@@ -337,6 +337,7 @@ detect_monotonic(void)
 	if (use_monotonic_initialized)
 		return;
 
+	/* 检测系统是否支持monotonic */
 	if (clock_gettime(CLOCK_MONOTONIC, &ts) == 0)
 		use_monotonic = 1;
 
@@ -358,12 +359,15 @@ gettime(struct event_base *base, struct timeval *tp)
 {
 	EVENT_BASE_ASSERT_LOCKED(base);
 
+	/* 如果tv_cache时间缓存已经设置，就直接使用 */
 	if (base->tv_cache.tv_sec) {
 		*tp = base->tv_cache;
 		return (0);
 	}
 
+	/* 否则需要再次执行系统调用获取系统时间 */
 #if defined(_EVENT_HAVE_CLOCK_GETTIME) && defined(CLOCK_MONOTONIC)
+	/* 如果支持monotonic，就用clock_gettime获取monotonic时间 */
 	if (use_monotonic) {
 		struct timespec	ts;
 
@@ -384,6 +388,14 @@ gettime(struct event_base *base, struct timeval *tp)
 	}
 #endif
 
+	/*
+	 * 否则只能取得系统当前时间,
+	 * 在windows下调用_ftime来完成，
+	 * 在linux下调用gettimeofday来完成
+	 * #ifdef _EVENT_HAVE_GETTIMEOFDAY
+	 * #define evutil_gettimeofday(tv, tz) gettimeofday((tv), (tz))
+	 * #else
+	 */
 	return (evutil_gettimeofday(tp, NULL));
 }
 
@@ -1582,6 +1594,7 @@ event_base_loop(struct event_base *base, int flags)
 			break;
 		}
 
+		/* 时间校正 */
 		timeout_correct(base, &tv);
 
 		tv_p = &tv;
@@ -2473,6 +2486,7 @@ timeout_correct(struct event_base *base, struct timeval *tv)
 	struct timeval off;
 	int i;
 
+	/* monotonic时间就直接返回，无需调整 */
 	if (use_monotonic)
 		return;
 
@@ -2486,11 +2500,13 @@ timeout_correct(struct event_base *base, struct timeval *tv)
 
 	event_debug(("%s: time is running backwards, corrected",
 		    __func__));
+	/* 计算时间差 */
 	evutil_timersub(&base->event_tv, tv, &off);
 
 	/*
 	 * We can modify the key element of the node without destroying
 	 * the minheap property, because we change every element.
+	 * 调整定时小根推
 	 */
 	pev = base->timeheap.p;
 	size = base->timeheap.n;
