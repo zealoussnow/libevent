@@ -28,21 +28,21 @@ ASSERT_LOCKED	evdns.c	423;"	d	file:
 ASSERT_VALID_REQUEST	evdns.c	133;"	d	file:
 AcceptEx	iocp-internal.h	/^	AcceptExPtr AcceptEx;$/;"	m	struct:win32_extension_fns
 AcceptExPtr	iocp-internal.h	/^typedef BOOL (WINAPI *AcceptExPtr)(SOCKET, SOCKET, PVOID, DWORD, DWORD, DWORD, LPDWORD, LPOVERLAPPED);$/;"	t
+AddDeclaration	event_rpcgen.py	/^    def AddDeclaration(self, funcname):$/;"	m	class:EntryArray
+AddEntry	event_rpcgen.py	/^    def AddEntry(self, entry):$/;"	m	class:Struct
+AddFuncName	event_rpcgen.py	/^    def AddFuncName(self):$/;"	m	class:Entry
+Array	event_rpcgen.py	/^    def Array(self):$/;"	m	class:Entry
+AssignDeclaration	event_rpcgen.py	/^    def AssignDeclaration(self, funcname):$/;"	m	class:Entry
+AssignDeclaration	event_rpcgen.py	/^    def AssignDeclaration(self, funcname):$/;"	m	class:EntryArray
+AssignDeclaration	event_rpcgen.py	/^    def AssignDeclaration(self, funcname):$/;"	m	class:EntryBytes
+AssignDeclaration	event_rpcgen.py	/^    def AssignDeclaration(self, funcname):$/;"	m	class:EntryVarBytes
+AssignFuncName	event_rpcgen.py	/^    def AssignFuncName(self):$/;"	m	class:Entry
 BEV_CTRL_CANCEL_ALL	bufferevent-internal.h	/^	BEV_CTRL_CANCEL_ALL$/;"	e	enum:bufferevent_ctrl_op
 BEV_CTRL_GET_FD	bufferevent-internal.h	/^	BEV_CTRL_GET_FD,$/;"	e	enum:bufferevent_ctrl_op
 BEV_CTRL_GET_UNDERLYING	bufferevent-internal.h	/^	BEV_CTRL_GET_UNDERLYING,$/;"	e	enum:bufferevent_ctrl_op
 BEV_CTRL_SET_FD	bufferevent-internal.h	/^	BEV_CTRL_SET_FD,$/;"	e	enum:bufferevent_ctrl_op
 BEV_DEL_GENERIC_READ_TIMEOUT	bufferevent-internal.h	368;"	d
 BEV_DEL_GENERIC_WRITE_TIMEOUT	bufferevent-internal.h	370;"	d
-BEV_ERROR	include/event2/bufferevent.h	/^	BEV_ERROR = 2$/;"	e	enum:bufferevent_filter_result
-BEV_EVENT_CONNECTED	include/event2/bufferevent.h	103;"	d
-BEV_EVENT_EOF	include/event2/bufferevent.h	100;"	d
-BEV_EVENT_ERROR	include/event2/bufferevent.h	101;"	d
-BEV_EVENT_READING	include/event2/bufferevent.h	98;"	d
-BEV_EVENT_TIMEOUT	include/event2/bufferevent.h	102;"	d
-BEV_EVENT_WRITING	include/event2/bufferevent.h	99;"	d
-BEV_FINISHED	include/event2/bufferevent.h	/^	BEV_FINISHED = 2$/;"	e	enum:bufferevent_flush_mode
-BEV_FLUSH	include/event2/bufferevent.h	/^	BEV_FLUSH = 1,$/;"	e	enum:bufferevent_flush_mode
 BEV_IS_ASYNC	bufferevent-internal.h	267;"	d
 BEV_IS_ASYNC	bufferevent-internal.h	269;"	d
 BEV_IS_FILTER	bufferevent-internal.h	262;"	d
@@ -50,13 +50,6 @@ BEV_IS_PAIR	bufferevent-internal.h	263;"	d
 BEV_IS_SOCKET	bufferevent-internal.h	261;"	d
 BEV_LOCK	bufferevent-internal.h	379;"	d
 BEV_LOCK	bufferevent-internal.h	383;"	d
-BEV_NEED_MORE	include/event2/bufferevent.h	/^	BEV_NEED_MORE = 1,$/;"	e	enum:bufferevent_filter_result
-BEV_NORMAL	include/event2/bufferevent.h	/^	BEV_NORMAL = 0,$/;"	e	enum:bufferevent_flush_mode
-BEV_OK	include/event2/bufferevent.h	/^	BEV_OK = 0,$/;"	e	enum:bufferevent_filter_result
-BEV_OPT_CLOSE_ON_FREE	include/event2/bufferevent.h	/^	BEV_OPT_CLOSE_ON_FREE = (1<<0),$/;"	e	enum:bufferevent_options
-BEV_OPT_DEFER_CALLBACKS	include/event2/bufferevent.h	/^	BEV_OPT_DEFER_CALLBACKS = (1<<2),$/;"	e	enum:bufferevent_options
-BEV_OPT_THREADSAFE	include/event2/bufferevent.h	/^	BEV_OPT_THREADSAFE = (1<<1),$/;"	e	enum:bufferevent_options
-BEV_OPT_UNLOCK_CALLBACKS	include/event2/bufferevent.h	/^	BEV_OPT_UNLOCK_CALLBACKS = (1<<3)$/;"	e	enum:bufferevent_options
 BEV_RESET_GENERIC_READ_TIMEOUT	bufferevent-internal.h	356;"	d
 BEV_RESET_GENERIC_WRITE_TIMEOUT	bufferevent-internal.h	363;"	d
 BEV_SUSPEND_BW	bufferevent-internal.h	54;"	d
@@ -70,10 +63,9 @@ BEV_UPCAST	bufferevent-internal.h	376;"	d
 BIO_TYPE_LIBEVENT	bufferevent_openssl.c	79;"	d	file:
 BIO_new_bufferevent	bufferevent_openssl.c	/^BIO_new_bufferevent(struct bufferevent *bufferevent, int close_flag)$/;"	f	file:
 BIO_s_bufferevent	bufferevent_openssl.c	/^BIO_s_bufferevent(void)$/;"	f	file:
-BUFFEREVENT_SSL_ACCEPTING	include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_ACCEPTING = 2$/;"	e	enum:bufferevent_ssl_state
-BUFFEREVENT_SSL_CONNECTING	include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_CONNECTING = 1,$/;"	e	enum:bufferevent_ssl_state
-BUFFEREVENT_SSL_OPEN	include/event2/bufferevent_ssl.h	/^	BUFFEREVENT_SSL_OPEN = 0,$/;"	e	enum:bufferevent_ssl_state
 BYTES_BEFORE_RESEED	arc4random.c	74;"	d	file:
+BodyPreamble	event_rpcgen.py	/^    def BodyPreamble(self, name, header_file):$/;"	m	class:CCodeGenerator
+CCodeGenerator	event_rpcgen.py	/^class CCodeGenerator:$/;"	c
 CHAIN_PINNED	buffer.c	135;"	d	file:
 CHAIN_PINNED_R	buffer.c	136;"	d	file:
 CHAIN_SPACE_LEN	buffer.c	132;"	d	file:
@@ -83,47 +75,91 @@ CHUNK_SZ	buffer.c	1320;"	d	file:
 CHUNK_SZ	buffer.c	1341;"	d	file:
 CLAMPTO	bufferevent_ratelim.c	212;"	d	file:
 CLASS_INET	evdns.c	153;"	d	file:
-CLOCK_SYNC_INTERVAL	event.c	349;"	d	file:
-COMMON_TIMEOUT_IDX	event.c	1098;"	d	file:
-COMMON_TIMEOUT_IDX_MASK	event.c	1093;"	d	file:
-COMMON_TIMEOUT_IDX_SHIFT	event.c	1094;"	d	file:
-COMMON_TIMEOUT_MAGIC	event.c	1096;"	d	file:
-COMMON_TIMEOUT_MASK	event.c	1095;"	d	file:
+CLOCK_SYNC_INTERVAL	event.c	350;"	d	file:
+COMMON_TIMEOUT_IDX	event.c	1110;"	d	file:
+COMMON_TIMEOUT_IDX_MASK	event.c	1105;"	d	file:
+COMMON_TIMEOUT_IDX_SHIFT	event.c	1106;"	d	file:
+COMMON_TIMEOUT_MAGIC	event.c	1108;"	d	file:
+COMMON_TIMEOUT_MASK	event.c	1107;"	d	file:
 COMMON_TIMEOUT_MICROSECONDS_MASK	event-internal.h	150;"	d
 COPY_CHAIN	buffer.c	/^COPY_CHAIN(struct evbuffer *dst, struct evbuffer *src)$/;"	f	file:
+CodeAdd	event_rpcgen.py	/^    def CodeAdd(self):$/;"	f
+CodeArrayAdd	event_rpcgen.py	/^    def CodeArrayAdd(self, varname, value):$/;"	m	class:EntryBytes
+CodeArrayAdd	event_rpcgen.py	/^    def CodeArrayAdd(self, varname, value):$/;"	m	class:EntryInt
+CodeArrayAdd	event_rpcgen.py	/^    def CodeArrayAdd(self, varname, value):$/;"	m	class:EntryString
+CodeArrayAdd	event_rpcgen.py	/^    def CodeArrayAdd(self, varname, value):$/;"	m	class:EntryStruct
+CodeArrayAdd	event_rpcgen.py	/^    def CodeArrayAdd(self, varname, value):$/;"	m	class:EntryVarBytes
+CodeArrayAssign	event_rpcgen.py	/^    def CodeArrayAssign(self, var, srcvar):$/;"	m	class:EntryStruct
+CodeArrayAssign	event_rpcgen.py	/^    def CodeArrayAssign(self, varname, srcvar):$/;"	m	class:EntryInt
+CodeArrayAssign	event_rpcgen.py	/^    def CodeArrayAssign(self, varname, srcvar):$/;"	m	class:EntryString
+CodeArrayFree	event_rpcgen.py	/^    def CodeArrayFree(self, var):$/;"	m	class:EntryInt
+CodeArrayFree	event_rpcgen.py	/^    def CodeArrayFree(self, var):$/;"	m	class:EntryStruct
+CodeArrayFree	event_rpcgen.py	/^    def CodeArrayFree(self, varname):$/;"	m	class:EntryString
+CodeAssign	event_rpcgen.py	/^    def CodeAssign(self):$/;"	f
+CodeAssign	event_rpcgen.py	/^    def CodeAssign(self):$/;"	m	class:Entry
+CodeAssign	event_rpcgen.py	/^    def CodeAssign(self):$/;"	m	class:EntryBytes
+CodeAssign	event_rpcgen.py	/^    def CodeAssign(self):$/;"	m	class:EntryString
+CodeAssign	event_rpcgen.py	/^    def CodeAssign(self):$/;"	m	class:EntryStruct
+CodeAssign	event_rpcgen.py	/^    def CodeAssign(self):$/;"	m	class:EntryVarBytes
+CodeBase	event_rpcgen.py	/^    def CodeBase(self):$/;"	m	class:Entry
+CodeClear	event_rpcgen.py	/^    def CodeClear(self, structname):$/;"	f
+CodeClear	event_rpcgen.py	/^    def CodeClear(self, structname):$/;"	m	class:Entry
+CodeClear	event_rpcgen.py	/^    def CodeClear(self, structname):$/;"	m	class:EntryBytes
+CodeClear	event_rpcgen.py	/^    def CodeClear(self, structname):$/;"	m	class:EntryString
+CodeClear	event_rpcgen.py	/^    def CodeClear(self, structname):$/;"	m	class:EntryStruct
+CodeClear	event_rpcgen.py	/^    def CodeClear(self, structname):$/;"	m	class:EntryVarBytes
+CodeComplete	event_rpcgen.py	/^    def CodeComplete(self, structname, var_name):$/;"	f
+CodeComplete	event_rpcgen.py	/^    def CodeComplete(self, structname, var_name):$/;"	m	class:Entry
+CodeComplete	event_rpcgen.py	/^    def CodeComplete(self, structname, var_name):$/;"	m	class:EntryStruct
+CodeFilename	event_rpcgen.py	/^    def CodeFilename(self, filename):$/;"	m	class:CCodeGenerator
+CodeFree	event_rpcgen.py	/^    def CodeFree(self, name):$/;"	m	class:Entry
+CodeFree	event_rpcgen.py	/^    def CodeFree(self, name):$/;"	m	class:EntryString
+CodeFree	event_rpcgen.py	/^    def CodeFree(self, name):$/;"	m	class:EntryStruct
+CodeFree	event_rpcgen.py	/^    def CodeFree(self, name):$/;"	m	class:EntryVarBytes
+CodeFree	event_rpcgen.py	/^    def CodeFree(self, structname):$/;"	f
+CodeGet	event_rpcgen.py	/^    def CodeGet(self):$/;"	m	class:Entry
+CodeGet	event_rpcgen.py	/^    def CodeGet(self):$/;"	m	class:EntryArray
+CodeGet	event_rpcgen.py	/^    def CodeGet(self):$/;"	m	class:EntryBytes
+CodeGet	event_rpcgen.py	/^    def CodeGet(self):$/;"	m	class:EntryStruct
+CodeGet	event_rpcgen.py	/^    def CodeGet(self):$/;"	m	class:EntryVarBytes
+CodeInitialize	event_rpcgen.py	/^    def CodeInitialize(self, name):$/;"	f
+CodeInitialize	event_rpcgen.py	/^    def CodeInitialize(self, name):$/;"	m	class:EntryBytes
+CodeInitialize	event_rpcgen.py	/^    def CodeInitialize(self, name):$/;"	m	class:EntryInt
+CodeInitialize	event_rpcgen.py	/^    def CodeInitialize(self, name):$/;"	m	class:EntryString
+CodeInitialize	event_rpcgen.py	/^    def CodeInitialize(self, name):$/;"	m	class:EntryStruct
+CodeInitialize	event_rpcgen.py	/^    def CodeInitialize(self, name):$/;"	m	class:EntryVarBytes
+CodeMakeInitalize	event_rpcgen.py	/^    def CodeMakeInitalize(self, varname):$/;"	m	class:EntryString
+CodeMarshal	event_rpcgen.py	/^    def CodeMarshal(self, buf, tag_name, var_name, var_len):$/;"	f
+CodeMarshal	event_rpcgen.py	/^    def CodeMarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryBytes
+CodeMarshal	event_rpcgen.py	/^    def CodeMarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryInt
+CodeMarshal	event_rpcgen.py	/^    def CodeMarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryString
+CodeMarshal	event_rpcgen.py	/^    def CodeMarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryStruct
+CodeMarshal	event_rpcgen.py	/^    def CodeMarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryVarBytes
+CodeUnmarshal	event_rpcgen.py	/^    def CodeUnmarshal(self, buf, tag_name, var_name, var_len):$/;"	f
+CodeUnmarshal	event_rpcgen.py	/^    def CodeUnmarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryBytes
+CodeUnmarshal	event_rpcgen.py	/^    def CodeUnmarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryInt
+CodeUnmarshal	event_rpcgen.py	/^    def CodeUnmarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryString
+CodeUnmarshal	event_rpcgen.py	/^    def CodeUnmarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryStruct
+CodeUnmarshal	event_rpcgen.py	/^    def CodeUnmarshal(self, buf, tag_name, var_name, var_len):$/;"	m	class:EntryVarBytes
+CommandLine	event_rpcgen.py	/^class CommandLine:$/;"	c
 ConnectEx	iocp-internal.h	/^	ConnectExPtr ConnectEx;$/;"	m	struct:win32_extension_fns
 ConnectExPtr	iocp-internal.h	/^typedef BOOL (WINAPI *ConnectExPtr)(SOCKET, const struct sockaddr *, int, PVOID, DWORD, LPDWORD, LPOVERLAPPED);$/;"	t
+CreateProcess	ltmain.sh	/^   CreateProcess().  We must quote the arguments since Win32 CreateProcess()$/;"	f
 DATA_CORRUPTED	http-internal.h	/^	DATA_CORRUPTED = -1,$/;"	e	enum:message_read_status
 DATA_TOO_LONG	http-internal.h	/^	DATA_TOO_LONG = -3$/;"	e	enum:message_read_status
 DECODE_INT_INTERNAL	event_tagging.c	304;"	d	file:
 DEFAULT_NFDS	evport.c	83;"	d	file:
 DEFAULT_WRITE_IOVEC	buffer.c	1962;"	d	file:
 DIV_ROUNDUP	select.c	63;"	d	file:
-DNS_ERR_CANCEL	include/event2/dns.h	168;"	d
-DNS_ERR_FORMAT	include/event2/dns.h	148;"	d
-DNS_ERR_NODATA	include/event2/dns.h	172;"	d
-DNS_ERR_NONE	include/event2/dns.h	146;"	d
-DNS_ERR_NOTEXIST	include/event2/dns.h	153;"	d
-DNS_ERR_NOTIMPL	include/event2/dns.h	155;"	d
-DNS_ERR_REFUSED	include/event2/dns.h	158;"	d
-DNS_ERR_SERVERFAILED	include/event2/dns.h	151;"	d
-DNS_ERR_SHUTDOWN	include/event2/dns.h	166;"	d
-DNS_ERR_TIMEOUT	include/event2/dns.h	164;"	d
-DNS_ERR_TRUNCATED	include/event2/dns.h	160;"	d
-DNS_ERR_UNKNOWN	include/event2/dns.h	162;"	d
-DNS_IPv4_A	include/event2/dns.h	174;"	d
-DNS_IPv6_AAAA	include/event2/dns.h	176;"	d
-DNS_NO_SEARCH	include/event2/dns.h	187;"	d
-DNS_OPTIONS_ALL	include/event2/dns.h	184;"	d
-DNS_OPTION_HOSTSFILE	include/event2/dns.h	183;"	d
-DNS_OPTION_MISC	include/event2/dns.h	182;"	d
-DNS_OPTION_NAMESERVERS	include/event2/dns.h	181;"	d
-DNS_OPTION_SEARCH	include/event2/dns.h	180;"	d
-DNS_PTR	include/event2/dns.h	175;"	d
-DNS_QUERY_NO_SEARCH	include/event2/dns.h	178;"	d
+Declaration	event_rpcgen.py	/^    def Declaration(self):$/;"	f
+Declaration	event_rpcgen.py	/^    def Declaration(self):$/;"	m	class:EntryBytes
+Declaration	event_rpcgen.py	/^    def Declaration(self):$/;"	m	class:EntryInt
+Declaration	event_rpcgen.py	/^    def Declaration(self):$/;"	m	class:EntryString
+Declaration	event_rpcgen.py	/^    def Declaration(self):$/;"	m	class:EntryStruct
+Declaration	event_rpcgen.py	/^    def Declaration(self):$/;"	m	class:EntryVarBytes
 E	evutil.c	1474;"	d	file:
 E	evutil.c	1535;"	d	file:
-EFD_CLOEXEC	event.c	2811;"	d	file:
+EFD_CLOEXEC	event.c	2827;"	d	file:
 ENCODE_INT_INTERNAL	event_tagging.c	115;"	d	file:
 ERR	evutil.c	204;"	d	file:
 ERR	evutil.c	291;"	d	file:
@@ -143,7 +179,6 @@ EVBASE_NEED_NOTIFY	evthread-internal.h	68;"	d
 EVBASE_RELEASE_LOCK	evthread-internal.h	118;"	d
 EVBASE_RELEASE_LOCK	evthread-internal.h	232;"	d
 EVBASE_RELEASE_LOCK	evthread-internal.h	306;"	d
-EVBUFFER_CB_ENABLED	include/event2/buffer.h	727;"	d
 EVBUFFER_CB_INTERNAL_FLAGS	buffer.c	125;"	d	file:
 EVBUFFER_CB_NODEFER	evbuffer-internal.h	42;"	d
 EVBUFFER_CB_OBSOLETE	buffer.c	128;"	d	file:
@@ -152,17 +187,7 @@ EVBUFFER_CHAIN_EXTRA	evbuffer-internal.h	214;"	d
 EVBUFFER_CHAIN_MAX_AUTO_SIZE	buffer.c	1529;"	d	file:
 EVBUFFER_CHAIN_SIZE	evbuffer-internal.h	212;"	d
 EVBUFFER_DANGLING	evbuffer-internal.h	186;"	d
-EVBUFFER_DATA	include/event2/buffer_compat.h	107;"	d
-EVBUFFER_EOF	include/event2/bufferevent_compat.h	91;"	d
-EVBUFFER_EOL_ANY	include/event2/buffer.h	/^	EVBUFFER_EOL_ANY,$/;"	e	enum:evbuffer_eol_style
-EVBUFFER_EOL_CRLF	include/event2/buffer.h	/^	EVBUFFER_EOL_CRLF,$/;"	e	enum:evbuffer_eol_style
-EVBUFFER_EOL_CRLF_STRICT	include/event2/buffer.h	/^	EVBUFFER_EOL_CRLF_STRICT,$/;"	e	enum:evbuffer_eol_style
-EVBUFFER_EOL_LF	include/event2/buffer.h	/^	EVBUFFER_EOL_LF$/;"	e	enum:evbuffer_eol_style
-EVBUFFER_ERROR	include/event2/bufferevent_compat.h	92;"	d
-EVBUFFER_FLAG_DRAINS_TO_FD	include/event2/buffer.h	193;"	d
 EVBUFFER_IMMUTABLE	evbuffer-internal.h	178;"	d
-EVBUFFER_INPUT	include/event2/bufferevent_compat.h	96;"	d
-EVBUFFER_LENGTH	include/event2/buffer_compat.h	105;"	d
 EVBUFFER_LOCK	evbuffer-internal.h	220;"	d
 EVBUFFER_LOCK2	evbuffer-internal.h	228;"	d
 EVBUFFER_MAX_READ	buffer.c	1986;"	d	file:
@@ -170,16 +195,10 @@ EVBUFFER_MEM_PINNED_ANY	evbuffer-internal.h	183;"	d
 EVBUFFER_MEM_PINNED_R	evbuffer-internal.h	181;"	d
 EVBUFFER_MEM_PINNED_W	evbuffer-internal.h	182;"	d
 EVBUFFER_MMAP	evbuffer-internal.h	175;"	d
-EVBUFFER_OUTPUT	include/event2/bufferevent_compat.h	98;"	d
-EVBUFFER_PTR_ADD	include/event2/buffer.h	/^	EVBUFFER_PTR_ADD$/;"	e	enum:evbuffer_ptr_how
-EVBUFFER_PTR_SET	include/event2/buffer.h	/^	EVBUFFER_PTR_SET,$/;"	e	enum:evbuffer_ptr_how
-EVBUFFER_READ	include/event2/bufferevent_compat.h	89;"	d
 EVBUFFER_REFERENCE	evbuffer-internal.h	177;"	d
 EVBUFFER_SENDFILE	evbuffer-internal.h	176;"	d
-EVBUFFER_TIMEOUT	include/event2/bufferevent_compat.h	93;"	d
 EVBUFFER_UNLOCK	evbuffer-internal.h	224;"	d
 EVBUFFER_UNLOCK2	evbuffer-internal.h	232;"	d
-EVBUFFER_WRITE	include/event2/bufferevent_compat.h	90;"	d
 EVCON_CONNECTING	http-internal.h	/^	EVCON_CONNECTING,	\/**< tries to currently connect *\/$/;"	e	enum:evhttp_connection_state
 EVCON_DISCONNECTED	http-internal.h	/^	EVCON_DISCONNECTED,	\/**< not currently connected not trying either*\/$/;"	e	enum:evhttp_connection_state
 EVCON_HTTP_BUFFER_ERROR	http-internal.h	/^	EVCON_HTTP_BUFFER_ERROR,$/;"	e	enum:evhttp_connection_error
@@ -193,14 +212,6 @@ EVCON_READING_FIRSTLINE	http-internal.h	/^	EVCON_READING_FIRSTLINE,\/**< reading
 EVCON_READING_HEADERS	http-internal.h	/^	EVCON_READING_HEADERS,	\/**< reading request\/response headers *\/$/;"	e	enum:evhttp_connection_state
 EVCON_READING_TRAILER	http-internal.h	/^	EVCON_READING_TRAILER,	\/**< reading request\/response chunked trailer *\/$/;"	e	enum:evhttp_connection_state
 EVCON_WRITING	http-internal.h	/^	EVCON_WRITING		\/**< writing request\/response headers\/body *\/$/;"	e	enum:evhttp_connection_state
-EVDNS_ADDITIONAL_SECTION	include/event2/dns.h	545;"	d
-EVDNS_ANSWER_SECTION	include/event2/dns.h	543;"	d
-EVDNS_AUTHORITY_SECTION	include/event2/dns.h	544;"	d
-EVDNS_BASE_CONFIG_WINDOWS_NAMESERVERS_IMPLEMENTED	include/event2/dns.h	455;"	d
-EVDNS_CLASS_INET	include/event2/dns.h	559;"	d
-EVDNS_CONFIG_WINDOWS_NAMESERVERS_IMPLEMENTED	include/event2/dns_compat.h	329;"	d
-EVDNS_FLAGS_AA	include/event2/dns.h	562;"	d
-EVDNS_FLAGS_RD	include/event2/dns.h	563;"	d
 EVDNS_LOCK	evdns.c	415;"	d	file:
 EVDNS_LOCK	evdns.c	419;"	d	file:
 EVDNS_LOG_CHECK	evdns.c	447;"	d	file:
@@ -208,63 +219,16 @@ EVDNS_LOG_CHECK	evdns.c	449;"	d	file:
 EVDNS_LOG_DEBUG	evdns.c	120;"	d	file:
 EVDNS_LOG_MSG	evdns.c	122;"	d	file:
 EVDNS_LOG_WARN	evdns.c	121;"	d	file:
-EVDNS_QTYPE_ALL	include/event2/dns.h	557;"	d
-EVDNS_QTYPE_AXFR	include/event2/dns.h	556;"	d
-EVDNS_TYPE_A	include/event2/dns.h	547;"	d
-EVDNS_TYPE_AAAA	include/event2/dns.h	554;"	d
-EVDNS_TYPE_CNAME	include/event2/dns.h	549;"	d
-EVDNS_TYPE_MX	include/event2/dns.h	552;"	d
-EVDNS_TYPE_NS	include/event2/dns.h	548;"	d
-EVDNS_TYPE_PTR	include/event2/dns.h	551;"	d
-EVDNS_TYPE_SOA	include/event2/dns.h	550;"	d
-EVDNS_TYPE_TXT	include/event2/dns.h	553;"	d
 EVDNS_UNLOCK	evdns.c	416;"	d	file:
 EVDNS_UNLOCK	evdns.c	421;"	d	file:
 EVENTS_PER_GETN	evport.c	91;"	d	file:
 EVENT_BASE_ASSERT_LOCKED	event.c	325;"	d	file:
-EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST	include/event2/event.h	/^	EVENT_BASE_FLAG_EPOLL_USE_CHANGELIST = 0x10$/;"	e	enum:event_base_config_flag
-EVENT_BASE_FLAG_IGNORE_ENV	include/event2/event.h	/^	EVENT_BASE_FLAG_IGNORE_ENV = 0x02,$/;"	e	enum:event_base_config_flag
-EVENT_BASE_FLAG_NOLOCK	include/event2/event.h	/^	EVENT_BASE_FLAG_NOLOCK = 0x01,$/;"	e	enum:event_base_config_flag
-EVENT_BASE_FLAG_NO_CACHE_TIME	include/event2/event.h	/^	EVENT_BASE_FLAG_NO_CACHE_TIME = 0x08,$/;"	e	enum:event_base_config_flag
-EVENT_BASE_FLAG_STARTUP_IOCP	include/event2/event.h	/^	EVENT_BASE_FLAG_STARTUP_IOCP = 0x04,$/;"	e	enum:event_base_config_flag
 EVENT_CHANGELIST_FDINFO_SIZE	changelist-internal.h	82;"	d
 EVENT_DEBUG_MODE_IS_ON	event-internal.h	165;"	d
 EVENT_DEBUG_MODE_IS_ON	event-internal.h	167;"	d
-EVENT_FD	include/event2/event_compat.h	212;"	d
-EVENT_LOG_DEBUG	include/event2/event.h	566;"	d
-EVENT_LOG_ERR	include/event2/event.h	569;"	d
-EVENT_LOG_MSG	include/event2/event.h	567;"	d
-EVENT_LOG_WARN	include/event2/event.h	568;"	d
-EVENT_MAX_PRIORITIES	include/event2/event.h	1090;"	d
-EVENT_SET_MEM_FUNCTIONS_IMPLEMENTED	include/event2/event.h	1181;"	d
-EVENT_SIGNAL	include/event2/event_compat.h	213;"	d
 EVHTTP_CON_CLOSEDETECT	http-internal.h	84;"	d
 EVHTTP_CON_INCOMING	http-internal.h	82;"	d
 EVHTTP_CON_OUTGOING	http-internal.h	83;"	d
-EVHTTP_PROXY_REQUEST	include/event2/http_struct.h	73;"	d
-EVHTTP_REQUEST	include/event2/http.h	/^enum evhttp_request_kind { EVHTTP_REQUEST, EVHTTP_RESPONSE };$/;"	e	enum:evhttp_request_kind
-EVHTTP_REQ_CONNECT	include/event2/http.h	/^	EVHTTP_REQ_CONNECT = 1 << 7,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_DEFER_FREE	include/event2/http_struct.h	77;"	d
-EVHTTP_REQ_DELETE	include/event2/http.h	/^	EVHTTP_REQ_DELETE  = 1 << 4,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_GET	include/event2/http.h	/^	EVHTTP_REQ_GET     = 1 << 0,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_HEAD	include/event2/http.h	/^	EVHTTP_REQ_HEAD    = 1 << 2,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_NEEDS_FREE	include/event2/http_struct.h	79;"	d
-EVHTTP_REQ_OPTIONS	include/event2/http.h	/^	EVHTTP_REQ_OPTIONS = 1 << 5,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_OWN_CONNECTION	include/event2/http_struct.h	71;"	d
-EVHTTP_REQ_PATCH	include/event2/http.h	/^	EVHTTP_REQ_PATCH   = 1 << 8$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_POST	include/event2/http.h	/^	EVHTTP_REQ_POST    = 1 << 1,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_PUT	include/event2/http.h	/^	EVHTTP_REQ_PUT     = 1 << 3,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_REQ_TRACE	include/event2/http.h	/^	EVHTTP_REQ_TRACE   = 1 << 6,$/;"	e	enum:evhttp_cmd_type
-EVHTTP_RESPONSE	include/event2/http.h	/^enum evhttp_request_kind { EVHTTP_REQUEST, EVHTTP_RESPONSE };$/;"	e	enum:evhttp_request_kind
-EVHTTP_URI_NONCONFORMANT	include/event2/http.h	830;"	d
-EVHTTP_USER_OWNED	include/event2/http_struct.h	75;"	d
-EVLIST_ACTIVE	include/event2/event_struct.h	60;"	d
-EVLIST_ALL	include/event2/event_struct.h	65;"	d
-EVLIST_INIT	include/event2/event_struct.h	62;"	d
-EVLIST_INSERTED	include/event2/event_struct.h	58;"	d
-EVLIST_INTERNAL	include/event2/event_struct.h	61;"	d
-EVLIST_SIGNAL	include/event2/event_struct.h	59;"	d
-EVLIST_TIMEOUT	include/event2/event_struct.h	57;"	d
 EVLIST_X_IOFOUND	evmap.c	732;"	d	file:
 EVLIST_X_SIGFOUND	evmap.c	731;"	d	file:
 EVLOCK_ASSERT_LOCKED	evthread-internal.h	124;"	d
@@ -282,56 +246,16 @@ EVLOCK_UNLOCK	evthread-internal.h	299;"	d
 EVLOCK_UNLOCK	evthread-internal.h	95;"	d
 EVLOCK_UNLOCK2	evthread-internal.h	301;"	d
 EVLOCK_UNLOCK2	evthread-internal.h	346;"	d
-EVLOOP_NONBLOCK	include/event2/event.h	639;"	d
-EVLOOP_ONCE	include/event2/event.h	636;"	d
 EVMAP_USE_HT	event-internal.h	107;"	d
-EVRPC_CONTINUE	include/event2/rpc.h	/^	EVRPC_CONTINUE = 0,	\/**< continue processing the rpc *\/$/;"	e	enum:EVRPC_HOOK_RESULT
-EVRPC_GENERATE	include/event2/rpc.h	233;"	d
-EVRPC_HEADER	include/event2/rpc.h	172;"	d
-EVRPC_HOOK_RESULT	include/event2/rpc.h	/^enum EVRPC_HOOK_RESULT {$/;"	g
-EVRPC_HOOK_TYPE	include/event2/rpc.h	/^enum EVRPC_HOOK_TYPE {$/;"	g
-EVRPC_INPUT	include/event2/rpc.h	/^	EVRPC_INPUT,		\/**< apply the function to an input hook *\/$/;"	e	enum:EVRPC_HOOK_TYPE
-EVRPC_MAKE_CTX	include/event2/rpc.h	213;"	d
-EVRPC_MAKE_REQUEST	include/event2/rpc.h	374;"	d
-EVRPC_OUTPUT	include/event2/rpc.h	/^	EVRPC_OUTPUT		\/**< apply the function to an output hook *\/$/;"	e	enum:EVRPC_HOOK_TYPE
-EVRPC_PAUSE	include/event2/rpc.h	/^	EVRPC_PAUSE = 1		\/**< pause processing request until resumed *\/$/;"	e	enum:EVRPC_HOOK_RESULT
-EVRPC_REGISTER	include/event2/rpc.h	319;"	d
-EVRPC_REQUEST_DONE	include/event2/rpc.h	274;"	d
-EVRPC_REQUEST_HTTP	include/event2/rpc.h	257;"	d
-EVRPC_STATUS_ERR_BADPAYLOAD	include/event2/rpc_struct.h	47;"	d
-EVRPC_STATUS_ERR_HOOKABORTED	include/event2/rpc_struct.h	49;"	d
-EVRPC_STATUS_ERR_NONE	include/event2/rpc_struct.h	45;"	d
-EVRPC_STATUS_ERR_TIMEOUT	include/event2/rpc_struct.h	46;"	d
-EVRPC_STATUS_ERR_UNSTARTED	include/event2/rpc_struct.h	48;"	d
-EVRPC_STRUCT	include/event2/rpc.h	155;"	d
-EVRPC_TERMINATE	include/event2/rpc.h	/^	EVRPC_TERMINATE = -1,	\/**< indicates the rpc should be terminated *\/$/;"	e	enum:EVRPC_HOOK_RESULT
-EVRPC_UNREGISTER	include/event2/rpc.h	348;"	d
 EVRPC_URI_PREFIX	evrpc-internal.h	35;"	d
 EVSIGBASE_LOCK	signal.c	124;"	d	file:
 EVSIGBASE_UNLOCK	signal.c	125;"	d	file:
-EVTAG_ADD	include/event2/rpc_compat.h	46;"	d
-EVTAG_ADD	include/event2/rpc_compat.h	52;"	d
-EVTAG_ARRAY_ADD	include/event2/rpc.h	132;"	d
-EVTAG_ARRAY_ADD_VALUE	include/event2/rpc.h	127;"	d
-EVTAG_ARRAY_GET	include/event2/rpc.h	137;"	d
-EVTAG_ARRAY_LEN	include/event2/rpc.h	142;"	d
-EVTAG_ASSIGN	include/event2/rpc.h	88;"	d
-EVTAG_ASSIGN	include/event2/rpc_compat.h	44;"	d
-EVTAG_ASSIGN	include/event2/rpc_compat.h	48;"	d
-EVTAG_ASSIGN_WITH_LEN	include/event2/rpc.h	98;"	d
-EVTAG_GET	include/event2/rpc.h	108;"	d
-EVTAG_GET	include/event2/rpc_compat.h	45;"	d
-EVTAG_GET	include/event2/rpc_compat.h	50;"	d
-EVTAG_GET_WITH_LEN	include/event2/rpc.h	119;"	d
-EVTAG_HAS	include/event2/rpc.h	76;"	d
-EVTAG_LEN	include/event2/rpc_compat.h	55;"	d
 EVTHREAD_ALLOC_COND	evthread-internal.h	148;"	d
 EVTHREAD_ALLOC_COND	evthread-internal.h	262;"	d
 EVTHREAD_ALLOC_COND	evthread-internal.h	311;"	d
 EVTHREAD_ALLOC_LOCK	evthread-internal.h	201;"	d
 EVTHREAD_ALLOC_LOCK	evthread-internal.h	295;"	d
 EVTHREAD_ALLOC_LOCK	evthread-internal.h	75;"	d
-EVTHREAD_CONDITION_API_VERSION	include/event2/thread.h	129;"	d
 EVTHREAD_COND_BROADCAST	evthread-internal.h	163;"	d
 EVTHREAD_COND_BROADCAST	evthread-internal.h	276;"	d
 EVTHREAD_COND_BROADCAST	evthread-internal.h	314;"	d
@@ -357,57 +281,11 @@ EVTHREAD_GET_ID	evthread-internal.h	56;"	d
 EVTHREAD_LOCKING_ENABLED	evthread-internal.h	177;"	d
 EVTHREAD_LOCKING_ENABLED	evthread-internal.h	289;"	d
 EVTHREAD_LOCKING_ENABLED	evthread-internal.h	318;"	d
-EVTHREAD_LOCKTYPE_READWRITE	include/event2/thread.h	86;"	d
-EVTHREAD_LOCKTYPE_RECURSIVE	include/event2/thread.h	83;"	d
-EVTHREAD_LOCK_API_VERSION	include/event2/thread.h	74;"	d
-EVTHREAD_READ	include/event2/thread.h	65;"	d
 EVTHREAD_SETUP_GLOBAL_LOCK	evthread-internal.h	362;"	d
-EVTHREAD_TRY	include/event2/thread.h	69;"	d
-EVTHREAD_USE_PTHREADS_IMPLEMENTED	include/event2/thread.h	210;"	d
-EVTHREAD_USE_WINDOWS_THREADS_IMPLEMENTED	include/event2/thread.h	199;"	d
-EVTHREAD_WRITE	include/event2/thread.h	62;"	d
-EVUTIL_AI_ADDRCONFIG	include/event2/util.h	623;"	d
-EVUTIL_AI_ADDRCONFIG	include/event2/util.h	625;"	d
-EVUTIL_AI_ALL	include/event2/util.h	618;"	d
-EVUTIL_AI_ALL	include/event2/util.h	620;"	d
-EVUTIL_AI_CANONNAME	include/event2/util.h	598;"	d
-EVUTIL_AI_CANONNAME	include/event2/util.h	600;"	d
 EVUTIL_AI_LIBEVENT_ALLOCATED	evutil.c	642;"	d	file:
-EVUTIL_AI_NUMERICHOST	include/event2/util.h	603;"	d
-EVUTIL_AI_NUMERICHOST	include/event2/util.h	605;"	d
-EVUTIL_AI_NUMERICSERV	include/event2/util.h	608;"	d
-EVUTIL_AI_NUMERICSERV	include/event2/util.h	610;"	d
-EVUTIL_AI_PASSIVE	include/event2/util.h	593;"	d
-EVUTIL_AI_PASSIVE	include/event2/util.h	595;"	d
-EVUTIL_AI_V4MAPPED	include/event2/util.h	613;"	d
-EVUTIL_AI_V4MAPPED	include/event2/util.h	615;"	d
 EVUTIL_ASSERT	util-internal.h	195;"	d
 EVUTIL_ASSERT	util-internal.h	198;"	d
-EVUTIL_CLOSESOCKET	include/event2/util.h	324;"	d
-EVUTIL_EAI_ADDRFAMILY	include/event2/util.h	532;"	d
-EVUTIL_EAI_ADDRFAMILY	include/event2/util.h	534;"	d
-EVUTIL_EAI_AGAIN	include/event2/util.h	537;"	d
-EVUTIL_EAI_AGAIN	include/event2/util.h	539;"	d
-EVUTIL_EAI_BADFLAGS	include/event2/util.h	542;"	d
-EVUTIL_EAI_BADFLAGS	include/event2/util.h	544;"	d
-EVUTIL_EAI_CANCEL	include/event2/util.h	590;"	d
-EVUTIL_EAI_FAIL	include/event2/util.h	547;"	d
-EVUTIL_EAI_FAIL	include/event2/util.h	549;"	d
-EVUTIL_EAI_FAMILY	include/event2/util.h	552;"	d
-EVUTIL_EAI_FAMILY	include/event2/util.h	554;"	d
-EVUTIL_EAI_MEMORY	include/event2/util.h	557;"	d
-EVUTIL_EAI_MEMORY	include/event2/util.h	559;"	d
 EVUTIL_EAI_NEED_RESOLVE	util-internal.h	233;"	d
-EVUTIL_EAI_NODATA	include/event2/util.h	565;"	d
-EVUTIL_EAI_NODATA	include/event2/util.h	567;"	d
-EVUTIL_EAI_NONAME	include/event2/util.h	570;"	d
-EVUTIL_EAI_NONAME	include/event2/util.h	572;"	d
-EVUTIL_EAI_SERVICE	include/event2/util.h	575;"	d
-EVUTIL_EAI_SERVICE	include/event2/util.h	577;"	d
-EVUTIL_EAI_SOCKTYPE	include/event2/util.h	580;"	d
-EVUTIL_EAI_SOCKTYPE	include/event2/util.h	582;"	d
-EVUTIL_EAI_SYSTEM	include/event2/util.h	585;"	d
-EVUTIL_EAI_SYSTEM	include/event2/util.h	587;"	d
 EVUTIL_ERR_ACCEPT_RETRIABLE	util-internal.h	102;"	d
 EVUTIL_ERR_ACCEPT_RETRIABLE	util-internal.h	83;"	d
 EVUTIL_ERR_CONNECT_REFUSED	util-internal.h	105;"	d
@@ -426,18 +304,12 @@ EVUTIL_ISPRINT_TABLE	evutil.c	/^static const ev_uint32_t EVUTIL_ISPRINT_TABLE[8]
 EVUTIL_ISSPACE_TABLE	evutil.c	/^static const ev_uint32_t EVUTIL_ISSPACE_TABLE[8] = { 0x3e00, 0x1, 0, 0, 0, 0, 0, 0 };$/;"	v	file:
 EVUTIL_ISUPPER_TABLE	evutil.c	/^static const ev_uint32_t EVUTIL_ISUPPER_TABLE[8] = { 0, 0, 0x7fffffe, 0, 0, 0, 0, 0 };$/;"	v	file:
 EVUTIL_ISXDIGIT_TABLE	evutil.c	/^static const ev_uint32_t EVUTIL_ISXDIGIT_TABLE[8] =$/;"	v	file:
-EVUTIL_SET_SOCKET_ERROR	include/event2/util.h	331;"	d
-EVUTIL_SET_SOCKET_ERROR	include/event2/util.h	355;"	d
-EVUTIL_SET_SOCKET_ERROR	include/event2/util.h	363;"	d
 EVUTIL_SHUT_BOTH	util-internal.h	126;"	d
 EVUTIL_SHUT_BOTH	util-internal.h	128;"	d
 EVUTIL_SHUT_RD	util-internal.h	116;"	d
 EVUTIL_SHUT_RD	util-internal.h	118;"	d
 EVUTIL_SHUT_WR	util-internal.h	121;"	d
 EVUTIL_SHUT_WR	util-internal.h	123;"	d
-EVUTIL_SOCKET_ERROR	include/event2/util.h	329;"	d
-EVUTIL_SOCKET_ERROR	include/event2/util.h	353;"	d
-EVUTIL_SOCKET_ERROR	include/event2/util.h	362;"	d
 EVUTIL_TOLOWER_TABLE	evutil.c	/^static const unsigned char EVUTIL_TOLOWER_TABLE[256] = {$/;"	v	file:
 EVUTIL_TOUPPER	evutil.c	/^char EVUTIL_TOUPPER(char c)$/;"	f
 EVUTIL_TOUPPER_TABLE	evutil.c	/^static const unsigned char EVUTIL_TOUPPER_TABLE[256] = {$/;"	v	file:
@@ -457,37 +329,18 @@ EV_CHECK_FMT	log-internal.h	57;"	d
 EV_CLOSURE_NONE	event-internal.h	55;"	d
 EV_CLOSURE_PERSIST	event-internal.h	57;"	d
 EV_CLOSURE_SIGNAL	event-internal.h	56;"	d
-EV_ET	include/event2/event.h	746;"	d
-EV_FEATURE_ET	include/event2/event.h	/^    EV_FEATURE_ET = 0x01,$/;"	e	enum:event_method_feature
-EV_FEATURE_FDS	include/event2/event.h	/^    EV_FEATURE_FDS = 0x04$/;"	e	enum:event_method_feature
-EV_FEATURE_O1	include/event2/event.h	/^    EV_FEATURE_O1 = 0x02,$/;"	e	enum:event_method_feature
 EV_I64_ARG	util-internal.h	282;"	d
 EV_I64_ARG	util-internal.h	287;"	d
 EV_I64_FMT	util-internal.h	281;"	d
 EV_I64_FMT	util-internal.h	286;"	d
-EV_INT16_MAX	include/event2/util.h	225;"	d
-EV_INT16_MIN	include/event2/util.h	226;"	d
-EV_INT32_MAX	include/event2/util.h	222;"	d
-EV_INT32_MIN	include/event2/util.h	223;"	d
-EV_INT64_MAX	include/event2/util.h	219;"	d
-EV_INT64_MIN	include/event2/util.h	220;"	d
-EV_INT8_MAX	include/event2/util.h	228;"	d
-EV_INT8_MIN	include/event2/util.h	229;"	d
 EV_NORETURN	log-internal.h	34;"	d
 EV_NORETURN	log-internal.h	37;"	d
-EV_PERSIST	include/event2/event.h	744;"	d
-EV_RATE_LIMIT_MAX	include/event2/bufferevent.h	613;"	d
-EV_READ	include/event2/event.h	733;"	d
-EV_SIGNAL	include/event2/event.h	737;"	d
 EV_SIZE_ARG	util-internal.h	304;"	d
 EV_SIZE_ARG	util-internal.h	313;"	d
 EV_SIZE_ARG	util-internal.h	318;"	d
 EV_SIZE_FMT	util-internal.h	302;"	d
 EV_SIZE_FMT	util-internal.h	311;"	d
 EV_SIZE_FMT	util-internal.h	316;"	d
-EV_SIZE_MAX	include/event2/util.h	238;"	d
-EV_SIZE_MAX	include/event2/util.h	241;"	d
-EV_SIZE_MAX	include/event2/util.h	244;"	d
 EV_SOCK_ARG	util-internal.h	294;"	d
 EV_SOCK_ARG	util-internal.h	297;"	d
 EV_SOCK_FMT	util-internal.h	293;"	d
@@ -498,20 +351,24 @@ EV_SSIZE_ARG	util-internal.h	319;"	d
 EV_SSIZE_FMT	util-internal.h	303;"	d
 EV_SSIZE_FMT	util-internal.h	312;"	d
 EV_SSIZE_FMT	util-internal.h	317;"	d
-EV_SSIZE_MAX	include/event2/util.h	239;"	d
-EV_SSIZE_MAX	include/event2/util.h	242;"	d
-EV_SSIZE_MAX	include/event2/util.h	245;"	d
-EV_SSIZE_MIN	include/event2/util.h	250;"	d
-EV_TIMEOUT	include/event2/event.h	731;"	d
 EV_U64_ARG	util-internal.h	283;"	d
 EV_U64_ARG	util-internal.h	288;"	d
 EV_U64_FMT	util-internal.h	280;"	d
 EV_U64_FMT	util-internal.h	285;"	d
-EV_UINT16_MAX	include/event2/util.h	224;"	d
-EV_UINT32_MAX	include/event2/util.h	221;"	d
-EV_UINT64_MAX	include/event2/util.h	218;"	d
-EV_UINT8_MAX	include/event2/util.h	227;"	d
-EV_WRITE	include/event2/event.h	735;"	d
+Entry	event_rpcgen.py	/^class Entry:$/;"	c
+EntryArray	event_rpcgen.py	/^    def EntryArray(self, entry):$/;"	m	class:CCodeGenerator
+EntryArray	event_rpcgen.py	/^class EntryArray(Entry):$/;"	c
+EntryBytes	event_rpcgen.py	/^    def EntryBytes(self, entry_type, name, tag, fixed_length):$/;"	m	class:CCodeGenerator
+EntryBytes	event_rpcgen.py	/^class EntryBytes(Entry):$/;"	c
+EntryInt	event_rpcgen.py	/^    def EntryInt(self, entry_type, name, tag, bits=32):$/;"	m	class:CCodeGenerator
+EntryInt	event_rpcgen.py	/^class EntryInt(Entry):$/;"	c
+EntryString	event_rpcgen.py	/^    def EntryString(self, entry_type, name, tag):$/;"	m	class:CCodeGenerator
+EntryString	event_rpcgen.py	/^class EntryString(Entry):$/;"	c
+EntryStruct	event_rpcgen.py	/^    def EntryStruct(self, entry_type, name, tag, struct_name):$/;"	m	class:CCodeGenerator
+EntryStruct	event_rpcgen.py	/^class EntryStruct(Entry):$/;"	c
+EntryTagName	event_rpcgen.py	/^    def EntryTagName(self, entry):$/;"	m	class:Struct
+EntryVarBytes	event_rpcgen.py	/^    def EntryVarBytes(self, entry_type, name, tag):$/;"	m	class:CCodeGenerator
+EntryVarBytes	event_rpcgen.py	/^class EntryVarBytes(Entry):$/;"	c
 FDINFO_OFFSET	evmap.c	184;"	d	file:
 FDI_HAS_EVENTS	evport.c	104;"	d	file:
 FDI_HAS_READ	evport.c	102;"	d	file:
@@ -536,26 +393,37 @@ GLOBAL	evthread.c	44;"	d	file:
 GROUP_SUSPENDED	bufferevent_ratelim.c	208;"	d	file:
 GetAcceptExSockaddrs	iocp-internal.h	/^	GetAcceptExSockaddrsPtr GetAcceptExSockaddrs;$/;"	m	struct:win32_extension_fns
 GetAcceptExSockaddrsPtr	iocp-internal.h	/^typedef void (WINAPI *GetAcceptExSockaddrsPtr)(PVOID, DWORD, DWORD, DWORD, LPSOCKADDR *, LPINT, LPSOCKADDR *, LPINT);$/;"	t
+GetDeclaration	event_rpcgen.py	/^    def GetDeclaration(self, funcname):$/;"	m	class:Entry
+GetDeclaration	event_rpcgen.py	/^    def GetDeclaration(self, funcname):$/;"	m	class:EntryArray
+GetDeclaration	event_rpcgen.py	/^    def GetDeclaration(self, funcname):$/;"	m	class:EntryBytes
+GetDeclaration	event_rpcgen.py	/^    def GetDeclaration(self, funcname):$/;"	m	class:EntryVarBytes
+GetFuncName	event_rpcgen.py	/^    def GetFuncName(self):$/;"	m	class:Entry
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:Entry
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:EntryArray
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:EntryBytes
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:EntryInt
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:EntryString
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:EntryStruct
+GetInitializer	event_rpcgen.py	/^    def GetInitializer(self):$/;"	m	class:EntryVarBytes
 GetNetworkParams_fn_t	evdns.c	/^typedef DWORD(WINAPI *GetNetworkParams_fn_t)(FIXED_INFO *, DWORD*);$/;"	t	file:
+GetNextStruct	event_rpcgen.py	/^def GetNextStruct(file):$/;"	f
+GetTranslation	event_rpcgen.py	/^    def GetTranslation(self, extradict = {}):$/;"	m	class:Entry
+GetVarLen	event_rpcgen.py	/^    def GetVarLen(self, var):$/;"	m	class:Entry
+GetVarLen	event_rpcgen.py	/^    def GetVarLen(self, var):$/;"	m	class:EntryBytes
+GetVarLen	event_rpcgen.py	/^    def GetVarLen(self, var):$/;"	m	class:EntryString
+GetVarLen	event_rpcgen.py	/^    def GetVarLen(self, var):$/;"	m	class:EntryStruct
+GetVarLen	event_rpcgen.py	/^    def GetVarLen(self, var):$/;"	m	class:EntryVarBytes
+GetVarLen	event_rpcgen.py	/^    def GetVarLen(self, var_name):$/;"	m	class:EntryArray
+GetVarName	event_rpcgen.py	/^        def GetVarName(var_name):$/;"	f	function:EntryArray.__init__
+GetVarName	event_rpcgen.py	/^    def GetVarName(self, var):$/;"	m	class:Entry
+GetVarName	event_rpcgen.py	/^    def GetVarName(self, var_name):$/;"	m	class:EntryArray
+GuardName	event_rpcgen.py	/^    def GuardName(self, name):$/;"	m	class:CCodeGenerator
 HAS_PINNED_R	buffer.c	/^HAS_PINNED_R(struct evbuffer *buf)$/;"	f	file:
 HOST_NAME_MAX	evdns.c	125;"	d	file:
-HTTP_BADMETHOD	include/event2/http.h	60;"	d
-HTTP_BADREQUEST	include/event2/http.h	58;"	d
 HTTP_CONNECT_TIMEOUT	http-internal.h	17;"	d
 HTTP_DEFAULTPORT	http-internal.h	22;"	d
-HTTP_ENTITYTOOLARGE	include/event2/http.h	61;"	d
-HTTP_EXPECTATIONFAILED	include/event2/http.h	62;"	d
-HTTP_INTERNAL	include/event2/http.h	63;"	d
-HTTP_MOVEPERM	include/event2/http.h	55;"	d
-HTTP_MOVETEMP	include/event2/http.h	56;"	d
-HTTP_NOCONTENT	include/event2/http.h	54;"	d
-HTTP_NOTFOUND	include/event2/http.h	59;"	d
-HTTP_NOTIMPLEMENTED	include/event2/http.h	64;"	d
-HTTP_NOTMODIFIED	include/event2/http.h	57;"	d
-HTTP_OK	include/event2/http.h	53;"	d
 HTTP_PREFIX	http-internal.h	21;"	d
 HTTP_READ_TIMEOUT	http-internal.h	19;"	d
-HTTP_SERVUNAVAIL	include/event2/http.h	65;"	d
 HTTP_WRITE_TIMEOUT	http-internal.h	18;"	d
 HT_CLEAR	ht-internal.h	55;"	d
 HT_EMPTY	ht-internal.h	41;"	d
@@ -576,10 +444,12 @@ HT_REMOVE	ht-internal.h	51;"	d
 HT_REPLACE	ht-internal.h	50;"	d
 HT_SIZE	ht-internal.h	45;"	d
 HT_START	ht-internal.h	52;"	d
+HeaderFilename	event_rpcgen.py	/^    def HeaderFilename(self, filename):$/;"	m	class:CCodeGenerator
+HeaderPostamble	event_rpcgen.py	/^    def HeaderPostamble(self, name):$/;"	m	class:CCodeGenerator
+HeaderPreamble	event_rpcgen.py	/^    def HeaderPreamble(self, name):$/;"	m	class:CCodeGenerator
 IMPL_CTYPE_FN	evutil.c	/^IMPL_CTYPE_FN(ISALPHA)$/;"	f
 IMPL_CTYPE_FN	evutil.c	2023;"	d	file:
 INITIAL_NEVENT	epoll.c	96;"	d	file:
-INPUT	include/event2/rpc.h	460;"	d
 INT_TO_UDATA	kqueue.c	54;"	d	file:
 INT_TO_UDATA	kqueue.c	57;"	d	file:
 IOV_LEN_FIELD	buffer.c	1974;"	d	file:
@@ -591,23 +461,17 @@ IOV_PTR_FIELD	buffer.c	1979;"	d	file:
 IOV_TYPE	buffer.c	1972;"	d	file:
 IOV_TYPE	buffer.c	1978;"	d	file:
 InitializeConditionVariable_fn	evthread_win32.c	/^static void WINAPI (*InitializeConditionVariable_fn)(PCONDITION_VARIABLE)$/;"	v	file:
-LEV_OPT_CLOSE_ON_EXEC	include/event2/listener.h	65;"	d
-LEV_OPT_CLOSE_ON_FREE	include/event2/listener.h	63;"	d
-LEV_OPT_LEAVE_SOCKETS_BLOCKING	include/event2/listener.h	60;"	d
-LEV_OPT_REUSEABLE	include/event2/listener.h	68;"	d
-LEV_OPT_THREADSAFE	include/event2/listener.h	71;"	d
-LIBEVENT_VERSION	include/event2/event.h	1084;"	d
-LIBEVENT_VERSION_NUMBER	include/event2/event.h	1087;"	d
 LIM	bufferevent_ratelim.c	205;"	d	file:
 LOAD	evthread_win32.c	112;"	d	file:
-LOCAL_SOCKETPAIR_AF	event.c	2834;"	d	file:
+LOCAL_SOCKETPAIR_AF	event.c	2850;"	d	file:
 LOCK	listener.c	103;"	d	file:
 LOCK_DEFERRED_QUEUE	defer-internal.h	87;"	d
 LOCK_GROUP	bufferevent_ratelim.c	187;"	d	file:
+LineCount	event_rpcgen.py	/^    def LineCount(self):$/;"	m	class:Entry
 MAP_FAILED	buffer.c	96;"	d	file:
-MAX_COMMON_TIMEOUTS	event.c	1179;"	d	file:
-MAX_DEFERRED	event.c	1384;"	d	file:
-MAX_DEFERRED	event.c	1399;"	d	file:
+MAX_COMMON_TIMEOUTS	event.c	1191;"	d	file:
+MAX_DEFERRED	event.c	1396;"	d	file:
+MAX_DEFERRED	event.c	1411;"	d	file:
 MAX_EPOLL_TIMEOUT_MSEC	epoll.c	105;"	d	file:
 MAX_LABELS	evdns.c	1509;"	d	file:
 MAX_NEVENT	epoll.c	97;"	d	file:
@@ -621,13 +485,15 @@ MAX_V4_ADDRS	evdns.c	143;"	d	file:
 MAX_V6_ADDRS	evdns.c	144;"	d	file:
 MAX_WSABUFS	buffer_iocp.c	49;"	d	file:
 MEMBERSOF	http.c	2578;"	d	file:
-MICROSECONDS_MASK	event.c	1092;"	d	file:
+MICROSECONDS_MASK	event.c	1104;"	d	file:
 MIN	evdns.c	130;"	d	file:
 MIN	evdns.c	131;"	d	file:
 MIN	http.c	165;"	d	file:
 MIN_BUFFER_SIZE	evbuffer-internal.h	53;"	d
 MIN_BUFFER_SIZE	evbuffer-internal.h	55;"	d
 MORE_DATA_EXPECTED	http-internal.h	/^	MORE_DATA_EXPECTED = 0,$/;"	e	enum:message_read_status
+MakeArray	event_rpcgen.py	/^    def MakeArray(self, yes=1):$/;"	m	class:Entry
+MakeOptional	event_rpcgen.py	/^    def MakeOptional(self):$/;"	m	class:Entry
 NEVENT	devpoll.c	79;"	d	file:
 NEVENT	kqueue.c	67;"	d	file:
 NEVENT	win32select.c	175;"	d	file:
@@ -651,10 +517,13 @@ N_ACTIVE_CALLBACKS	event-internal.h	341;"	d
 N_CPUS_DEFAULT	event_iocp.c	169;"	d	file:
 N_SOCKETS_PER_LISTENER	listener.c	796;"	d	file:
 N_TO_READ	evutil.c	160;"	d	file:
+Name	event_rpcgen.py	/^    def Name(self):$/;"	m	class:Entry
+Name	event_rpcgen.py	/^    def Name(self):$/;"	m	class:Struct
+NormalizeLine	event_rpcgen.py	/^def NormalizeLine(line):$/;"	f
 OP_BLOCKED	bufferevent_openssl.c	560;"	d	file:
 OP_ERR	bufferevent_openssl.c	561;"	d	file:
 OP_MADE_PROGRESS	bufferevent_openssl.c	559;"	d	file:
-OUTPUT	include/event2/rpc.h	463;"	d
+Optional	event_rpcgen.py	/^    def Optional(self):$/;"	m	class:Entry
 PART_FRAGMENT	http.c	/^	PART_FRAGMENT$/;"	e	enum:uri_part	file:
 PART_PATH	http.c	/^	PART_PATH,$/;"	e	enum:uri_part	file:
 PART_QUERY	http.c	/^	PART_QUERY,$/;"	e	enum:uri_part	file:
@@ -663,12 +532,21 @@ PREPEND_CHAIN	buffer.c	/^PREPEND_CHAIN(struct evbuffer *dst, struct evbuffer *sr
 PRESERVE_PINNED	buffer.c	/^PRESERVE_PINNED(struct evbuffer *src, struct evbuffer_chain **first,$/;"	f	file:
 PTR_TO_UDATA	kqueue.c	53;"	d	file:
 PTR_TO_UDATA	kqueue.c	56;"	d	file:
+Parse	event_rpcgen.py	/^def Parse(factory, file):$/;"	f
+PrintCode	event_rpcgen.py	/^    def PrintCode(self, file):$/;"	m	class:StructCCode
+PrintDeclaration	event_rpcgen.py	/^    def PrintDeclaration(self, file):$/;"	m	class:StructCCode
+PrintForwardDeclaration	event_rpcgen.py	/^    def PrintForwardDeclaration(self, file):$/;"	m	class:StructCCode
+PrintIndented	event_rpcgen.py	/^    def PrintIndented(self, file, ident, code):$/;"	m	class:Struct
+PrintTags	event_rpcgen.py	/^    def PrintTags(self, file):$/;"	m	class:StructCCode
+ProcessOneEntry	event_rpcgen.py	/^def ProcessOneEntry(factory, newstruct, entry):$/;"	f
+ProcessStruct	event_rpcgen.py	/^def ProcessStruct(factory, data):$/;"	f
 READ_DEFAULT	bufferevent_openssl.c	715;"	d	file:
 REQUEST_CANCELED	http-internal.h	/^	REQUEST_CANCELED = -2,$/;"	e	enum:message_read_status
 REQ_HEAD	evdns.c	386;"	d	file:
 REQ_VERSION_ATLEAST	http.c	160;"	d	file:
 REQ_VERSION_BEFORE	http.c	156;"	d	file:
 RESTORE_PINNED	buffer.c	/^RESTORE_PINNED(struct evbuffer *src, struct evbuffer_chain *pinned,$/;"	f	file:
+RpcGenError	event_rpcgen.py	/^class RpcGenError(Exception):$/;"	c
 SCHEDULE_DEFERRED	bufferevent.c	210;"	d	file:
 SELECT_ALLOC_SIZE	select.c	66;"	d	file:
 SENDFILE_IS_FREEBSD	buffer.c	105;"	d	file:
@@ -682,18 +560,15 @@ SKIP_NAME	evdns.c	1277;"	d	file:
 SO_UPDATE_CONNECT_CONTEXT	bufferevent_async.c	68;"	d	file:
 SPIN_COUNT	evthread_win32.c	46;"	d	file:
 SUBDELIMS	http.c	3956;"	d	file:
+SetLineCount	event_rpcgen.py	/^    def SetLineCount(self, number):$/;"	m	class:Entry
+SetStruct	event_rpcgen.py	/^    def SetStruct(self, struct):$/;"	m	class:Entry
 SleepConditionVariableCS_fn	evthread_win32.c	/^static BOOL WINAPI (*SleepConditionVariableCS_fn)($/;"	v	file:
+Struct	event_rpcgen.py	/^    def Struct(self, name):$/;"	m	class:CCodeGenerator
+Struct	event_rpcgen.py	/^class Struct:$/;"	c
+StructCCode	event_rpcgen.py	/^class StructCCode(Struct):$/;"	c
 TAILQ_END	event-internal.h	318;"	d
-TAILQ_ENTRY	include/event2/event_struct.h	130;"	d
-TAILQ_ENTRY	include/event2/event_struct.h	70;"	d
-TAILQ_ENTRY	include/event2/keyvalq_struct.h	38;"	d
-TAILQ_ENTRY	include/event2/keyvalq_struct.h	69;"	d
 TAILQ_FIRST	event-internal.h	315;"	d
 TAILQ_FOREACH	event-internal.h	325;"	d
-TAILQ_HEAD	include/event2/event_struct.h	134;"	d
-TAILQ_HEAD	include/event2/event_struct.h	79;"	d
-TAILQ_HEAD	include/event2/keyvalq_struct.h	47;"	d
-TAILQ_HEAD	include/event2/keyvalq_struct.h	73;"	d
 TAILQ_INSERT_BEFORE	event-internal.h	332;"	d
 TAILQ_NEXT	event-internal.h	321;"	d
 TEST_NAME	evdns.c	1039;"	d	file:
@@ -711,6 +586,9 @@ TYPE_AAAA	evdns.c	151;"	d	file:
 TYPE_CNAME	evdns.c	148;"	d	file:
 TYPE_PTR	evdns.c	149;"	d	file:
 TYPE_SOA	evdns.c	150;"	d	file:
+Tag	event_rpcgen.py	/^    def Tag(self):$/;"	m	class:Entry
+TranslateList	event_rpcgen.py	/^def TranslateList(mylist, mydict):$/;"	f
+Type	event_rpcgen.py	/^    def Type(self):$/;"	m	class:Entry
 UNLOCK	listener.c	104;"	d	file:
 UNLOCKED	bufferevent.c	172;"	d	file:
 UNLOCKED	bufferevent.c	207;"	d	file:
@@ -724,6 +602,9 @@ USE_SENDFILE	buffer.c	101;"	d	file:
 USE_SENDFILE	buffer.c	104;"	d	file:
 USE_SENDFILE	buffer.c	107;"	d	file:
 USE_SENDFILE	buffer.c	110;"	d	file:
+Usage	event_rpcgen.py	/^class Usage(RpcGenError):$/;"	c
+Verify	event_rpcgen.py	/^    def Verify(self):$/;"	m	class:Entry
+Verify	event_rpcgen.py	/^    def Verify(self):$/;"	m	class:EntryBytes
 WIN32_LEAN_AND_MEAN	event.c	31;"	d	file:
 WIN32_LEAN_AND_MEAN	event.c	33;"	d	file:
 WIN32_LEAN_AND_MEAN	event.h	61;"	d
@@ -759,48 +640,14 @@ _BUFFEREVENT_INTERNAL_H_	bufferevent-internal.h	27;"	d
 _CHANGELIST_H_	changelist-internal.h	27;"	d
 _DEFER_INTERNAL_H_	defer-internal.h	27;"	d
 _EVBUFFER_INTERNAL_H_	evbuffer-internal.h	28;"	d
-_EVBUFFER_IOVEC_IS_NATIVE	include/event2/buffer.h	127;"	d
 _EVDNS_H_	evdns.h	28;"	d
-_EVENT2_BUFFEREVENT_COMPAT_H_	include/event2/bufferevent_compat.h	29;"	d
-_EVENT2_BUFFEREVENT_H_	include/event2/bufferevent.h	28;"	d
-_EVENT2_BUFFEREVENT_SSL_H_	include/event2/bufferevent_ssl.h	27;"	d
-_EVENT2_BUFFEREVENT_STRUCT_H_	include/event2/bufferevent_struct.h	28;"	d
-_EVENT2_BUFFER_COMPAT_H_	include/event2/buffer_compat.h	28;"	d
-_EVENT2_BUFFER_H_	include/event2/buffer.h	27;"	d
-_EVENT2_DNS_COMPAT_H_	include/event2/dns_compat.h	28;"	d
-_EVENT2_DNS_H_	include/event2/dns.h	136;"	d
-_EVENT2_DNS_STRUCT_H_	include/event2/dns_struct.h	28;"	d
-_EVENT2_EVENT_COMPAT_H_	include/event2/event_compat.h	28;"	d
-_EVENT2_EVENT_H_	include/event2/event.h	28;"	d
-_EVENT2_EVENT_KEYVALQ_STRUCT_H_	include/event2/keyvalq_struct.h	28;"	d
-_EVENT2_EVENT_STRUCT_H_	include/event2/event_struct.h	28;"	d
-_EVENT2_HTTP_COMPAT_H_	include/event2/http_compat.h	28;"	d
-_EVENT2_HTTP_H_	include/event2/http.h	28;"	d
-_EVENT2_HTTP_STRUCT_H_	include/event2/http_struct.h	28;"	d
-_EVENT2_LISTENER_H_	include/event2/listener.h	28;"	d
-_EVENT2_RPC_COMPAT_H_	include/event2/rpc_compat.h	28;"	d
-_EVENT2_RPC_H_	include/event2/rpc.h	28;"	d
-_EVENT2_RPC_STRUCT_H_	include/event2/rpc_struct.h	28;"	d
-_EVENT2_TAG_COMPAT_H_	include/event2/tag_compat.h	28;"	d
-_EVENT2_TAG_H_	include/event2/tag.h	28;"	d
-_EVENT2_THREAD_H_	include/event2/thread.h	27;"	d
-_EVENT2_UTIL_H_	include/event2/util.h	27;"	d
-_EVENT_DEFINED_TQENTRY	include/event2/event_struct.h	69;"	d
-_EVENT_DEFINED_TQENTRY	include/event2/keyvalq_struct.h	37;"	d
-_EVENT_DEFINED_TQHEAD	include/event2/event_struct.h	78;"	d
-_EVENT_DEFINED_TQHEAD	include/event2/keyvalq_struct.h	46;"	d
 _EVENT_ERR_ABORT	log-internal.h	40;"	d
 _EVENT_HT_H	ht-internal.h	9;"	d
 _EVENT_H_	event.h	28;"	d
 _EVENT_INTERNAL_H_	event-internal.h	28;"	d
 _EVENT_IOCP_INTERNAL_H	iocp-internal.h	28;"	d
 _EVENT_IPV6_INTERNAL_H	ipv6-internal.h	31;"	d
-_EVENT_LOG_DEBUG	include/event2/event.h	574;"	d
-_EVENT_LOG_ERR	include/event2/event.h	577;"	d
-_EVENT_LOG_MSG	include/event2/event.h	575;"	d
-_EVENT_LOG_WARN	include/event2/event.h	576;"	d
 _EVENT_MM_INTERNAL_H	mm-internal.h	27;"	d
-_EVENT_SIZEOF_VOID_P	include/event2/util.h	74;"	d
 _EVENT_UTIL_INTERNAL_H	util-internal.h	27;"	d
 _EVHTTP_H_	evhttp.h	28;"	d
 _EVHTTP_REQ_UNKNOWN	http-internal.h	45;"	d
@@ -818,7 +665,6 @@ _FORTIFY_SOURCE	evdns.c	55;"	d	file:
 _GNU_SOURCE	buffer.c	38;"	d	file:
 _GNU_SOURCE	evthread_pthread.c	29;"	d	file:
 _GNU_SOURCE	evutil.c	29;"	d	file:
-_GNU_SOURCE	include/event2/util.h	61;"	d
 _GNU_SOURCE	kqueue.c	31;"	d	file:
 _HTTP_INTERNAL_H_	http-internal.h	11;"	d
 _HT_BUCKET	ht-internal.h	117;"	d
@@ -832,6 +678,7 @@ _HT_SET_HASHVAL	ht-internal.h	103;"	d
 _HT_SET_HASHVAL	ht-internal.h	112;"	d
 _LOG_H_	log-internal.h	28;"	d
 _MIN_HEAP_H_	minheap-internal.h	29;"	d
+_NAME	event_rpcgen.py	/^_NAME = "event_rpcgen.py"$/;"	v
 _RATELIM_INTERNAL_H_	ratelim-internal.h	27;"	d
 _STRLCPY_INTERNAL_H_	strlcpy-internal.h	2;"	d
 _URI_ADD	http.c	4352;"	d	file:
@@ -839,12 +686,27 @@ _URI_ADD	http.c	4406;"	d	file:
 _URI_FREE_STR	http.c	4329;"	d	file:
 _URI_FREE_STR	http.c	4342;"	d	file:
 _URI_SET_STR	http.c	4445;"	d	file:
+_VERSION	event_rpcgen.py	/^_VERSION = "0.1"$/;"	v
 _WIN32_IE	evdns.c	80;"	d	file:
 _WIN32_WINNT	event_iocp.c	29;"	d	file:
 _WIN32_WINNT	evthread_win32.c	31;"	d	file:
 _WIN32_WINNT	listener.c	34;"	d	file:
 __cdecl	signal.c	96;"	d	file:
 __func__	util-internal.h	52;"	d
+__init__	event_rpcgen.py	/^        def __init__(self, why):$/;"	m	class:RpcGenError
+__init__	event_rpcgen.py	/^    def __init__(self):$/;"	m	class:CCodeGenerator
+__init__	event_rpcgen.py	/^    def __init__(self, argv):$/;"	m	class:CommandLine
+__init__	event_rpcgen.py	/^    def __init__(self, argv0):$/;"	m	class:Usage
+__init__	event_rpcgen.py	/^    def __init__(self, entry):$/;"	m	class:EntryArray
+__init__	event_rpcgen.py	/^    def __init__(self, name):$/;"	m	class:Struct
+__init__	event_rpcgen.py	/^    def __init__(self, name):$/;"	m	class:StructCCode
+__init__	event_rpcgen.py	/^    def __init__(self, type, name, tag):$/;"	m	class:Entry
+__init__	event_rpcgen.py	/^    def __init__(self, type, name, tag):$/;"	m	class:EntryString
+__init__	event_rpcgen.py	/^    def __init__(self, type, name, tag):$/;"	m	class:EntryVarBytes
+__init__	event_rpcgen.py	/^    def __init__(self, type, name, tag, bits=32):$/;"	m	class:EntryInt
+__init__	event_rpcgen.py	/^    def __init__(self, type, name, tag, length):$/;"	m	class:EntryBytes
+__init__	event_rpcgen.py	/^    def __init__(self, type, name, tag, refname):$/;"	m	class:EntryStruct
+__str__	event_rpcgen.py	/^        def __str__(self):$/;"	m	class:RpcGenError	file:
 _bev_group_random_element	bufferevent_ratelim.c	/^_bev_group_random_element(struct bufferevent_rate_limit_group *group)$/;"	f	file:
 _bev_group_refill_callback	bufferevent_ratelim.c	/^_bev_group_refill_callback(evutil_socket_t fd, short what, void *arg)$/;"	f	file:
 _bev_group_suspend_reading	bufferevent_ratelim.c	/^_bev_group_suspend_reading(struct bufferevent_rate_limit_group *g)$/;"	f	file:
@@ -867,7 +729,6 @@ _bufferevent_init_generic_timeout_cbs	bufferevent.c	/^_bufferevent_init_generic_
 _bufferevent_run_eventcb	bufferevent.c	/^_bufferevent_run_eventcb(struct bufferevent *bufev, short what)$/;"	f
 _bufferevent_run_readcb	bufferevent.c	/^_bufferevent_run_readcb(struct bufferevent *bufev)$/;"	f
 _bufferevent_run_writecb	bufferevent.c	/^_bufferevent_run_writecb(struct bufferevent *bufev)$/;"	f
-_ev	include/event2/event_struct.h	/^	} _ev;$/;"	m	struct:event	typeref:union:event::__anon12
 _evbuffer_chain_pin	buffer.c	/^_evbuffer_chain_pin(struct evbuffer_chain *chain, unsigned flag)$/;"	f
 _evbuffer_chain_unpin	buffer.c	/^_evbuffer_chain_unpin(struct evbuffer_chain *chain, unsigned flag)$/;"	f
 _evbuffer_decref_and_unlock	buffer.c	/^_evbuffer_decref_and_unlock(struct evbuffer *buffer)$/;"	f
@@ -914,16 +775,26 @@ _evthreadimpl_lock_lock	evthread.c	/^_evthreadimpl_lock_lock(unsigned mode, void
 _evthreadimpl_lock_unlock	evthread.c	/^_evthreadimpl_lock_unlock(unsigned mode, void *lock)$/;"	f
 _evthreadimpl_locking_enabled	evthread.c	/^_evthreadimpl_locking_enabled(void)$/;"	f
 _evutil_weakrand	evutil.c	/^_evutil_weakrand(void)$/;"	f
-_internal	include/event2/buffer.h	/^	} _internal;$/;"	m	struct:evbuffer_ptr	typeref:struct:evbuffer_ptr::__anon10
 _mm_free_fn	event.c	/^static void (*_mm_free_fn)(void *p) = NULL;$/;"	v	file:
 _mm_malloc_fn	event.c	/^static void *(*_mm_malloc_fn)(size_t sz) = NULL;$/;"	v	file:
 _mm_realloc_fn	event.c	/^static void *(*_mm_realloc_fn)(void *p, size_t sz) = NULL;$/;"	v	file:
 _original_cond_fns	evthread.c	/^static struct evthread_condition_callbacks _original_cond_fns = {$/;"	v	typeref:struct:evthread_condition_callbacks	file:
 _original_lock_fns	evthread.c	/^static struct evthread_lock_callbacks _original_lock_fns = {$/;"	v	typeref:struct:evthread_lock_callbacks	file:
 _warn_helper	log.c	/^_warn_helper(int severity, const char *errstr, const char *fmt, va_list ap)$/;"	f	file:
-a	evdns.c	/^		} a;$/;"	m	union:reply::__anon1	typeref:struct:reply::__anon1::__anon2	file:
+a	evdns.c	/^		} a;$/;"	m	union:reply::__anon2	typeref:struct:reply::__anon2::__anon3	file:
 a	minheap-internal.h	/^	unsigned n, a;$/;"	m	struct:min_heap
-aaaa	evdns.c	/^		} aaaa;$/;"	m	union:reply::__anon1	typeref:struct:reply::__anon1::__anon3	file:
+aaaa	evdns.c	/^		} aaaa;$/;"	m	union:reply::__anon2	typeref:struct:reply::__anon2::__anon4	file:
+ac_fn_c_check_decl	configure	/^ac_fn_c_check_decl ()$/;"	f
+ac_fn_c_check_func	configure	/^ac_fn_c_check_func ()$/;"	f
+ac_fn_c_check_header_compile	configure	/^ac_fn_c_check_header_compile ()$/;"	f
+ac_fn_c_check_header_mongrel	configure	/^ac_fn_c_check_header_mongrel ()$/;"	f
+ac_fn_c_check_member	configure	/^ac_fn_c_check_member ()$/;"	f
+ac_fn_c_check_type	configure	/^ac_fn_c_check_type ()$/;"	f
+ac_fn_c_compute_int	configure	/^ac_fn_c_compute_int ()$/;"	f
+ac_fn_c_try_compile	configure	/^ac_fn_c_try_compile ()$/;"	f
+ac_fn_c_try_cpp	configure	/^ac_fn_c_try_cpp ()$/;"	f
+ac_fn_c_try_link	configure	/^ac_fn_c_try_link ()$/;"	f
+ac_fn_c_try_run	configure	/^ac_fn_c_try_run ()$/;"	f
 accept_socket_cb	http.c	/^accept_socket_cb(struct evconnlistener *listener, evutil_socket_t nfd, struct sockaddr *peer_sa, int peer_socklen, void *arg)$/;"	f	file:
 accepted_socket_cb	listener.c	/^accepted_socket_cb(struct event_overlapped *o, ev_uintptr_t key, ev_ssize_t n, int ok)$/;"	f	file:
 accepted_socket_invoke_user_cb	listener.c	/^accepted_socket_invoke_user_cb(struct deferred_cb *dcb, void *arg)$/;"	f	file:
@@ -936,32 +807,22 @@ add_cname_to_reply	evdns.c	/^add_cname_to_reply(struct evdns_getaddrinfo_request
 added	event.c	/^	unsigned added : 1;$/;"	m	struct:event_debug_entry	file:
 additional	evdns.c	/^	struct server_reply_item *additional; \/* linked list of additional RRs *\/$/;"	m	struct:server_request	typeref:struct:server_request::server_reply_item	file:
 addr	evdns.c	/^	struct sockaddr_storage addr; \/* Where to send the response *\/$/;"	m	struct:server_request	typeref:struct:server_request::sockaddr_storage	file:
-addr	evdns.c	/^	} addr;$/;"	m	struct:hosts_entry	typeref:union:hosts_entry::__anon5	file:
+addr	evdns.c	/^	} addr;$/;"	m	struct:hosts_entry	typeref:union:hosts_entry::__anon6	file:
 addrbuf	listener.c	/^	char addrbuf[1];$/;"	m	struct:accepting_socket	file:
-addrcount	evdns.c	/^			u32 addrcount;$/;"	m	struct:reply::__anon1::__anon2	file:
-addrcount	evdns.c	/^			u32 addrcount;$/;"	m	struct:reply::__anon1::__anon3	file:
+addrcount	evdns.c	/^			u32 addrcount;$/;"	m	struct:reply::__anon2::__anon3	file:
+addrcount	evdns.c	/^			u32 addrcount;$/;"	m	struct:reply::__anon2::__anon4	file:
 address	evdns.c	/^	struct sockaddr_storage address;$/;"	m	struct:nameserver	typeref:struct:nameserver::sockaddr_storage	file:
 address	http-internal.h	/^	char *address;			\/* address to connect to *\/$/;"	m	struct:evhttp_connection
-addresses	evdns.c	/^			struct in6_addr addresses[MAX_V6_ADDRS];$/;"	m	struct:reply::__anon1::__anon3	typeref:struct:reply::__anon1::__anon3::in6_addr	file:
-addresses	evdns.c	/^			u32 addresses[MAX_V4_ADDRS];$/;"	m	struct:reply::__anon1::__anon2	file:
+addresses	evdns.c	/^			struct in6_addr addresses[MAX_V6_ADDRS];$/;"	m	struct:reply::__anon2::__anon4	typeref:struct:reply::__anon2::__anon4::in6_addr	file:
+addresses	evdns.c	/^			u32 addresses[MAX_V4_ADDRS];$/;"	m	struct:reply::__anon2::__anon3	file:
 addrinfo_from_hostent	evutil.c	/^addrinfo_from_hostent(const struct hostent *ent,$/;"	f	file:
 addrlen	evdns.c	/^	ev_socklen_t addrlen; \/* length of addr *\/$/;"	m	struct:server_request	file:
 addrlen	evdns.c	/^	ev_socklen_t addrlen;$/;"	m	struct:nameserver	file:
 addrlen	evdns.c	/^	int addrlen;$/;"	m	struct:hosts_entry	file:
 adj_timeouts	bufferevent-internal.h	/^	int (*adj_timeouts)(struct bufferevent *);$/;"	m	struct:bufferevent_ops
 advance_last_with_data	buffer.c	/^advance_last_with_data(struct evbuffer *buf)$/;"	f	file:
-ai_addr	include/event2/util.h	/^	struct sockaddr  *ai_addr; \/* binary address *\/$/;"	m	struct:evutil_addrinfo	typeref:struct:evutil_addrinfo::sockaddr
-ai_addrlen	include/event2/util.h	/^	size_t  ai_addrlen;   \/* length of ai_addr *\/$/;"	m	struct:evutil_addrinfo
-ai_canonname	include/event2/util.h	/^	char   *ai_canonname; \/* canonical name for nodename *\/$/;"	m	struct:evutil_addrinfo
-ai_family	include/event2/util.h	/^	int     ai_family;    \/* PF_xxx *\/$/;"	m	struct:evutil_addrinfo
-ai_flags	include/event2/util.h	/^	int     ai_flags;     \/* AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST *\/$/;"	m	struct:evutil_addrinfo
-ai_next	include/event2/util.h	/^	struct evutil_addrinfo  *ai_next; \/* next structure in linked list *\/$/;"	m	struct:evutil_addrinfo	typeref:struct:evutil_addrinfo::evutil_addrinfo
-ai_protocol	include/event2/util.h	/^	int     ai_protocol;  \/* 0 or IPPROTO_xxx for IPv4 and IPv6 *\/$/;"	m	struct:evutil_addrinfo
-ai_socktype	include/event2/util.h	/^	int     ai_socktype;  \/* SOCK_xxx *\/$/;"	m	struct:evutil_addrinfo
 alias	http-internal.h	/^	char *alias; \/* the server alias. *\/$/;"	m	struct:evhttp_server_alias
 aliases	http-internal.h	/^	TAILQ_HEAD(aliasq, evhttp_server_alias) aliases;$/;"	m	struct:evhttp
-alloc	include/event2/thread.h	/^	void *(*alloc)(unsigned locktype);$/;"	m	struct:evthread_lock_callbacks
-alloc_condition	include/event2/thread.h	/^	void *(*alloc_condition)(unsigned condtype);$/;"	m	struct:evthread_condition_callbacks
 allow_dirty_shutdown	bufferevent_openssl.c	/^	unsigned allow_dirty_shutdown : 1;$/;"	m	struct:bufferevent_openssl	file:
 allowed_methods	http-internal.h	/^	ev_uint16_t allowed_methods;$/;"	m	struct:evhttp
 answer	evdns.c	/^	struct server_reply_item *answer; \/* linked list of answer RRs *\/$/;"	m	struct:server_request	typeref:struct:server_request::server_reply_item	file:
@@ -991,6 +852,17 @@ arc4random_stir	arc4random.c	/^arc4random_stir(void)$/;"	f
 arc4random_uniform	arc4random.c	/^arc4random_uniform(unsigned int upper_bound)$/;"	f
 arg	defer-internal.h	/^	void *arg;$/;"	m	struct:deferred_cb
 arg	event.c	/^	void *arg;$/;"	m	struct:event_once	file:
+as_fn_append	configure	/^  as_fn_append ()$/;"	f
+as_fn_arith	configure	/^  as_fn_arith ()$/;"	f
+as_fn_error	configure	/^as_fn_error ()$/;"	f
+as_fn_exit	configure	/^as_fn_exit ()$/;"	f
+as_fn_failure	configure	/^as_fn_failure () { as_fn_return 1; }$/;"	f
+as_fn_mkdir_p	configure	/^as_fn_mkdir_p ()$/;"	f
+as_fn_ret_failure	configure	/^as_fn_ret_failure () { return 1; }$/;"	f
+as_fn_ret_success	configure	/^as_fn_ret_success () { return 0; }$/;"	f
+as_fn_set_status	configure	/^as_fn_set_status ()$/;"	f
+as_fn_success	configure	/^as_fn_success () { as_fn_return 0; }$/;"	f
+as_fn_unset	configure	/^as_fn_unset ()$/;"	f
 attr_recursive	evthread_pthread.c	/^static pthread_mutexattr_t attr_recursive;$/;"	v	file:
 authority	evdns.c	/^	struct server_reply_item *authority; \/* linked list of authority RRs *\/$/;"	m	struct:server_request	typeref:struct:server_request::server_reply_item	file:
 avoid_method	event-internal.h	/^	const char *avoid_method;$/;"	m	struct:event_config_entry
@@ -1002,7 +874,6 @@ base	event-internal.h	/^	struct event_base *base;$/;"	m	struct:common_timeout_li
 base	evrpc-internal.h	/^	struct event_base *base;$/;"	m	struct:evrpc_pool	typeref:struct:evrpc_pool::event_base
 base	http-internal.h	/^	struct event_base *base;$/;"	m	struct:evhttp	typeref:struct:evhttp::event_base
 base	http-internal.h	/^	struct event_base *base;$/;"	m	struct:evhttp_connection	typeref:struct:evhttp_connection::event_base
-base	include/event2/rpc_struct.h	/^	struct evrpc_base *base;$/;"	m	struct:evrpc	typeref:struct:evrpc::evrpc_base
 base	listener.c	/^	struct evconnlistener base;$/;"	m	struct:evconnlistener_event	typeref:struct:evconnlistener_event::evconnlistener	file:
 base	listener.c	/^	struct evconnlistener base;$/;"	m	struct:evconnlistener_iocp	typeref:struct:evconnlistener_iocp::evconnlistener	file:
 be_async_ctrl	bufferevent_async.c	/^be_async_ctrl(struct bufferevent *bev, enum bufferevent_ctrl_op op,$/;"	f	file:
@@ -1037,7 +908,6 @@ be_openssl_readcb	bufferevent_openssl.c	/^be_openssl_readcb(struct bufferevent *
 be_openssl_readeventcb	bufferevent_openssl.c	/^be_openssl_readeventcb(evutil_socket_t fd, short what, void *ptr)$/;"	f	file:
 be_openssl_writecb	bufferevent_openssl.c	/^be_openssl_writecb(struct bufferevent *bev_base, void *ctx)$/;"	f	file:
 be_openssl_writeeventcb	bufferevent_openssl.c	/^be_openssl_writeeventcb(evutil_socket_t fd, short what, void *ptr)$/;"	f	file:
-be_ops	include/event2/bufferevent_struct.h	/^	const struct bufferevent_ops *be_ops;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::bufferevent_ops
 be_pair_destruct	bufferevent_pair.c	/^be_pair_destruct(struct bufferevent *bev)$/;"	f	file:
 be_pair_disable	bufferevent_pair.c	/^be_pair_disable(struct bufferevent *bev, short events)$/;"	f	file:
 be_pair_enable	bufferevent_pair.c	/^be_pair_enable(struct bufferevent *bufev, short events)$/;"	f	file:
@@ -1078,14 +948,11 @@ bio_bufferevent_puts	bufferevent_openssl.c	/^bio_bufferevent_puts(BIO *b, const 
 bio_bufferevent_read	bufferevent_openssl.c	/^bio_bufferevent_read(BIO *b, char *out, int outlen)$/;"	f	file:
 bio_bufferevent_write	bufferevent_openssl.c	/^bio_bufferevent_write(BIO *b, const char *in, int inlen)$/;"	f	file:
 bio_data_counts	bufferevent_openssl.c	/^struct bio_data_counts {$/;"	s	file:
-body_size	include/event2/http_struct.h	/^	size_t body_size;$/;"	m	struct:evhttp_request
 bracket_addr_ok	http.c	/^bracket_addr_ok(const char *s, const char *eos)$/;"	f	file:
 bufev	http-internal.h	/^	struct bufferevent *bufev;$/;"	m	struct:evhttp_connection	typeref:struct:evhttp_connection::bufferevent
 buffer	buffer_iocp.c	/^	struct evbuffer buffer;$/;"	m	struct:evbuffer_overlapped	typeref:struct:evbuffer_overlapped::evbuffer	file:
 buffer	evbuffer-internal.h	/^	unsigned char *buffer;$/;"	m	struct:evbuffer_chain
 buffer_len	evbuffer-internal.h	/^	size_t buffer_len;$/;"	m	struct:evbuffer_chain
-bufferevent	include/event2/bufferevent.h	/^struct bufferevent$/;"	s
-bufferevent	include/event2/bufferevent_struct.h	/^struct bufferevent {$/;"	s
 bufferevent_add_to_rate_limit_group	bufferevent_ratelim.c	/^bufferevent_add_to_rate_limit_group(struct bufferevent *bev,$/;"	f
 bufferevent_async	bufferevent_async.c	/^struct bufferevent_async {$/;"	s	file:
 bufferevent_async_can_connect	bufferevent_async.c	/^bufferevent_async_can_connect(struct bufferevent *bev)$/;"	f
@@ -1096,7 +963,6 @@ bufferevent_base_set	bufferevent_sock.c	/^bufferevent_base_set(struct event_base
 bufferevent_connect_getaddrinfo_cb	bufferevent_sock.c	/^bufferevent_connect_getaddrinfo_cb(int result, struct evutil_addrinfo *ai,$/;"	f	file:
 bufferevent_ctrl_data	bufferevent-internal.h	/^union bufferevent_ctrl_data {$/;"	u
 bufferevent_ctrl_op	bufferevent-internal.h	/^enum bufferevent_ctrl_op {$/;"	g
-bufferevent_data_cb	include/event2/bufferevent.h	/^typedef void (*bufferevent_data_cb)(struct bufferevent *bev, void *ctx);$/;"	t
 bufferevent_decref	bufferevent.c	/^bufferevent_decref(struct bufferevent *bufev)$/;"	f
 bufferevent_decrement_read_limit	bufferevent_ratelim.c	/^bufferevent_decrement_read_limit(struct bufferevent *bev, ev_ssize_t decr)$/;"	f
 bufferevent_decrement_write_limit	bufferevent_ratelim.c	/^bufferevent_decrement_write_limit(struct bufferevent *bev, ev_ssize_t decr)$/;"	f
@@ -1104,14 +970,10 @@ bufferevent_disable	bufferevent.c	/^bufferevent_disable(struct bufferevent *bufe
 bufferevent_disable_hard	bufferevent.c	/^bufferevent_disable_hard(struct bufferevent *bufev, short event)$/;"	f
 bufferevent_enable	bufferevent.c	/^bufferevent_enable(struct bufferevent *bufev, short event)$/;"	f
 bufferevent_enable_locking	bufferevent.c	/^bufferevent_enable_locking(struct bufferevent *bufev, void *lock)$/;"	f
-bufferevent_event_cb	include/event2/bufferevent.h	/^typedef void (*bufferevent_event_cb)(struct bufferevent *bev, short what, void *ctx);$/;"	t
-bufferevent_filter_cb	include/event2/bufferevent.h	/^typedef enum bufferevent_filter_result (*bufferevent_filter_cb)($/;"	t	typeref:enum:bufferevent_filter_cb
 bufferevent_filter_new	bufferevent_filter.c	/^bufferevent_filter_new(struct bufferevent *underlying,$/;"	f
-bufferevent_filter_result	include/event2/bufferevent.h	/^enum bufferevent_filter_result {$/;"	g
 bufferevent_filtered	bufferevent_filter.c	/^struct bufferevent_filtered {$/;"	s	file:
 bufferevent_filtered_outbuf_cb	bufferevent_filter.c	/^bufferevent_filtered_outbuf_cb(struct evbuffer *buf,$/;"	f	file:
 bufferevent_flush	bufferevent.c	/^bufferevent_flush(struct bufferevent *bufev,$/;"	f
-bufferevent_flush_mode	include/event2/bufferevent.h	/^enum bufferevent_flush_mode {$/;"	g
 bufferevent_free	bufferevent.c	/^bufferevent_free(struct bufferevent *bufev)$/;"	f
 bufferevent_generic_read_timeout_cb	bufferevent.c	/^bufferevent_generic_read_timeout_cb(evutil_socket_t fd, short event, void *ctx)$/;"	f	file:
 bufferevent_generic_write_timeout_cb	bufferevent.c	/^bufferevent_generic_write_timeout_cb(evutil_socket_t fd, short event, void *ctx)$/;"	f	file:
@@ -1142,7 +1004,6 @@ bufferevent_ops_filter	bufferevent_filter.c	/^const struct bufferevent_ops buffe
 bufferevent_ops_openssl	bufferevent_openssl.c	/^const struct bufferevent_ops bufferevent_ops_openssl = {$/;"	v	typeref:struct:bufferevent_ops
 bufferevent_ops_pair	bufferevent_pair.c	/^const struct bufferevent_ops bufferevent_ops_pair = {$/;"	v	typeref:struct:bufferevent_ops
 bufferevent_ops_socket	bufferevent_sock.c	/^const struct bufferevent_ops bufferevent_ops_socket = {$/;"	v	typeref:struct:bufferevent_ops
-bufferevent_options	include/event2/bufferevent.h	/^enum bufferevent_options {$/;"	g
 bufferevent_pair	bufferevent_pair.c	/^struct bufferevent_pair {$/;"	s	file:
 bufferevent_pair_elt_new	bufferevent_pair.c	/^bufferevent_pair_elt_new(struct event_base *base,$/;"	f	file:
 bufferevent_pair_get_partner	bufferevent_pair.c	/^bufferevent_pair_get_partner(struct bufferevent *bev)$/;"	f
@@ -1180,7 +1041,6 @@ bufferevent_socket_get_dns_error	bufferevent_sock.c	/^bufferevent_socket_get_dns
 bufferevent_socket_new	bufferevent_sock.c	/^bufferevent_socket_new(struct event_base *base, evutil_socket_t fd,$/;"	f
 bufferevent_socket_outbuf_cb	bufferevent_sock.c	/^bufferevent_socket_outbuf_cb(struct evbuffer *buf,$/;"	f	file:
 bufferevent_ssl_renegotiate	bufferevent_openssl.c	/^bufferevent_ssl_renegotiate(struct bufferevent *bev)$/;"	f
-bufferevent_ssl_state	include/event2/bufferevent_ssl.h	/^enum bufferevent_ssl_state {$/;"	g
 bufferevent_suspend_flags	bufferevent-internal.h	/^typedef ev_uint16_t bufferevent_suspend_flags;$/;"	t
 bufferevent_suspend_read	bufferevent.c	/^bufferevent_suspend_read(struct bufferevent *bufev, bufferevent_suspend_flags what)$/;"	f
 bufferevent_suspend_write	bufferevent.c	/^bufferevent_suspend_write(struct bufferevent *bufev, bufferevent_suspend_flags what)$/;"	f
@@ -1199,29 +1059,23 @@ bytes_to_read	bufferevent_openssl.c	/^bytes_to_read(struct bufferevent_openssl *
 callbacks	evbuffer-internal.h	/^	TAILQ_HEAD(evbuffer_cb_queue, evbuffer_cb_entry) callbacks;$/;"	m	struct:evbuffer
 callbacks	http-internal.h	/^	TAILQ_HEAD(httpcbq, evhttp_cb) callbacks;$/;"	m	struct:evhttp
 cb	defer-internal.h	/^	deferred_cb_fn cb;$/;"	m	struct:deferred_cb
-cb	evbuffer-internal.h	/^	} cb;$/;"	m	struct:evbuffer_cb_entry	typeref:union:evbuffer_cb_entry::__anon8
+cb	evbuffer-internal.h	/^	} cb;$/;"	m	struct:evbuffer_cb_entry	typeref:union:evbuffer_cb_entry::__anon1
 cb	event.c	/^	void (*cb)(evutil_socket_t, short, void *);$/;"	m	struct:event_once	file:
 cb	evrpc-internal.h	/^	void (*cb)(struct evrpc_status*, void *request, void *reply, void *arg);$/;"	m	struct:evrpc_request_wrapper
 cb	evrpc-internal.h	/^	void (*cb)(void *, enum EVRPC_HOOK_RESULT);$/;"	m	struct:evrpc_hook_ctx
 cb	http-internal.h	/^	void (*cb)(struct evhttp_connection *, void *);$/;"	m	struct:evhttp_connection
 cb	http-internal.h	/^	void (*cb)(struct evhttp_request *req, void *);$/;"	m	struct:evhttp_cb
-cb	include/event2/http_struct.h	/^	void (*cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
-cb	include/event2/rpc_struct.h	/^	void (*cb)(struct evrpc_req_generic *, void *);$/;"	m	struct:evrpc
 cb	iocp-internal.h	/^	iocp_callback cb;$/;"	m	struct:event_overlapped
 cb	listener.c	/^	evconnlistener_cb cb;$/;"	m	struct:evconnlistener	file:
 cb_arg	evrpc-internal.h	/^	void *cb_arg;$/;"	m	struct:evrpc_request_wrapper
 cb_arg	http-internal.h	/^	void *cb_arg;$/;"	m	struct:evhttp_connection
-cb_arg	include/event2/http_struct.h	/^	void *cb_arg;$/;"	m	struct:evhttp_request
-cb_arg	include/event2/rpc_struct.h	/^	void *cb_arg;$/;"	m	struct:evrpc
-cb_func	evbuffer-internal.h	/^		evbuffer_cb_func cb_func;$/;"	m	union:evbuffer_cb_entry::__anon8
+cb_func	evbuffer-internal.h	/^		evbuffer_cb_func cb_func;$/;"	m	union:evbuffer_cb_entry::__anon1
 cb_next	defer-internal.h	/^	TAILQ_ENTRY (deferred_cb) cb_next;$/;"	m	struct:deferred_cb
-cb_obsolete	evbuffer-internal.h	/^		evbuffer_cb cb_obsolete;$/;"	m	union:evbuffer_cb_entry::__anon8
+cb_obsolete	evbuffer-internal.h	/^		evbuffer_cb cb_obsolete;$/;"	m	union:evbuffer_cb_entry::__anon1
 cb_queue	evbuffer-internal.h	/^	struct deferred_cb_queue *cb_queue;$/;"	m	struct:evbuffer	typeref:struct:evbuffer::deferred_cb_queue
 cbarg	evbuffer-internal.h	/^	void *cbarg;$/;"	m	struct:evbuffer_cb_entry
 cbarg	http-internal.h	/^	void *cbarg;$/;"	m	struct:evhttp_cb
-cbarg	include/event2/bufferevent_struct.h	/^	void *cbarg;$/;"	m	struct:bufferevent
 cfg	bufferevent-internal.h	/^	struct ev_token_bucket_cfg *cfg;$/;"	m	struct:bufferevent_rate_limit	typeref:struct:bufferevent_rate_limit::ev_token_bucket_cfg
-chain	include/event2/buffer.h	/^		void *chain;$/;"	m	struct:evbuffer_ptr::__anon10
 change_to_string	epoll.c	/^change_to_string(int change)$/;"	f	file:
 changelist	event-internal.h	/^	struct event_changelist changelist;$/;"	m	struct:event_base	typeref:struct:event_base::event_changelist
 changes	devpoll.c	/^	struct pollfd *changes;$/;"	m	struct:devpollop	typeref:struct:devpollop::pollfd	file:
@@ -1237,8 +1091,6 @@ check_selectop	select.c	/^check_selectop(struct selectop *sop)$/;"	f	file:
 check_selectop	select.c	125;"	d	file:
 choked	evdns.c	/^	char choked;  \/* true if we have an EAGAIN from this server's socket *\/$/;"	m	struct:nameserver	file:
 choked	evdns.c	/^	char choked; \/* Are we currently blocked from writing? *\/$/;"	m	struct:evdns_server_port	file:
-chunk_cb	include/event2/http_struct.h	/^	void (*chunk_cb)(struct evhttp_request *, void *);$/;"	m	struct:evhttp_request
-chunked	include/event2/http_struct.h	/^	unsigned chunked:1,		\/* a chunked request *\/$/;"	m	struct:evhttp_request
 class	evdns.c	/^	u16 class; \/* The RR class (usually CLASS_INET) *\/$/;"	m	struct:server_reply_item	file:
 cleanupfn	evbuffer-internal.h	/^	evbuffer_ref_cleanup_cb cleanupfn;$/;"	m	struct:evbuffer_chain_reference
 clear_rbow	bufferevent_openssl.c	/^clear_rbow(struct bufferevent_openssl *bev_ssl)$/;"	f	file:
@@ -1251,14 +1103,13 @@ closecb	http-internal.h	/^	void (*closecb)(struct evhttp_connection *, void *);$
 closecb_arg	http-internal.h	/^	void *closecb_arg;$/;"	m	struct:evhttp_connection
 closing	evdns.c	/^	char closing; \/* Are we trying to close this port, pending writes? *\/$/;"	m	struct:evdns_server_port	file:
 cname_result	evdns.c	/^	char *cname_result;$/;"	m	struct:evdns_getaddrinfo_request	file:
-code	evutil.c	/^static struct { int code; const char *msg; } windows_socket_errors[] = {$/;"	m	struct:__anon7	file:
+code	evutil.c	/^static struct { int code; const char *msg; } windows_socket_errors[] = {$/;"	m	struct:__anon8	file:
 common	evrpc-internal.h	/^	struct _evrpc_hooks common;$/;"	m	struct:evrpc_base	typeref:struct:evrpc_base::_evrpc_hooks
 common	evrpc-internal.h	/^	struct _evrpc_hooks common;$/;"	m	struct:evrpc_pool	typeref:struct:evrpc_pool::_evrpc_hooks
 common_timeout_callback	event.c	/^common_timeout_callback(evutil_socket_t fd, short what, void *arg)$/;"	f	file:
 common_timeout_list	event-internal.h	/^struct common_timeout_list {$/;"	s
 common_timeout_queues	event-internal.h	/^	struct common_timeout_list **common_timeout_queues;$/;"	m	struct:event_base	typeref:struct:event_base::common_timeout_list
 common_timeout_schedule	event.c	/^common_timeout_schedule(struct common_timeout_list *ctl,$/;"	f	file:
-condition_api_version	include/event2/thread.h	/^	int condition_api_version;$/;"	m	struct:evthread_condition_callbacks
 config_nameserver_from_reg_key	evdns.c	/^config_nameserver_from_reg_key(struct evdns_base *base, HKEY key, const TCHAR *subkey)$/;"	f	file:
 configured_min_share	bufferevent-internal.h	/^	ev_ssize_t configured_min_share;$/;"	m	struct:bufferevent_rate_limit_group
 conn_closed	bufferevent_openssl.c	/^conn_closed(struct bufferevent_openssl *bev_ssl, int errcode, int ret)$/;"	f	file:
@@ -1273,6 +1124,8 @@ consider_writing	bufferevent_openssl.c	/^consider_writing(struct bufferevent_ope
 context	bufferevent_filter.c	/^	void *context;$/;"	m	struct:bufferevent_filtered	file:
 count	evthread.c	/^	int count;$/;"	m	struct:debug_lock	file:
 counts	bufferevent_openssl.c	/^	struct bio_data_counts counts;$/;"	m	struct:bufferevent_openssl	typeref:struct:bufferevent_openssl::bio_data_counts	file:
+cppcomment	event_rpcgen.py	/^cppcomment = re.compile(r'\\\/\\\/.*$')$/;"	v
+cppdirect	event_rpcgen.py	/^cppdirect = []$/;"	v
 ctrl	bufferevent-internal.h	/^	int (*ctrl)(struct bufferevent *, enum bufferevent_ctrl_op, union bufferevent_ctrl_data *);$/;"	m	struct:bufferevent_ops
 ctx	evrpc-internal.h	/^	void *ctx;$/;"	m	struct:evrpc_hook_ctx
 current_base	evdns.c	/^static struct evdns_base *current_base = NULL;$/;"	v	typeref:struct:evdns_base	file:
@@ -1282,7 +1135,7 @@ current_event_cond	event-internal.h	/^	void *current_event_cond;$/;"	m	struct:ev
 current_event_waiters	event-internal.h	/^	int current_event_waiters;$/;"	m	struct:event_base
 current_req	evdns.c	/^	struct request *current_req;$/;"	m	struct:evdns_request	typeref:struct:evdns_request::request	file:
 data	evdns.c	/^	void *data; \/* The contents of the RR *\/$/;"	m	struct:server_reply_item	file:
-data	evdns.c	/^	} data;$/;"	m	struct:reply	typeref:union:reply::__anon1	file:
+data	evdns.c	/^	} data;$/;"	m	struct:reply	typeref:union:reply::__anon2	file:
 data	evrpc-internal.h	/^	void *data;$/;"	m	struct:evrpc_meta
 data_size	evrpc-internal.h	/^	size_t data_size;$/;"	m	struct:evrpc_meta
 datalen	evdns.c	/^	u16 datalen; \/* Length of data; -1 if data is a label *\/$/;"	m	struct:server_reply_item	file:
@@ -1330,8 +1183,6 @@ disable	listener.c	/^	int (*disable)(struct evconnlistener *);$/;"	m	struct:evco
 dispatch	event-internal.h	/^	int (*dispatch)(struct event_base *, struct timeval *);$/;"	m	struct:eventop
 dns_base	http-internal.h	/^	struct evdns_base *dns_base;$/;"	m	struct:evhttp_connection	typeref:struct:evhttp_connection::evdns_base
 dns_error	bufferevent-internal.h	/^	int dns_error;$/;"	m	struct:bufferevent_private
-dns_question_class	include/event2/dns_struct.h	/^	int dns_question_class;$/;"	m	struct:evdns_server_question
-dns_question_class	include/event2/dns_struct.h	70;"	d
 dnslabel_clear	evdns.c	/^dnslabel_clear(struct dnslabel_table *table)$/;"	f	file:
 dnslabel_entry	evdns.c	/^struct dnslabel_entry { char *v; off_t pos; };$/;"	s	file:
 dnslabel_table	evdns.c	/^struct dnslabel_table {$/;"	s	file:
@@ -1354,16 +1205,13 @@ ed_pending	evport.c	/^	int ed_pending[EVENTS_PER_GETN]; \/* fd's with pending ev
 ed_port	evport.c	/^	int		ed_port;	\/* event port for system events  *\/$/;"	m	struct:evport_data	file:
 enable	bufferevent-internal.h	/^	int (*enable)(struct bufferevent *, short);$/;"	m	struct:bufferevent_ops
 enable	listener.c	/^	int (*enable)(struct evconnlistener *);$/;"	m	struct:evconnlistener_ops	file:
-enabled	include/event2/bufferevent_struct.h	/^	short enabled;$/;"	m	struct:bufferevent
 enabled	listener.c	/^	unsigned enabled : 1;$/;"	m	struct:evconnlistener	file:
-encode_int	include/event2/tag_compat.h	45;"	d
-encode_int64	include/event2/tag_compat.h	46;"	d
 encode_int64_internal	event_tagging.c	/^encode_int64_internal(ev_uint8_t *data, ev_uint64_t number)$/;"	f	file:
 encode_int_internal	event_tagging.c	/^encode_int_internal(ev_uint8_t *data, ev_uint32_t number)$/;"	f	file:
 end_of_authority	http.c	/^end_of_authority(char *cp)$/;"	f	file:
 end_of_cpath	http.c	4499;"	d	file:
 end_of_path	http.c	/^end_of_path(char *cp, enum uri_part part, unsigned flags)$/;"	f	file:
-ent	evmap.c	/^	} ent;$/;"	m	struct:event_map_entry	typeref:union:event_map_entry::__anon6	file:
+ent	evmap.c	/^	} ent;$/;"	m	struct:event_map_entry	typeref:union:event_map_entry::__anon7	file:
 entries	event-internal.h	/^	TAILQ_HEAD(event_configq, event_config_entry) entries;$/;"	m	struct:event_config
 entries	event-internal.h	/^	void **entries;$/;"	m	struct:event_signal_map
 epfd	epoll.c	/^	int epfd;$/;"	m	struct:epollop	file:
@@ -1385,76 +1233,22 @@ eq_debug_entry	event.c	/^eq_debug_entry(const struct event_debug_entry *a,$/;"	f
 eqsocket	evmap.c	/^eqsocket(struct event_map_entry *e1, struct event_map_entry *e2)$/;"	f	file:
 err	evdns.c	/^	u32 err;$/;"	m	struct:deferred_reply_callback	file:
 errno_pending	bufferevent-internal.h	/^	int errno_pending;$/;"	m	struct:bufferevent_private
-error	include/event2/rpc_struct.h	/^	int error;$/;"	m	struct:evrpc_status
 error	listener.c	/^	int error;$/;"	m	struct:accepting_socket	file:
-errorcb	include/event2/bufferevent_struct.h	/^	bufferevent_event_cb errorcb;$/;"	m	struct:bufferevent
 errorcb	listener.c	/^	evconnlistener_errorcb errorcb;$/;"	m	struct:evconnlistener	file:
 errors	bufferevent_openssl.c	/^	ev_uint32_t errors[NUM_ERRORS];$/;"	m	struct:bufferevent_openssl	file:
 ev	event.c	/^	struct event ev;$/;"	m	struct:event_once	typeref:struct:event_once::event	file:
-ev_active_next	include/event2/event_struct.h	/^	TAILQ_ENTRY(event) ev_active_next;$/;"	m	struct:event
 ev_arc4random_buf	evutil_rand.c	/^ev_arc4random_buf(void *buf, size_t n)$/;"	f	file:
-ev_arg	include/event2/event_struct.h	/^	void *ev_arg;$/;"	m	struct:event
-ev_base	include/event2/bufferevent_struct.h	/^	struct event_base *ev_base;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_base
-ev_base	include/event2/event_struct.h	/^	struct event_base *ev_base;$/;"	m	struct:event	typeref:struct:event::event_base
-ev_callback	include/event2/event_struct.h	/^	void (*ev_callback)(evutil_socket_t, short, void *arg);$/;"	m	struct:event
-ev_closure	include/event2/event_struct.h	/^	ev_uint8_t ev_closure;$/;"	m	struct:event
-ev_events	include/event2/event_struct.h	/^	short ev_events;$/;"	m	struct:event
-ev_fd	include/event2/event_struct.h	/^	evutil_socket_t ev_fd;$/;"	m	struct:event
-ev_flags	include/event2/event_struct.h	/^	short ev_flags;$/;"	m	struct:event
-ev_int16_t	include/event2/util.h	146;"	d
-ev_int16_t	include/event2/util.h	149;"	d
-ev_int16_t	include/event2/util.h	152;"	d
-ev_int16_t	include/event2/util.h	155;"	d
-ev_int16_t	include/event2/util.h	158;"	d
-ev_int32_t	include/event2/util.h	127;"	d
-ev_int32_t	include/event2/util.h	130;"	d
-ev_int32_t	include/event2/util.h	133;"	d
-ev_int32_t	include/event2/util.h	136;"	d
-ev_int32_t	include/event2/util.h	139;"	d
-ev_int64_t	include/event2/util.h	108;"	d
-ev_int64_t	include/event2/util.h	111;"	d
-ev_int64_t	include/event2/util.h	114;"	d
-ev_int64_t	include/event2/util.h	117;"	d
-ev_int64_t	include/event2/util.h	120;"	d
-ev_int8_t	include/event2/util.h	165;"	d
-ev_int8_t	include/event2/util.h	168;"	d
-ev_int8_t	include/event2/util.h	171;"	d
-ev_intptr_t	include/event2/util.h	176;"	d
-ev_intptr_t	include/event2/util.h	179;"	d
-ev_intptr_t	include/event2/util.h	182;"	d
-ev_intptr_t	include/event2/util.h	185;"	d
-ev_io	include/event2/event_struct.h	/^		} ev_io;$/;"	m	union:event::__anon12	typeref:struct:event::__anon12::__anon13
 ev_io_next	event-internal.h	47;"	d
-ev_io_next	include/event2/event_struct.h	/^			TAILQ_ENTRY(event) ev_io_next;$/;"	m	struct:event::__anon12::__anon13
 ev_io_timeout	event-internal.h	48;"	d
 ev_n_signals_added	evsignal-internal.h	/^	int ev_n_signals_added;$/;"	m	struct:evsig_info
 ev_ncalls	event-internal.h	51;"	d
-ev_ncalls	include/event2/event_struct.h	/^			short ev_ncalls;$/;"	m	struct:event::__anon12::__anon14
-ev_next	include/event2/event_struct.h	/^	TAILQ_ENTRY(event) ev_next;$/;"	m	struct:event
-ev_next_with_common_timeout	include/event2/event_struct.h	/^		TAILQ_ENTRY(event) ev_next_with_common_timeout;$/;"	m	union:event::__anon11
-ev_off_t	include/event2/util.h	197;"	d
-ev_off_t	include/event2/util.h	199;"	d
 ev_pncalls	event-internal.h	52;"	d
-ev_pncalls	include/event2/event_struct.h	/^			short *ev_pncalls;$/;"	m	struct:event::__anon12::__anon14
-ev_pri	include/event2/event_struct.h	/^	ev_uint8_t ev_pri;	\/* smaller numbers are higher priority *\/$/;"	m	struct:event
-ev_read	include/event2/bufferevent_struct.h	/^	struct event ev_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event
-ev_res	include/event2/event_struct.h	/^	short ev_res;		\/* result passed to event callback *\/$/;"	m	struct:event
 ev_sighandler_t	evsignal-internal.h	/^typedef void (*ev_sighandler_t)(int);$/;"	t
 ev_signal	evsignal-internal.h	/^	struct event ev_signal;$/;"	m	struct:evsig_info	typeref:struct:evsig_info::event
-ev_signal	include/event2/event_struct.h	/^		} ev_signal;$/;"	m	union:event::__anon12	typeref:struct:event::__anon12::__anon14
 ev_signal_added	evsignal-internal.h	/^	int ev_signal_added;$/;"	m	struct:evsig_info
 ev_signal_next	event-internal.h	46;"	d
-ev_signal_next	include/event2/event_struct.h	/^			TAILQ_ENTRY(event) ev_signal_next;$/;"	m	struct:event::__anon12::__anon14
 ev_signal_pair	evsignal-internal.h	/^	evutil_socket_t ev_signal_pair[2];$/;"	m	struct:evsig_info
-ev_socklen_t	include/event2/util.h	254;"	d
-ev_socklen_t	include/event2/util.h	256;"	d
-ev_socklen_t	include/event2/util.h	258;"	d
-ev_ssize_t	include/event2/util.h	191;"	d
-ev_ssize_t	include/event2/util.h	193;"	d
 ev_timeout	evrpc-internal.h	/^	struct event ev_timeout;$/;"	m	struct:evrpc_request_wrapper	typeref:struct:evrpc_request_wrapper::event
-ev_timeout	include/event2/event_struct.h	/^			struct timeval ev_timeout;$/;"	m	struct:event::__anon12::__anon13	typeref:struct:event::__anon12::__anon13::timeval
-ev_timeout	include/event2/event_struct.h	/^	struct timeval ev_timeout;$/;"	m	struct:event	typeref:struct:event::timeval
-ev_timeout_pos	include/event2/event_struct.h	/^	} ev_timeout_pos;$/;"	m	struct:event	typeref:union:event::__anon11
 ev_token_bucket	ratelim-internal.h	/^struct ev_token_bucket {$/;"	s
 ev_token_bucket_cfg	ratelim-internal.h	/^struct ev_token_bucket_cfg {$/;"	s
 ev_token_bucket_cfg_free	bufferevent_ratelim.c	/^ev_token_bucket_cfg_free(struct ev_token_bucket_cfg *cfg)$/;"	f
@@ -1464,32 +1258,8 @@ ev_token_bucket_decrement_write	ratelim-internal.h	96;"	d
 ev_token_bucket_get_tick	bufferevent_ratelim.c	/^ev_token_bucket_get_tick(const struct timeval *tv,$/;"	f
 ev_token_bucket_init	bufferevent_ratelim.c	/^ev_token_bucket_init(struct ev_token_bucket *bucket,$/;"	f
 ev_token_bucket_update	bufferevent_ratelim.c	/^ev_token_bucket_update(struct ev_token_bucket *bucket,$/;"	f
-ev_uint16_t	include/event2/util.h	145;"	d
-ev_uint16_t	include/event2/util.h	148;"	d
-ev_uint16_t	include/event2/util.h	151;"	d
-ev_uint16_t	include/event2/util.h	154;"	d
-ev_uint16_t	include/event2/util.h	157;"	d
-ev_uint32_t	include/event2/util.h	126;"	d
-ev_uint32_t	include/event2/util.h	129;"	d
-ev_uint32_t	include/event2/util.h	132;"	d
-ev_uint32_t	include/event2/util.h	135;"	d
-ev_uint32_t	include/event2/util.h	138;"	d
-ev_uint64_t	include/event2/util.h	107;"	d
-ev_uint64_t	include/event2/util.h	110;"	d
-ev_uint64_t	include/event2/util.h	113;"	d
-ev_uint64_t	include/event2/util.h	116;"	d
-ev_uint64_t	include/event2/util.h	119;"	d
-ev_uint8_t	include/event2/util.h	164;"	d
-ev_uint8_t	include/event2/util.h	167;"	d
-ev_uint8_t	include/event2/util.h	170;"	d
-ev_uintptr_t	include/event2/util.h	175;"	d
-ev_uintptr_t	include/event2/util.h	178;"	d
-ev_uintptr_t	include/event2/util.h	181;"	d
-ev_uintptr_t	include/event2/util.h	184;"	d
-ev_write	include/event2/bufferevent_struct.h	/^	struct event ev_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event
 evbase	event-internal.h	/^	void *evbase;$/;"	m	struct:event_base
 evbuffer	evbuffer-internal.h	/^struct evbuffer {$/;"	s
-evbuffer	include/event2/buffer.h	/^struct evbuffer$/;"	s
 evbuffer_add	buffer.c	/^evbuffer_add(struct evbuffer *buf, const void *data_in, size_t datlen)$/;"	f
 evbuffer_add_buffer	buffer.c	/^evbuffer_add_buffer(struct evbuffer *outbuf, struct evbuffer *inbuf)$/;"	f
 evbuffer_add_cb	buffer.c	/^evbuffer_add_cb(struct evbuffer *buffer, evbuffer_cb_func cb, void *cbarg)$/;"	f
@@ -1497,11 +1267,8 @@ evbuffer_add_file	buffer.c	/^evbuffer_add_file(struct evbuffer *outbuf, int fd,$
 evbuffer_add_printf	buffer.c	/^evbuffer_add_printf(struct evbuffer *buf, const char *fmt, ...)$/;"	f
 evbuffer_add_reference	buffer.c	/^evbuffer_add_reference(struct evbuffer *outbuf,$/;"	f
 evbuffer_add_vprintf	buffer.c	/^evbuffer_add_vprintf(struct evbuffer *buf, const char *fmt, va_list ap)$/;"	f
-evbuffer_cb	include/event2/buffer_compat.h	/^typedef void (*evbuffer_cb)(struct evbuffer *buffer, size_t old_len, size_t new_len, void *arg);$/;"	t
 evbuffer_cb_clear_flags	buffer.c	/^evbuffer_cb_clear_flags(struct evbuffer *buffer,$/;"	f
 evbuffer_cb_entry	evbuffer-internal.h	/^struct evbuffer_cb_entry {$/;"	s
-evbuffer_cb_func	include/event2/buffer.h	/^typedef void (*evbuffer_cb_func)(struct evbuffer *buffer, const struct evbuffer_cb_info *info, void *arg);$/;"	t
-evbuffer_cb_info	include/event2/buffer.h	/^struct evbuffer_cb_info {$/;"	s
 evbuffer_cb_set_flags	buffer.c	/^evbuffer_cb_set_flags(struct evbuffer *buffer,$/;"	f
 evbuffer_chain	evbuffer-internal.h	/^struct evbuffer_chain {$/;"	s
 evbuffer_chain_align	buffer.c	/^evbuffer_chain_align(struct evbuffer_chain *chain)$/;"	f	file:
@@ -1523,7 +1290,6 @@ evbuffer_defer_callbacks	buffer.c	/^evbuffer_defer_callbacks(struct evbuffer *bu
 evbuffer_deferred_callback	buffer.c	/^evbuffer_deferred_callback(struct deferred_cb *cb, void *arg)$/;"	f	file:
 evbuffer_drain	buffer.c	/^evbuffer_drain(struct evbuffer *buf, size_t len)$/;"	f
 evbuffer_enable_locking	buffer.c	/^evbuffer_enable_locking(struct evbuffer *buf, void *lock)$/;"	f
-evbuffer_eol_style	include/event2/buffer.h	/^enum evbuffer_eol_style {$/;"	g
 evbuffer_expand	buffer.c	/^evbuffer_expand(struct evbuffer *buf, size_t datlen)$/;"	f
 evbuffer_expand_singlechain	buffer.c	/^evbuffer_expand_singlechain(struct evbuffer *buf, size_t datlen)$/;"	f	file:
 evbuffer_find	buffer.c	/^evbuffer_find(struct evbuffer *buffer, const unsigned char *what, size_t len)$/;"	f
@@ -1536,8 +1302,6 @@ evbuffer_get_contiguous_space	buffer.c	/^evbuffer_get_contiguous_space(const str
 evbuffer_get_length	buffer.c	/^evbuffer_get_length(const struct evbuffer *buffer)$/;"	f
 evbuffer_getchr	buffer.c	/^evbuffer_getchr(struct evbuffer_ptr *it)$/;"	f	file:
 evbuffer_invoke_callbacks	buffer.c	/^evbuffer_invoke_callbacks(struct evbuffer *buffer)$/;"	f
-evbuffer_iovec	include/event2/buffer.h	/^struct evbuffer_iovec {$/;"	s
-evbuffer_iovec	include/event2/buffer.h	125;"	d
 evbuffer_launch_read	buffer_iocp.c	/^evbuffer_launch_read(struct evbuffer *buf, size_t at_most,$/;"	f
 evbuffer_launch_write	buffer_iocp.c	/^evbuffer_launch_write(struct evbuffer *buf, ev_ssize_t at_most,$/;"	f
 evbuffer_lock	buffer.c	/^evbuffer_lock(struct evbuffer *buf)$/;"	f
@@ -1547,8 +1311,6 @@ evbuffer_overlapped_new	buffer_iocp.c	/^evbuffer_overlapped_new(evutil_socket_t 
 evbuffer_peek	buffer.c	/^evbuffer_peek(struct evbuffer *buffer, ev_ssize_t len,$/;"	f
 evbuffer_prepend	buffer.c	/^evbuffer_prepend(struct evbuffer *buf, const void *data, size_t datlen)$/;"	f
 evbuffer_prepend_buffer	buffer.c	/^evbuffer_prepend_buffer(struct evbuffer *outbuf, struct evbuffer *inbuf)$/;"	f
-evbuffer_ptr	include/event2/buffer.h	/^struct evbuffer_ptr {$/;"	s
-evbuffer_ptr_how	include/event2/buffer.h	/^enum evbuffer_ptr_how {$/;"	g
 evbuffer_ptr_memcmp	buffer.c	/^evbuffer_ptr_memcmp(const struct evbuffer *buf, const struct evbuffer_ptr *pos,$/;"	f	file:
 evbuffer_ptr_set	buffer.c	/^evbuffer_ptr_set(struct evbuffer *buf, struct evbuffer_ptr *pos,$/;"	f
 evbuffer_pullup	buffer.c	/^evbuffer_pullup(struct evbuffer *buf, ev_ssize_t size)$/;"	f
@@ -1557,7 +1319,6 @@ evbuffer_readfile	buffer.c	/^evbuffer_readfile(struct evbuffer *buf, evutil_sock
 evbuffer_readfile	buffer.c	151;"	d	file:
 evbuffer_readline	buffer.c	/^evbuffer_readline(struct evbuffer *buffer)$/;"	f
 evbuffer_readln	buffer.c	/^evbuffer_readln(struct evbuffer *buffer, size_t *n_read_out,$/;"	f
-evbuffer_ref_cleanup_cb	include/event2/buffer.h	/^typedef void (*evbuffer_ref_cleanup_cb)(const void *data,$/;"	t
 evbuffer_remove	buffer.c	/^evbuffer_remove(struct evbuffer *buf, void *data_out, size_t datlen)$/;"	f
 evbuffer_remove_all_callbacks	buffer.c	/^evbuffer_remove_all_callbacks(struct evbuffer *buffer)$/;"	f	file:
 evbuffer_remove_buffer	buffer.c	/^evbuffer_remove_buffer(struct evbuffer *src, struct evbuffer *dst,$/;"	f
@@ -1579,15 +1340,11 @@ evbuffer_write	buffer.c	/^evbuffer_write(struct evbuffer *buffer, evutil_socket_
 evbuffer_write_atmost	buffer.c	/^evbuffer_write_atmost(struct evbuffer *buffer, evutil_socket_t fd,$/;"	f
 evbuffer_write_iovec	buffer.c	/^evbuffer_write_iovec(struct evbuffer *buffer, evutil_socket_t fd,$/;"	f	file:
 evbuffer_write_sendfile	buffer.c	/^evbuffer_write_sendfile(struct evbuffer *buffer, evutil_socket_t fd,$/;"	f	file:
-evbuffercb	include/event2/bufferevent_compat.h	31;"	d
 evcon	evrpc-internal.h	/^	struct evhttp_connection *evcon;$/;"	m	struct:evrpc_hook_meta	typeref:struct:evrpc_hook_meta::evhttp_connection
 evcon	evrpc-internal.h	/^	struct evhttp_connection *evcon;$/;"	m	struct:evrpc_request_wrapper	typeref:struct:evrpc_request_wrapper::evhttp_connection
-evcon	include/event2/http_struct.h	/^	struct evhttp_connection *evcon;$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evhttp_connection
 evconnlistener	listener.c	/^struct evconnlistener {$/;"	s	file:
-evconnlistener_cb	include/event2/listener.h	/^typedef void (*evconnlistener_cb)(struct evconnlistener *, evutil_socket_t, struct sockaddr *, int socklen, void *);$/;"	t
 evconnlistener_disable	listener.c	/^evconnlistener_disable(struct evconnlistener *lev)$/;"	f
 evconnlistener_enable	listener.c	/^evconnlistener_enable(struct evconnlistener *lev)$/;"	f
-evconnlistener_errorcb	include/event2/listener.h	/^typedef void (*evconnlistener_errorcb)(struct evconnlistener *, void *);$/;"	t
 evconnlistener_event	listener.c	/^struct evconnlistener_event {$/;"	s	file:
 evconnlistener_event_ops	listener.c	/^static const struct evconnlistener_ops evconnlistener_event_ops = {$/;"	v	typeref:struct:evconnlistener_ops	file:
 evconnlistener_free	listener.c	/^evconnlistener_free(struct evconnlistener *lev)$/;"	f
@@ -1630,20 +1387,17 @@ evdns_base_search_ndots_set	evdns.c	/^evdns_base_search_ndots_set(struct evdns_b
 evdns_base_set_max_requests_inflight	evdns.c	/^evdns_base_set_max_requests_inflight(struct evdns_base *base, int maxinflight)$/;"	f	file:
 evdns_base_set_option	evdns.c	/^evdns_base_set_option(struct evdns_base *base,$/;"	f
 evdns_base_set_option_impl	evdns.c	/^evdns_base_set_option_impl(struct evdns_base *base,$/;"	f	file:
-evdns_callback_type	include/event2/dns.h	/^typedef void (*evdns_callback_type) (int result, char type, int count, int ttl, void *addresses, void *arg);$/;"	t
 evdns_cancel_request	evdns.c	/^evdns_cancel_request(struct evdns_base *base, struct evdns_request *handle)$/;"	f
 evdns_clear_nameservers_and_suspend	evdns.c	/^evdns_clear_nameservers_and_suspend(void)$/;"	f
 evdns_close_server_port	evdns.c	/^evdns_close_server_port(struct evdns_server_port *port)$/;"	f
 evdns_config_windows_nameservers	evdns.c	/^evdns_config_windows_nameservers(void)$/;"	f
 evdns_count_nameservers	evdns.c	/^evdns_count_nameservers(void)$/;"	f
-evdns_debug_log_fn_type	include/event2/dns.h	/^typedef void (*evdns_debug_log_fn_type)(int is_warning, const char *msg);$/;"	t
 evdns_err_to_getaddrinfo_err	evdns.c	/^evdns_err_to_getaddrinfo_err(int e1)$/;"	f	file:
 evdns_err_to_string	evdns.c	/^evdns_err_to_string(int err)$/;"	f
 evdns_get_default_hosts_filename	evdns.c	/^evdns_get_default_hosts_filename(void)$/;"	f	file:
 evdns_get_global_base	evdns.c	/^evdns_get_global_base(void)$/;"	f
 evdns_getaddrinfo	evdns.c	/^evdns_getaddrinfo(struct evdns_base *dns_base,$/;"	f
 evdns_getaddrinfo_cancel	evdns.c	/^evdns_getaddrinfo_cancel(struct evdns_getaddrinfo_request *data)$/;"	f
-evdns_getaddrinfo_cb	include/event2/dns.h	/^typedef void (*evdns_getaddrinfo_cb)(int result, struct evutil_addrinfo *res, void *arg);$/;"	t
 evdns_getaddrinfo_fn	util-internal.h	/^typedef struct evdns_getaddrinfo_request* (*evdns_getaddrinfo_fn)($/;"	t	typeref:struct:evdns_getaddrinfo_fn
 evdns_getaddrinfo_fromhosts	evdns.c	/^evdns_getaddrinfo_fromhosts(struct evdns_base *base,$/;"	f	file:
 evdns_getaddrinfo_gotresolve	evdns.c	/^evdns_getaddrinfo_gotresolve(int result, char type, int count,$/;"	f	file:
@@ -1658,7 +1412,6 @@ evdns_nameserver_free	evdns.c	/^evdns_nameserver_free(struct nameserver *server)
 evdns_nameserver_ip_add	evdns.c	/^evdns_nameserver_ip_add(const char *ip_as_string) {$/;"	f
 evdns_nameserver_ip_add_line	evdns.c	/^evdns_nameserver_ip_add_line(struct evdns_base *base, const char *ips) {$/;"	f	file:
 evdns_request	evdns.c	/^struct evdns_request {$/;"	s	file:
-evdns_request_callback_fn_type	include/event2/dns.h	/^typedef void (*evdns_request_callback_fn_type)(struct evdns_server_request *, void *);$/;"	t
 evdns_request_data_build	evdns.c	/^evdns_request_data_build(const char *const name, const size_t name_len,$/;"	f	file:
 evdns_request_insert	evdns.c	/^evdns_request_insert(struct request *req, struct request **head) {$/;"	f	file:
 evdns_request_len	evdns.c	/^evdns_request_len(const size_t name_len) {$/;"	f	file:
@@ -1679,8 +1432,6 @@ evdns_search_add	evdns.c	/^evdns_search_add(const char *domain) {$/;"	f
 evdns_search_clear	evdns.c	/^evdns_search_clear(void) {$/;"	f
 evdns_search_ndots_set	evdns.c	/^evdns_search_ndots_set(const int ndots) {$/;"	f
 evdns_server_port	evdns.c	/^struct evdns_server_port {$/;"	s	file:
-evdns_server_question	include/event2/dns_struct.h	/^struct evdns_server_question {$/;"	s
-evdns_server_request	include/event2/dns_struct.h	/^struct evdns_server_request {$/;"	s
 evdns_server_request_add_a_reply	evdns.c	/^evdns_server_request_add_a_reply(struct evdns_server_request *req, const char *name, int n, const void *addrs, int ttl)$/;"	f
 evdns_server_request_add_aaaa_reply	evdns.c	/^evdns_server_request_add_aaaa_reply(struct evdns_server_request *req, const char *name, int n, const void *addrs, int ttl)$/;"	f
 evdns_server_request_add_cname_reply	evdns.c	/^evdns_server_request_add_cname_reply(struct evdns_server_request *req, const char *name, const char *cname, int ttl)$/;"	f
@@ -1700,8 +1451,6 @@ evdns_transmit	evdns.c	/^evdns_transmit(struct evdns_base *base) {$/;"	f	file:
 event	evdns.c	/^	struct event event; \/* Read\/write event *\/$/;"	m	struct:evdns_server_port	typeref:struct:evdns_server_port::event	file:
 event	evdns.c	/^	struct event event;$/;"	m	struct:nameserver	typeref:struct:nameserver::event	file:
 event	evthread_win32.c	/^	HANDLE event;$/;"	m	struct:evthread_win32_cond	file:
-event	include/event2/event.h	/^struct event$/;"	s
-event	include/event2/event_struct.h	/^struct event {$/;"	s
 event_active	event.c	/^event_active(struct event *ev, int res, short ncalls)$/;"	f
 event_active_nolock	event.c	/^event_active_nolock(struct event *ev, int res, short ncalls)$/;"	f
 event_add	event.c	/^event_add(struct event *ev, const struct timeval *tv)$/;"	f
@@ -1711,11 +1460,9 @@ event_assign	event.c	/^event_assign(struct event *ev, struct event_base *base, e
 event_base	evdns.c	/^	struct event_base *event_base;$/;"	m	struct:evdns_base	typeref:struct:evdns_base::event_base	file:
 event_base	evdns.c	/^	struct event_base *event_base;$/;"	m	struct:evdns_server_port	typeref:struct:evdns_server_port::event_base	file:
 event_base	event-internal.h	/^struct event_base {$/;"	s
-event_base	include/event2/event.h	/^struct event_base$/;"	s
 event_base	listener.c	/^	struct event_base *event_base;$/;"	m	struct:evconnlistener_iocp	typeref:struct:evconnlistener_iocp::event_base	file:
 event_base_add_virtual	event.c	/^event_base_add_virtual(struct event_base *base)$/;"	f
 event_base_assert_ok	event.c	/^event_base_assert_ok(struct event_base *base)$/;"	f
-event_base_config_flag	include/event2/event.h	/^enum event_base_config_flag {$/;"	g
 event_base_del_virtual	event.c	/^event_base_del_virtual(struct event_base *base)$/;"	f
 event_base_dispatch	event.c	/^event_base_dispatch(struct event_base *event_base)$/;"	f
 event_base_dump_events	event.c	/^event_base_dump_events(struct event_base *base, FILE *output)$/;"	f
@@ -1739,7 +1486,6 @@ event_base_set	event.c	/^event_base_set(struct event_base *base, struct event *e
 event_base_start_iocp	event.c	/^event_base_start_iocp(struct event_base *base, int n_cpus)$/;"	f
 event_base_stop_iocp	event.c	/^event_base_stop_iocp(struct event_base *base)$/;"	f
 event_break	event-internal.h	/^	int event_break;$/;"	m	struct:event_base
-event_callback_fn	include/event2/event.h	/^typedef void (*event_callback_fn)(evutil_socket_t, short, void *);$/;"	t
 event_change	changelist-internal.h	/^struct event_change {$/;"	s
 event_change_get_fdinfo	evmap.c	/^event_change_get_fdinfo(struct event_base *base,$/;"	f	file:
 event_changelist	event-internal.h	/^struct event_changelist {$/;"	s
@@ -1754,7 +1500,6 @@ event_changelist_grow	evmap.c	/^event_changelist_grow(struct event_changelist *c
 event_changelist_init	evmap.c	/^event_changelist_init(struct event_changelist *changelist)$/;"	f
 event_changelist_remove_all	evmap.c	/^event_changelist_remove_all(struct event_changelist *changelist,$/;"	f
 event_config	event-internal.h	/^struct event_config {$/;"	s
-event_config	include/event2/event.h	/^struct event_config$/;"	s
 event_config_avoid_method	event.c	/^event_config_avoid_method(struct event_config *cfg, const char *method)$/;"	f
 event_config_entry	event-internal.h	/^struct event_config_entry {$/;"	s
 event_config_entry_free	event.c	/^event_config_entry_free(struct event_config_entry *entry)$/;"	f	file:
@@ -1784,7 +1529,6 @@ event_enable_debug_mode	event.c	/^event_enable_debug_mode(void)$/;"	f
 event_err	log.c	/^event_err(int eval, const char *fmt, ...)$/;"	f
 event_errx	log.c	/^event_errx(int eval, const char *fmt, ...)$/;"	f
 event_exit	log.c	/^event_exit(int errcode)$/;"	f	file:
-event_fatal_cb	include/event2/event.h	/^typedef void (*event_fatal_cb)(int err);$/;"	t
 event_fds	select.c	/^	int event_fds;		\/* Highest fd in fd set *\/$/;"	m	struct:selectop	file:
 event_fdsz	select.c	/^	int event_fdsz;$/;"	m	struct:selectop	file:
 event_free	event.c	/^event_free(struct event *ev)$/;"	f
@@ -1795,7 +1539,6 @@ event_get_callback_arg	event.c	/^event_get_callback_arg(const struct event *ev)$
 event_get_events	event.c	/^event_get_events(const struct event *ev)$/;"	f
 event_get_fd	event.c	/^event_get_fd(const struct event *ev)$/;"	f
 event_get_method	event.c	/^event_get_method(void)$/;"	f
-event_get_signal	include/event2/event.h	1005;"	d
 event_get_struct_event_size	event.c	/^event_get_struct_event_size(void)$/;"	f
 event_get_supported_methods	event.c	/^event_get_supported_methods(void)$/;"	f
 event_get_version	event.c	/^event_get_version(void)$/;"	f
@@ -1821,13 +1564,11 @@ event_listener_enable	listener.c	/^event_listener_enable(struct evconnlistener *
 event_listener_getbase	listener.c	/^event_listener_getbase(struct evconnlistener *lev)$/;"	f	file:
 event_listener_getfd	listener.c	/^event_listener_getfd(struct evconnlistener *lev)$/;"	f	file:
 event_log	log.c	/^event_log(int severity, const char *msg)$/;"	f	file:
-event_log_cb	include/event2/event.h	/^typedef void (*event_log_cb)(int severity, const char *msg);$/;"	t
 event_loop	event.c	/^event_loop(int flags)$/;"	f
 event_loopbreak	event.c	/^event_loopbreak(void)$/;"	f
 event_loopexit	event.c	/^event_loopexit(const struct timeval *tv)$/;"	f
 event_loopexit_cb	event.c	/^event_loopexit_cb(evutil_socket_t fd, short what, void *arg)$/;"	f	file:
 event_map_entry	evmap.c	/^struct event_map_entry {$/;"	s	file:
-event_method_feature	include/event2/event.h	/^enum event_method_feature {$/;"	g
 event_mm_calloc_	event.c	/^event_mm_calloc_(size_t count, size_t size)$/;"	f
 event_mm_free_	event.c	/^event_mm_free_(void *ptr)$/;"	f
 event_mm_malloc_	event.c	/^event_mm_malloc_(size_t sz)$/;"	f
@@ -1866,7 +1607,6 @@ event_sock_warn	log.c	/^event_sock_warn(evutil_socket_t sock, const char *fmt, .
 event_tv	event-internal.h	/^	struct timeval event_tv;$/;"	m	struct:event_base	typeref:struct:event_base::timeval
 event_warn	log.c	/^event_warn(const char *fmt, ...)$/;"	f
 event_warnx	log.c	/^event_warnx(const char *fmt, ...)$/;"	f
-event_watermark	include/event2/bufferevent_struct.h	/^struct event_watermark {$/;"	s
 event_writeset_in	select.c	/^	fd_set *event_writeset_in;$/;"	m	struct:selectop	file:
 event_writeset_out	select.c	/^	fd_set *event_writeset_out;$/;"	m	struct:selectop	file:
 eventcb_pending	bufferevent-internal.h	/^	short eventcb_pending;$/;"	m	struct:bufferevent_private
@@ -1880,7 +1620,6 @@ events	evmap.c	/^	struct event_list events;$/;"	m	struct:evmap_io	typeref:struct
 events	evmap.c	/^	struct event_list events;$/;"	m	struct:evmap_signal	typeref:struct:evmap_signal::event_list	file:
 events	kqueue.c	/^	struct kevent *events;$/;"	m	struct:kqop	typeref:struct:kqop::kevent	file:
 events_size	kqueue.c	/^	int events_size;$/;"	m	struct:kqop	file:
-everrorcb	include/event2/bufferevent_compat.h	32;"	d
 evhttp	http-internal.h	/^struct evhttp {$/;"	s
 evhttp_accept_socket	http.c	/^evhttp_accept_socket(struct evhttp *http, evutil_socket_t fd)$/;"	f
 evhttp_accept_socket_with_handle	http.c	/^evhttp_accept_socket_with_handle(struct evhttp *http, evutil_socket_t fd)$/;"	f
@@ -1900,7 +1639,6 @@ evhttp_bound_socket_get_listener	http.c	/^evhttp_bound_socket_get_listener(struc
 evhttp_cancel_request	http.c	/^evhttp_cancel_request(struct evhttp_request *req)$/;"	f
 evhttp_cb	http-internal.h	/^struct evhttp_cb {$/;"	s
 evhttp_clear_headers	http.c	/^evhttp_clear_headers(struct evkeyvalq *headers)$/;"	f
-evhttp_cmd_type	include/event2/http.h	/^enum evhttp_cmd_type {$/;"	g
 evhttp_connected	http.c	/^evhttp_connected(struct evhttp_connection *evcon)$/;"	f	file:
 evhttp_connection	http-internal.h	/^struct evhttp_connection {$/;"	s
 evhttp_connection_base_new	http.c	/^evhttp_connection_base_new(struct event_base *base, struct evdns_base *dnsbase,$/;"	f
@@ -1977,7 +1715,6 @@ evhttp_read_trailer	http.c	/^evhttp_read_trailer(struct evhttp_connection *evcon
 evhttp_remove_header	http.c	/^evhttp_remove_header(struct evkeyvalq *headers, const char *key)$/;"	f
 evhttp_remove_server_alias	http.c	/^evhttp_remove_server_alias(struct evhttp *http, const char *alias)$/;"	f
 evhttp_remove_virtual_host	http.c	/^evhttp_remove_virtual_host(struct evhttp* http, struct evhttp* vhost)$/;"	f
-evhttp_request	include/event2/http_struct.h	/^struct evhttp_request {$/;"	s
 evhttp_request_dispatch	http.c	/^evhttp_request_dispatch(struct evhttp_connection* evcon)$/;"	f	file:
 evhttp_request_free	http.c	/^evhttp_request_free(struct evhttp_request *req)$/;"	f
 evhttp_request_get_command	http.c	/^evhttp_request_get_command(const struct evhttp_request *req) {$/;"	f
@@ -1991,11 +1728,9 @@ evhttp_request_get_output_headers	http.c	/^struct evkeyvalq *evhttp_request_get_
 evhttp_request_get_response_code	http.c	/^evhttp_request_get_response_code(const struct evhttp_request *req)$/;"	f
 evhttp_request_get_uri	http.c	/^evhttp_request_get_uri(const struct evhttp_request *req) {$/;"	f
 evhttp_request_is_owned	http.c	/^evhttp_request_is_owned(struct evhttp_request *req)$/;"	f
-evhttp_request_kind	include/event2/http.h	/^enum evhttp_request_kind { EVHTTP_REQUEST, EVHTTP_RESPONSE };$/;"	g
 evhttp_request_new	http.c	/^evhttp_request_new(void (*cb)(struct evhttp_request *, void *), void *arg)$/;"	f
 evhttp_request_own	http.c	/^evhttp_request_own(struct evhttp_request *req)$/;"	f
 evhttp_request_set_chunked_cb	http.c	/^evhttp_request_set_chunked_cb(struct evhttp_request *req,$/;"	f
-evhttp_request_uri	include/event2/http_compat.h	84;"	d
 evhttp_response_code	http.c	/^evhttp_response_code(struct evhttp_request *req, int code, const char *reason)$/;"	f
 evhttp_response_needs_body	http.c	/^evhttp_response_needs_body(struct evhttp_request *req)$/;"	f	file:
 evhttp_response_phrase_internal	http.c	/^evhttp_response_phrase_internal(int code)$/;"	f	file:
@@ -2045,9 +1780,8 @@ evhttp_valid_response_code	http.c	/^evhttp_valid_response_code(int code)$/;"	f	f
 evhttp_write_buffer	http.c	/^evhttp_write_buffer(struct evhttp_connection *evcon,$/;"	f	file:
 evhttp_write_cb	http.c	/^evhttp_write_cb(struct bufferevent *bufev, void *arg)$/;"	f	file:
 evhttp_write_connectioncb	http.c	/^evhttp_write_connectioncb(struct evhttp_connection *evcon, void *arg)$/;"	f	file:
-evkeyval	include/event2/keyvalq_struct.h	/^struct evkeyval {$/;"	s
 evmap_check_integrity	evmap.c	/^evmap_check_integrity(struct event_base *base)$/;"	f
-evmap_io	evmap.c	/^		struct evmap_io evmap_io;$/;"	m	union:event_map_entry::__anon6	typeref:struct:event_map_entry::__anon6::evmap_io	file:
+evmap_io	evmap.c	/^		struct evmap_io evmap_io;$/;"	m	union:event_map_entry::__anon7	typeref:struct:event_map_entry::__anon7::evmap_io	file:
 evmap_io	evmap.c	/^struct evmap_io {$/;"	s	file:
 evmap_io_active	evmap.c	/^evmap_io_active(struct event_base *base, evutil_socket_t fd, short events)$/;"	f
 evmap_io_add	evmap.c	/^evmap_io_add(struct event_base *base, evutil_socket_t fd, struct event *ev)$/;"	f
@@ -2072,7 +1806,6 @@ evport_del	evport.c	/^evport_del(struct event_base *base, int fd, short old, sho
 evport_dispatch	evport.c	/^evport_dispatch(struct event_base *base, struct timeval *tv)$/;"	f	file:
 evport_init	evport.c	/^evport_init(struct event_base *base)$/;"	f	file:
 evportops	evport.c	/^const struct eventop evportops = {$/;"	v	typeref:struct:eventop
-evrpc	include/event2/rpc_struct.h	/^struct evrpc {$/;"	s
 evrpc_add_hook	evrpc.c	/^evrpc_add_hook(void *vbase,$/;"	f
 evrpc_base	evrpc-internal.h	/^struct evrpc_base {$/;"	s
 evrpc_construct_uri	evrpc.c	/^evrpc_construct_uri(const char *uri)$/;"	f	file:
@@ -2126,7 +1859,6 @@ evrpc_resume_request	evrpc.c	/^evrpc_resume_request(void *vbase, void *ctx, enum
 evrpc_schedule_request	evrpc.c	/^evrpc_schedule_request(struct evhttp_connection *connection,$/;"	f	file:
 evrpc_schedule_request_closure	evrpc.c	/^evrpc_schedule_request_closure(void *arg, enum EVRPC_HOOK_RESULT hook_res)$/;"	f	file:
 evrpc_send_request_generic	evrpc.c	/^evrpc_send_request_generic(struct evrpc_pool *pool,$/;"	f
-evrpc_status	include/event2/rpc_struct.h	/^struct evrpc_status {$/;"	s
 evrpc_unregister_rpc	evrpc.c	/^evrpc_unregister_rpc(struct evrpc_base *base, const char *name)$/;"	f
 evsel	event-internal.h	/^	const struct eventop *evsel;$/;"	m	struct:event_base	typeref:struct:event_base::eventop
 evsig_add	signal.c	/^evsig_add(struct event_base *base, evutil_socket_t evsignal, short old, short events, void *p)$/;"	f	file:
@@ -2142,13 +1874,6 @@ evsig_handler	signal.c	/^evsig_handler(int sig)$/;"	f	file:
 evsig_info	evsignal-internal.h	/^struct evsig_info {$/;"	s
 evsig_init	signal.c	/^evsig_init(struct event_base *base)$/;"	f
 evsig_set_base	signal.c	/^evsig_set_base(struct event_base *base)$/;"	f
-evsignal_add	include/event2/event.h	769;"	d
-evsignal_assign	include/event2/event.h	770;"	d
-evsignal_del	include/event2/event.h	774;"	d
-evsignal_initialized	include/event2/event.h	776;"	d
-evsignal_new	include/event2/event.h	772;"	d
-evsignal_pending	include/event2/event.h	775;"	d
-evsignal_set	include/event2/event_compat.h	177;"	d
 evsigops	signal.c	/^static const struct eventop evsigops = {$/;"	v	typeref:struct:eventop	file:
 evsigsel	event-internal.h	/^	const struct eventop *evsigsel;$/;"	m	struct:event_base	typeref:struct:event_base::eventop
 evtag_consume	event_tagging.c	/^evtag_consume(struct evbuffer *evbuf)$/;"	f
@@ -2175,11 +1900,9 @@ evtag_unmarshal_int	event_tagging.c	/^evtag_unmarshal_int(struct evbuffer *evbuf
 evtag_unmarshal_int64	event_tagging.c	/^evtag_unmarshal_int64(struct evbuffer *evbuf, ev_uint32_t need_tag,$/;"	f
 evtag_unmarshal_string	event_tagging.c	/^evtag_unmarshal_string(struct evbuffer *evbuf, ev_uint32_t need_tag,$/;"	f
 evtag_unmarshal_timeval	event_tagging.c	/^evtag_unmarshal_timeval(struct evbuffer *evbuf, ev_uint32_t need_tag,$/;"	f
-evthread_condition_callbacks	include/event2/thread.h	/^struct evthread_condition_callbacks {$/;"	s
 evthread_debug_lock_mark_locked	evthread.c	/^evthread_debug_lock_mark_locked(unsigned mode, struct debug_lock *lock)$/;"	f	file:
 evthread_debug_lock_mark_unlocked	evthread.c	/^evthread_debug_lock_mark_unlocked(unsigned mode, struct debug_lock *lock)$/;"	f	file:
 evthread_enable_lock_debuging	evthread.c	/^evthread_enable_lock_debuging(void)$/;"	f
-evthread_lock_callbacks	include/event2/thread.h	/^struct evthread_lock_callbacks {$/;"	s
 evthread_make_base_notifiable	event.c	/^evthread_make_base_notifiable(struct event_base *base)$/;"	f
 evthread_notify_base	event.c	/^evthread_notify_base(struct event_base *base)$/;"	f	file:
 evthread_notify_base_default	event.c	/^evthread_notify_base_default(struct event_base *base)$/;"	f	file:
@@ -2216,15 +1939,6 @@ evthread_win32_lock	evthread_win32.c	/^evthread_win32_lock(unsigned mode, void *
 evthread_win32_lock_create	evthread_win32.c	/^evthread_win32_lock_create(unsigned locktype)$/;"	f	file:
 evthread_win32_lock_free	evthread_win32.c	/^evthread_win32_lock_free(void *_lock, unsigned locktype)$/;"	f	file:
 evthread_win32_unlock	evthread_win32.c	/^evthread_win32_unlock(unsigned mode, void *_lock)$/;"	f	file:
-evtimer_add	include/event2/event.h	757;"	d
-evtimer_assign	include/event2/event.h	754;"	d
-evtimer_del	include/event2/event.h	758;"	d
-evtimer_initialized	include/event2/event.h	760;"	d
-evtimer_new	include/event2/event.h	756;"	d
-evtimer_pending	include/event2/event.h	759;"	d
-evtimer_set	include/event2/event_compat.h	176;"	d
-evutil_addrinfo	include/event2/util.h	/^struct evutil_addrinfo {$/;"	s
-evutil_addrinfo	include/event2/util.h	506;"	d
 evutil_addrinfo_append	evutil.c	/^evutil_addrinfo_append(struct evutil_addrinfo *first,$/;"	f
 evutil_adjust_hints_for_addrconfig	evutil.c	/^evutil_adjust_hints_for_addrconfig(struct evutil_addrinfo *hints)$/;"	f
 evutil_ascii_strcasecmp	evutil.c	/^evutil_ascii_strcasecmp(const char *s1, const char *s2)$/;"	f
@@ -2241,7 +1955,6 @@ evutil_getaddrinfo_common	evutil.c	/^evutil_getaddrinfo_common(const char *noden
 evutil_getaddrinfo_infer_protocols	evutil.c	/^evutil_getaddrinfo_infer_protocols(struct evutil_addrinfo *hints)$/;"	f	file:
 evutil_getenv	evutil.c	/^evutil_getenv(const char *varname)$/;"	f
 evutil_gettimeofday	evutil.c	/^evutil_gettimeofday(struct timeval *tv, struct timezone *tz)$/;"	f
-evutil_gettimeofday	include/event2/util.h	435;"	d
 evutil_hex_char_to_int	evutil.c	/^evutil_hex_char_to_int(char c)$/;"	f
 evutil_inet_ntop	evutil.c	/^evutil_inet_ntop(int af, const void *src, char *dst, size_t len)$/;"	f
 evutil_inet_pton	evutil.c	/^evutil_inet_pton(int af, const char *src, void *dst)$/;"	f
@@ -2251,8 +1964,6 @@ evutil_make_listen_socket_reuseable	evutil.c	/^evutil_make_listen_socket_reuseab
 evutil_make_socket_closeonexec	evutil.c	/^evutil_make_socket_closeonexec(evutil_socket_t fd)$/;"	f
 evutil_make_socket_nonblocking	evutil.c	/^evutil_make_socket_nonblocking(evutil_socket_t fd)$/;"	f
 evutil_new_addrinfo	evutil.c	/^evutil_new_addrinfo(struct sockaddr *sa, ev_socklen_t socklen,$/;"	f
-evutil_offsetof	include/event2/util.h	424;"	d
-evutil_offsetof	include/event2/util.h	426;"	d
 evutil_open_closeonexec	evutil.c	/^evutil_open_closeonexec(const char *pathname, int flags, unsigned mode)$/;"	f
 evutil_parse_servname	evutil.c	/^evutil_parse_servname(const char *servname, const char *protocol,$/;"	f	file:
 evutil_parse_sockaddr_port	evutil.c	/^evutil_parse_sockaddr_port(const char *ip_as_string, struct sockaddr *out, int *outlen)$/;"	f
@@ -2267,25 +1978,10 @@ evutil_sockaddr_cmp	evutil.c	/^evutil_sockaddr_cmp(const struct sockaddr *sa1, c
 evutil_sockaddr_is_loopback	evutil.c	/^evutil_sockaddr_is_loopback(const struct sockaddr *addr)$/;"	f
 evutil_socket_connect	evutil.c	/^evutil_socket_connect(evutil_socket_t *fd_ptr, struct sockaddr *sa, int socklen)$/;"	f
 evutil_socket_error_to_string	evutil.c	/^evutil_socket_error_to_string(int errcode)$/;"	f
-evutil_socket_error_to_string	include/event2/util.h	359;"	d
-evutil_socket_error_to_string	include/event2/util.h	366;"	d
 evutil_socket_finished_connecting	evutil.c	/^evutil_socket_finished_connecting(evutil_socket_t fd)$/;"	f
 evutil_socket_geterror	evutil.c	/^evutil_socket_geterror(evutil_socket_t sock)$/;"	f
-evutil_socket_geterror	include/event2/util.h	357;"	d
-evutil_socket_geterror	include/event2/util.h	365;"	d
-evutil_socket_t	include/event2/util.h	272;"	d
-evutil_socket_t	include/event2/util.h	274;"	d
 evutil_socketpair	evutil.c	/^evutil_socketpair(int family, int type, int protocol, evutil_socket_t fd[2])$/;"	f
 evutil_strtoll	evutil.c	/^evutil_strtoll(const char *s, char **endptr, int base)$/;"	f
-evutil_timeradd	include/event2/util.h	379;"	d
-evutil_timeradd	include/event2/util.h	382;"	d
-evutil_timerclear	include/event2/util.h	403;"	d
-evutil_timerclear	include/event2/util.h	405;"	d
-evutil_timercmp	include/event2/util.h	411;"	d
-evutil_timerisset	include/event2/util.h	417;"	d
-evutil_timerisset	include/event2/util.h	419;"	d
-evutil_timersub	include/event2/util.h	380;"	d
-evutil_timersub	include/event2/util.h	391;"	d
 evutil_tv_to_msec	evutil.c	/^evutil_tv_to_msec(const struct timeval *tv)$/;"	f
 evutil_unparse_protoname	evutil.c	/^evutil_unparse_protoname(int proto)$/;"	f	file:
 evutil_vsnprintf	evutil.c	/^evutil_vsnprintf(char *buf, size_t buflen, const char *format, va_list ap)$/;"	f
@@ -2323,20 +2019,132 @@ flags	event-internal.h	/^	enum event_base_config_flag flags;$/;"	m	struct:event_
 flags	event-internal.h	/^	enum event_base_config_flag flags;$/;"	m	struct:event_config	typeref:enum:event_config::event_base_config_flag
 flags	http-internal.h	/^	int flags;$/;"	m	struct:evhttp_connection
 flags	http.c	/^	unsigned flags;$/;"	m	struct:evhttp_uri	file:
-flags	include/event2/dns_struct.h	/^	int flags;$/;"	m	struct:evdns_server_request
-flags	include/event2/http_struct.h	/^	int flags;$/;"	m	struct:evhttp_request
 flags	listener.c	/^	unsigned flags;$/;"	m	struct:evconnlistener	file:
 flush	bufferevent-internal.h	/^	int (*flush)(struct bufferevent *, short, enum bufferevent_flush_mode);$/;"	m	struct:bufferevent_ops
 fragment	http.c	/^	char *fragment; \/* fragment or NULL *\/$/;"	m	struct:evhttp_uri	file:
-free	include/event2/thread.h	/^	void (*free)(void *lock, unsigned locktype);$/;"	m	struct:evthread_lock_callbacks
 free_and_unlock_accepting_socket	listener.c	/^free_and_unlock_accepting_socket(struct accepting_socket *as)$/;"	f	file:
-free_condition	include/event2/thread.h	/^	void (*free_condition)(void *cond);$/;"	m	struct:evthread_condition_callbacks
 free_context	bufferevent_filter.c	/^	void (*free_context)(void *);$/;"	m	struct:bufferevent_filtered	file:
 free_getaddrinfo_request	evdns.c	/^free_getaddrinfo_request(struct evdns_getaddrinfo_request *data)$/;"	f	file:
 free_on_cb	listener.c	/^	unsigned free_on_cb:1;$/;"	m	struct:accepting_socket	file:
 freeze_end	evbuffer-internal.h	/^	unsigned freeze_end : 1;$/;"	m	struct:evbuffer
 freeze_start	evbuffer-internal.h	/^	unsigned freeze_start : 1;$/;"	m	struct:evbuffer
 fstat	evutil.c	86;"	d	file:
+func_append	configure	/^func_append ()\\$/;"	f
+func_append	ltmain.sh	/^func_append ()$/;"	f
+func_append_quoted	configure	/^func_append_quoted ()\\$/;"	f
+func_append_quoted	ltmain.sh	/^func_append_quoted ()$/;"	f
+func_arith	configure	/^func_arith ()\\$/;"	f
+func_arith	ltmain.sh	/^func_arith ()$/;"	f
+func_basename	configure	/^func_basename ()\\$/;"	f
+func_basename	ltmain.sh	/^func_basename ()$/;"	f
+func_check_version_match	ltmain.sh	/^func_check_version_match ()$/;"	f
+func_cl_dashL	compile	/^func_cl_dashL ()$/;"	f
+func_cl_dashl	compile	/^func_cl_dashl ()$/;"	f
+func_cl_wrapper	compile	/^func_cl_wrapper ()$/;"	f
+func_config	ltmain.sh	/^func_config ()$/;"	f
+func_convert_core_file_wine_to_w32	ltmain.sh	/^func_convert_core_file_wine_to_w32 ()$/;"	f
+func_convert_core_msys_to_w32	ltmain.sh	/^func_convert_core_msys_to_w32 ()$/;"	f
+func_convert_core_path_wine_to_w32	ltmain.sh	/^func_convert_core_path_wine_to_w32 ()$/;"	f
+func_convert_file_check	ltmain.sh	/^func_convert_file_check ()$/;"	f
+func_convert_file_cygwin_to_w32	ltmain.sh	/^func_convert_file_cygwin_to_w32 ()$/;"	f
+func_convert_file_msys_to_cygwin	ltmain.sh	/^func_convert_file_msys_to_cygwin ()$/;"	f
+func_convert_file_msys_to_w32	ltmain.sh	/^func_convert_file_msys_to_w32 ()$/;"	f
+func_convert_file_nix_to_cygwin	ltmain.sh	/^func_convert_file_nix_to_cygwin ()$/;"	f
+func_convert_file_nix_to_w32	ltmain.sh	/^func_convert_file_nix_to_w32 ()$/;"	f
+func_convert_file_noop	ltmain.sh	/^func_convert_file_noop ()$/;"	f
+func_convert_path_check	ltmain.sh	/^func_convert_path_check ()$/;"	f
+func_convert_path_cygwin_to_w32	ltmain.sh	/^func_convert_path_cygwin_to_w32 ()$/;"	f
+func_convert_path_front_back_pathsep	ltmain.sh	/^func_convert_path_front_back_pathsep ()$/;"	f
+func_convert_path_msys_to_cygwin	ltmain.sh	/^func_convert_path_msys_to_cygwin ()$/;"	f
+func_convert_path_msys_to_w32	ltmain.sh	/^func_convert_path_msys_to_w32 ()$/;"	f
+func_convert_path_nix_to_cygwin	ltmain.sh	/^func_convert_path_nix_to_cygwin ()$/;"	f
+func_convert_path_nix_to_w32	ltmain.sh	/^func_convert_path_nix_to_w32 ()$/;"	f
+func_convert_path_noop	ltmain.sh	/^func_convert_path_noop ()$/;"	f
+func_cygming_dll_for_implib	ltmain.sh	/^func_cygming_dll_for_implib ()$/;"	f
+func_cygming_dll_for_implib_fallback	ltmain.sh	/^func_cygming_dll_for_implib_fallback ()$/;"	f
+func_cygming_dll_for_implib_fallback_core	ltmain.sh	/^func_cygming_dll_for_implib_fallback_core ()$/;"	f
+func_cygming_gnu_implib_p	ltmain.sh	/^func_cygming_gnu_implib_p ()$/;"	f
+func_cygming_ms_implib_p	ltmain.sh	/^func_cygming_ms_implib_p ()$/;"	f
+func_cygpath	ltmain.sh	/^func_cygpath ()$/;"	f
+func_dirname	configure	/^func_dirname ()\\$/;"	f
+func_dirname	ltmain.sh	/^func_dirname ()$/;"	f
+func_dirname_and_basename	configure	/^func_dirname_and_basename ()\\$/;"	f
+func_dirname_and_basename	ltmain.sh	/^func_dirname_and_basename ()$/;"	f
+func_echo	ltmain.sh	/^func_echo ()$/;"	f
+func_echo_all	configure	/^func_echo_all ()$/;"	f
+func_echo_all	ltmain.sh	/^func_echo_all ()$/;"	f
+func_emit_cwrapperexe_src	ltmain.sh	/^func_emit_cwrapperexe_src ()$/;"	f
+func_emit_wrapper	ltmain.sh	/^func_emit_wrapper ()$/;"	f
+func_enable_tag	ltmain.sh	/^func_enable_tag ()$/;"	f
+func_error	ltmain.sh	/^func_error ()$/;"	f
+func_exec_program	ltmain.sh	/^func_exec_program ()$/;"	f
+func_exec_program_core	ltmain.sh	/^func_exec_program_core ()$/;"	f
+func_execute_cmds	ltmain.sh	/^func_execute_cmds ()$/;"	f
+func_extract_an_archive	ltmain.sh	/^func_extract_an_archive ()$/;"	f
+func_extract_archives	ltmain.sh	/^func_extract_archives ()$/;"	f
+func_fallback_echo	configure	/^  func_fallback_echo ()$/;"	f
+func_fallback_echo	configure	/^func_fallback_echo ()$/;"	f
+func_fallback_echo	ltmain.sh	/^func_fallback_echo ()$/;"	f
+func_fatal_configuration	ltmain.sh	/^func_fatal_configuration ()$/;"	f
+func_fatal_error	ltmain.sh	/^func_fatal_error ()$/;"	f
+func_fatal_help	ltmain.sh	/^func_fatal_help ()$/;"	f
+func_features	ltmain.sh	/^func_features ()$/;"	f
+func_file_conv	compile	/^func_file_conv ()$/;"	f
+func_generate_dlsyms	ltmain.sh	/^func_generate_dlsyms ()$/;"	f
+func_grep	ltmain.sh	/^func_grep ()$/;"	f
+func_help	ltmain.sh	/^func_help ()$/;"	f
+func_infer_tag	ltmain.sh	/^func_infer_tag ()$/;"	f
+func_init_to_host_path_cmd	ltmain.sh	/^func_init_to_host_path_cmd ()$/;"	f
+func_lalib_p	ltmain.sh	/^func_lalib_p ()$/;"	f
+func_lalib_unsafe_p	ltmain.sh	/^func_lalib_unsafe_p ()$/;"	f
+func_len	configure	/^func_len ()\\$/;"	f
+func_len	ltmain.sh	/^func_len ()$/;"	f
+func_lo2o	configure	/^func_lo2o ()\\$/;"	f
+func_lo2o	ltmain.sh	/^func_lo2o ()$/;"	f
+func_lt_dump_args	ltmain.sh	/^func_lt_dump_args ()$/;"	f
+func_ltwrapper_executable_p	ltmain.sh	/^func_ltwrapper_executable_p ()$/;"	f
+func_ltwrapper_p	ltmain.sh	/^func_ltwrapper_p ()$/;"	f
+func_ltwrapper_script_p	ltmain.sh	/^func_ltwrapper_script_p ()$/;"	f
+func_ltwrapper_scriptname	ltmain.sh	/^func_ltwrapper_scriptname ()$/;"	f
+func_missing_arg	ltmain.sh	/^func_missing_arg ()$/;"	f
+func_mkdir_p	ltmain.sh	/^func_mkdir_p ()$/;"	f
+func_mktempdir	ltmain.sh	/^func_mktempdir ()$/;"	f
+func_mode_compile	ltmain.sh	/^func_mode_compile ()$/;"	f
+func_mode_execute	ltmain.sh	/^func_mode_execute ()$/;"	f
+func_mode_finish	ltmain.sh	/^func_mode_finish ()$/;"	f
+func_mode_help	ltmain.sh	/^func_mode_help ()$/;"	f
+func_mode_install	ltmain.sh	/^func_mode_install ()$/;"	f
+func_mode_link	ltmain.sh	/^func_mode_link ()$/;"	f
+func_mode_uninstall	ltmain.sh	/^func_mode_uninstall ()$/;"	f
+func_normal_abspath	ltmain.sh	/^func_normal_abspath ()$/;"	f
+func_parse_lt_options	ltmain.sh	/^func_parse_lt_options ()$/;"	f
+func_quote_for_eval	ltmain.sh	/^func_quote_for_eval ()$/;"	f
+func_quote_for_expand	ltmain.sh	/^func_quote_for_expand ()$/;"	f
+func_relative_path	ltmain.sh	/^func_relative_path ()$/;"	f
+func_replace_sysroot	ltmain.sh	/^func_replace_sysroot ()$/;"	f
+func_resolve_sysroot	ltmain.sh	/^func_resolve_sysroot ()$/;"	f
+func_show_eval	ltmain.sh	/^func_show_eval ()$/;"	f
+func_show_eval_locale	ltmain.sh	/^func_show_eval_locale ()$/;"	f
+func_source	ltmain.sh	/^func_source ()$/;"	f
+func_split_long_opt	configure	/^func_split_long_opt ()\\$/;"	f
+func_split_long_opt	ltmain.sh	/^func_split_long_opt ()$/;"	f
+func_split_short_opt	configure	/^func_split_short_opt ()\\$/;"	f
+func_split_short_opt	ltmain.sh	/^func_split_short_opt ()$/;"	f
+func_stripname	configure	/^func_stripname ()\\$/;"	f
+func_stripname	ltmain.sh	/^func_stripname ()$/;"	f
+func_to_host_file	ltmain.sh	/^func_to_host_file ()$/;"	f
+func_to_host_path	ltmain.sh	/^func_to_host_path ()$/;"	f
+func_to_tool_file	ltmain.sh	/^func_to_tool_file ()$/;"	f
+func_tr_sh	ltmain.sh	/^func_tr_sh ()$/;"	f
+func_usage	ltmain.sh	/^func_usage ()$/;"	f
+func_verbose	ltmain.sh	/^func_verbose ()$/;"	f
+func_version	ltmain.sh	/^func_version ()$/;"	f
+func_warning	ltmain.sh	/^func_warning ()$/;"	f
+func_win32_import_lib_p	ltmain.sh	/^func_win32_import_lib_p ()$/;"	f
+func_win32_libid	ltmain.sh	/^func_win32_libid ()$/;"	f
+func_write_libtool_object	ltmain.sh	/^func_write_libtool_object ()$/;"	f
+func_xform	configure	/^func_xform ()\\$/;"	f
+func_xform	ltmain.sh	/^func_xform ()$/;"	f
 gencb	http-internal.h	/^	void (*gencb)(struct evhttp_request *req, void *);$/;"	m	struct:evhttp
 gencbarg	http-internal.h	/^	void *gencbarg;$/;"	m	struct:evhttp
 generation	evthread_win32.c	/^	int generation;$/;"	m	struct:evthread_win32_cond	file:
@@ -2383,21 +2191,18 @@ have_answer	evdns.c	/^	unsigned int have_answer : 1;$/;"	m	struct:reply	file:
 have_checked_interfaces	evutil.c	/^static int have_checked_interfaces, had_ipv4_address, had_ipv6_address;$/;"	v	file:
 have_reply	evdns.c	/^	u8 have_reply;$/;"	m	struct:deferred_reply_callback	file:
 head	evdns.c	/^	struct search_domain *head;$/;"	m	struct:search_state	typeref:struct:search_state::search_domain	file:
-headers_size	include/event2/http_struct.h	/^	size_t headers_size;$/;"	m	struct:evhttp_request
+headerdirect	event_rpcgen.py	/^headerdirect = []$/;"	v
 held_by	evthread.c	/^	unsigned long held_by;$/;"	m	struct:debug_lock	file:
-high	include/event2/bufferevent_struct.h	/^	size_t high;$/;"	m	struct:event_watermark
 hints	evdns.c	/^	struct evutil_addrinfo hints;$/;"	m	struct:evdns_getaddrinfo_request	typeref:struct:evdns_getaddrinfo_request::evutil_addrinfo	file:
 hook_meta	evrpc-internal.h	/^	struct evrpc_hook_meta *hook_meta;$/;"	m	struct:evrpc_req_generic	typeref:struct:evrpc_req_generic::evrpc_hook_meta
 hook_meta	evrpc-internal.h	/^	struct evrpc_hook_meta *hook_meta;$/;"	m	struct:evrpc_request_wrapper	typeref:struct:evrpc_request_wrapper::evrpc_hook_meta
 host	http.c	/^	char *host; \/* hostname, IP address, or NULL *\/$/;"	m	struct:evhttp_uri	file:
-host_cache	include/event2/http_struct.h	/^	char *host_cache;$/;"	m	struct:evhttp_request
 hostname	evdns.c	/^	char hostname[1];$/;"	m	struct:hosts_entry	file:
 hosts_entry	evdns.c	/^struct hosts_entry {$/;"	s	file:
 ht_improve_hash	ht-internal.h	/^ht_improve_hash(unsigned h)$/;"	f
 ht_string_hash	ht-internal.h	/^ht_string_hash(const char *s)$/;"	f
 html_replace	http.c	/^html_replace(const char ch, const char **escaped)$/;"	f	file:
 http_req	evrpc-internal.h	/^	struct evhttp_request* http_req;$/;"	m	struct:evrpc_req_generic	typeref:struct:evrpc_req_generic::evhttp_request
-http_req	include/event2/rpc_struct.h	/^	struct evhttp_request *http_req;$/;"	m	struct:evrpc_status	typeref:struct:evrpc_status::evhttp_request
 http_server	evrpc-internal.h	/^	struct evhttp* http_server;$/;"	m	struct:evrpc_base	typeref:struct:evrpc_base::evhttp
 http_server	http-internal.h	/^	struct evhttp *http_server;$/;"	m	struct:evhttp_connection	typeref:struct:evhttp_connection::evhttp
 i	arc4random.c	/^	unsigned char i;$/;"	m	struct:arc4_stream	file:
@@ -2412,9 +2217,6 @@ init	event-internal.h	/^	void *(*init)(struct event_base *);$/;"	m	struct:evento
 init_bio_counts	bufferevent_openssl.c	/^init_bio_counts(struct bufferevent_openssl *bev_ssl)$/;"	f	file:
 init_extension_functions	event_iocp.c	/^init_extension_functions(struct win32_extension_fns *ext)$/;"	f	file:
 inline	util-internal.h	49;"	d
-input	include/event2/bufferevent_struct.h	/^	struct evbuffer *input;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::evbuffer
-input_buffer	include/event2/http_struct.h	/^	struct evbuffer *input_buffer;	\/* read data *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evbuffer
-input_headers	include/event2/http_struct.h	/^	struct evkeyvalq *input_headers;$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evkeyvalq
 input_hooks	evrpc-internal.h	67;"	d
 insert_common_timeout_inorder	event.c	/^insert_common_timeout_inorder(struct common_timeout_list *ctl,$/;"	f	file:
 io	event-internal.h	/^	struct event_io_map io;$/;"	m	struct:event_base	typeref:struct:event_base::event_io_map
@@ -2428,8 +2230,6 @@ iocp_listener_event_add	listener.c	/^iocp_listener_event_add(struct evconnlisten
 iocp_listener_event_del	listener.c	/^iocp_listener_event_del(struct evconnlistener_iocp *lev)$/;"	f	file:
 iocp_listener_getbase	listener.c	/^iocp_listener_getbase(struct evconnlistener *lev)$/;"	f	file:
 iocp_listener_getfd	listener.c	/^iocp_listener_getfd(struct evconnlistener *lev)$/;"	f	file:
-iov_base	include/event2/buffer.h	/^	void *iov_base;$/;"	m	struct:evbuffer_iovec
-iov_len	include/event2/buffer.h	/^	size_t iov_len;$/;"	m	struct:evbuffer_iovec
 ipv4_request	evdns.c	/^	struct getaddrinfo_subrequest ipv4_request;$/;"	m	struct:evdns_getaddrinfo_request	typeref:struct:evdns_getaddrinfo_request::getaddrinfo_subrequest	file:
 ipv6_request	evdns.c	/^	struct getaddrinfo_subrequest ipv6_request;$/;"	m	struct:evdns_getaddrinfo_request	typeref:struct:evdns_getaddrinfo_request::getaddrinfo_subrequest	file:
 is_common_timeout	event.c	/^is_common_timeout(const struct timeval *tv,$/;"	f	file:
@@ -2439,8 +2239,6 @@ is_overlapped	evbuffer-internal.h	/^	unsigned is_overlapped : 1;$/;"	m	struct:ev
 is_same_common_timeout	event.c	/^is_same_common_timeout(const struct timeval *tv1, const struct timeval *tv2)$/;"	f	file:
 j	arc4random.c	/^	unsigned char j;$/;"	m	struct:arc4_stream	file:
 key	evrpc-internal.h	/^	char *key;$/;"	m	struct:evrpc_meta
-key	include/event2/keyvalq_struct.h	/^	char *key;$/;"	m	struct:evkeyval
-kind	include/event2/http_struct.h	/^	enum evhttp_request_kind kind;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_request_kind
 kq	kqueue.c	/^	int kq;$/;"	m	struct:kqop	file:
 kq_build_changes_list	kqueue.c	/^kq_build_changes_list(const struct event_changelist *changelist,$/;"	f	file:
 kq_dealloc	kqueue.c	/^kq_dealloc(struct event_base *base)$/;"	f	file:
@@ -2464,6 +2262,7 @@ last_write	bufferevent_openssl.c	/^	ev_ssize_t last_write;$/;"	m	struct:bufferev
 len	evdns.c	/^	int len;$/;"	m	struct:search_domain	file:
 lev	listener.c	/^	struct evconnlistener_iocp *lev;$/;"	m	struct:accepting_socket	typeref:struct:accepting_socket::evconnlistener_iocp	file:
 limit	bufferevent-internal.h	/^	struct ev_token_bucket limit;$/;"	m	struct:bufferevent_rate_limit	typeref:struct:bufferevent_rate_limit::ev_token_bucket
+line_count	event_rpcgen.py	/^line_count = 0$/;"	v
 listener	http-internal.h	/^	struct evconnlistener *listener;$/;"	m	struct:evhttp_bound_socket	typeref:struct:evhttp_bound_socket::evconnlistener
 listener	listener.c	/^	struct event listener;$/;"	m	struct:evconnlistener_event	typeref:struct:evconnlistener_event::event	file:
 listener_decref_and_unlock	listener.c	/^listener_decref_and_unlock(struct evconnlistener *listener)$/;"	f	file:
@@ -2478,18 +2277,17 @@ lock	evdns.c	/^	void *lock;$/;"	m	struct:evdns_base	file:
 lock	evdns.c	/^	void *lock;$/;"	m	struct:evdns_server_port	file:
 lock	evthread.c	/^	void *lock;$/;"	m	struct:debug_lock	file:
 lock	evthread_win32.c	/^	CRITICAL_SECTION lock;$/;"	m	struct:evthread_win32_cond	file:
-lock	include/event2/thread.h	/^	int (*lock)(unsigned mode, void *lock);$/;"	m	struct:evthread_lock_callbacks
 lock	iocp-internal.h	/^	CRITICAL_SECTION lock;$/;"	m	struct:event_iocp_port
 lock	listener.c	/^	CRITICAL_SECTION lock;$/;"	m	struct:accepting_socket	file:
 lock	listener.c	/^	void *lock;$/;"	m	struct:evconnlistener	file:
-lock_api_version	include/event2/thread.h	/^	int lock_api_version;$/;"	m	struct:evthread_lock_callbacks
 locktype	evthread.c	/^	unsigned locktype;$/;"	m	struct:debug_lock	file:
 log	evdns.c	473;"	d	file:
 log_fn	log.c	/^static event_log_cb log_fn = NULL;$/;"	v	file:
 loop	event_iocp.c	/^loop(void *_port)$/;"	f	file:
-low	include/event2/bufferevent_struct.h	/^	size_t low;$/;"	m	struct:event_watermark
 lseek	buffer.c	2841;"	d	file:
-major	include/event2/http_struct.h	/^	char major;			\/* HTTP Major number *\/$/;"	m	struct:evhttp_request
+main	config.guess	/^		main()$/;"	f
+main	config.guess	/^	main ()$/;"	f
+main	config.guess	/^main ()$/;"	f
 make_addrinfo	http.c	/^make_addrinfo(const char *address, ev_uint16_t port)$/;"	f	file:
 master_refill_event	bufferevent-internal.h	/^	struct event master_refill_event;$/;"	m	struct:bufferevent_rate_limit_group	typeref:struct:bufferevent_rate_limit_group::event
 max_body_size	http-internal.h	/^	ev_uint64_t max_body_size;$/;"	m	struct:evhttp_connection
@@ -2507,7 +2305,6 @@ min_heap_elem_init	minheap-internal.h	/^void min_heap_elem_init(struct event* e)
 min_heap_elt_is_top	minheap-internal.h	/^int min_heap_elt_is_top(const struct event *e)$/;"	f
 min_heap_empty	minheap-internal.h	/^int min_heap_empty(min_heap_t* s) { return 0u == s->n; }$/;"	f
 min_heap_erase	minheap-internal.h	/^int min_heap_erase(min_heap_t* s, struct event* e)$/;"	f
-min_heap_idx	include/event2/event_struct.h	/^		int min_heap_idx;$/;"	m	union:event::__anon11
 min_heap_pop	minheap-internal.h	/^struct event* min_heap_pop(min_heap_t* s)$/;"	f
 min_heap_push	minheap-internal.h	/^int min_heap_push(min_heap_t* s, struct event* e)$/;"	f
 min_heap_reserve	minheap-internal.h	/^int min_heap_reserve(min_heap_t* s, unsigned n)$/;"	f
@@ -2517,7 +2314,6 @@ min_heap_size	minheap-internal.h	/^unsigned min_heap_size(min_heap_t* s) { retur
 min_heap_t	minheap-internal.h	/^} min_heap_t;$/;"	t	typeref:struct:min_heap
 min_heap_top	minheap-internal.h	/^struct event* min_heap_top(min_heap_t* s) { return s->n ? *s->p : 0; }$/;"	f
 min_share	bufferevent-internal.h	/^	ev_ssize_t min_share;$/;"	m	struct:bufferevent_rate_limit_group
-minor	include/event2/http_struct.h	/^	char minor;			\/* HTTP Minor number *\/$/;"	m	struct:evhttp_request
 misalign	evbuffer-internal.h	/^	ev_off_t misalign;$/;"	m	struct:evbuffer_chain
 mm_calloc	mm-internal.h	45;"	d
 mm_calloc	mm-internal.h	51;"	d
@@ -2532,11 +2328,10 @@ mm_strdup	mm-internal.h	52;"	d
 mode_t	evutil.c	88;"	d	file:
 ms	iocp-internal.h	/^	long ms;$/;"	m	struct:event_iocp_port
 msec_per_tick	ratelim-internal.h	/^	unsigned msec_per_tick;$/;"	m	struct:ev_token_bucket_cfg
-msg	evutil.c	/^static struct { int code; const char *msg; } windows_socket_errors[] = {$/;"	m	struct:__anon7	file:
+msg	evutil.c	/^static struct { int code; const char *msg; } windows_socket_errors[] = {$/;"	m	struct:__anon8	file:
 n	minheap-internal.h	/^	unsigned n, a;$/;"	m	struct:min_heap
 n_accepting	listener.c	/^	short n_accepting;$/;"	m	struct:evconnlistener_iocp	file:
 n_add_for_cb	evbuffer-internal.h	/^	size_t n_add_for_cb;$/;"	m	struct:evbuffer
-n_added	include/event2/buffer.h	/^	size_t n_added;$/;"	m	struct:evbuffer_cb_info
 n_additional	evdns.c	/^	int n_additional; \/* how many additional RRs have been set? *\/$/;"	m	struct:server_request	file:
 n_answer	evdns.c	/^	int n_answer; \/* how many answer RRs have been set? *\/$/;"	m	struct:server_request	file:
 n_authority	evdns.c	/^	int n_authority; \/* how many authority RRs have been set? *\/$/;"	m	struct:server_request	file:
@@ -2546,7 +2341,6 @@ n_common_timeouts	event-internal.h	/^	int n_common_timeouts;$/;"	m	struct:event_
 n_common_timeouts_allocated	event-internal.h	/^	int n_common_timeouts_allocated;$/;"	m	struct:event_base
 n_cpus_hint	event-internal.h	/^	int n_cpus_hint;$/;"	m	struct:event_config
 n_del_for_cb	evbuffer-internal.h	/^	size_t n_del_for_cb;$/;"	m	struct:evbuffer
-n_deleted	include/event2/buffer.h	/^	size_t n_deleted;$/;"	m	struct:evbuffer_cb_info
 n_errors	bufferevent_openssl.c	/^	unsigned n_errors : 2;$/;"	m	struct:bufferevent_openssl	file:
 n_labels	evdns.c	/^	int n_labels; \/* number of current entries *\/$/;"	m	struct:dnslabel_table	file:
 n_live_threads	iocp-internal.h	/^	short n_live_threads;$/;"	m	struct:event_iocp_port
@@ -2558,12 +2352,11 @@ n_to_wake	evthread_win32.c	/^	int n_to_wake;$/;"	m	struct:evthread_win32_cond	fi
 n_waiting	evthread_win32.c	/^	int n_waiting;$/;"	m	struct:evthread_win32_cond	file:
 n_written	bufferevent_openssl.c	/^	unsigned long n_written;$/;"	m	struct:bio_data_counts	file:
 nactivequeues	event-internal.h	/^	int nactivequeues;$/;"	m	struct:event_base
-name	evdns.c	/^			char name[HOST_NAME_MAX];$/;"	m	struct:reply::__anon1::__anon4	file:
+name	evdns.c	/^			char name[HOST_NAME_MAX];$/;"	m	struct:reply::__anon2::__anon5	file:
 name	evdns.c	/^	char *name; \/* name part of the RR *\/$/;"	m	struct:server_reply_item	file:
 name	event-internal.h	/^	const char *name;$/;"	m	struct:eventop
 name	evrpc-internal.h	/^	char *name;$/;"	m	struct:evrpc_request_wrapper
 name	http.c	/^	const char *name;$/;"	m	struct:response_class	file:
-name	include/event2/dns_struct.h	/^	char name[1];$/;"	m	struct:evdns_server_question
 name_from_addr	http.c	/^name_from_addr(struct sockaddr *sa, ev_socklen_t salen,$/;"	f	file:
 name_parse	evdns.c	/^name_parse(u8 *packet, int length, int *idx, char *name_out, int name_out_len) {$/;"	f	file:
 nameserver	evdns.c	/^struct nameserver {$/;"	s	file:
@@ -2603,20 +2396,16 @@ next	http-internal.h	/^	TAILQ_ENTRY(evhttp_bound_socket) next;$/;"	m	struct:evht
 next	http-internal.h	/^	TAILQ_ENTRY(evhttp_cb) next;$/;"	m	struct:evhttp_cb
 next	http-internal.h	/^	TAILQ_ENTRY(evhttp_connection) next;$/;"	m	struct:evhttp_connection
 next	http-internal.h	/^	TAILQ_ENTRY(evhttp_server_alias) next;$/;"	m	struct:evhttp_server_alias
-next	include/event2/http_struct.h	/^	TAILQ_ENTRY(evhttp_request) next;$/;"	m	struct:evhttp_request
-next	include/event2/keyvalq_struct.h	/^	TAILQ_ENTRY(evkeyval) next;$/;"	m	struct:evkeyval
-next	include/event2/rpc_struct.h	/^	TAILQ_ENTRY(evrpc) next;$/;"	m	struct:evrpc
 next_in_group	bufferevent-internal.h	/^	TAILQ_ENTRY(bufferevent_private) next_in_group;$/;"	m	struct:bufferevent_rate_limit
 next_pending	evdns.c	/^	struct server_request *next_pending;$/;"	m	struct:server_request	typeref:struct:server_request::server_request	file:
 next_vhost	http-internal.h	/^	TAILQ_ENTRY(evhttp) next_vhost;$/;"	m	struct:evhttp
 nfds	poll.c	/^	int nfds;			\/* Highest number used *\/$/;"	m	struct:pollop	file:
+nonident	event_rpcgen.py	/^nonident = re.compile(r'[^a-zA-Z0-9_]')$/;"	v
 notify_arg	defer-internal.h	/^	void *notify_arg;$/;"	m	struct:deferred_cb_queue
 notify_base_cbq_callback	event.c	/^notify_base_cbq_callback(struct deferred_cb_queue *cb, void *baseptr)$/;"	f	file:
 notify_fn	defer-internal.h	/^	void (*notify_fn)(struct deferred_cb_queue *, void *);$/;"	m	struct:deferred_cb_queue
-nquestions	include/event2/dns_struct.h	/^	int nquestions;$/;"	m	struct:evdns_server_request
 nread	evmap.c	/^	ev_uint16_t nread;$/;"	m	struct:evmap_io	file:
 ns	evdns.c	/^	struct nameserver *ns;	\/* the server which we last sent it *\/$/;"	m	struct:request	typeref:struct:request::nameserver	file:
-ntoread	include/event2/http_struct.h	/^	ev_int64_t ntoread;$/;"	m	struct:evhttp_request
 num_domains	evdns.c	/^	int num_domains;$/;"	m	struct:search_state	file:
 num_fds_in_fd_sets	win32select.c	/^	unsigned num_fds_in_fd_sets;$/;"	m	struct:win32op	file:
 num_responses	http.c	/^	size_t num_responses;$/;"	m	struct:response_class	file:
@@ -2627,13 +2416,9 @@ old_events	changelist-internal.h	/^	short old_events;$/;"	m	struct:event_change
 open	evutil.c	83;"	d	file:
 ops	listener.c	/^	const struct evconnlistener_ops *ops;$/;"	m	struct:evconnlistener	typeref:struct:evconnlistener::evconnlistener_ops	file:
 options	bufferevent-internal.h	/^	enum bufferevent_options options;$/;"	m	struct:bufferevent_private	typeref:enum:bufferevent_private::bufferevent_options
-orig_size	include/event2/buffer.h	/^	size_t orig_size;$/;"	m	struct:evbuffer_cb_info
 out_hooks	evrpc-internal.h	/^	struct evrpc_hook_list out_hooks;$/;"	m	struct:_evrpc_hooks	typeref:struct:_evrpc_hooks::evrpc_hook_list
 outbuf_cb	bufferevent_filter.c	/^	struct evbuffer_cb_entry *outbuf_cb;$/;"	m	struct:bufferevent_filtered	typeref:struct:bufferevent_filtered::evbuffer_cb_entry	file:
 outbuf_cb	bufferevent_openssl.c	/^	struct evbuffer_cb_entry *outbuf_cb;$/;"	m	struct:bufferevent_openssl	typeref:struct:bufferevent_openssl::evbuffer_cb_entry	file:
-output	include/event2/bufferevent_struct.h	/^	struct evbuffer *output;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::evbuffer
-output_buffer	include/event2/http_struct.h	/^	struct evbuffer *output_buffer;	\/* outgoing post or data *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evbuffer
-output_headers	include/event2/http_struct.h	/^	struct evkeyvalq *output_headers;$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evkeyvalq
 output_hooks	evrpc-internal.h	68;"	d
 overlapped	iocp-internal.h	/^	OVERLAPPED overlapped;$/;"	m	struct:event_overlapped
 overlapped	listener.c	/^	struct event_overlapped overlapped;$/;"	m	struct:accepting_socket	typeref:struct:accepting_socket::event_overlapped	file:
@@ -2676,8 +2461,6 @@ port	http.c	/^	int port; \/* port, or zero *\/$/;"	m	struct:evhttp_uri	file:
 port	iocp-internal.h	/^	HANDLE port;$/;"	m	struct:event_iocp_port
 port	listener.c	/^	struct event_iocp_port *port;$/;"	m	struct:evconnlistener_iocp	typeref:struct:evconnlistener_iocp::event_iocp_port	file:
 pos	evdns.c	/^struct dnslabel_entry { char *v; off_t pos; };$/;"	m	struct:dnslabel_entry	file:
-pos	include/event2/buffer.h	/^	ev_ssize_t pos;$/;"	m	struct:evbuffer_ptr
-pos_in_chain	include/event2/buffer.h	/^		size_t pos_in_chain;$/;"	m	struct:evbuffer_ptr::__anon10
 prefix_suffix_match	http.c	/^prefix_suffix_match(const char *pattern, const char *name, int ignorecase)$/;"	f	file:
 prev	evdns.c	/^	struct nameserver *next, *prev;$/;"	m	struct:nameserver	typeref:struct:nameserver::	file:
 prev	evdns.c	/^	struct request *next, *prev;$/;"	m	struct:request	typeref:struct:request::	file:
@@ -2688,13 +2471,13 @@ process	evrpc-internal.h	/^	int (*process)(void *, struct evhttp_request *,$/;"	
 process_arg	evrpc-internal.h	/^	void *process_arg;$/;"	m	struct:evrpc_hook
 process_in	bufferevent_filter.c	/^	bufferevent_filter_cb process_in;$/;"	m	struct:bufferevent_filtered	file:
 process_out	bufferevent_filter.c	/^	bufferevent_filter_cb process_out;$/;"	m	struct:bufferevent_filtered	file:
+prototypes	configure	/^   function prototypes and stuff, but not '\\xHH' hex character constants.$/;"	f
 ptr	bufferevent-internal.h	/^	void *ptr;$/;"	m	union:bufferevent_ctrl_data
-ptr	evdns.c	/^		} ptr;$/;"	m	union:reply::__anon1	typeref:struct:reply::__anon1::__anon4	file:
+ptr	evdns.c	/^		} ptr;$/;"	m	union:reply::__anon2	typeref:struct:reply::__anon2::__anon5	file:
 ptr	event.c	/^	const struct event *ptr;$/;"	m	struct:event_debug_entry	typeref:struct:event_debug_entry::event	file:
 put_cname_in_ptr	evdns.c	/^	char **put_cname_in_ptr; \/* store the cname here if we get one. *\/$/;"	m	struct:request	file:
 put_error	bufferevent_openssl.c	/^put_error(struct bufferevent_openssl *bev_ssl, unsigned long err)$/;"	f	file:
 query	http.c	/^	char *query; \/* query, or NULL *\/$/;"	m	struct:evhttp_uri	file:
-questions	include/event2/dns_struct.h	/^	struct evdns_server_question **questions;$/;"	m	struct:evdns_server_request	typeref:struct:evdns_server_request::evdns_server_question
 queued	defer-internal.h	/^	unsigned queued : 1;$/;"	m	struct:deferred_cb
 r	evdns.c	/^	struct evdns_request *r;$/;"	m	struct:getaddrinfo_subrequest	typeref:struct:getaddrinfo_subrequest::evdns_request	file:
 rate_limit	bufferevent-internal.h	/^	struct ev_token_bucket rate_limit;$/;"	m	struct:bufferevent_rate_limit_group	typeref:struct:bufferevent_rate_limit_group::ev_token_bucket
@@ -2718,7 +2501,6 @@ read_rate	ratelim-internal.h	/^	size_t read_rate;$/;"	m	struct:ev_token_bucket_c
 read_suspended	bufferevent-internal.h	/^	bufferevent_suspend_flags read_suspended;$/;"	m	struct:bufferevent_private
 read_suspended	bufferevent-internal.h	/^	unsigned read_suspended : 1;$/;"	m	struct:bufferevent_rate_limit_group
 read_watermarks_cb	bufferevent-internal.h	/^	struct evbuffer_cb_entry *read_watermarks_cb;$/;"	m	struct:bufferevent_private	typeref:struct:bufferevent_private::evbuffer_cb_entry
-readcb	include/event2/bufferevent_struct.h	/^	bufferevent_data_cb readcb;$/;"	m	struct:bufferevent
 readcb_pending	bufferevent-internal.h	/^	unsigned readcb_pending : 1;$/;"	m	struct:bufferevent_private
 readset_in	win32select.c	/^	struct win_fd_set *readset_in;$/;"	m	struct:win32op	typeref:struct:win32op::win_fd_set	file:
 readset_out	win32select.c	/^	struct win_fd_set *readset_out;$/;"	m	struct:win32op	typeref:struct:win32op::win_fd_set	file:
@@ -2734,19 +2516,12 @@ refill_bucket_event	bufferevent-internal.h	/^	struct event refill_bucket_event;$
 registered_rpcs	evrpc-internal.h	/^	TAILQ_HEAD(evrpc_list, evrpc) registered_rpcs;$/;"	m	struct:evrpc_base
 regname_ok	http.c	/^regname_ok(const char *s, const char *eos)$/;"	f	file:
 reissue_count	evdns.c	/^	int reissue_count;$/;"	m	struct:request	file:
-remote_host	include/event2/http_struct.h	/^	char *remote_host;$/;"	m	struct:evhttp_request
-remote_port	include/event2/http_struct.h	/^	ev_uint16_t remote_port;$/;"	m	struct:evhttp_request
 reply	evdns.c	/^	struct reply reply;$/;"	m	struct:deferred_reply_callback	typeref:struct:deferred_reply_callback::reply	file:
 reply	evdns.c	/^struct reply {$/;"	s	file:
 reply	evrpc-internal.h	/^	void *reply;$/;"	m	struct:evrpc_req_generic
 reply	evrpc-internal.h	/^	void *reply;$/;"	m	struct:evrpc_request_wrapper
 reply_clear	evrpc-internal.h	/^	void (*reply_clear)(void *);$/;"	m	struct:evrpc_request_wrapper
-reply_complete	include/event2/rpc_struct.h	/^	int (*reply_complete)(void *);$/;"	m	struct:evrpc
-reply_free	include/event2/rpc_struct.h	/^	void (*reply_free)(void *);$/;"	m	struct:evrpc
 reply_handle	evdns.c	/^reply_handle(struct request *const req, u16 flags, u32 ttl, struct reply *reply) {$/;"	f	file:
-reply_marshal	include/event2/rpc_struct.h	/^	void (*reply_marshal)(struct evbuffer*, void *);$/;"	m	struct:evrpc
-reply_new	include/event2/rpc_struct.h	/^	void *(*reply_new)(void *);$/;"	m	struct:evrpc
-reply_new_arg	include/event2/rpc_struct.h	/^	void *reply_new_arg;$/;"	m	struct:evrpc
 reply_parse	evdns.c	/^reply_parse(struct evdns_base *base, u8 *packet, int length) {$/;"	f	file:
 reply_run_callback	evdns.c	/^reply_run_callback(struct deferred_cb *d, void *user_pointer)$/;"	f	file:
 reply_schedule_callback	evdns.c	/^reply_schedule_callback(struct request *const req, u32 ttl, u32 err, struct reply *reply)$/;"	f	file:
@@ -2762,19 +2537,15 @@ request_appended	evdns.c	/^	unsigned request_appended :1;	\/* true if the reques
 request_done	evdns.c	/^	unsigned request_done : 1;$/;"	m	struct:evdns_getaddrinfo_request	file:
 request_find_from_trans_id	evdns.c	/^request_find_from_trans_id(struct evdns_base *base, u16 trans_id) {$/;"	f	file:
 request_finished	evdns.c	/^request_finished(struct request *const req, struct request **head, int free_handle) {$/;"	f	file:
-request_free	include/event2/rpc_struct.h	/^	void (*request_free)(void *);$/;"	m	struct:evrpc
 request_len	evdns.c	/^	unsigned int request_len;$/;"	m	struct:request	file:
 request_marshal	evrpc-internal.h	/^	void (*request_marshal)(struct evbuffer *, void *);$/;"	m	struct:evrpc_request_wrapper
 request_new	evdns.c	/^request_new(struct evdns_base *base, struct evdns_request *handle, int type,$/;"	f	file:
-request_new	include/event2/rpc_struct.h	/^	void *(*request_new)(void *);$/;"	m	struct:evrpc
-request_new_arg	include/event2/rpc_struct.h	/^	void *request_new_arg;$/;"	m	struct:evrpc
 request_parse	evdns.c	/^request_parse(u8 *packet, int length, struct evdns_server_port *port, struct sockaddr *addr, ev_socklen_t addrlen)$/;"	f	file:
 request_reissue	evdns.c	/^request_reissue(struct request *req) {$/;"	f	file:
 request_submit	evdns.c	/^request_submit(struct request *const req) {$/;"	f	file:
 request_trans_id_set	evdns.c	/^request_trans_id_set(struct request *const req, const u16 trans_id) {$/;"	f	file:
 request_type	evdns.c	/^	u8 request_type; \/* TYPE_PTR or TYPE_A or TYPE_AAAA *\/$/;"	m	struct:request	file:
 request_type	evdns.c	/^	u8 request_type;$/;"	m	struct:deferred_reply_callback	file:
-request_unmarshal	include/event2/rpc_struct.h	/^	int (*request_unmarshal)(void *, struct evbuffer *);$/;"	m	struct:evrpc
 requests	http-internal.h	/^	TAILQ_HEAD(evcon_requestq, evhttp_request) requests;$/;"	m	struct:evhttp_connection
 require_features	event-internal.h	/^	enum event_method_feature require_features;$/;"	m	struct:event_config	typeref:enum:event_config::event_method_feature
 resize_out_sets	select.c	/^	int resize_out_sets;$/;"	m	struct:selectop	file:
@@ -2783,8 +2554,6 @@ resolv_conf_parse_line	evdns.c	/^resolv_conf_parse_line(struct evdns_base *base,
 response	evdns.c	/^	char *response;$/;"	m	struct:server_request	file:
 response_class	http.c	/^struct response_class {$/;"	s	file:
 response_classes	http.c	/^static const struct response_class response_classes[] = {$/;"	v	typeref:struct:response_class	file:
-response_code	include/event2/http_struct.h	/^	int response_code;		\/* HTTP Response code *\/$/;"	m	struct:evhttp_request
-response_code_line	include/event2/http_struct.h	/^	char *response_code_line;	\/* Readable response *\/$/;"	m	struct:evhttp_request
 response_len	evdns.c	/^	size_t response_len;$/;"	m	struct:server_request	file:
 responses	http.c	/^	const char **responses;$/;"	m	struct:response_class	file:
 retry_cnt	http-internal.h	/^	int retry_cnt;			\/* retry count *\/$/;"	m	struct:evhttp_connection
@@ -2794,11 +2563,12 @@ rpc	evrpc-internal.h	/^	struct evrpc *rpc;$/;"	m	struct:evrpc_req_generic	typere
 rpc_data	evrpc-internal.h	/^	struct evbuffer* rpc_data;$/;"	m	struct:evrpc_req_generic	typeref:struct:evrpc_req_generic::evbuffer
 rs	arc4random.c	/^static struct arc4_stream rs;$/;"	v	typeref:struct:arc4_stream	file:
 rs_initialized	arc4random.c	/^static int rs_initialized;$/;"	v	file:
+run	event_rpcgen.py	/^    def run(self):$/;"	m	class:CommandLine
 running_loop	event-internal.h	/^	int running_loop;$/;"	m	struct:event_base
 s	arc4random.c	/^	unsigned char s[256];$/;"	m	struct:arc4_stream	file:
 s	listener.c	/^	SOCKET s;$/;"	m	struct:accepting_socket	file:
 s6_addr	ipv6-internal.h	/^	ev_uint8_t s6_addr[16];$/;"	m	struct:in6_addr
-sa	evdns.c	/^		struct sockaddr sa;$/;"	m	union:hosts_entry::__anon5	typeref:struct:hosts_entry::__anon5::sockaddr	file:
+sa	evdns.c	/^		struct sockaddr sa;$/;"	m	union:hosts_entry::__anon6	typeref:struct:hosts_entry::__anon6::sockaddr	file:
 sa_family_t	ipv6-internal.h	/^typedef int sa_family_t;$/;"	t
 scheme	http.c	/^	char *scheme; \/* scheme; e.g http, ftp etc *\/$/;"	m	struct:evhttp_uri	file:
 scheme_ok	http.c	/^scheme_ok(const char *s, const char *eos)$/;"	f	file:
@@ -2850,15 +2620,9 @@ shutdownSemaphore	iocp-internal.h	/^	HANDLE *shutdownSemaphore;$/;"	m	struct:eve
 shutting_down	listener.c	/^	unsigned shutting_down : 1;$/;"	m	struct:evconnlistener_iocp	file:
 sig	event-internal.h	/^	struct evsig_info sig;$/;"	m	struct:event_base	typeref:struct:event_base::evsig_info
 sigmap	event-internal.h	/^	struct event_signal_map sigmap;$/;"	m	struct:event_base	typeref:struct:event_base::event_signal_map
-signal_add	include/event2/event_compat.h	202;"	d
-signal_condition	include/event2/thread.h	/^	int (*signal_condition)(void *cond, int broadcast);$/;"	m	struct:evthread_condition_callbacks
-signal_del	include/event2/event_compat.h	205;"	d
-signal_initialized	include/event2/event_compat.h	207;"	d
-signal_pending	include/event2/event_compat.h	206;"	d
-signal_set	include/event2/event_compat.h	203;"	d
 signals_are_broken	win32select.c	/^	unsigned signals_are_broken : 1;$/;"	m	struct:win32op	file:
-sin	evdns.c	/^		struct sockaddr_in sin;$/;"	m	union:hosts_entry::__anon5	typeref:struct:hosts_entry::__anon5::sockaddr_in	file:
-sin6	evdns.c	/^		struct sockaddr_in6 sin6;$/;"	m	union:hosts_entry::__anon5	typeref:struct:hosts_entry::__anon5::sockaddr_in6	file:
+sin	evdns.c	/^		struct sockaddr_in sin;$/;"	m	union:hosts_entry::__anon6	typeref:struct:hosts_entry::__anon6::sockaddr_in	file:
+sin6	evdns.c	/^		struct sockaddr_in6 sin6;$/;"	m	union:hosts_entry::__anon6	typeref:struct:hosts_entry::__anon6::sockaddr_in6	file:
 sin6_addr	ipv6-internal.h	/^	struct in6_addr sin6_addr;$/;"	m	struct:sockaddr_in6	typeref:struct:sockaddr_in6::in6_addr
 sin6_family	ipv6-internal.h	/^	sa_family_t sin6_family;$/;"	m	struct:sockaddr_in6
 sin6_port	ipv6-internal.h	/^	ev_uint16_t sin6_port;$/;"	m	struct:sockaddr_in6
@@ -2870,7 +2634,6 @@ socket	evdns.c	/^	evutil_socket_t socket;	 \/* a connected UDP socket *\/$/;"	m	
 socket	evdns.c	/^	evutil_socket_t socket; \/* socket we use to read queries and write replies. *\/$/;"	m	struct:evdns_server_port	file:
 sockets	http-internal.h	/^	TAILQ_HEAD(boundq, evhttp_bound_socket) sockets;$/;"	m	struct:evhttp
 socklen_t	util-internal.h	111;"	d
-ss_family	include/event2/util.h	264;"	d
 ss_family	util-internal.h	227;"	d
 ss_padding	util-internal.h	/^		char ss_padding[128];$/;"	m	union:sockaddr_storage::__anon9
 ss_sa	util-internal.h	/^		struct sockaddr ss_sa;$/;"	m	union:sockaddr_storage::__anon9	typeref:struct:sockaddr_storage::__anon9::sockaddr
@@ -2897,8 +2660,9 @@ strtoint	evdns.c	/^strtoint(const char *const str)$/;"	f	file:
 strtoint_clipped	evdns.c	/^strtoint_clipped(const char *const str, int min, int max)$/;"	f	file:
 strtok_r	evdns.c	/^strtok_r(char *s, const char *delim, char **state) {$/;"	f	file:
 strtotimeval	evdns.c	/^strtotimeval(const char *const str, struct timeval *out)$/;"	f	file:
+structdef	event_rpcgen.py	/^structdef = re.compile(r'^struct +[a-zA-Z_][a-zA-Z0-9_]* *{$')$/;"	v
+structref	event_rpcgen.py	/^structref = re.compile(r'^struct\\[([a-zA-Z_][a-zA-Z0-9_]*)\\]$')$/;"	v
 success_phrases	http.c	/^static const char *success_phrases[] = {$/;"	v	file:
-supported_locktypes	include/event2/thread.h	/^	unsigned supported_locktypes;$/;"	m	struct:evthread_lock_callbacks
 test_for_getaddrinfo_hacks	evutil.c	/^test_for_getaddrinfo_hacks(void)$/;"	f	file:
 tested_for_getaddrinfo_hacks	evutil.c	/^static int tested_for_getaddrinfo_hacks=0;$/;"	v	file:
 th_base_lock	event-internal.h	/^	void *th_base_lock;$/;"	m	struct:event_base
@@ -2915,21 +2679,14 @@ timeout	evdns.c	/^	struct event timeout;$/;"	m	struct:evdns_getaddrinfo_request	
 timeout	evrpc-internal.h	/^	int timeout;$/;"	m	struct:evrpc_pool
 timeout	http-internal.h	/^	int timeout;			\/* timeout in seconds for events *\/$/;"	m	struct:evhttp_connection
 timeout	http-internal.h	/^	int timeout;$/;"	m	struct:evhttp
-timeout_add	include/event2/event_compat.h	188;"	d
 timeout_correct	event.c	/^timeout_correct(struct event_base *base, struct timeval *tv)$/;"	f	file:
-timeout_del	include/event2/event_compat.h	190;"	d
 timeout_event	evdns.c	/^	struct event timeout_event;  \/* used to keep the timeout for *\/$/;"	m	struct:nameserver	typeref:struct:nameserver::event	file:
 timeout_event	evdns.c	/^	struct event timeout_event;$/;"	m	struct:request	typeref:struct:request::event	file:
 timeout_event	event-internal.h	/^	struct event timeout_event;$/;"	m	struct:common_timeout_list	typeref:struct:common_timeout_list::event
 timeout_initialized	http.c	87;"	d	file:
-timeout_initialized	include/event2/event_compat.h	192;"	d
 timeout_next	event.c	/^timeout_next(struct event_base *base, struct timeval **tv_p)$/;"	f	file:
 timeout_pending	http.c	86;"	d	file:
-timeout_pending	include/event2/event_compat.h	191;"	d
 timeout_process	event.c	/^timeout_process(struct event_base *base)$/;"	f	file:
-timeout_read	include/event2/bufferevent_struct.h	/^	struct timeval timeout_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::timeval
-timeout_set	include/event2/event_compat.h	189;"	d
-timeout_write	include/event2/bufferevent_struct.h	/^	struct timeval timeout_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::timeval
 total_len	evbuffer-internal.h	/^	size_t total_len;$/;"	m	struct:evbuffer
 total_read	bufferevent-internal.h	/^	ev_uint64_t total_read;$/;"	m	struct:bufferevent_rate_limit_group
 total_written	bufferevent-internal.h	/^	ev_uint64_t total_written;$/;"	m	struct:bufferevent_rate_limit_group
@@ -2946,8 +2703,6 @@ type	bufferevent-internal.h	/^	const char *type;$/;"	m	struct:bufferevent_ops
 type	evdns.c	/^	ev_uint32_t type;$/;"	m	struct:getaddrinfo_subrequest	file:
 type	evdns.c	/^	u16 type; \/* The RR type *\/$/;"	m	struct:server_reply_item	file:
 type	evdns.c	/^	unsigned int type;$/;"	m	struct:reply	file:
-type	include/event2/dns_struct.h	/^	int type;$/;"	m	struct:evdns_server_question
-type	include/event2/http_struct.h	/^	enum evhttp_cmd_type type;$/;"	m	struct:evhttp_request	typeref:enum:evhttp_request::evhttp_cmd_type
 u16	evdns.c	138;"	d	file:
 u32	evdns.c	137;"	d	file:
 u64	evdns.c	136;"	d	file:
@@ -2956,7 +2711,6 @@ u_char	event.h	/^typedef unsigned char u_char;$/;"	t
 u_short	event.h	/^typedef unsigned short u_short;$/;"	t
 underlying	bufferevent_filter.c	/^	struct bufferevent *underlying;$/;"	m	struct:bufferevent_filtered	typeref:struct:bufferevent_filtered::bufferevent	file:
 underlying	bufferevent_openssl.c	/^	struct bufferevent *underlying;$/;"	m	struct:bufferevent_openssl	typeref:struct:bufferevent_openssl::bufferevent	file:
-unlock	include/event2/thread.h	/^	int (*unlock)(unsigned mode, void *lock);$/;"	m	struct:evthread_lock_callbacks
 upcast	bufferevent_async.c	/^upcast(struct bufferevent *bev)$/;"	f	file:
 upcast	bufferevent_filter.c	/^upcast(struct bufferevent *bev)$/;"	f	file:
 upcast	bufferevent_openssl.c	/^upcast(struct bufferevent *bev)$/;"	f	file:
@@ -2966,10 +2720,7 @@ upcast_evbuffer	buffer_iocp.c	/^upcast_evbuffer(struct evbuffer *buf)$/;"	f	file
 upcast_read	bufferevent_async.c	/^upcast_read(struct event_overlapped *eo)$/;"	f	file:
 upcast_write	bufferevent_async.c	/^upcast_write(struct event_overlapped *eo)$/;"	f	file:
 update_time_cache	event.c	/^update_time_cache(struct event_base *base)$/;"	f	file:
-uri	include/event2/http_struct.h	/^	char *uri;			\/* uri after HTTP request was parsed *\/$/;"	m	struct:evhttp_request
-uri	include/event2/rpc_struct.h	/^	const char* uri;$/;"	m	struct:evrpc
 uri_chars	http.c	/^static const char uri_chars[256] = {$/;"	v	file:
-uri_elems	include/event2/http_struct.h	/^	struct evhttp_uri *uri_elems;	\/* uri elements *\/$/;"	m	struct:evhttp_request	typeref:struct:evhttp_request::evhttp_uri
 uri_part	http.c	/^enum uri_part {$/;"	g	file:
 use_mmap	buffer.c	/^static int use_mmap = 1;$/;"	v	file:
 use_monotonic	event.c	/^static int use_monotonic;$/;"	v	file:
@@ -2983,17 +2734,15 @@ user_data	evdns.c	/^	void *user_data; \/* Opaque pointer passed to user_callback
 user_data	evdns.c	/^	void *user_data;$/;"	m	struct:evdns_getaddrinfo_request	file:
 user_data	listener.c	/^	void *user_data;$/;"	m	struct:evconnlistener	file:
 user_pointer	evdns.c	/^	void *user_pointer;  \/* the pointer given to us for this request *\/$/;"	m	struct:request	file:
-userdone	include/event2/http_struct.h	/^	    userdone:1;			\/* the user has sent all data *\/$/;"	m	struct:evhttp_request
 userinfo	http.c	/^	char *userinfo; \/* userinfo (typically username:pass), or NULL *\/$/;"	m	struct:evhttp_uri	file:
 userinfo_ok	http.c	/^userinfo_ok(const char *s, const char *eos)$/;"	f	file:
 v	evdns.c	/^struct dnslabel_entry { char *v; off_t pos; };$/;"	m	struct:dnslabel_entry	file:
 va_copy	buffer.c	2644;"	d	file:
-value	include/event2/keyvalq_struct.h	/^	char *value;$/;"	m	struct:evkeyval
 vhost_pattern	http-internal.h	/^	char *vhost_pattern;$/;"	m	struct:evhttp
 virtual_event_count	event-internal.h	/^	int virtual_event_count;$/;"	m	struct:event_base
 virtualhosts	http-internal.h	/^	TAILQ_HEAD(vhostsq, evhttp) virtualhosts;$/;"	m	struct:evhttp
-wait_condition	include/event2/thread.h	/^	int (*wait_condition)(void *cond, void *lock,$/;"	m	struct:evthread_condition_callbacks
 what	http-internal.h	/^	char *what;$/;"	m	struct:evhttp_cb
+white	event_rpcgen.py	/^white = re.compile(r'\\s+')$/;"	v
 win32_add	win32select.c	/^win32_add(struct event_base *base, evutil_socket_t fd,$/;"	f
 win32_dealloc	win32select.c	/^win32_dealloc(struct event_base *_base)$/;"	f
 win32_del	win32select.c	/^win32_del(struct event_base *base, evutil_socket_t fd, short old, short events,$/;"	f
@@ -3003,9 +2752,7 @@ win32_init	win32select.c	/^win32_init(struct event_base *_base)$/;"	f
 win32op	win32select.c	/^struct win32op {$/;"	s	file:
 win32ops	win32select.c	/^struct eventop win32ops = {$/;"	v	typeref:struct:eventop
 win_fd_set	win32select.c	/^struct win_fd_set {$/;"	s	file:
-windows_socket_errors	evutil.c	/^static struct { int code; const char *msg; } windows_socket_errors[] = {$/;"	v	typeref:struct:__anon7	file:
-wm_read	include/event2/bufferevent_struct.h	/^	struct event_watermark wm_read;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
-wm_write	include/event2/bufferevent_struct.h	/^	struct event_watermark wm_write;$/;"	m	struct:bufferevent	typeref:struct:bufferevent::event_watermark
+windows_socket_errors	evutil.c	/^static struct { int code; const char *msg; } windows_socket_errors[] = {$/;"	v	typeref:struct:__anon8	file:
 write_added	bufferevent_async.c	/^	unsigned write_added : 1;$/;"	m	struct:bufferevent_async	file:
 write_blocked_on_read	bufferevent_openssl.c	/^	unsigned write_blocked_on_read : 1;$/;"	m	struct:bufferevent_openssl	file:
 write_change	changelist-internal.h	/^	ev_uint8_t write_change;$/;"	m	struct:event_change
@@ -3020,7 +2767,6 @@ write_rate	ratelim-internal.h	/^	size_t write_rate;$/;"	m	struct:ev_token_bucket
 write_suspended	bufferevent-internal.h	/^	bufferevent_suspend_flags write_suspended;$/;"	m	struct:bufferevent_private
 write_suspended	bufferevent-internal.h	/^	unsigned write_suspended : 1;$/;"	m	struct:bufferevent_rate_limit_group
 write_waiting	evdns.c	/^	char write_waiting;  \/* true if we are waiting for EV_WRITE events *\/$/;"	m	struct:nameserver	file:
-writecb	include/event2/bufferevent_struct.h	/^	bufferevent_data_cb writecb;$/;"	m	struct:bufferevent
 writecb_pending	bufferevent-internal.h	/^	unsigned writecb_pending : 1;$/;"	m	struct:bufferevent_private
 writeset_in	win32select.c	/^	struct win_fd_set *writeset_in;$/;"	m	struct:win32op	typeref:struct:win32op::win_fd_set	file:
 writeset_out	win32select.c	/^	struct win_fd_set *writeset_out;$/;"	m	struct:win32op	typeref:struct:win32op::win_fd_set	file:

@@ -26,7 +26,7 @@
 
 /* Based on software by Adam Langly. Adam's original message:
  *
- * Async DNS Library
+ * Async DNS Library 异步DNS库
  * Adam Langley <agl@imperialviolet.org>
  * http://www.imperialviolet.org/eventdns.html
  * Public Domain code
