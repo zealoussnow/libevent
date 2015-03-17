@@ -1,0 +1,156 @@
+\section{event2/thread.h File Reference}
+\label{thread_8h}\index{event2/thread.h@{event2/thread.h}}
+
+
+Functions for multi-\/threaded applications using Libevent.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf evthread\_\-condition\_\-callbacks}
+\begin{DoxyCompactList}\small\item\em This structure describes the interface a threading library uses for condition variables. \item\end{DoxyCompactList}\item 
+struct {\bf evthread\_\-lock\_\-callbacks}
+\begin{DoxyCompactList}\small\item\em This structure describes the interface a threading library uses for locking. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EVTHREAD\_\-CONDITION\_\-API\_\-VERSION}~1\label{thread_8h_a83fecb8503fdb40ca4e57bac66608721}
+
+\item 
+\#define {\bfseries EVTHREAD\_\-LOCK\_\-API\_\-VERSION}~1\label{thread_8h_a911771b77b303b553612bef600573448}
+
+\item 
+\#define {\bf EVTHREAD\_\-USE\_\-PTHREADS\_\-IMPLEMENTED}~1\label{thread_8h_a8906b609d6c2bb4af5c7653c4f0f355d}
+
+\begin{DoxyCompactList}\small\item\em Defined if Libevent was built with support for \doxyref{evthread\_\-use\_\-pthreads()}{p.}{thread_8h_a6b2f9d2502cbf13063f5bfe0c3c8ff73}. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTHREAD\_\-USE\_\-WINDOWS\_\-THREADS\_\-IMPLEMENTED}~1\label{thread_8h_a05306512f3074b45be6eba702440f1f1}
+
+\begin{DoxyCompactList}\small\item\em Defined if Libevent was built with support for \doxyref{evthread\_\-use\_\-windows\_\-threads()}{p.}{thread_8h_ae6227c318642f9af248897bab1a0aa58}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}{\bf Types of locks}\par
+{\em \label{_amgrp72cfa80268617dbb9665d872f45bfaa3}
+ }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EVTHREAD\_\-LOCKTYPE\_\-READWRITE}~2\label{thread_8h_aefbfdb33065b9e3a50e69c7c02cf2f42}
+
+\item 
+\#define {\bf EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE}~1
+\begin{DoxyCompactList}\small\item\em A recursive lock is one that can be acquired multiple times at once by the same thread. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Flags passed to lock functions}\par
+{\em \label{_amgrpa9c08963cdb71cf8803a315e74ee95d2}
+ }\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EVTHREAD\_\-READ}~0x08
+\begin{DoxyCompactList}\small\item\em A flag passed to a locking callback when the lock was allocated as a read-\/write lock, and we want to acquire or release the lock for reading. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTHREAD\_\-TRY}~0x10
+\begin{DoxyCompactList}\small\item\em A flag passed to a locking callback when we don't want to block waiting for the lock; if we can't get the lock immediately, we will instead return nonzero from the locking callback. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTHREAD\_\-WRITE}~0x04
+\begin{DoxyCompactList}\small\item\em A flag passed to a locking callback when the lock was allocated as a read-\/write lock, and we want to acquire or release the lock for writing. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf evthread\_\-enable\_\-lock\_\-debuging} (void)
+\begin{DoxyCompactList}\small\item\em Enable debugging wrappers around the current lock callbacks. \item\end{DoxyCompactList}\item 
+int {\bf evthread\_\-make\_\-base\_\-notifiable} (struct {\bf event\_\-base} $\ast$base)
+\begin{DoxyCompactList}\small\item\em Make sure it's safe to tell an \doxyref{event}{p.}{structevent} base to wake up from another thread or a signal handler. \item\end{DoxyCompactList}\item 
+int {\bf evthread\_\-set\_\-condition\_\-callbacks} (const struct {\bf evthread\_\-condition\_\-callbacks} $\ast$)
+\begin{DoxyCompactList}\small\item\em Sets a group of functions that Libevent should use for condition variables. \item\end{DoxyCompactList}\item 
+void {\bf evthread\_\-set\_\-id\_\-callback} (unsigned long($\ast$id\_\-fn)(void))
+\begin{DoxyCompactList}\small\item\em Sets the function for determining the thread id. \item\end{DoxyCompactList}\item 
+int {\bf evthread\_\-set\_\-lock\_\-callbacks} (const struct {\bf evthread\_\-lock\_\-callbacks} $\ast$)
+\begin{DoxyCompactList}\small\item\em Sets a group of functions that Libevent should use for locking. \item\end{DoxyCompactList}\item 
+int {\bf evthread\_\-use\_\-pthreads} (void)
+\begin{DoxyCompactList}\small\item\em Sets up Libevent for use with Pthreads locking and thread ID functions. \item\end{DoxyCompactList}\item 
+int {\bf evthread\_\-use\_\-windows\_\-threads} (void)
+\begin{DoxyCompactList}\small\item\em Sets up Libevent for use with Windows builtin locking and thread ID functions. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for multi-\/threaded applications using Libevent. When using a multi-\/threaded application in which multiple threads add and delete events from a single \doxyref{event}{p.}{structevent} base, Libevent needs to lock its data structures.
+
+Like the memory-\/management function hooks, all of the threading functions \_\-must\_\- be set up before an \doxyref{event\_\-base}{p.}{structevent__base} is created if you want the base to use them.
+
+Most programs will either be using Windows threads or Posix threads. You can configure Libevent to use one of these event\_\-use\_\-windows\_\-threads() or event\_\-use\_\-pthreads() respectively. If you're using another threading library, you'll need to configure threading functions manually using \doxyref{evthread\_\-set\_\-lock\_\-callbacks()}{p.}{thread_8h_a89fd5de575d5f0fba24d0e8e0a25c641} and \doxyref{evthread\_\-set\_\-condition\_\-callbacks()}{p.}{thread_8h_a05b941ee76d9798da61270d4016bb015}. 
+
+\subsection{Define Documentation}
+\index{thread.h@{thread.h}!EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE@{EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE}}
+\index{EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE@{EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE}!thread.h@{thread.h}}
+\subsubsection[{EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE~1}\label{thread_8h_a8fbf4020f11c3b98459fd8d4d427513c}
+
+
+A recursive lock is one that can be acquired multiple times at once by the same thread. No other process can allocate the lock until the thread that has been holding it has unlocked it as many times as it locked it. \index{thread.h@{thread.h}!EVTHREAD\_\-READ@{EVTHREAD\_\-READ}}
+\index{EVTHREAD\_\-READ@{EVTHREAD\_\-READ}!thread.h@{thread.h}}
+\subsubsection[{EVTHREAD\_\-READ}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTHREAD\_\-READ~0x08}\label{thread_8h_a8c7a3fb4b1f521b4a262e5043f3fa14c}
+
+
+A flag passed to a locking callback when the lock was allocated as a read-\/write lock, and we want to acquire or release the lock for reading. \index{thread.h@{thread.h}!EVTHREAD\_\-TRY@{EVTHREAD\_\-TRY}}
+\index{EVTHREAD\_\-TRY@{EVTHREAD\_\-TRY}!thread.h@{thread.h}}
+\subsubsection[{EVTHREAD\_\-TRY}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTHREAD\_\-TRY~0x10}\label{thread_8h_a746e63692bf5bd5b4ee5d929df1592e2}
+
+
+A flag passed to a locking callback when we don't want to block waiting for the lock; if we can't get the lock immediately, we will instead return nonzero from the locking callback. \index{thread.h@{thread.h}!EVTHREAD\_\-WRITE@{EVTHREAD\_\-WRITE}}
+\index{EVTHREAD\_\-WRITE@{EVTHREAD\_\-WRITE}!thread.h@{thread.h}}
+\subsubsection[{EVTHREAD\_\-WRITE}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTHREAD\_\-WRITE~0x04}\label{thread_8h_aa9fb1861f3b09a03c5986561dd00db0d}
+
+
+A flag passed to a locking callback when the lock was allocated as a read-\/write lock, and we want to acquire or release the lock for writing. 
+
+\subsection{Function Documentation}
+\index{thread.h@{thread.h}!evthread\_\-enable\_\-lock\_\-debuging@{evthread\_\-enable\_\-lock\_\-debuging}}
+\index{evthread\_\-enable\_\-lock\_\-debuging@{evthread\_\-enable\_\-lock\_\-debuging}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-enable\_\-lock\_\-debuging}]{\setlength{\rightskip}{0pt plus 5cm}void evthread\_\-enable\_\-lock\_\-debuging (void)}\label{thread_8h_a473ab66bfe6a74fe78eb95a86053ae67}
+
+
+Enable debugging wrappers around the current lock callbacks. If Libevent makes one of several common locking errors, exit with an assertion failure.
+
+If you're going to call this function, you must do so before any locks are allocated. \index{thread.h@{thread.h}!evthread\_\-make\_\-base\_\-notifiable@{evthread\_\-make\_\-base\_\-notifiable}}
+\index{evthread\_\-make\_\-base\_\-notifiable@{evthread\_\-make\_\-base\_\-notifiable}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-make\_\-base\_\-notifiable}]{\setlength{\rightskip}{0pt plus 5cm}int evthread\_\-make\_\-base\_\-notifiable (struct {\bf event\_\-base} $\ast$ {\em base})}\label{thread_8h_ad6ce3b3efff53b41758944a8b486f62c}
+
+
+Make sure it's safe to tell an \doxyref{event}{p.}{structevent} base to wake up from another thread or a signal handler. \begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{thread.h@{thread.h}!evthread\_\-set\_\-condition\_\-callbacks@{evthread\_\-set\_\-condition\_\-callbacks}}
+\index{evthread\_\-set\_\-condition\_\-callbacks@{evthread\_\-set\_\-condition\_\-callbacks}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-set\_\-condition\_\-callbacks}]{\setlength{\rightskip}{0pt plus 5cm}int evthread\_\-set\_\-condition\_\-callbacks (const struct {\bf evthread\_\-condition\_\-callbacks} $\ast$)}\label{thread_8h_a05b941ee76d9798da61270d4016bb015}
+
+
+Sets a group of functions that Libevent should use for condition variables. For full information on the required callback API, see the documentation for the individual members of \doxyref{evthread\_\-condition\_\-callbacks}{p.}{structevthread__condition__callbacks}.
+
+Note that if you're using Windows or the Pthreads threading library, you probably shouldn't call this function; instead, use \doxyref{evthread\_\-use\_\-windows\_\-threads()}{p.}{thread_8h_ae6227c318642f9af248897bab1a0aa58} or \doxyref{evthread\_\-use\_\-pthreads()}{p.}{thread_8h_a6b2f9d2502cbf13063f5bfe0c3c8ff73} if you can. \index{thread.h@{thread.h}!evthread\_\-set\_\-id\_\-callback@{evthread\_\-set\_\-id\_\-callback}}
+\index{evthread\_\-set\_\-id\_\-callback@{evthread\_\-set\_\-id\_\-callback}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-set\_\-id\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void evthread\_\-set\_\-id\_\-callback (unsigned long($\ast$)(void) {\em id\_\-fn})}\label{thread_8h_a3eae2571d33fc83f16d1810ab56211d3}
+
+
+Sets the function for determining the thread id. 
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the \doxyref{event}{p.}{structevent} base for which to set the id function \item[{\em id\_\-fn}]the identify function Libevent should invoke to determine the identity of a thread. \end{DoxyParams}
+\index{thread.h@{thread.h}!evthread\_\-set\_\-lock\_\-callbacks@{evthread\_\-set\_\-lock\_\-callbacks}}
+\index{evthread\_\-set\_\-lock\_\-callbacks@{evthread\_\-set\_\-lock\_\-callbacks}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-set\_\-lock\_\-callbacks}]{\setlength{\rightskip}{0pt plus 5cm}int evthread\_\-set\_\-lock\_\-callbacks (const struct {\bf evthread\_\-lock\_\-callbacks} $\ast$)}\label{thread_8h_a89fd5de575d5f0fba24d0e8e0a25c641}
+
+
+Sets a group of functions that Libevent should use for locking. For full information on the required callback API, see the documentation for the individual members of \doxyref{evthread\_\-lock\_\-callbacks}{p.}{structevthread__lock__callbacks}.
+
+Note that if you're using Windows or the Pthreads threading library, you probably shouldn't call this function; instead, use \doxyref{evthread\_\-use\_\-windows\_\-threads()}{p.}{thread_8h_ae6227c318642f9af248897bab1a0aa58} or evthread\_\-use\_\-posix\_\-threads() if you can. \index{thread.h@{thread.h}!evthread\_\-use\_\-pthreads@{evthread\_\-use\_\-pthreads}}
+\index{evthread\_\-use\_\-pthreads@{evthread\_\-use\_\-pthreads}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-use\_\-pthreads}]{\setlength{\rightskip}{0pt plus 5cm}int evthread\_\-use\_\-pthreads (void)}\label{thread_8h_a6b2f9d2502cbf13063f5bfe0c3c8ff73}
+
+
+Sets up Libevent for use with Pthreads locking and thread ID functions. Unavailable if Libevent is not build for use with pthreads. Requires libraries to link against Libevent\_\-pthreads as well as Libevent.
+
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{thread.h@{thread.h}!evthread\_\-use\_\-windows\_\-threads@{evthread\_\-use\_\-windows\_\-threads}}
+\index{evthread\_\-use\_\-windows\_\-threads@{evthread\_\-use\_\-windows\_\-threads}!thread.h@{thread.h}}
+\subsubsection[{evthread\_\-use\_\-windows\_\-threads}]{\setlength{\rightskip}{0pt plus 5cm}int evthread\_\-use\_\-windows\_\-threads (void)}\label{thread_8h_ae6227c318642f9af248897bab1a0aa58}
+
+
+Sets up Libevent for use with Windows builtin locking and thread ID functions. Unavailable if Libevent is not built for Windows.
+
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}

@@ -1,0 +1,194 @@
+\section{event2/event\_\-compat.h File Reference}
+\label{event__compat_8h}\index{event2/event\_\-compat.h@{event2/event\_\-compat.h}}
+
+
+Potentially non-\/threadsafe versions of the functions in \doxyref{event.h}{p.}{event_8h}: provided only for backwards compatibility.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EVENT\_\-FD}(ev)~((int)event\_\-get\_\-fd(ev))\label{event__compat_8h_a2b1c2a40ad619b9c3ca2cb82a126e2e4}
+
+\item 
+\#define {\bfseries EVENT\_\-SIGNAL}(ev)~event\_\-get\_\-signal(ev)\label{event__compat_8h_a899cb8dd0c2bf1289c0069e4649326ad}
+
+\item 
+\#define {\bfseries evsignal\_\-set}(ev, x, cb, arg)~event\_\-set((ev), (x), EV\_\-SIGNAL$|$EV\_\-PERSIST, (cb), (arg))\label{event__compat_8h_a0c943992e3125ac5a28cde48216d334c}
+
+\item 
+\#define {\bfseries evtimer\_\-set}(ev, cb, arg)~event\_\-set((ev), -\/1, 0, (cb), (arg))\label{event__compat_8h_afa5d72155d72931332ed0656fc8fb0a1}
+
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf signal\_\-$\ast$ macros}\par
+{\em \label{_amgrpd275339f7c05b5ba515c4e8f8ebb479f}
+\begin{Desc}
+\item[{\bf Deprecated}]These macros are deprecated because their naming is inconsistent with the rest of Libevent. Use the evsignal\_\-$\ast$ macros instead.\end{Desc}
+}\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries signal\_\-add}(ev, tv)~event\_\-add((ev), (tv))\label{event__compat_8h_ac26a36d05805ed2fadc7b2dcbf881020}
+
+\item 
+\#define {\bfseries signal\_\-del}(ev)~event\_\-del(ev)\label{event__compat_8h_a77fc0b01f4acf885075e9720faf91906}
+
+\item 
+\#define {\bfseries signal\_\-initialized}(ev)~event\_\-initialized(ev)\label{event__compat_8h_a049ba1588cd2d372b2617f1ff336282b}
+
+\item 
+\#define {\bfseries signal\_\-pending}(ev, tv)~event\_\-pending((ev), EV\_\-SIGNAL, (tv))\label{event__compat_8h_a07458695d3403c8c0bcec356a9d243c7}
+
+\item 
+\#define {\bfseries signal\_\-set}(ev, x, cb, arg)~event\_\-set((ev), (x), EV\_\-SIGNAL$|$EV\_\-PERSIST, (cb), (arg))\label{event__compat_8h_a1e620dc98462b393821cf84cb02c7e5c}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf timeout\_\-$\ast$ macros}\par
+{\em \label{_amgrp20d51f2b412be5ac9dbaae67f8db07f5}
+\begin{Desc}
+\item[{\bf Deprecated}]These macros are deprecated because their naming is inconsistent with the rest of Libevent. Use the evtimer\_\-$\ast$ macros instead.\end{Desc}
+}\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries timeout\_\-add}(ev, tv)~event\_\-add((ev), (tv))\label{event__compat_8h_afaf6ea49aab66ec47acd9f5b629bfe5e}
+
+\item 
+\#define {\bfseries timeout\_\-del}(ev)~event\_\-del(ev)\label{event__compat_8h_a8febdc39e7def3c49deb1e9faa7fc537}
+
+\item 
+\#define {\bfseries timeout\_\-initialized}(ev)~event\_\-initialized(ev)\label{event__compat_8h_a960c63760b26a73350a2bd3618fe4d66}
+
+\item 
+\#define {\bfseries timeout\_\-pending}(ev, tv)~event\_\-pending((ev), EV\_\-TIMEOUT, (tv))\label{event__compat_8h_a221671efe98942558743d1a66669b494}
+
+\item 
+\#define {\bfseries timeout\_\-set}(ev, cb, arg)~event\_\-set((ev), -\/1, 0, (cb), (arg))\label{event__compat_8h_a85e9253a4d75703692dd912be4a87aab}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf event\_\-dispatch} (void)
+\begin{DoxyCompactList}\small\item\em Loop to process events. \item\end{DoxyCompactList}\item 
+const char $\ast$ {\bf event\_\-get\_\-method} (void)
+\begin{DoxyCompactList}\small\item\em Get the kernel \doxyref{event}{p.}{structevent} notification mechanism used by Libevent. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-base} $\ast$ {\bf event\_\-init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxyref{event}{p.}{structevent} API. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-loop} (int)
+\begin{DoxyCompactList}\small\item\em Handle events. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-loopbreak} (void)
+\begin{DoxyCompactList}\small\item\em Abort the active \doxyref{event\_\-loop()}{p.}{event__compat_8h_a765c1875642fc730addf04e9433f6448} immediately. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-loopexit} (const struct timeval $\ast$)
+\begin{DoxyCompactList}\small\item\em Exit the \doxyref{event}{p.}{structevent} loop after the specified time. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-once} (evutil\_\-socket\_\-t, short, void($\ast$)(evutil\_\-socket\_\-t, short, void $\ast$), void $\ast$, const struct timeval $\ast$)
+\begin{DoxyCompactList}\small\item\em Schedule a one-\/time \doxyref{event}{p.}{structevent} to occur. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-priority\_\-init} (int)
+\begin{DoxyCompactList}\small\item\em Set the number of different \doxyref{event}{p.}{structevent} priorities. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-set} (struct {\bf event} $\ast$, evutil\_\-socket\_\-t, short, void($\ast$)(evutil\_\-socket\_\-t, short, void $\ast$), void $\ast$)
+\begin{DoxyCompactList}\small\item\em Prepare an \doxyref{event}{p.}{structevent} structure to be added. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Potentially non-\/threadsafe versions of the functions in \doxyref{event.h}{p.}{event_8h}: provided only for backwards compatibility. In the oldest versions of Libevent, \doxyref{event\_\-base}{p.}{structevent__base} was not a first-\/class structure. Instead, there was a single \doxyref{event}{p.}{structevent} base that every function manipulated. Later, when separate \doxyref{event}{p.}{structevent} bases were added, the old functions that didn't take an \doxyref{event\_\-base}{p.}{structevent__base} argument needed to work by manipulating the \char`\"{}current\char`\"{} \doxyref{event}{p.}{structevent} base. This could lead to thread-\/safety issues, and obscure, hard-\/to-\/diagnose bugs.
+
+\begin{Desc}
+\item[{\bf Deprecated}]All functions in this file are by definition deprecated. \end{Desc}
+
+
+\subsection{Function Documentation}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-dispatch@{event\_\-dispatch}}
+\index{event\_\-dispatch@{event\_\-dispatch}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-dispatch}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-dispatch (void)}\label{event__compat_8h_a1f4991bceb8aaf33545d1fc857230b51}
+
+
+Loop to process events. Like \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f}, but uses the \char`\"{}current\char`\"{} base.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it is easily confused by multiple calls to \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}, and because it is not safe for multithreaded use. The replacement is \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f}, \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-get\_\-method@{event\_\-get\_\-method}}
+\index{event\_\-get\_\-method@{event\_\-get\_\-method}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-get\_\-method}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ event\_\-get\_\-method (void)}\label{event__compat_8h_a8a03c9175e0578017a384b4c039b090f}
+
+
+Get the kernel \doxyref{event}{p.}{structevent} notification mechanism used by Libevent. \begin{Desc}
+\item[{\bf Deprecated}]This function is obsolete, and has been replaced by \doxyref{event\_\-base\_\-get\_\-method()}{p.}{event_8h_a10914a893ed07dc8238d3274a9cbb3fc}. Its use is deprecated because it relies on the \char`\"{}current\char`\"{} base configured by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-get\_\-method()}{p.}{event_8h_a10914a893ed07dc8238d3274a9cbb3fc} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-init@{event\_\-init}}
+\index{event\_\-init@{event\_\-init}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf event\_\-base}$\ast$ event\_\-init (void)\hspace{0.3cm}{\ttfamily  [read]}}\label{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}
+
+
+Initialize the \doxyref{event}{p.}{structevent} API. The \doxyref{event}{p.}{structevent} API needs to be initialized with \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} before it can be used. Sets the global current base that gets used for events that have no base associated with them.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it replaces the \char`\"{}current\char`\"{} \doxyref{event\_\-base}{p.}{structevent__base}, and is totally unsafe for multithreaded use. The replacement is \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-set()}{p.}{event_8h_a2efd0ac7e54428d1941f212bc16ed9ce}, \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-loop@{event\_\-loop}}
+\index{event\_\-loop@{event\_\-loop}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-loop}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-loop (int)}\label{event__compat_8h_a765c1875642fc730addf04e9433f6448}
+
+
+Handle events. This function behaves like \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80}, but uses the \char`\"{}current\char`\"{} base
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it uses the \doxyref{event}{p.}{structevent} base from the last call to event\_\-init, and is therefore not safe for multithreaded use. The replacement is \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80}, \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-loopbreak@{event\_\-loopbreak}}
+\index{event\_\-loopbreak@{event\_\-loopbreak}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-loopbreak}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-loopbreak (void)}\label{event__compat_8h_a3a5c57caea1d97160f6990b3deeb6961}
+
+
+Abort the active \doxyref{event\_\-loop()}{p.}{event__compat_8h_a765c1875642fc730addf04e9433f6448} immediately. This function behaves like event\_\-base\_\-loopbreakt(), except that it uses the \char`\"{}current\char`\"{} base.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it uses the \doxyref{event}{p.}{structevent} base from the last call to event\_\-init, and is therefore not safe for multithreaded use. The replacement is \doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e}, \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-loopexit@{event\_\-loopexit}}
+\index{event\_\-loopexit@{event\_\-loopexit}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-loopexit}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-loopexit (const struct timeval $\ast$)}\label{event__compat_8h_a2e3d894ac7986bb4967ebfe67a2d9977}
+
+
+Exit the \doxyref{event}{p.}{structevent} loop after the specified time. This function behaves like \doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9}, except that it uses the \char`\"{}current\char`\"{} base.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it uses the \doxyref{event}{p.}{structevent} base from the last call to event\_\-init, and is therefore not safe for multithreaded use. The replacement is \doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-init}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}, \doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-once@{event\_\-once}}
+\index{event\_\-once@{event\_\-once}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-once}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-once (evutil\_\-socket\_\-t, \/  short, \/  void($\ast$)(evutil\_\-socket\_\-t, short, void $\ast$), \/  void $\ast$, \/  const struct timeval $\ast$)}\label{event__compat_8h_a074cf31709035ec2b7b660374bbd3b90}
+
+
+Schedule a one-\/time \doxyref{event}{p.}{structevent} to occur. \begin{Desc}
+\item[{\bf Deprecated}]This function is obsolete, and has been replaced by \doxyref{event\_\-base\_\-once()}{p.}{event_8h_acddee16b430c037ae061f966dc18eb9d}. Its use is deprecated because it relies on the \char`\"{}current\char`\"{} base configured by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-once()}{p.}{event_8h_acddee16b430c037ae061f966dc18eb9d} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-priority\_\-init@{event\_\-priority\_\-init}}
+\index{event\_\-priority\_\-init@{event\_\-priority\_\-init}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-priority\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-priority\_\-init (int)}\label{event__compat_8h_ac98d83bce2fe3e97ac655329fb30fccb}
+
+
+Set the number of different \doxyref{event}{p.}{structevent} priorities. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it is easily confused by multiple calls to \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}, and because it is not safe for multithreaded use. The replacement is \doxyref{event\_\-base\_\-priority\_\-init()}{p.}{event_8h_a67067fe995561cd36a7f34ef19e030e8}.\end{Desc}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-priority\_\-init()}{p.}{event_8h_a67067fe995561cd36a7f34ef19e030e8} 
+\end{DoxySeeAlso}
+\index{event\_\-compat.h@{event\_\-compat.h}!event\_\-set@{event\_\-set}}
+\index{event\_\-set@{event\_\-set}!event_compat.h@{event\_\-compat.h}}
+\subsubsection[{event\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-set (struct {\bf event} $\ast$, \/  evutil\_\-socket\_\-t, \/  short, \/  void($\ast$)(evutil\_\-socket\_\-t, short, void $\ast$), \/  void $\ast$)}\label{event__compat_8h_ace184d66066e9bac013779d8f6921d11}
+
+
+Prepare an \doxyref{event}{p.}{structevent} structure to be added. \begin{Desc}
+\item[{\bf Deprecated}]\doxyref{event\_\-set()}{p.}{event__compat_8h_ace184d66066e9bac013779d8f6921d11} is not recommended for new code, because it requires a subsequent call to \doxyref{event\_\-base\_\-set()}{p.}{event_8h_a2efd0ac7e54428d1941f212bc16ed9ce} to be safe under most circumstances. Use \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} or \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd} instead. \end{Desc}

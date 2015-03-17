@@ -1,0 +1,57 @@
+\section{event2/http\_\-compat.h File Reference}
+\label{http__compat_8h}\index{event2/http\_\-compat.h@{event2/http\_\-compat.h}}
+
+
+Potentially non-\/threadsafe versions of the functions in \doxyref{http.h}{p.}{http_8h}: provided only for backwards compatibility.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf evhttp\_\-request\_\-uri}~evhttp\_\-request\_\-get\_\-uri\label{http__compat_8h_aae95ca15c179b4b0b8c7bbb7b1da342a}
+
+\begin{DoxyCompactList}\small\item\em Returns the request URI. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct evhttp\_\-connection $\ast$ {\bf evhttp\_\-connection\_\-new} (const char $\ast$address, unsigned short port)
+\begin{DoxyCompactList}\small\item\em A connection object that can be used to for making HTTP requests. \item\end{DoxyCompactList}\item 
+void {\bf evhttp\_\-connection\_\-set\_\-base} (struct evhttp\_\-connection $\ast$evcon, struct {\bf event\_\-base} $\ast$base)
+\begin{DoxyCompactList}\small\item\em Associates an \doxyref{event}{p.}{structevent} base with the connection -\/ can only be called on a freshly created connection object that has not been used yet. \item\end{DoxyCompactList}\item 
+struct evhttp $\ast$ {\bf evhttp\_\-start} (const char $\ast$address, unsigned short port)
+\begin{DoxyCompactList}\small\item\em Start an HTTP server on the specified address and port. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Potentially non-\/threadsafe versions of the functions in \doxyref{http.h}{p.}{http_8h}: provided only for backwards compatibility. 
+
+\subsection{Function Documentation}
+\index{http\_\-compat.h@{http\_\-compat.h}!evhttp\_\-connection\_\-new@{evhttp\_\-connection\_\-new}}
+\index{evhttp\_\-connection\_\-new@{evhttp\_\-connection\_\-new}!http_compat.h@{http\_\-compat.h}}
+\subsubsection[{evhttp\_\-connection\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct evhttp\_\-connection$\ast$ evhttp\_\-connection\_\-new (const char $\ast$ {\em address}, \/  unsigned short {\em port})\hspace{0.3cm}{\ttfamily  [read]}}\label{http__compat_8h_a3fab40a20af95f525d5d7f21ea215535}
+
+
+A connection object that can be used to for making HTTP requests. The connection object tries to establish the connection when it is given an http request object.
+
+\begin{Desc}
+\item[{\bf Deprecated}]It does not allow an \doxyref{event}{p.}{structevent} base to be specified \end{Desc}
+\index{http\_\-compat.h@{http\_\-compat.h}!evhttp\_\-connection\_\-set\_\-base@{evhttp\_\-connection\_\-set\_\-base}}
+\index{evhttp\_\-connection\_\-set\_\-base@{evhttp\_\-connection\_\-set\_\-base}!http_compat.h@{http\_\-compat.h}}
+\subsubsection[{evhttp\_\-connection\_\-set\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}void evhttp\_\-connection\_\-set\_\-base (struct evhttp\_\-connection $\ast$ {\em evcon}, \/  struct {\bf event\_\-base} $\ast$ {\em base})}\label{http__compat_8h_a7a3a6de60e64dd0469affb45f267888a}
+
+
+Associates an \doxyref{event}{p.}{structevent} base with the connection -\/ can only be called on a freshly created connection object that has not been used yet. \begin{Desc}
+\item[{\bf Deprecated}]XXXX Why? \end{Desc}
+\index{http\_\-compat.h@{http\_\-compat.h}!evhttp\_\-start@{evhttp\_\-start}}
+\index{evhttp\_\-start@{evhttp\_\-start}!http_compat.h@{http\_\-compat.h}}
+\subsubsection[{evhttp\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}struct evhttp$\ast$ evhttp\_\-start (const char $\ast$ {\em address}, \/  unsigned short {\em port})\hspace{0.3cm}{\ttfamily  [read]}}\label{http__compat_8h_aff4e96ef72ca014740878e3e5f02befc}
+
+
+Start an HTTP server on the specified address and port. \begin{Desc}
+\item[{\bf Deprecated}]It does not allow an \doxyref{event}{p.}{structevent} base to be specified\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em address}]the address to which the HTTP server should be bound \item[{\em port}]the port number on which the HTTP server should listen \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an struct evhttp object 
+\end{DoxyReturn}

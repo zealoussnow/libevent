@@ -1,0 +1,30 @@
+\section{evbuffer\_\-ptr Struct Reference}
+\label{structevbuffer__ptr}\index{evbuffer\_\-ptr@{evbuffer\_\-ptr}}
+
+
+Pointer to a position within an \doxyref{evbuffer}{p.}{structevbuffer}.  
+
+
+{\ttfamily \#include $<$buffer.h$>$}\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>void $\ast$ {\bfseries chain}\\
+\>size\_t {\bfseries pos\_in\_chain}\\
+\} {\bfseries \_internal}\label{structevbuffer__ptr_a8959079a0c6903a10c5a5198a82ea338}
+\\
+
+\end{tabbing}\item 
+ev\_\-ssize\_\-t {\bfseries pos}\label{structevbuffer__ptr_ad2312c70df899eed23d72d0f8d52ac53}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Pointer to a position within an \doxyref{evbuffer}{p.}{structevbuffer}. Used when repeatedly searching through a buffer. Calling any function that modifies or re-\/packs the buffer contents may invalidate all evbuffer\_\-ptrs for that buffer. Do not modify these values except with evbuffer\_\-ptr\_\-set. 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+event2/{\bf buffer.h}\end{DoxyCompactItemize}

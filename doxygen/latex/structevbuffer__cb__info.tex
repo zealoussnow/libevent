@@ -1,0 +1,45 @@
+\section{evbuffer\_\-cb\_\-info Struct Reference}
+\label{structevbuffer__cb__info}\index{evbuffer\_\-cb\_\-info@{evbuffer\_\-cb\_\-info}}
+
+
+Structure passed to an evbuffer\_\-cb\_\-func \doxyref{evbuffer}{p.}{structevbuffer} callback.  
+
+
+{\ttfamily \#include $<$buffer.h$>$}\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+size\_\-t {\bf n\_\-added}
+\begin{DoxyCompactList}\small\item\em The number of bytes added since callbacks were last invoked. \item\end{DoxyCompactList}\item 
+size\_\-t {\bf n\_\-deleted}
+\begin{DoxyCompactList}\small\item\em The number of bytes removed since callbacks were last invoked. \item\end{DoxyCompactList}\item 
+size\_\-t {\bf orig\_\-size}
+\begin{DoxyCompactList}\small\item\em The number of bytes in this \doxyref{evbuffer}{p.}{structevbuffer} when callbacks were last invoked. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure passed to an evbuffer\_\-cb\_\-func \doxyref{evbuffer}{p.}{structevbuffer} callback. \begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-cb\_\-func}{p.}{buffer_8h_af40adaa98b02da7fca55da29270266d9}, \doxyref{evbuffer\_\-add\_\-cb()}{p.}{buffer_8h_aa2a1509845c3d71f0adac4198aab0bf7} 
+\end{DoxySeeAlso}
+
+
+\subsection{Field Documentation}
+\index{evbuffer\_\-cb\_\-info@{evbuffer\_\-cb\_\-info}!n\_\-added@{n\_\-added}}
+\index{n\_\-added@{n\_\-added}!evbuffer_cb_info@{evbuffer\_\-cb\_\-info}}
+\subsubsection[{n\_\-added}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf evbuffer\_\-cb\_\-info::n\_\-added}}\label{structevbuffer__cb__info_a8191bbc06e291543359428daace6bae6}
+
+
+The number of bytes added since callbacks were last invoked. \index{evbuffer\_\-cb\_\-info@{evbuffer\_\-cb\_\-info}!n\_\-deleted@{n\_\-deleted}}
+\index{n\_\-deleted@{n\_\-deleted}!evbuffer_cb_info@{evbuffer\_\-cb\_\-info}}
+\subsubsection[{n\_\-deleted}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf evbuffer\_\-cb\_\-info::n\_\-deleted}}\label{structevbuffer__cb__info_a7d1a674e020d2eee72538b0221dc32a4}
+
+
+The number of bytes removed since callbacks were last invoked. \index{evbuffer\_\-cb\_\-info@{evbuffer\_\-cb\_\-info}!orig\_\-size@{orig\_\-size}}
+\index{orig\_\-size@{orig\_\-size}!evbuffer_cb_info@{evbuffer\_\-cb\_\-info}}
+\subsubsection[{orig\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t {\bf evbuffer\_\-cb\_\-info::orig\_\-size}}\label{structevbuffer__cb__info_a18e973448576100923328e4de05ddef5}
+
+
+The number of bytes in this \doxyref{evbuffer}{p.}{structevbuffer} when callbacks were last invoked. 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+event2/{\bf buffer.h}\end{DoxyCompactItemize}

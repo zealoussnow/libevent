@@ -1,0 +1,36 @@
+\section{event Struct Reference}
+\label{structevent}\index{event@{event}}
+
+
+Structure to represent a single \doxyref{event}{p.}{structevent}.  
+
+
+{\ttfamily \#include $<$event.h$>$}
+
+\subsection{Detailed Description}
+Structure to represent a single \doxyref{event}{p.}{structevent}. An \doxyref{event}{p.}{structevent} can have some underlying condition it represents: a socket becoming readable or writeable (or both), or a signal becoming raised. (An \doxyref{event}{p.}{structevent} that represents no underlying condition is still useful: you can use one to implement a timer, or to communicate between threads.)
+
+Generally, you can create events with \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}, then make them pending with \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}. As your \doxyref{event\_\-base}{p.}{structevent__base} runs, it will run the callbacks of an events whose conditions are triggered. When you longer want the \doxyref{event}{p.}{structevent}, free it with \doxyref{event\_\-free()}{p.}{event_8h_ad7fd53b1263bf0fdccd959a6c5a659cc}.
+
+In more depth:
+
+An \doxyref{event}{p.}{structevent} may be \char`\"{}pending\char`\"{} (one whose condition we are watching), \char`\"{}active\char`\"{} (one whose condition has triggered and whose callback is about to run), neither, or both. Events come into existence via \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} or \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}, and are then neither active nor pending.
+
+To make an \doxyref{event}{p.}{structevent} pending, pass it to \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}. When doing so, you can also set a timeout for the \doxyref{event}{p.}{structevent}.
+
+Events become active during an \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} call when either their condition has triggered, or when their timeout has elapsed. You can also activate an \doxyref{event}{p.}{structevent} manually using \doxyref{event\_\-active()}{p.}{event_8h_a3262ae1dc7fe51516b43412d61301e4f}. The even\_\-base loop will run the callbacks of active events; after it has done so, it marks them as no longer active.
+
+You can make an \doxyref{event}{p.}{structevent} non-\/pending by passing it to \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}. This also makes the \doxyref{event}{p.}{structevent} non-\/active.
+
+Events can be \char`\"{}persistent\char`\"{} or \char`\"{}non-\/persistent\char`\"{}. A non-\/persistent \doxyref{event}{p.}{structevent} becomes non-\/pending as soon as it is triggered: thus, it only runs at most once per call to \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}. A persistent \doxyref{event}{p.}{structevent} remains pending even when it becomes active: you'll need to \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258} it manually in order to make it non-\/pending. When a persistent \doxyref{event}{p.}{structevent} with a timeout becomes active, its timeout is reset: this means you can use persistent events to implement periodic timeouts.
+
+This should be treated as an opaque structure; you should never read or write any of its fields directly. For backward compatibility with old code, it is defined in the event2/event\_\-struct.h header; including this header may make your code incompatible with other versions of Libevent.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}, \doxyref{event\_\-free()}{p.}{event_8h_ad7fd53b1263bf0fdccd959a6c5a659cc}, \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0}, \doxyref{event\_\-get\_\-assignment()}{p.}{event_8h_a2103c3cbf6e3e173419ebf019e29c788}, \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}, \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}, \doxyref{event\_\-active()}{p.}{event_8h_a3262ae1dc7fe51516b43412d61301e4f}, \doxyref{event\_\-pending()}{p.}{event_8h_a49773a4e3e46f60e488ac37fb46950d9}, \doxyref{event\_\-get\_\-fd()}{p.}{event_8h_aee0c9c3fc7c997e4d4b77bdcdf321ee6}, \doxyref{event\_\-get\_\-base()}{p.}{event_8h_ae9763d285fa415e4547a0d5e55cf5b13}, \doxyref{event\_\-get\_\-events()}{p.}{event_8h_a0123fdd5b9a1c204de5d7ef1a4578387}, \doxyref{event\_\-get\_\-callback()}{p.}{event_8h_a6cdb0a8dbf7efa9be7b65914ed5c6821}, \doxyref{event\_\-get\_\-callback\_\-arg()}{p.}{event_8h_ab07e87ff7d43ad7205a008f08fbaf0a3}, \doxyref{event\_\-priority\_\-set()}{p.}{event_8h_a9984a63f2edcc72bef96a188f569b367} 
+\end{DoxySeeAlso}
+
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+event2/{\bf event.h}\end{DoxyCompactItemize}

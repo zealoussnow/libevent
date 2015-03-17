@@ -1,0 +1,43 @@
+\section{Introduction}\label{index_intro}
+Libevent is an \doxyref{event}{p.}{structevent} notification library for developing scalable network servers. The Libevent API provides a mechanism to execute a callback function when a specific \doxyref{event}{p.}{structevent} occurs on a file descriptor or after a timeout has been reached. Furthermore, Libevent also support callbacks due to signals or regular timeouts.
+
+Libevent is meant to replace the \doxyref{event}{p.}{structevent} loop found in \doxyref{event}{p.}{structevent} driven network servers. An application just needs to call \doxyref{event\_\-dispatch()}{p.}{event__compat_8h_a1f4991bceb8aaf33545d1fc857230b51} and then add or remove events dynamically without having to change the \doxyref{event}{p.}{structevent} loop.
+
+Currently, Libevent supports /dev/poll, kqueue(2), select(2), poll(2), epoll(4), and evports. The internal \doxyref{event}{p.}{structevent} mechanism is completely independent of the exposed \doxyref{event}{p.}{structevent} API, and a simple update of Libevent can provide new functionality without having to redesign the applications. As a result, Libevent allows for portable application development and provides the most scalable \doxyref{event}{p.}{structevent} notification mechanism available on an operating system. Libevent can also be used for multithreaded programs. Libevent should compile on Linux, $\ast$BSD, Mac OS X, Solaris and, Windows.\section{Standard usage}\label{index_usage}
+Every program that uses Libevent must inclurde the $<$\doxyref{event2/event.h}{p.}{event_8h}$>$ header, and pass the -\/levent flag to the linker. (You can instead link -\/levent\_\-core if you only want the main \doxyref{event}{p.}{structevent} and buffered IO-\/based code, and don't want to link any protocol code.)\section{Library setup}\label{index_setup}
+Before you call any other Libevent functions, you need to set up the library. If you're going to use Libevent from multiple threads in a multithreaded application, you need to initialize thread support -\/-\/ typically by using \doxyref{evthread\_\-use\_\-pthreads()}{p.}{thread_8h_a6b2f9d2502cbf13063f5bfe0c3c8ff73} or \doxyref{evthread\_\-use\_\-windows\_\-threads()}{p.}{thread_8h_ae6227c318642f9af248897bab1a0aa58}. See $<$\doxyref{event2/thread.h}{p.}{thread_8h}$>$ for more information.
+
+This is also the point where you can replace Libevent's memory management functions with event\_\-set\_\-mem\_\-functions, and enable debug mode with \doxyref{event\_\-enable\_\-debug\_\-mode()}{p.}{event_8h_a3472400b8b1802550df2242673a6da37}.\section{Creating an event base}\label{index_base}
+Next, you need to create an \doxyref{event\_\-base}{p.}{structevent__base} structure, using \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} or \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04}. The \doxyref{event\_\-base}{p.}{structevent__base} is responsible for keeping track of which events are \char`\"{}pending\char`\"{} (that is to say, being watched to see if they become active) and which events are \char`\"{}active\char`\"{}. Every \doxyref{event}{p.}{structevent} is associated with a single \doxyref{event\_\-base}{p.}{structevent__base}.\section{Event notification}\label{index_event}
+For each file descriptor that you wish to monitor, you must create an \doxyref{event}{p.}{structevent} structure with \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}. (You may also declare an \doxyref{event}{p.}{structevent} structure and call \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} to initialize the members of the structure.) To enable notification, you add the structure to the list of monitored events by calling \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}. The \doxyref{event}{p.}{structevent} structure must remain allocated as long as it is active, so it should generally be allocated on the heap.\section{Dispaching evets.}\label{index_loop}
+Finally, you call \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f} to loop and dispatch events. You can also use \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} for more fine-\/grained control.
+
+Currently, only one thread can be dispatching a given \doxyref{event\_\-base}{p.}{structevent__base} at a time. If you want to run events in multiple threads at once, you can either have a single \doxyref{event\_\-base}{p.}{structevent__base} whose events add work to a work queue, or you can create multiple \doxyref{event\_\-base}{p.}{structevent__base} objects.\section{I/O Buffers}\label{index_bufferevent}
+Libevent provides a buffered I/O abstraction on top of the regular \doxyref{event}{p.}{structevent} callbacks. This abstraction is called a \doxyref{bufferevent}{p.}{structbufferevent}. A \doxyref{bufferevent}{p.}{structbufferevent} provides input and output buffers that get filled and drained automatically. The user of a buffered \doxyref{event}{p.}{structevent} no longer deals directly with the I/O, but instead is reading from input and writing to output buffers.
+
+Once initialized via \doxyref{bufferevent\_\-socket\_\-new()}{p.}{bufferevent_8h_a501557193aa56c9f4923583d9d734395}, the \doxyref{bufferevent}{p.}{structbufferevent} structure can be used repeatedly with \doxyref{bufferevent\_\-enable()}{p.}{bufferevent_8h_a1b9a3412e8c8e122c745b33d46b9643e} and \doxyref{bufferevent\_\-disable()}{p.}{bufferevent_8h_aa15582fe250247aa98d4897527215727}. Instead of reading and writing directly to a socket, you would call \doxyref{bufferevent\_\-read()}{p.}{bufferevent_8h_a6bd435529e20a39b24fead9ddcd966ba} and \doxyref{bufferevent\_\-write()}{p.}{bufferevent_8h_abc606695cd6bb2e3f25c4330d0c9e3ab}.
+
+When read enabled the \doxyref{bufferevent}{p.}{structbufferevent} will try to read from the file descriptor and call the read callback. The write callback is executed whenever the output buffer is drained below the write low watermark, which is 0 by default.
+
+See $<$event2/bufferevent$\ast$.h$>$ for more information.\section{Timers}\label{index_timers}
+Libevent can also be used to create timers that invoke a callback after a certain amount of time has expired. The evtimer\_\-new() function returns an \doxyref{event}{p.}{structevent} struct to use as a timer. To activate the timer, call evtimer\_\-add(). Timers can be deactivated by calling evtimer\_\-del().\section{Asynchronous DNS resolution}\label{index_evdns}
+Libevent provides an asynchronous DNS resolver that should be used instead of the standard DNS resolver functions. See the $<$\doxyref{event2/dns.h}{p.}{dns_8h}$>$ functions for more detail.\section{Event-\/driven HTTP servers}\label{index_evhttp}
+Libevent provides a very simple event-\/driven HTTP server that can be embedded in your program and used to service HTTP requests.
+
+To use this capability, you need to include the $<$\doxyref{event2/http.h}{p.}{http_8h}$>$ header in your program. See that header for more information.\section{A framework for RPC servers and clients}\label{index_evrpc}
+Libevent provides a framework for creating RPC servers and clients. It takes care of marshaling and unmarshaling all data structures.\section{API Reference}\label{index_api}
+To browse the complete documentation of the libevent API, click on any of the following links.
+
+\doxyref{event2/event.h}{p.}{event_8h} The primary libevent header
+
+\doxyref{event2/thread.h}{p.}{thread_8h} Functions for use by multithreaded programs
+
+\doxyref{event2/buffer.h}{p.}{buffer_8h} and \doxyref{event2/bufferevent.h}{p.}{bufferevent_8h} Buffer management for network reading and writing
+
+\doxyref{event2/util.h}{p.}{util_8h} Utility functions for portable nonblocking network code
+
+\doxyref{event2/dns.h}{p.}{dns_8h} Asynchronous DNS resolution
+
+\doxyref{event2/http.h}{p.}{http_8h} An embedded libevent-\/based HTTP server
+
+\doxyref{event2/rpc.h}{p.}{rpc_8h} A framework for creating RPC servers and clients 

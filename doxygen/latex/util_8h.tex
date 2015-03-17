@@ -1,0 +1,504 @@
+\section{event2/util.h File Reference}
+\label{util_8h}\index{event2/util.h@{event2/util.h}}
+
+
+Common convenience functions for cross-\/platform portability and related socket manipulations.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$stdarg.h$>$}\par
+{\ttfamily \#include $<$sys/socket.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf evutil\_\-addrinfo}
+\begin{DoxyCompactList}\small\item\em A definition of struct addrinfo for systems that lack it. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries ev\_\-socklen\_\-t}~socklen\_\-t\label{util_8h_a1aa9b4bfabbeaae5ba828e808938fa2c}
+
+\item 
+\#define {\bfseries EVUTIL\_\-CLOSESOCKET}(s)~evutil\_\-closesocket(s)\label{util_8h_aa70c6baf0f9ac418407245579ec2a168}
+
+\item 
+\#define {\bf evutil\_\-offsetof}(type, field)~((off\_\-t)(\&((type $\ast$)0)-\/$>$field))
+\begin{DoxyCompactList}\small\item\em Replacement for offsetof on platforms that don't define it. \item\end{DoxyCompactList}\item 
+\#define {\bf evutil\_\-socket\_\-t}~int
+\begin{DoxyCompactList}\small\item\em A type wide enough to hold the output of \char`\"{}socket()\char`\"{} or \char`\"{}accept()\char`\"{}. \item\end{DoxyCompactList}\item 
+\#define {\bf evutil\_\-timercmp}(tvp, uvp, cmp)
+\begin{DoxyCompactList}\small\item\em Return true iff the tvp is related to uvp according to the relational operator cmp. \item\end{DoxyCompactList}\item 
+\#define {\bfseries evutil\_\-timerisset}(tvp)~((tvp)-\/$>$tv\_\-sec $|$$|$ (tvp)-\/$>$tv\_\-usec)\label{util_8h_a393a0aee6129d132a3dd488366352bf2}
+
+\end{DoxyCompactItemize}
+\begin{Indent}{\bf Limits for integer types}\par
+{\em \label{_amgrpa22069b681b1061b3c363863253572fa}
+These macros hold the largest or smallest values possible for the ev\_\-[u]int$\ast$\_\-t types. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EV\_\-INT16\_\-MAX}~((ev\_\-int16\_\-t) 0x7fffL)\label{util_8h_af6271a010b87f8e78edfb3d576d16909}
+
+\item 
+\#define {\bfseries EV\_\-INT16\_\-MIN}~((-\/EV\_\-INT16\_\-MAX) -\/ 1)\label{util_8h_a10afd44462363963e6cdfc20e10d250a}
+
+\item 
+\#define {\bfseries EV\_\-INT32\_\-MAX}~((ev\_\-int32\_\-t) 0x7fffffffL)\label{util_8h_adbfb8c4ad3c2b8d2bec82787c9f0eaa3}
+
+\item 
+\#define {\bfseries EV\_\-INT32\_\-MIN}~((-\/EV\_\-INT32\_\-MAX) -\/ 1)\label{util_8h_a7899efdfa42ebe54093c85fbc35ba8e5}
+
+\item 
+\#define {\bfseries EV\_\-INT64\_\-MAX}~((((ev\_\-int64\_\-t) 0x7fffffffL) $<$$<$ 32) $|$ 0xffffffffL)\label{util_8h_a7a5b615c4a5ffb69122263c69d8bb091}
+
+\item 
+\#define {\bfseries EV\_\-INT64\_\-MIN}~((-\/EV\_\-INT64\_\-MAX) -\/ 1)\label{util_8h_a20073b67f3e9cdda20215246b11c4f6d}
+
+\item 
+\#define {\bfseries EV\_\-INT8\_\-MAX}~127\label{util_8h_ae959d5851ca0690f9da6e47fbb8056c9}
+
+\item 
+\#define {\bfseries EV\_\-INT8\_\-MIN}~((-\/EV\_\-INT8\_\-MAX) -\/ 1)\label{util_8h_aa4adcc386a7cb06436af4618301c8b03}
+
+\item 
+\#define {\bfseries EV\_\-UINT16\_\-MAX}~((ev\_\-uint16\_\-t)0xffffUL)\label{util_8h_af85ec3c0198df9bbb370d9c70f1fd2f4}
+
+\item 
+\#define {\bfseries EV\_\-UINT32\_\-MAX}~((ev\_\-uint32\_\-t)0xffffffffUL)\label{util_8h_a815ab1b931ad8d2b11da526b9071282a}
+
+\item 
+\#define {\bfseries EV\_\-UINT64\_\-MAX}~((((ev\_\-uint64\_\-t)0xffffffffUL) $<$$<$ 32) $|$ 0xffffffffUL)\label{util_8h_a34cff4b5f64165a133fd51d3004964db}
+
+\item 
+\#define {\bfseries EV\_\-UINT8\_\-MAX}~255\label{util_8h_a8af5a509193ad75cdd20e77a8422d84d}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Standard integer types.}\par
+{\em \label{_amgrpb9efe3e8071cb39ecaa9bca905f2b9f1}
+Integer type definitions for types that are supposed to be defined in the C99-\/specified stdint.h.
+
+Shamefully, some platforms do not include stdint.h, so we need to replace it. (If you are on a platform like this, your C headers are now over 10 years out of date. You should bug them to do something about this.)
+
+We define:
+
+
+\begin{DoxyDescription}
+\item[ev\_\-uint64\_\-t, ev\_\-uint32\_\-t, ev\_\-uint16\_\-t, ev\_\-uint8\_\-t ]unsigned integer types of exactly 64, 32, 16, and 8 bits respectively. 
+\item[ev\_\-int64\_\-t, ev\_\-int32\_\-t, ev\_\-int16\_\-t, ev\_\-int8\_\-t ]signed integer types of exactly 64, 32, 16, and 8 bits respectively. 
+\item[ev\_\-uintptr\_\-t, ev\_\-intptr\_\-t ]unsigned/signed integers large enough to hold a pointer without loss of bits. 
+\item[ev\_\-ssize\_\-t ]A signed type of the same size as size\_\-t 
+\item[ev\_\-off\_\-t ]A signed type typically used to represent offsets within a (potentially large) file 
+\end{DoxyDescription}}\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries ev\_\-int16\_\-t}~...\label{util_8h_a5943ff8aa2063dd531c7cbc7f20a1e55}
+
+\item 
+\#define {\bfseries ev\_\-int32\_\-t}~...\label{util_8h_a91a83fba6bcb61a80774e2533fa1da1b}
+
+\item 
+\#define {\bfseries ev\_\-int64\_\-t}~...\label{util_8h_a22ebbcfd82e30a022792cc0aef0a0049}
+
+\item 
+\#define {\bfseries ev\_\-int8\_\-t}~...\label{util_8h_ab642ae86b43a6d75c52811eb686f0837}
+
+\item 
+\#define {\bfseries ev\_\-intptr\_\-t}~ev\_\-int32\_\-t\label{util_8h_a4913c495b489d419353b3d1512505ea2}
+
+\item 
+\#define {\bfseries ev\_\-off\_\-t}~off\_\-t\label{util_8h_a2f968b0d453ef37a233e2d40860296a6}
+
+\item 
+\#define {\bfseries ev\_\-ssize\_\-t}~ssize\_\-t\label{util_8h_a9fce2c187cee381db4bf5276f76a39e8}
+
+\item 
+\#define {\bfseries ev\_\-uint16\_\-t}~...\label{util_8h_a9cc03c0ef4fc4327e373b079528ca049}
+
+\item 
+\#define {\bfseries ev\_\-uint32\_\-t}~...\label{util_8h_a43b2386e75123100c6179f7f14f8fda2}
+
+\item 
+\#define {\bfseries ev\_\-uint64\_\-t}~...\label{util_8h_a58f6d4822116b1492238ea9b0b1469f9}
+
+\item 
+\#define {\bfseries ev\_\-uint8\_\-t}~...\label{util_8h_ad9052cd1d14b92812de0796d84af5604}
+
+\item 
+\#define {\bfseries ev\_\-uintptr\_\-t}~ev\_\-uint32\_\-t\label{util_8h_a6bf36939a205bd52df25c40fe44b7fd7}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Limits for SIZE\_\-T and SSIZE\_\-T}\par
+{\em \label{_amgrpf5322ad6da93744a31594c48e9f91bb6}
+ }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EV\_\-SIZE\_\-MAX}~...\label{util_8h_a2b6a9c2fa6a1ba42d79e2f9118f9670c}
+
+\item 
+\#define {\bfseries EV\_\-SSIZE\_\-MAX}~...\label{util_8h_a142028f0a0d7248168a3aaca652851c3}
+
+\item 
+\#define {\bfseries EV\_\-SSIZE\_\-MIN}~((-\/EV\_\-SSIZE\_\-MAX) -\/ 1)\label{util_8h_a59e6c7724ce1f7e0562d6e24021acb10}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf evutil\_\-getaddrinfo() error codes}\par
+{\em \label{_amgrpc3bbc2b66cd972855cbba0bcdab30dbc}
+These values are possible error codes for \doxyref{evutil\_\-getaddrinfo()}{p.}{util_8h_af72dd0e3c31f03a1de0fd297b1b2691b} and related functions. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-ADDRCONFIG}~0x40000\label{util_8h_a1162c61313f61eff48a9533a3309f739}
+
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-ALL}~0x20000\label{util_8h_a437bacd5a8915b541a3e38c965932297}
+
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-CANONNAME}~0x2000\label{util_8h_a1b1fbbc2f3b038e60fd97a620bff9230}
+
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-NUMERICHOST}~0x4000\label{util_8h_a145a3766f56a33a6d845cfd0dba1890d}
+
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-NUMERICSERV}~0x8000\label{util_8h_a067c788a683f74e43e87098a68b37e69}
+
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-PASSIVE}~0x1000\label{util_8h_a2611f48d74207f6e996189e71ca9742f}
+
+\item 
+\#define {\bfseries EVUTIL\_\-AI\_\-V4MAPPED}~0x10000\label{util_8h_abbc6a3beb4ecf5b653a871949a49b53a}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-ADDRFAMILY}~-\/901\label{util_8h_aaf1a2e7213ceab1be80a752ec8cbd109}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-AGAIN}~-\/902\label{util_8h_ae1cb726c0bf1ff8907dfc3b4171742ac}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-BADFLAGS}~-\/903\label{util_8h_ac5f1ed6215f25714f371551cb7467ad7}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-CANCEL}~-\/90001\label{util_8h_a34127164b338d82707034566b100b4cb}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-FAIL}~-\/904\label{util_8h_a76916ba557e677dafe9c1fd7da89f2b3}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-FAMILY}~-\/905\label{util_8h_a0df5ae5495d39cb471ef5403c2823ab4}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-MEMORY}~-\/906\label{util_8h_a03351808979dfac04060773ebfd3c06b}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-NODATA}~-\/907\label{util_8h_a1d7b69a78006c0f48d88f88e9b55334b}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-NONAME}~-\/908\label{util_8h_ab100c4d4e222d5cdfa2aebcf3a0140e9}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-SERVICE}~-\/909\label{util_8h_ab2cc1d8d4eead1bc0e15eaae2edaf668}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-SOCKTYPE}~-\/910\label{util_8h_ac30b335f48757b2ba10da69f80a87a46}
+
+\item 
+\#define {\bfseries EVUTIL\_\-EAI\_\-SYSTEM}~-\/911\label{util_8h_a03273ded49de60ab08e489b7d5d5e17e}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Socket error functions}\par
+{\em \label{_amgrpa0f9f860daf31b89470c36b87ba1bd7f}
+These functions are needed for making programs compatible between Windows and Unix-\/like platforms.
+
+You see, Winsock handles socket errors differently from the rest of the world. Elsewhere, a socket error is like any other error and is stored in errno. But winsock functions require you to retrieve the error with a special function, and don't let you use strerror for the error codes. And handling EWOULDBLOCK is ... different. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EVUTIL\_\-SET\_\-SOCKET\_\-ERROR}(errcode)~...\label{util_8h_ae8b4fae7790599f7b58e8c269f6b29d8}
+
+\begin{DoxyCompactList}\small\item\em Replace the most recent socket error with errcode. \item\end{DoxyCompactList}\item 
+\#define {\bf EVUTIL\_\-SOCKET\_\-ERROR}()~...
+\begin{DoxyCompactList}\small\item\em Return the most recent socket error. \item\end{DoxyCompactList}\item 
+\#define {\bf evutil\_\-socket\_\-error\_\-to\_\-string}(errcode)~...
+\begin{DoxyCompactList}\small\item\em Convert a socket error to a string. \item\end{DoxyCompactList}\item 
+\#define {\bf evutil\_\-socket\_\-geterror}(sock)~...
+\begin{DoxyCompactList}\small\item\em Return the most recent socket error to occur on sock. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Manipulation macros for struct timeval.}\par
+{\em \label{_amgrpb5781dd4bec0ea17b0d67f2ad8c0c6bf}
+We define replacements for timeradd, timersub, timerclear, timercmp, and timerisset. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries evutil\_\-timeradd}(tvp, uvp, vvp)
+\item 
+\#define {\bfseries evutil\_\-timerclear}(tvp)~(tvp)-\/$>$tv\_\-sec = (tvp)-\/$>$tv\_\-usec = 0\label{util_8h_add4999b82eab8bcb8becc8cb079341a0}
+
+\item 
+\#define {\bfseries evutil\_\-timersub}(tvp, uvp, vvp)
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf evutil\_\-ascii\_\-strcasecmp} (const char $\ast$str1, const char $\ast$str2)
+\begin{DoxyCompactList}\small\item\em As strcasecmp, but always compares the characters in locale-\/independent ASCII. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-ascii\_\-strncasecmp} (const char $\ast$str1, const char $\ast$str2, size\_\-t n)
+\begin{DoxyCompactList}\small\item\em As strncasecmp, but always compares the characters in locale-\/independent ASCII. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-closesocket} (evutil\_\-socket\_\-t sock)
+\begin{DoxyCompactList}\small\item\em Do the platform-\/specific call needed to close a socket returned from socket() or accept(). \item\end{DoxyCompactList}\item 
+void {\bf evutil\_\-freeaddrinfo} (struct {\bf evutil\_\-addrinfo} $\ast$ai)
+\begin{DoxyCompactList}\small\item\em Release storage allocated by evutil\_\-getaddrinfo or evdns\_\-getaddrinfo. \item\end{DoxyCompactList}\item 
+const char $\ast$ {\bfseries evutil\_\-gai\_\-strerror} (int err)\label{util_8h_a09249a88abca73bf3b739bb0dcbc0c72}
+
+\item 
+int {\bf evutil\_\-getaddrinfo} (const char $\ast$nodename, const char $\ast$servname, const struct {\bf evutil\_\-addrinfo} $\ast$hints\_\-in, struct {\bf evutil\_\-addrinfo} $\ast$$\ast$res)
+\begin{DoxyCompactList}\small\item\em This function clones getaddrinfo for systems that don't have it. \item\end{DoxyCompactList}\item 
+int {\bfseries evutil\_\-gettimeofday} (struct timeval $\ast$tv, struct timezone $\ast$tz)\label{util_8h_a2ca2db950ffe1e218494428a4c6be268}
+
+\item 
+const char $\ast$ {\bf evutil\_\-inet\_\-ntop} (int af, const void $\ast$src, char $\ast$dst, size\_\-t len)
+\begin{DoxyCompactList}\small\item\em Replacement for inet\_\-ntop for platforms which lack it. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-inet\_\-pton} (int af, const char $\ast$src, void $\ast$dst)
+\begin{DoxyCompactList}\small\item\em Replacement for inet\_\-pton for platforms which lack it. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-make\_\-listen\_\-socket\_\-reuseable} (evutil\_\-socket\_\-t sock)
+\begin{DoxyCompactList}\small\item\em Do platform-\/specific operations to make a listener socket reusable. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-make\_\-socket\_\-closeonexec} (evutil\_\-socket\_\-t sock)
+\begin{DoxyCompactList}\small\item\em Do platform-\/specific operations as needed to close a socket upon a successful execution of one of the exec$\ast$() functions. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-make\_\-socket\_\-nonblocking} (evutil\_\-socket\_\-t sock)
+\begin{DoxyCompactList}\small\item\em Do platform-\/specific operations as needed to make a socket nonblocking. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-parse\_\-sockaddr\_\-port} (const char $\ast$str, struct sockaddr $\ast$out, int $\ast$outlen)
+\begin{DoxyCompactList}\small\item\em Parse an IPv4 or IPv6 address, with optional port, from a string. \item\end{DoxyCompactList}\item 
+void {\bf evutil\_\-secure\_\-rng\_\-add\_\-bytes} (const char $\ast$dat, size\_\-t datlen)
+\begin{DoxyCompactList}\small\item\em Seed the random number generator with extra random bytes. \item\end{DoxyCompactList}\item 
+void {\bf evutil\_\-secure\_\-rng\_\-get\_\-bytes} (void $\ast$buf, size\_\-t n)
+\begin{DoxyCompactList}\small\item\em Generate n bytes of secure pseudorandom data, and store them in buf. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-secure\_\-rng\_\-init} (void)
+\begin{DoxyCompactList}\small\item\em Seed the secure random number generator if needed, and return 0 on success or -\/1 on failure. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-snprintf} (char $\ast$buf, size\_\-t buflen, const char $\ast$format,...)\label{util_8h_a55dc7427a539b8c710acf6eb117364e1}
+
+\begin{DoxyCompactList}\small\item\em Replacement for snprintf to get consistent behavior on platforms for which the return value of snprintf does not conform to C99. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-sockaddr\_\-cmp} (const struct sockaddr $\ast$sa1, const struct sockaddr $\ast$sa2, int include\_\-port)
+\begin{DoxyCompactList}\small\item\em Compare two sockaddrs; return 0 if they are equal, or less than 0 if sa1 preceeds sa2, or greater than 0 if sa1 follows sa2. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-socketpair} (int d, int type, int protocol, evutil\_\-socket\_\-t sv[2])
+\begin{DoxyCompactList}\small\item\em Create two new sockets that are connected to each other. \item\end{DoxyCompactList}\item 
+ev\_\-int64\_\-t {\bf evutil\_\-strtoll} (const char $\ast$s, char $\ast$$\ast$endptr, int base)
+\begin{DoxyCompactList}\small\item\em Parse a 64-\/bit value from a string. \item\end{DoxyCompactList}\item 
+int {\bf evutil\_\-vsnprintf} (char $\ast$buf, size\_\-t buflen, const char $\ast$format, va\_\-list ap)\label{util_8h_a80bb0d174aa64218ce077b0c79df3e0f}
+
+\begin{DoxyCompactList}\small\item\em Replacement for vsnprintf to get consistent behavior on platforms for which the return value of snprintf does not conform to C99. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Common convenience functions for cross-\/platform portability and related socket manipulations. 
+
+\subsection{Define Documentation}
+\index{util.h@{util.h}!evutil\_\-offsetof@{evutil\_\-offsetof}}
+\index{evutil\_\-offsetof@{evutil\_\-offsetof}!util.h@{util.h}}
+\subsubsection[{evutil\_\-offsetof}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-offsetof(type, \/  field)~((off\_\-t)(\&((type $\ast$)0)-\/$>$field))}\label{util_8h_a4c296955d33624c18bd4811730caa417}
+
+
+Replacement for offsetof on platforms that don't define it. \index{util.h@{util.h}!EVUTIL\_\-SOCKET\_\-ERROR@{EVUTIL\_\-SOCKET\_\-ERROR}}
+\index{EVUTIL\_\-SOCKET\_\-ERROR@{EVUTIL\_\-SOCKET\_\-ERROR}!util.h@{util.h}}
+\subsubsection[{EVUTIL\_\-SOCKET\_\-ERROR}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVUTIL\_\-SOCKET\_\-ERROR()~...}\label{util_8h_a9a94a2e72982e708333486cf72aab941}
+
+
+Return the most recent socket error. Not idempotent on all platforms. \index{util.h@{util.h}!evutil\_\-socket\_\-error\_\-to\_\-string@{evutil\_\-socket\_\-error\_\-to\_\-string}}
+\index{evutil\_\-socket\_\-error\_\-to\_\-string@{evutil\_\-socket\_\-error\_\-to\_\-string}!util.h@{util.h}}
+\subsubsection[{evutil\_\-socket\_\-error\_\-to\_\-string}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-socket\_\-error\_\-to\_\-string(errcode)~...}\label{util_8h_ad5ea5ef81ddcfb299e4867d362ad8654}
+
+
+Convert a socket error to a string. \index{util.h@{util.h}!evutil\_\-socket\_\-geterror@{evutil\_\-socket\_\-geterror}}
+\index{evutil\_\-socket\_\-geterror@{evutil\_\-socket\_\-geterror}!util.h@{util.h}}
+\subsubsection[{evutil\_\-socket\_\-geterror}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-socket\_\-geterror(sock)~...}\label{util_8h_a28f952fb0f16b057d931fd38ee9bdf5e}
+
+
+Return the most recent socket error to occur on sock. \index{util.h@{util.h}!evutil\_\-socket\_\-t@{evutil\_\-socket\_\-t}}
+\index{evutil\_\-socket\_\-t@{evutil\_\-socket\_\-t}!util.h@{util.h}}
+\subsubsection[{evutil\_\-socket\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-socket\_\-t~int}\label{util_8h_a7ef0023565082a65020f6e56be59fd0b}
+
+
+A type wide enough to hold the output of \char`\"{}socket()\char`\"{} or \char`\"{}accept()\char`\"{}. On Windows, this is an intptr\_\-t; elsewhere, it is an int. \index{util.h@{util.h}!evutil\_\-timeradd@{evutil\_\-timeradd}}
+\index{evutil\_\-timeradd@{evutil\_\-timeradd}!util.h@{util.h}}
+\subsubsection[{evutil\_\-timeradd}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-timeradd(tvp, \/  uvp, \/  vvp)}\label{util_8h_a6182f91a8aede88fac748b3f424cbb6d}
+{\bfseries Value:}
+\begin{DoxyCode}
+do {                                                            \
+                (vvp)->tv_sec = (tvp)->tv_sec + (uvp)->tv_sec;          \
+                (vvp)->tv_usec = (tvp)->tv_usec + (uvp)->tv_usec;       \
+                if ((vvp)->tv_usec >= 1000000) {                        \
+                        (vvp)->tv_sec++;                                \
+                        (vvp)->tv_usec -= 1000000;                      \
+                }                                                       \
+        } while (0)
+\end{DoxyCode}
+\index{util.h@{util.h}!evutil\_\-timercmp@{evutil\_\-timercmp}}
+\index{evutil\_\-timercmp@{evutil\_\-timercmp}!util.h@{util.h}}
+\subsubsection[{evutil\_\-timercmp}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-timercmp(tvp, \/  uvp, \/  cmp)}\label{util_8h_a1a42f43db6aaf6e99736329b6611175d}
+{\bfseries Value:}
+\begin{DoxyCode}
+(((tvp)->tv_sec == (uvp)->tv_sec) ?                             \
+         ((tvp)->tv_usec cmp (uvp)->tv_usec) :                          \
+         ((tvp)->tv_sec cmp (uvp)->tv_sec))
+\end{DoxyCode}
+
+
+Return true iff the tvp is related to uvp according to the relational operator cmp. Recognized values for cmp are ==, $<$=, $<$, $>$=, and $>$. \index{util.h@{util.h}!evutil\_\-timersub@{evutil\_\-timersub}}
+\index{evutil\_\-timersub@{evutil\_\-timersub}!util.h@{util.h}}
+\subsubsection[{evutil\_\-timersub}]{\setlength{\rightskip}{0pt plus 5cm}\#define evutil\_\-timersub(tvp, \/  uvp, \/  vvp)}\label{util_8h_ab75cdb8eae7b33eac738c46356967399}
+{\bfseries Value:}
+\begin{DoxyCode}
+do {                                                            \
+                (vvp)->tv_sec = (tvp)->tv_sec - (uvp)->tv_sec;          \
+                (vvp)->tv_usec = (tvp)->tv_usec - (uvp)->tv_usec;       \
+                if ((vvp)->tv_usec < 0) {                               \
+                        (vvp)->tv_sec--;                                \
+                        (vvp)->tv_usec += 1000000;                      \
+                }                                                       \
+        } while (0)
+\end{DoxyCode}
+
+
+\subsection{Function Documentation}
+\index{util.h@{util.h}!evutil\_\-ascii\_\-strcasecmp@{evutil\_\-ascii\_\-strcasecmp}}
+\index{evutil\_\-ascii\_\-strcasecmp@{evutil\_\-ascii\_\-strcasecmp}!util.h@{util.h}}
+\subsubsection[{evutil\_\-ascii\_\-strcasecmp}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-ascii\_\-strcasecmp (const char $\ast$ {\em str1}, \/  const char $\ast$ {\em str2})}\label{util_8h_a56923d1aaa25b89ccb8d3b2def643ed3}
+
+
+As strcasecmp, but always compares the characters in locale-\/independent ASCII. That's useful if you're handling data in ASCII-\/based protocols. \index{util.h@{util.h}!evutil\_\-ascii\_\-strncasecmp@{evutil\_\-ascii\_\-strncasecmp}}
+\index{evutil\_\-ascii\_\-strncasecmp@{evutil\_\-ascii\_\-strncasecmp}!util.h@{util.h}}
+\subsubsection[{evutil\_\-ascii\_\-strncasecmp}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-ascii\_\-strncasecmp (const char $\ast$ {\em str1}, \/  const char $\ast$ {\em str2}, \/  size\_\-t {\em n})}\label{util_8h_a4a967b00e4ef0025d7e865f1e28f826b}
+
+
+As strncasecmp, but always compares the characters in locale-\/independent ASCII. That's useful if you're handling data in ASCII-\/based protocols. \index{util.h@{util.h}!evutil\_\-closesocket@{evutil\_\-closesocket}}
+\index{evutil\_\-closesocket@{evutil\_\-closesocket}!util.h@{util.h}}
+\subsubsection[{evutil\_\-closesocket}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-closesocket (evutil\_\-socket\_\-t {\em sock})}\label{util_8h_a3950f08bc7b4ab52d519eabe7edd1889}
+
+
+Do the platform-\/specific call needed to close a socket returned from socket() or accept(). 
+\begin{DoxyParams}{Parameters}
+\item[{\em sock}]The socket to be closed \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{util.h@{util.h}!evutil\_\-freeaddrinfo@{evutil\_\-freeaddrinfo}}
+\index{evutil\_\-freeaddrinfo@{evutil\_\-freeaddrinfo}!util.h@{util.h}}
+\subsubsection[{evutil\_\-freeaddrinfo}]{\setlength{\rightskip}{0pt plus 5cm}void evutil\_\-freeaddrinfo (struct {\bf evutil\_\-addrinfo} $\ast$ {\em ai})}\label{util_8h_ad43029540a4878bc49b343e7b0573ef3}
+
+
+Release storage allocated by evutil\_\-getaddrinfo or evdns\_\-getaddrinfo. \index{util.h@{util.h}!evutil\_\-getaddrinfo@{evutil\_\-getaddrinfo}}
+\index{evutil\_\-getaddrinfo@{evutil\_\-getaddrinfo}!util.h@{util.h}}
+\subsubsection[{evutil\_\-getaddrinfo}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-getaddrinfo (const char $\ast$ {\em nodename}, \/  const char $\ast$ {\em servname}, \/  const struct {\bf evutil\_\-addrinfo} $\ast$ {\em hints\_\-in}, \/  struct {\bf evutil\_\-addrinfo} $\ast$$\ast$ {\em res})}\label{util_8h_af72dd0e3c31f03a1de0fd297b1b2691b}
+
+
+This function clones getaddrinfo for systems that don't have it. For full details, see RFC 3493, section 6.1.
+
+Limitations:
+\begin{DoxyItemize}
+\item When the system has no getaddrinfo, we fall back to gethostbyname\_\-r or gethostbyname, with their attendant issues.
+\item The AI\_\-V4MAPPED and AI\_\-ALL flags are not currently implemented.
+\end{DoxyItemize}
+
+For a nonblocking variant, see evdns\_\-getaddrinfo. \index{util.h@{util.h}!evutil\_\-inet\_\-ntop@{evutil\_\-inet\_\-ntop}}
+\index{evutil\_\-inet\_\-ntop@{evutil\_\-inet\_\-ntop}!util.h@{util.h}}
+\subsubsection[{evutil\_\-inet\_\-ntop}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ evutil\_\-inet\_\-ntop (int {\em af}, \/  const void $\ast$ {\em src}, \/  char $\ast$ {\em dst}, \/  size\_\-t {\em len})}\label{util_8h_af21b0b8bc5a13594eccd492d564b64c0}
+
+
+Replacement for inet\_\-ntop for platforms which lack it. \index{util.h@{util.h}!evutil\_\-inet\_\-pton@{evutil\_\-inet\_\-pton}}
+\index{evutil\_\-inet\_\-pton@{evutil\_\-inet\_\-pton}!util.h@{util.h}}
+\subsubsection[{evutil\_\-inet\_\-pton}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-inet\_\-pton (int {\em af}, \/  const char $\ast$ {\em src}, \/  void $\ast$ {\em dst})}\label{util_8h_a1457e5a0b461a99ca9d6d5c19e9dd65f}
+
+
+Replacement for inet\_\-pton for platforms which lack it. \index{util.h@{util.h}!evutil\_\-make\_\-listen\_\-socket\_\-reuseable@{evutil\_\-make\_\-listen\_\-socket\_\-reuseable}}
+\index{evutil\_\-make\_\-listen\_\-socket\_\-reuseable@{evutil\_\-make\_\-listen\_\-socket\_\-reuseable}!util.h@{util.h}}
+\subsubsection[{evutil\_\-make\_\-listen\_\-socket\_\-reuseable}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-make\_\-listen\_\-socket\_\-reuseable (evutil\_\-socket\_\-t {\em sock})}\label{util_8h_a050bec12aefa132d8e94e712332f38d9}
+
+
+Do platform-\/specific operations to make a listener socket reusable. Specifically, we want to make sure that another program will be able to bind this address right after we've closed the listener.
+
+This differs from Windows's interpretation of \char`\"{}reusable\char`\"{}, which allows multiple listeners to bind the same address at the same time.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em sock}]The socket to make reusable \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{util.h@{util.h}!evutil\_\-make\_\-socket\_\-closeonexec@{evutil\_\-make\_\-socket\_\-closeonexec}}
+\index{evutil\_\-make\_\-socket\_\-closeonexec@{evutil\_\-make\_\-socket\_\-closeonexec}!util.h@{util.h}}
+\subsubsection[{evutil\_\-make\_\-socket\_\-closeonexec}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-make\_\-socket\_\-closeonexec (evutil\_\-socket\_\-t {\em sock})}\label{util_8h_ac5975b58b3c7b7360be7ac1a1df135df}
+
+
+Do platform-\/specific operations as needed to close a socket upon a successful execution of one of the exec$\ast$() functions. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sock}]The socket to be closed \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{util.h@{util.h}!evutil\_\-make\_\-socket\_\-nonblocking@{evutil\_\-make\_\-socket\_\-nonblocking}}
+\index{evutil\_\-make\_\-socket\_\-nonblocking@{evutil\_\-make\_\-socket\_\-nonblocking}!util.h@{util.h}}
+\subsubsection[{evutil\_\-make\_\-socket\_\-nonblocking}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-make\_\-socket\_\-nonblocking (evutil\_\-socket\_\-t {\em sock})}\label{util_8h_a1b5741a91b809c7f2594c96aa66d4aac}
+
+
+Do platform-\/specific operations as needed to make a socket nonblocking. 
+\begin{DoxyParams}{Parameters}
+\item[{\em sock}]The socket to make nonblocking \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{util.h@{util.h}!evutil\_\-parse\_\-sockaddr\_\-port@{evutil\_\-parse\_\-sockaddr\_\-port}}
+\index{evutil\_\-parse\_\-sockaddr\_\-port@{evutil\_\-parse\_\-sockaddr\_\-port}!util.h@{util.h}}
+\subsubsection[{evutil\_\-parse\_\-sockaddr\_\-port}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-parse\_\-sockaddr\_\-port (const char $\ast$ {\em str}, \/  struct sockaddr $\ast$ {\em out}, \/  int $\ast$ {\em outlen})}\label{util_8h_a8f0601b249a1eef50f16f519df26fe30}
+
+
+Parse an IPv4 or IPv6 address, with optional port, from a string. Recognized formats are:
+\begin{DoxyItemize}
+\item [IPv6Address]:port
+\item [IPv6Address]
+\item IPv6Address
+\item IPv4Address:port
+\item IPv4Address
+\end{DoxyItemize}
+
+If no port is specified, the port in the output is set to 0.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em str}]The string to parse. \item[{\em out}]A struct sockaddr to hold the result. This should probably be a struct sockaddr\_\-storage. \item[{\em outlen}]A pointer to the number of bytes that that 'out' can safely hold. Set to the number of bytes used in 'out' on success. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if the address is not well-\/formed, if the port is out of range, or if out is not large enough to hold the result. Otherwise returns 0 on success. 
+\end{DoxyReturn}
+\index{util.h@{util.h}!evutil\_\-secure\_\-rng\_\-add\_\-bytes@{evutil\_\-secure\_\-rng\_\-add\_\-bytes}}
+\index{evutil\_\-secure\_\-rng\_\-add\_\-bytes@{evutil\_\-secure\_\-rng\_\-add\_\-bytes}!util.h@{util.h}}
+\subsubsection[{evutil\_\-secure\_\-rng\_\-add\_\-bytes}]{\setlength{\rightskip}{0pt plus 5cm}void evutil\_\-secure\_\-rng\_\-add\_\-bytes (const char $\ast$ {\em dat}, \/  size\_\-t {\em datlen})}\label{util_8h_a3d19c11db91a8831b80104346b451a43}
+
+
+Seed the random number generator with extra random bytes. You should almost never need to call this function; it should be sufficient to invoke \doxyref{evutil\_\-secure\_\-rng\_\-init()}{p.}{util_8h_a40a0ef996a117d2e85d3a6a5a94938fc}, or let Libevent take care of calling \doxyref{evutil\_\-secure\_\-rng\_\-init()}{p.}{util_8h_a40a0ef996a117d2e85d3a6a5a94938fc} on its own.
+
+If you call this function as a \_\-replacement\_\- for the regular entropy sources, then you need to be sure that your input contains a fairly large amount of strong entropy. Doing so is notoriously hard: most people who try get it wrong. Watch out!
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em dat}]a buffer full of a strong source of random numbers \item[{\em datlen}]the number of bytes to read from datlen \end{DoxyParams}
+\index{util.h@{util.h}!evutil\_\-secure\_\-rng\_\-get\_\-bytes@{evutil\_\-secure\_\-rng\_\-get\_\-bytes}}
+\index{evutil\_\-secure\_\-rng\_\-get\_\-bytes@{evutil\_\-secure\_\-rng\_\-get\_\-bytes}!util.h@{util.h}}
+\subsubsection[{evutil\_\-secure\_\-rng\_\-get\_\-bytes}]{\setlength{\rightskip}{0pt plus 5cm}void evutil\_\-secure\_\-rng\_\-get\_\-bytes (void $\ast$ {\em buf}, \/  size\_\-t {\em n})}\label{util_8h_af1ed05b1100d3b6f08a3b66f8c58ad29}
+
+
+Generate n bytes of secure pseudorandom data, and store them in buf. By default, Libevent uses an ARC4-\/based random number generator, seeded using the platform's entropy source (/dev/urandom on Unix-\/like systems; CryptGenRandom on Windows). \index{util.h@{util.h}!evutil\_\-secure\_\-rng\_\-init@{evutil\_\-secure\_\-rng\_\-init}}
+\index{evutil\_\-secure\_\-rng\_\-init@{evutil\_\-secure\_\-rng\_\-init}!util.h@{util.h}}
+\subsubsection[{evutil\_\-secure\_\-rng\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-secure\_\-rng\_\-init (void)}\label{util_8h_a40a0ef996a117d2e85d3a6a5a94938fc}
+
+
+Seed the secure random number generator if needed, and return 0 on success or -\/1 on failure. It is okay to call this function more than once; it will still return 0 if the RNG has been successfully seeded and -\/1 if it can't be seeded.
+
+Ordinarily you don't need to call this function from your own code; Libevent will seed the RNG itself the first time it needs good random numbers. You only need to call it if (a) you want to double-\/check that one of the seeding methods did succeed, or (b) you plan to drop the capability to seed (by chrooting, or dropping capabilities, or whatever), and you want to make sure that seeding happens before your program loses the ability to do it. \index{util.h@{util.h}!evutil\_\-sockaddr\_\-cmp@{evutil\_\-sockaddr\_\-cmp}}
+\index{evutil\_\-sockaddr\_\-cmp@{evutil\_\-sockaddr\_\-cmp}!util.h@{util.h}}
+\subsubsection[{evutil\_\-sockaddr\_\-cmp}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-sockaddr\_\-cmp (const struct sockaddr $\ast$ {\em sa1}, \/  const struct sockaddr $\ast$ {\em sa2}, \/  int {\em include\_\-port})}\label{util_8h_ae2397b592e9965630a1bf78a6a688859}
+
+
+Compare two sockaddrs; return 0 if they are equal, or less than 0 if sa1 preceeds sa2, or greater than 0 if sa1 follows sa2. If include\_\-port is true, consider the port as well as the address. Only implemented for AF\_\-INET and AF\_\-INET6 addresses. The ordering is not guaranteed to remain the same between Libevent versions. \index{util.h@{util.h}!evutil\_\-socketpair@{evutil\_\-socketpair}}
+\index{evutil\_\-socketpair@{evutil\_\-socketpair}!util.h@{util.h}}
+\subsubsection[{evutil\_\-socketpair}]{\setlength{\rightskip}{0pt plus 5cm}int evutil\_\-socketpair (int {\em d}, \/  int {\em type}, \/  int {\em protocol}, \/  evutil\_\-socket\_\-t {\em sv}[2])}\label{util_8h_a405ce3c11b9672b7547669877c294935}
+
+
+Create two new sockets that are connected to each other. On Unix, this simply calls socketpair(). On Windows, it uses the loopback network interface on 127.0.0.1, and only AF\_\-INET,SOCK\_\-STREAM are supported.
+
+(This may fail on some Windows hosts where firewall software has cleverly decided to keep 127.0.0.1 from talking to itself.)
+
+Parameters and return values are as for socketpair() \index{util.h@{util.h}!evutil\_\-strtoll@{evutil\_\-strtoll}}
+\index{evutil\_\-strtoll@{evutil\_\-strtoll}!util.h@{util.h}}
+\subsubsection[{evutil\_\-strtoll}]{\setlength{\rightskip}{0pt plus 5cm}ev\_\-int64\_\-t evutil\_\-strtoll (const char $\ast$ {\em s}, \/  char $\ast$$\ast$ {\em endptr}, \/  int {\em base})}\label{util_8h_a87762fbc9974b211df3babfacd99df19}
+
+
+Parse a 64-\/bit value from a string. Arguments are as for strtol. 

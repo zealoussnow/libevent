@@ -1,0 +1,63 @@
+\section{evthread\_\-lock\_\-callbacks Struct Reference}
+\label{structevthread__lock__callbacks}\index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}}
+
+
+This structure describes the interface a threading library uses for locking.  
+
+
+{\ttfamily \#include $<$thread.h$>$}\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$($\ast$ {\bf alloc} )(unsigned locktype)
+\begin{DoxyCompactList}\small\item\em Function to allocate and initialize new lock of type 'locktype'. \item\end{DoxyCompactList}\item 
+void($\ast$ {\bf free} )(void $\ast${\bf lock}, unsigned locktype)
+\begin{DoxyCompactList}\small\item\em Funtion to release all storage held in 'lock', which was created with type 'locktype'. \item\end{DoxyCompactList}\item 
+int($\ast$ {\bf lock} )(unsigned mode, void $\ast${\bf lock})
+\begin{DoxyCompactList}\small\item\em Acquire an already-\/allocated lock at 'lock' with mode 'mode'. \item\end{DoxyCompactList}\item 
+int {\bf lock\_\-api\_\-version}
+\begin{DoxyCompactList}\small\item\em The current version of the locking API. \item\end{DoxyCompactList}\item 
+unsigned {\bf supported\_\-locktypes}
+\begin{DoxyCompactList}\small\item\em Which kinds of locks does this version of the locking API support? A bitfield of EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE and EVTHREAD\_\-LOCKTYPE\_\-READWRITE. \item\end{DoxyCompactList}\item 
+int($\ast$ {\bf unlock} )(unsigned mode, void $\ast${\bf lock})
+\begin{DoxyCompactList}\small\item\em Release a lock at 'lock' using mode 'mode'. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This structure describes the interface a threading library uses for locking. It's used to tell \doxyref{evthread\_\-set\_\-lock\_\-callbacks()}{p.}{thread_8h_a89fd5de575d5f0fba24d0e8e0a25c641} how to use locking on this platform. 
+
+\subsection{Field Documentation}
+\index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}!alloc@{alloc}}
+\index{alloc@{alloc}!evthread_lock_callbacks@{evthread\_\-lock\_\-callbacks}}
+\subsubsection[{alloc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$($\ast$ {\bf evthread\_\-lock\_\-callbacks::alloc})(unsigned locktype)}\label{structevthread__lock__callbacks_a25e81b496381c4edb018308e03b9bf03}
+
+
+Function to allocate and initialize new lock of type 'locktype'. Returns NULL on failure. \index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}!free@{free}}
+\index{free@{free}!evthread_lock_callbacks@{evthread\_\-lock\_\-callbacks}}
+\subsubsection[{free}]{\setlength{\rightskip}{0pt plus 5cm}void($\ast$ {\bf evthread\_\-lock\_\-callbacks::free})(void $\ast${\bf lock}, unsigned locktype)}\label{structevthread__lock__callbacks_a100c34a1663b7559d3221c8a51ebaac3}
+
+
+Funtion to release all storage held in 'lock', which was created with type 'locktype'. \index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}!lock@{lock}}
+\index{lock@{lock}!evthread_lock_callbacks@{evthread\_\-lock\_\-callbacks}}
+\subsubsection[{lock}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ {\bf evthread\_\-lock\_\-callbacks::lock})(unsigned mode, void $\ast${\bf lock})}\label{structevthread__lock__callbacks_a0ed763a13fc4e45867b2103ca462b77d}
+
+
+Acquire an already-\/allocated lock at 'lock' with mode 'mode'. Returns 0 on success, and nonzero on failure. \index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}!lock\_\-api\_\-version@{lock\_\-api\_\-version}}
+\index{lock\_\-api\_\-version@{lock\_\-api\_\-version}!evthread_lock_callbacks@{evthread\_\-lock\_\-callbacks}}
+\subsubsection[{lock\_\-api\_\-version}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf evthread\_\-lock\_\-callbacks::lock\_\-api\_\-version}}\label{structevthread__lock__callbacks_afe0e286cfffd238f4891bdb431c79eb9}
+
+
+The current version of the locking API. Set this to EVTHREAD\_\-LOCK\_\-API\_\-VERSION \index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}!supported\_\-locktypes@{supported\_\-locktypes}}
+\index{supported\_\-locktypes@{supported\_\-locktypes}!evthread_lock_callbacks@{evthread\_\-lock\_\-callbacks}}
+\subsubsection[{supported\_\-locktypes}]{\setlength{\rightskip}{0pt plus 5cm}unsigned {\bf evthread\_\-lock\_\-callbacks::supported\_\-locktypes}}\label{structevthread__lock__callbacks_afebbd92f9fc12e5852b0c008b423f948}
+
+
+Which kinds of locks does this version of the locking API support? A bitfield of EVTHREAD\_\-LOCKTYPE\_\-RECURSIVE and EVTHREAD\_\-LOCKTYPE\_\-READWRITE. (Note that RECURSIVE locks are currently mandatory, and READWRITE locks are not currently used.) \index{evthread\_\-lock\_\-callbacks@{evthread\_\-lock\_\-callbacks}!unlock@{unlock}}
+\index{unlock@{unlock}!evthread_lock_callbacks@{evthread\_\-lock\_\-callbacks}}
+\subsubsection[{unlock}]{\setlength{\rightskip}{0pt plus 5cm}int($\ast$ {\bf evthread\_\-lock\_\-callbacks::unlock})(unsigned mode, void $\ast${\bf lock})}\label{structevthread__lock__callbacks_ae532146a30d775906fae556967688576}
+
+
+Release a lock at 'lock' using mode 'mode'. Returns 0 on success, and nonzero on failure. 
+
+The documentation for this struct was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+event2/{\bf thread.h}\end{DoxyCompactItemize}

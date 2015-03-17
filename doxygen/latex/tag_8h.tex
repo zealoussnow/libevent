@@ -1,0 +1,95 @@
+\section{event2/tag.h File Reference}
+\label{tag_8h}\index{event2/tag.h@{event2/tag.h}}
+
+
+Helper functions for reading and writing tagged data onto buffers.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries evtag\_\-consume} (struct {\bf evbuffer} $\ast$evbuf)\label{tag_8h_a10c7bbbd8e129138d9f0ef122fae90f2}
+
+\item 
+void {\bf evtag\_\-encode\_\-int} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t number)
+\begin{DoxyCompactList}\small\item\em Encode an integer and store it in an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+void {\bfseries evtag\_\-encode\_\-int64} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint64\_\-t number)\label{tag_8h_aace1504f8230e17a77991ad5f130b11b}
+
+\item 
+void {\bfseries evtag\_\-init} (void)\label{tag_8h_a42029fb85fd8bdbd3d4b0d4fb07eedb1}
+
+\item 
+void {\bfseries evtag\_\-marshal} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t tag, const void $\ast$data, ev\_\-uint32\_\-t len)\label{tag_8h_a323ba1fdf6f2a12f2d0bfbef75d0b2a0}
+
+\item 
+void {\bfseries evtag\_\-marshal\_\-buffer} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t tag, struct {\bf evbuffer} $\ast$data)\label{tag_8h_adcf124d687770ddc83ceb1f1781d5e9a}
+
+\item 
+void {\bfseries evtag\_\-marshal\_\-int} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t tag, ev\_\-uint32\_\-t integer)\label{tag_8h_af21924dfc97056a88e97221b08e77de4}
+
+\item 
+void {\bfseries evtag\_\-marshal\_\-int64} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t tag, ev\_\-uint64\_\-t integer)\label{tag_8h_a1aaaa6791a5948b8f26ab62aacc6794d}
+
+\item 
+void {\bfseries evtag\_\-marshal\_\-string} (struct {\bf evbuffer} $\ast$buf, ev\_\-uint32\_\-t tag, const char $\ast$string)\label{tag_8h_ad8db60a9c4cd8ad2b0edc8faec1daf06}
+
+\item 
+void {\bfseries evtag\_\-marshal\_\-timeval} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t tag, struct timeval $\ast$tv)\label{tag_8h_a1663e1370fab412dc4cb6287e717af9f}
+
+\item 
+int {\bfseries evtag\_\-payload\_\-length} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t $\ast$plength)\label{tag_8h_a76d569ee176b7c225f28ec611254c9da}
+
+\item 
+int {\bfseries evtag\_\-peek} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t $\ast$ptag)\label{tag_8h_a28430d262e4289fdb1c445e3ceb6f286}
+
+\item 
+int {\bfseries evtag\_\-peek\_\-length} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t $\ast$plength)\label{tag_8h_a8ca004e71e3217bf406be3fd75525caf}
+
+\item 
+int {\bfseries evtag\_\-unmarshal} (struct {\bf evbuffer} $\ast$src, ev\_\-uint32\_\-t $\ast$ptag, struct {\bf evbuffer} $\ast$dst)\label{tag_8h_a7344d5755e9125d565dcfd87381f87d9}
+
+\item 
+int {\bfseries evtag\_\-unmarshal\_\-fixed} (struct {\bf evbuffer} $\ast$src, ev\_\-uint32\_\-t need\_\-tag, void $\ast$data, size\_\-t len)\label{tag_8h_a3f7c2d090a5b77291645e39d8f30df2a}
+
+\item 
+int {\bf evtag\_\-unmarshal\_\-header} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t $\ast$ptag)
+\begin{DoxyCompactList}\small\item\em Unmarshals the header and returns the length of the payload. \item\end{DoxyCompactList}\item 
+int {\bfseries evtag\_\-unmarshal\_\-int} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t need\_\-tag, ev\_\-uint32\_\-t $\ast$pinteger)\label{tag_8h_aa73031a48498064b6e64c66495768d86}
+
+\item 
+int {\bfseries evtag\_\-unmarshal\_\-int64} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t need\_\-tag, ev\_\-uint64\_\-t $\ast$pinteger)\label{tag_8h_ad7522ab3b627b8f71f70d295bbcdfccd}
+
+\item 
+int {\bfseries evtag\_\-unmarshal\_\-string} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t need\_\-tag, char $\ast$$\ast$pstring)\label{tag_8h_a54d99d6b1369ce129ce12542228ab98f}
+
+\item 
+int {\bfseries evtag\_\-unmarshal\_\-timeval} (struct {\bf evbuffer} $\ast$evbuf, ev\_\-uint32\_\-t need\_\-tag, struct timeval $\ast$ptv)\label{tag_8h_a154e7516c3eefa5e88014c26b863d00e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Helper functions for reading and writing tagged data onto buffers. 
+
+\subsection{Function Documentation}
+\index{tag.h@{tag.h}!evtag\_\-encode\_\-int@{evtag\_\-encode\_\-int}}
+\index{evtag\_\-encode\_\-int@{evtag\_\-encode\_\-int}!tag.h@{tag.h}}
+\subsubsection[{evtag\_\-encode\_\-int}]{\setlength{\rightskip}{0pt plus 5cm}void evtag\_\-encode\_\-int (struct {\bf evbuffer} $\ast$ {\em evbuf}, \/  ev\_\-uint32\_\-t {\em number})}\label{tag_8h_a3e34ecae0e12ea621ada9c3402c4bd8c}
+
+
+Encode an integer and store it in an \doxyref{evbuffer}{p.}{structevbuffer}. We encode integers by nybbles; the first nibble contains the number of significant nibbles -\/ 1; this allows us to encode up to 64-\/bit integers. This function is byte-\/order independent.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em evbuf}]\doxyref{evbuffer}{p.}{structevbuffer} to store the encoded number \item[{\em number}]a 32-\/bit integer \end{DoxyParams}
+\index{tag.h@{tag.h}!evtag\_\-unmarshal\_\-header@{evtag\_\-unmarshal\_\-header}}
+\index{evtag\_\-unmarshal\_\-header@{evtag\_\-unmarshal\_\-header}!tag.h@{tag.h}}
+\subsubsection[{evtag\_\-unmarshal\_\-header}]{\setlength{\rightskip}{0pt plus 5cm}int evtag\_\-unmarshal\_\-header (struct {\bf evbuffer} $\ast$ {\em evbuf}, \/  ev\_\-uint32\_\-t $\ast$ {\em ptag})}\label{tag_8h_a1344b577c7c86008bd2b62065795e8be}
+
+
+Unmarshals the header and returns the length of the payload. 
+\begin{DoxyParams}{Parameters}
+\item[{\em evbuf}]the buffer from which to unmarshal data \item[{\em ptag}]a pointer in which the tag id is being stored \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on failure or the number of bytes in the remaining payload. 
+\end{DoxyReturn}

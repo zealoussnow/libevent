@@ -1,0 +1,617 @@
+\section{event2/rpc.h File Reference}
+\label{rpc_8h}\index{event2/rpc.h@{event2/rpc.h}}
+
+
+This header files provides basic support for an RPC server and client.  
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EVRPC\_\-GENERATE}(rpcname, reqstruct, rplystruct)
+\begin{DoxyCompactList}\small\item\em Generates the code for receiving and sending an RPC message. \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-HEADER}(rpcname, reqstruct, rplystruct)
+\begin{DoxyCompactList}\small\item\em Creates the definitions and prototypes for an RPC. \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-MAKE\_\-CTX}(rpcname, reqstruct, rplystruct, pool, request, reply, cb, cbarg)
+\begin{DoxyCompactList}\small\item\em Creates a context structure that contains rpc specific information. \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-MAKE\_\-REQUEST}(name, pool, request, reply, cb, cbarg)~evrpc\_\-send\_\-request\_\-\#\#name((pool), (request), (reply), (cb), (cbarg))
+\begin{DoxyCompactList}\small\item\em launches an RPC and sends it to the server \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-REGISTER}(base, name, request, reply, callback, cbarg)
+\begin{DoxyCompactList}\small\item\em register RPCs with the HTTP Server \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-REQUEST\_\-DONE}(rpc\_\-req)
+\begin{DoxyCompactList}\small\item\em Creates the reply to an RPC request. \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-REQUEST\_\-HTTP}(rpc\_\-req)~(rpc\_\-req)-\/$>$http\_\-req
+\begin{DoxyCompactList}\small\item\em Provides access to the HTTP request object underlying an RPC. \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-STRUCT}(rpcname)~struct evrpc\_\-req\_\-\_\-\#\#rpcname
+\begin{DoxyCompactList}\small\item\em The type of a specific RPC Message. \item\end{DoxyCompactList}\item 
+\#define {\bf EVRPC\_\-UNREGISTER}(base, name)~evrpc\_\-unregister\_\-rpc((base), \#name)
+\begin{DoxyCompactList}\small\item\em Unregisters an already registered RPC. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-ARRAY\_\-ADD}(msg, member)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-add)(msg)\label{rpc_8h_a8bd4b0f338823bffee3ead3885ea6791}
+
+\begin{DoxyCompactList}\small\item\em Allocates a new entry in the array and returns it. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-ARRAY\_\-ADD\_\-VALUE}(msg, member, value)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-add)((msg), (value))\label{rpc_8h_a796d8c44ee666b13ecbae36b0897820b}
+
+\begin{DoxyCompactList}\small\item\em Adds a value to an array. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-ARRAY\_\-GET}(msg, member, offset, pvalue)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-get)((msg), (offset), (pvalue))\label{rpc_8h_a1b955ffe442d49fdfe17c76a6e758880}
+
+\begin{DoxyCompactList}\small\item\em Gets a variable at the specified offset from the array. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-ARRAY\_\-LEN}(msg, member)~((msg)-\/$>$member\#\#\_\-length)\label{rpc_8h_ab4a0a6a9f8fbe20ced71eaebd297168b}
+
+\begin{DoxyCompactList}\small\item\em Returns the number of entries in the array. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-ASSIGN}(msg, member, value)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-assign)((msg), (value))
+\begin{DoxyCompactList}\small\item\em Assigns a value to the member in the message. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-ASSIGN\_\-WITH\_\-LEN}(msg, member, value, len)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-assign)((msg), (value), (len))
+\begin{DoxyCompactList}\small\item\em Assigns a value to the member in the message. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-GET}(msg, member, pvalue)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-get)((msg), (pvalue))
+\begin{DoxyCompactList}\small\item\em Returns the value for a member. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-GET\_\-WITH\_\-LEN}(msg, member, pvalue, plen)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-get)((msg), (pvalue), (plen))
+\begin{DoxyCompactList}\small\item\em Returns the value for a member. \item\end{DoxyCompactList}\item 
+\#define {\bf EVTAG\_\-HAS}(msg, member)~((msg)-\/$>$member\#\#\_\-set == 1)
+\begin{DoxyCompactList}\small\item\em Determines if the member has been set in the message. \item\end{DoxyCompactList}\item 
+\#define {\bf INPUT}~EVRPC\_\-INPUT
+\begin{DoxyCompactList}\small\item\em Deprecated alias for EVRPC\_\-INPUT. \item\end{DoxyCompactList}\item 
+\#define {\bf OUTPUT}~EVRPC\_\-OUTPUT
+\begin{DoxyCompactList}\small\item\em Deprecated alias for EVRPC\_\-OUTPUT. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf EVRPC\_\-HOOK\_\-RESULT} \{ {\bf EVRPC\_\-TERMINATE} =  -\/1, 
+{\bf EVRPC\_\-CONTINUE} =  0, 
+{\bf EVRPC\_\-PAUSE} =  1
+ \}
+\begin{DoxyCompactList}\small\item\em Return value from hook processing functions. \item\end{DoxyCompactList}\item 
+enum {\bf EVRPC\_\-HOOK\_\-TYPE} \{ {\bf EVRPC\_\-INPUT}, 
+{\bf EVRPC\_\-OUTPUT}
+ \}
+\begin{DoxyCompactList}\small\item\em Hooks for changing the input and output of RPCs; this can be used to implement compression, authentication, encryption, . \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ {\bf evrpc\_\-add\_\-hook} (void $\ast$vbase, enum {\bf EVRPC\_\-HOOK\_\-TYPE} hook\_\-type, int($\ast$cb)(void $\ast$, struct evhttp\_\-request $\ast$, struct {\bf evbuffer} $\ast$, void $\ast$), void $\ast$cb\_\-arg)
+\begin{DoxyCompactList}\small\item\em adds a processing hook to either an rpc base or rpc pool \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-free} (struct evrpc\_\-base $\ast$base)
+\begin{DoxyCompactList}\small\item\em Frees the evrpc base. \item\end{DoxyCompactList}\item 
+void $\ast$ {\bfseries evrpc\_\-get\_\-reply} (struct evrpc\_\-req\_\-generic $\ast$req)\label{rpc_8h_a16119a6f8afcf3f3283e1a88bfa42262}
+
+\item 
+void $\ast$ {\bf evrpc\_\-get\_\-request} (struct evrpc\_\-req\_\-generic $\ast$req)\label{rpc_8h_afa6dddd447a86803d27a7b069503576c}
+
+\begin{DoxyCompactList}\small\item\em accessors for request and reply \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-hook\_\-add\_\-meta} (void $\ast$ctx, const char $\ast$key, const void $\ast$data, size\_\-t data\_\-size)
+\begin{DoxyCompactList}\small\item\em adds meta data to request \item\end{DoxyCompactList}\item 
+int {\bf evrpc\_\-hook\_\-find\_\-meta} (void $\ast$ctx, const char $\ast$key, void $\ast$$\ast$data, size\_\-t $\ast$data\_\-size)
+\begin{DoxyCompactList}\small\item\em retrieves meta data previously associated \item\end{DoxyCompactList}\item 
+struct evhttp\_\-connection $\ast$ {\bf evrpc\_\-hook\_\-get\_\-connection} (void $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em returns the connection object associated with the request \item\end{DoxyCompactList}\item 
+struct evrpc\_\-base $\ast$ {\bf evrpc\_\-init} (struct evhttp $\ast$server)
+\begin{DoxyCompactList}\small\item\em Creates a new rpc base from which RPC requests can be received. \item\end{DoxyCompactList}\item 
+int {\bf evrpc\_\-make\_\-request} (struct evrpc\_\-request\_\-wrapper $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em Makes an RPC request based on the provided context. \item\end{DoxyCompactList}\item 
+struct evrpc\_\-request\_\-wrapper $\ast$ {\bf evrpc\_\-make\_\-request\_\-ctx} (struct evrpc\_\-pool $\ast$pool, void $\ast$request, void $\ast$reply, const char $\ast$rpcname, void($\ast$req\_\-marshal)(struct {\bf evbuffer} $\ast$, void $\ast$), void($\ast$rpl\_\-clear)(void $\ast$), int($\ast$rpl\_\-unmarshal)(void $\ast$, struct {\bf evbuffer} $\ast$), void($\ast$cb)(struct evrpc\_\-status $\ast$, void $\ast$, void $\ast$, void $\ast$), void $\ast$cbarg)\label{rpc_8h_a83b3d3ddadb971e808f5e37bc4eb61bc}
+
+\begin{DoxyCompactList}\small\item\em use EVRPC\_\-GENERATE instead \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-pool\_\-add\_\-connection} (struct evrpc\_\-pool $\ast$pool, struct evhttp\_\-connection $\ast$evcon)
+\begin{DoxyCompactList}\small\item\em Adds a connection over which rpc can be dispatched to the pool. \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-pool\_\-free} (struct evrpc\_\-pool $\ast$pool)
+\begin{DoxyCompactList}\small\item\em frees an rpc connection pool \item\end{DoxyCompactList}\item 
+struct evrpc\_\-pool $\ast$ {\bf evrpc\_\-pool\_\-new} (struct {\bf event\_\-base} $\ast$base)
+\begin{DoxyCompactList}\small\item\em creates an rpc connection pool \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-pool\_\-remove\_\-connection} (struct evrpc\_\-pool $\ast$pool, struct evhttp\_\-connection $\ast$evcon)
+\begin{DoxyCompactList}\small\item\em Removes a connection from the pool. \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-pool\_\-set\_\-timeout} (struct evrpc\_\-pool $\ast$pool, int timeout\_\-in\_\-secs)
+\begin{DoxyCompactList}\small\item\em Sets the timeout in secs after which a request has to complete. \item\end{DoxyCompactList}\item 
+int {\bf evrpc\_\-register\_\-generic} (struct evrpc\_\-base $\ast$base, const char $\ast$name, void($\ast$callback)(struct evrpc\_\-req\_\-generic $\ast$, void $\ast$), void $\ast$cbarg, void $\ast$($\ast$req\_\-new)(void $\ast$), void $\ast$req\_\-new\_\-arg, void($\ast$req\_\-free)(void $\ast$), int($\ast$req\_\-unmarshal)(void $\ast$, struct {\bf evbuffer} $\ast$), void $\ast$($\ast$rpl\_\-new)(void $\ast$), void $\ast$rpl\_\-new\_\-arg, void($\ast$rpl\_\-free)(void $\ast$), int($\ast$rpl\_\-complete)(void $\ast$), void($\ast$rpl\_\-marshal)(struct {\bf evbuffer} $\ast$, void $\ast$))
+\begin{DoxyCompactList}\small\item\em Function for registering a generic RPC with the RPC base. \item\end{DoxyCompactList}\item 
+int {\bf evrpc\_\-register\_\-rpc} (struct evrpc\_\-base $\ast$, struct evrpc $\ast$, void($\ast$)(struct evrpc\_\-req\_\-generic $\ast$, void $\ast$), void $\ast$)
+\begin{DoxyCompactList}\small\item\em Low level function for registering an RPC with a server. \item\end{DoxyCompactList}\item 
+int {\bf evrpc\_\-remove\_\-hook} (void $\ast$vbase, enum {\bf EVRPC\_\-HOOK\_\-TYPE} hook\_\-type, void $\ast$handle)
+\begin{DoxyCompactList}\small\item\em removes a previously added hook \item\end{DoxyCompactList}\item 
+void {\bf evrpc\_\-request\_\-done} (struct evrpc\_\-req\_\-generic $\ast$req)\label{rpc_8h_aa8538456a93ddcbdf55755b88994d09a}
+
+\begin{DoxyCompactList}\small\item\em completes the server response to an rpc request \item\end{DoxyCompactList}\item 
+struct evrpc\_\-pool $\ast$ {\bf evrpc\_\-request\_\-get\_\-pool} (struct evrpc\_\-request\_\-wrapper $\ast$ctx)\label{rpc_8h_ab61cc3e97056faa013c3ad612e4ae763}
+
+\begin{DoxyCompactList}\small\item\em accessors for obscure and undocumented functionality \item\end{DoxyCompactList}\item 
+void {\bfseries evrpc\_\-request\_\-set\_\-cb} (struct evrpc\_\-request\_\-wrapper $\ast$ctx, void($\ast$cb)(struct evrpc\_\-status $\ast$, void $\ast$request, void $\ast$reply, void $\ast$arg), void $\ast$cb\_\-arg)\label{rpc_8h_a53cb59f6f7da1781221ac1aed2ddc38d}
+
+\item 
+void {\bfseries evrpc\_\-request\_\-set\_\-pool} (struct evrpc\_\-request\_\-wrapper $\ast$ctx, struct evrpc\_\-pool $\ast$pool)\label{rpc_8h_a21f7067fdc8d9328b28badb5c1c4016d}
+
+\item 
+int {\bf evrpc\_\-resume\_\-request} (void $\ast$vbase, void $\ast$ctx, enum {\bf EVRPC\_\-HOOK\_\-RESULT} res)
+\begin{DoxyCompactList}\small\item\em resume a paused request \item\end{DoxyCompactList}\item 
+int {\bf evrpc\_\-send\_\-request\_\-generic} (struct evrpc\_\-pool $\ast$pool, void $\ast$request, void $\ast$reply, void($\ast$cb)(struct evrpc\_\-status $\ast$, void $\ast$, void $\ast$, void $\ast$), void $\ast$cb\_\-arg, const char $\ast$rpcname, void($\ast$req\_\-marshal)(struct {\bf evbuffer} $\ast$, void $\ast$), void($\ast$rpl\_\-clear)(void $\ast$), int($\ast$rpl\_\-unmarshal)(void $\ast$, struct {\bf evbuffer} $\ast$))
+\begin{DoxyCompactList}\small\item\em Function for sending a generic RPC request. \item\end{DoxyCompactList}\item 
+int {\bfseries evrpc\_\-unregister\_\-rpc} (struct evrpc\_\-base $\ast$base, const char $\ast$name)\label{rpc_8h_a6b44b5ae7bad525a830eddfed03f561e}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This header files provides basic support for an RPC server and client. To support RPCs in a server, every supported RPC command needs to be defined and registered.
+
+\doxyref{EVRPC\_\-HEADER(SendCommand, Request, Reply)}{p.}{rpc_8h_aa526799df545537b2dc67358b0dfaa15};
+
+SendCommand is the name of the RPC command. Request is the name of a structure generated by event\_\-rpcgen.py. It contains all parameters relating to the SendCommand RPC. The server needs to fill in the Reply structure. Reply is the name of a structure generated by event\_\-rpcgen.py. It contains the answer to the RPC.
+
+To register an RPC with an HTTP server, you need to first create an RPC base with:
+
+struct evrpc\_\-base $\ast$base = evrpc\_\-init(http);
+
+A specific RPC can then be registered with
+
+\doxyref{EVRPC\_\-REGISTER(base, SendCommand, Request, Reply,  FunctionCB, arg)}{p.}{rpc_8h_abb204281e2555a1e91ff3885747d0533};
+
+when the server receives an appropriately formatted RPC, the user callback is invoked. The callback needs to fill in the reply structure.
+
+void FunctionCB(\doxyref{EVRPC\_\-STRUCT(SendCommand)}{p.}{rpc_8h_ae9eff66229e154543551a936c59dd8fa}$\ast$ rpc, void $\ast$arg);
+
+To send the reply, call \doxyref{EVRPC\_\-REQUEST\_\-DONE(rpc)}{p.}{rpc_8h_a36d6ba276baf3c95df69db35a2ef1527};
+
+See the regression test for an example. 
+
+\subsection{Define Documentation}
+\index{rpc.h@{rpc.h}!EVRPC\_\-GENERATE@{EVRPC\_\-GENERATE}}
+\index{EVRPC\_\-GENERATE@{EVRPC\_\-GENERATE}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-GENERATE}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-GENERATE(rpcname, \/  reqstruct, \/  rplystruct)}\label{rpc_8h_af7abcafae087e3c4dce6a4cd85346114}
+{\bfseries Value:}
+\begin{DoxyCode}
+int evrpc_send_request_##rpcname(struct evrpc_pool *pool,       \
+            struct reqstruct *request, struct rplystruct *reply,        \
+            void (*cb)(struct evrpc_status *,                           \
+                struct reqstruct *, struct rplystruct *, void *cbarg),  \
+            void *cbarg) {                                              \
+        return evrpc_send_request_generic(pool, request, reply, \
+            (void (*)(struct evrpc_status *, void *, void *, void *))cb, \
+            cbarg,                                                      \
+            #rpcname,                                                   \
+            (void (*)(struct evbuffer *, void *))reqstruct##_marshal,   \
+            (void (*)(void *))rplystruct##_clear,                       \
+            (int (*)(void *, struct evbuffer *))rplystruct##_unmarshal); \
+}
+\end{DoxyCode}
+
+
+Generates the code for receiving and sending an RPC message. EVRPC\_\-GENERATE is used to create the code corresponding to sending and receiving a particular RPC message
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em rpcname}]the name of the RPC \item[{\em reqstruct}]the name of the RPC request structure \item[{\em replystruct}]the name of the RPC reply structure \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-HEADER()}{p.}{rpc_8h_aa526799df545537b2dc67358b0dfaa15} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!EVRPC\_\-HEADER@{EVRPC\_\-HEADER}}
+\index{EVRPC\_\-HEADER@{EVRPC\_\-HEADER}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-HEADER}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-HEADER(rpcname, \/  reqstruct, \/  rplystruct)}\label{rpc_8h_aa526799df545537b2dc67358b0dfaa15}
+{\bfseries Value:}
+\begin{DoxyCode}
+EVRPC_STRUCT(rpcname) { \
+        struct evrpc_hook_meta *hook_meta; \
+        struct reqstruct* request; \
+        struct rplystruct* reply; \
+        struct evrpc* rpc; \
+        struct evhttp_request* http_req; \
+        struct evbuffer* rpc_data; \
+};                                                                   \
+int evrpc_send_request_##rpcname(struct evrpc_pool *, \
+    struct reqstruct *, struct rplystruct *, \
+    void (*)(struct evrpc_status *, \
+        struct reqstruct *, struct rplystruct *, void *cbarg),  \
+    void *);
+\end{DoxyCode}
+
+
+Creates the definitions and prototypes for an RPC. You need to use EVRPC\_\-HEADER to create structures and function prototypes needed by the server and client implementation. The structures have to be defined in an .rpc file and converted to source code via event\_\-rpcgen.py
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em rpcname}]the name of the RPC \item[{\em reqstruct}]the name of the RPC request structure \item[{\em replystruct}]the name of the RPC reply structure \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-GENERATE()}{p.}{rpc_8h_af7abcafae087e3c4dce6a4cd85346114} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!EVRPC\_\-MAKE\_\-CTX@{EVRPC\_\-MAKE\_\-CTX}}
+\index{EVRPC\_\-MAKE\_\-CTX@{EVRPC\_\-MAKE\_\-CTX}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-MAKE\_\-CTX}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-MAKE\_\-CTX(rpcname, \/  reqstruct, \/  rplystruct, \/  pool, \/  request, \/  reply, \/  cb, \/  cbarg)}\label{rpc_8h_ad7694fa8f1b5995a9d43bef1da170fad}
+{\bfseries Value:}
+\begin{DoxyCode}
+evrpc_make_request_ctx(pool, request, reply,                    \
+            #rpcname,                                                   \
+            (void (*)(struct evbuffer *, void *))reqstruct##_marshal,   \
+            (void (*)(void *))rplystruct##_clear,                       \
+            (int (*)(void *, struct evbuffer *))rplystruct##_unmarshal, \
+            (void (*)(struct evrpc_status *, void *, void *, void *))cb, \
+            cbarg)
+\end{DoxyCode}
+
+
+Creates a context structure that contains rpc specific information. EVRPC\_\-MAKE\_\-CTX is used to populate a RPC specific context that contains information about marshaling the RPC data types.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em rpcname}]the name of the RPC \item[{\em reqstruct}]the name of the RPC request structure \item[{\em replystruct}]the name of the RPC reply structure \item[{\em pool}]the evrpc\_\-pool over which to make the request \item[{\em request}]a pointer to the RPC request structure object \item[{\em reply}]a pointer to the RPC reply structure object \item[{\em cb}]the callback function to call when the RPC has completed \item[{\em cbarg}]the argument to supply to the callback \end{DoxyParams}
+\index{rpc.h@{rpc.h}!EVRPC\_\-MAKE\_\-REQUEST@{EVRPC\_\-MAKE\_\-REQUEST}}
+\index{EVRPC\_\-MAKE\_\-REQUEST@{EVRPC\_\-MAKE\_\-REQUEST}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-MAKE\_\-REQUEST}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-MAKE\_\-REQUEST(name, \/  pool, \/  request, \/  reply, \/  cb, \/  cbarg)~evrpc\_\-send\_\-request\_\-\#\#name((pool), (request), (reply), (cb), (cbarg))}\label{rpc_8h_aff0efcd7cb8b966256b5127960bd2c81}
+
+
+launches an RPC and sends it to the server \doxyref{EVRPC\_\-MAKE\_\-REQUEST()}{p.}{rpc_8h_aff0efcd7cb8b966256b5127960bd2c81} is used by the client to send an RPC to the server.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]the name of the RPC \item[{\em pool}]the evrpc\_\-pool that contains the connection objects over which the request should be sent. \item[{\em request}]a pointer to the RPC request structure -\/ it contains the data to be sent to the server. \item[{\em reply}]a pointer to the RPC reply structure. It is going to be filled if the request was answered successfully \item[{\em cb}]the callback to invoke when the RPC request has been answered \item[{\em cbarg}]an additional argument to be passed to the client \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!EVRPC\_\-REGISTER@{EVRPC\_\-REGISTER}}
+\index{EVRPC\_\-REGISTER@{EVRPC\_\-REGISTER}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-REGISTER}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-REGISTER(base, \/  name, \/  request, \/  reply, \/  callback, \/  cbarg)}\label{rpc_8h_abb204281e2555a1e91ff3885747d0533}
+{\bfseries Value:}
+\begin{DoxyCode}
+evrpc_register_generic(base, #name,                             \
+            (void (*)(struct evrpc_req_generic *, void *))callback, cbarg, \
+            (void *(*)(void *))request##_new, NULL,                     \
+            (void (*)(void *))request##_free,                           \
+            (int (*)(void *, struct evbuffer *))request##_unmarshal,    \
+            (void *(*)(void *))reply##_new, NULL,                       \
+            (void (*)(void *))reply##_free, \
+            (int (*)(void *))reply##_complete, \
+            (void (*)(struct evbuffer *, void *))reply##_marshal)
+\end{DoxyCode}
+
+
+register RPCs with the HTTP Server registers a new RPC with the HTTP server, each RPC needs to have a unique name under which it can be identified.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the evrpc\_\-base structure in which the RPC should be registered. \item[{\em name}]the name of the RPC \item[{\em request}]the name of the RPC request structure \item[{\em reply}]the name of the RPC reply structure \item[{\em callback}]the callback that should be invoked when the RPC is received. The callback has the following prototype void ($\ast$callback)(\doxyref{EVRPC\_\-STRUCT(Message)}{p.}{rpc_8h_ae9eff66229e154543551a936c59dd8fa}$\ast$ rpc, void $\ast$arg) \item[{\em cbarg}]an additional parameter that can be passed to the callback. The parameter can be used to carry around state. \end{DoxyParams}
+\index{rpc.h@{rpc.h}!EVRPC\_\-REQUEST\_\-DONE@{EVRPC\_\-REQUEST\_\-DONE}}
+\index{EVRPC\_\-REQUEST\_\-DONE@{EVRPC\_\-REQUEST\_\-DONE}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-REQUEST\_\-DONE}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-REQUEST\_\-DONE(rpc\_\-req)}\label{rpc_8h_a36d6ba276baf3c95df69db35a2ef1527}
+{\bfseries Value:}
+\begin{DoxyCode}
+do { \
+  struct evrpc_req_generic *_req = (struct evrpc_req_generic *)(rpc_req); \
+  evrpc_request_done(_req);                                     \
+} while (0)
+\end{DoxyCode}
+
+
+Creates the reply to an RPC request. EVRPC\_\-REQUEST\_\-DONE is used to answer a request; the reply is expected to have been filled in. The request and reply pointers become invalid after this call has finished.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em rpc\_\-req}]the rpc request structure provided to the server callback \end{DoxyParams}
+\index{rpc.h@{rpc.h}!EVRPC\_\-REQUEST\_\-HTTP@{EVRPC\_\-REQUEST\_\-HTTP}}
+\index{EVRPC\_\-REQUEST\_\-HTTP@{EVRPC\_\-REQUEST\_\-HTTP}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-REQUEST\_\-HTTP}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-REQUEST\_\-HTTP(rpc\_\-req)~(rpc\_\-req)-\/$>$http\_\-req}\label{rpc_8h_af78e1869994ee9597a9a0785d25fbf0b}
+
+
+Provides access to the HTTP request object underlying an RPC. Access to the underlying http object; can be used to look at headers or for getting the remote ip address
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em rpc\_\-req}]the rpc request structure provided to the server callback \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an struct evhttp\_\-request object that can be inspected for HTTP headers or sender information. 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!EVRPC\_\-STRUCT@{EVRPC\_\-STRUCT}}
+\index{EVRPC\_\-STRUCT@{EVRPC\_\-STRUCT}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-STRUCT}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-STRUCT(rpcname)~struct evrpc\_\-req\_\-\_\-\#\#rpcname}\label{rpc_8h_ae9eff66229e154543551a936c59dd8fa}
+
+
+The type of a specific RPC Message. 
+\begin{DoxyParams}{Parameters}
+\item[{\em rpcname}]the name of the RPC message \end{DoxyParams}
+\index{rpc.h@{rpc.h}!EVRPC\_\-UNREGISTER@{EVRPC\_\-UNREGISTER}}
+\index{EVRPC\_\-UNREGISTER@{EVRPC\_\-UNREGISTER}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-UNREGISTER}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVRPC\_\-UNREGISTER(base, \/  name)~evrpc\_\-unregister\_\-rpc((base), \#name)}\label{rpc_8h_ab646cdf50e026accddcd9fe23b35837b}
+
+
+Unregisters an already registered RPC. 
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the evrpc\_\-base object from which to unregister an RPC \item[{\em name}]the name of the rpc to unregister \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on error or 0 when successful. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-REGISTER()}{p.}{rpc_8h_abb204281e2555a1e91ff3885747d0533} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!EVTAG\_\-ASSIGN@{EVTAG\_\-ASSIGN}}
+\index{EVTAG\_\-ASSIGN@{EVTAG\_\-ASSIGN}!rpc.h@{rpc.h}}
+\subsubsection[{EVTAG\_\-ASSIGN}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTAG\_\-ASSIGN(msg, \/  member, \/  value)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-assign)((msg), (value))}\label{rpc_8h_a8063c9f0927da79cc9e53600a77eecc6}
+
+
+Assigns a value to the member in the message. 
+\begin{DoxyParams}{Parameters}
+\item[{\em msg}]the message to which to assign a value \item[{\em member}]the name of the member variable \item[{\em value}]the value to assign \end{DoxyParams}
+\index{rpc.h@{rpc.h}!EVTAG\_\-ASSIGN\_\-WITH\_\-LEN@{EVTAG\_\-ASSIGN\_\-WITH\_\-LEN}}
+\index{EVTAG\_\-ASSIGN\_\-WITH\_\-LEN@{EVTAG\_\-ASSIGN\_\-WITH\_\-LEN}!rpc.h@{rpc.h}}
+\subsubsection[{EVTAG\_\-ASSIGN\_\-WITH\_\-LEN}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTAG\_\-ASSIGN\_\-WITH\_\-LEN(msg, \/  member, \/  value, \/  len)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-assign)((msg), (value), (len))}\label{rpc_8h_af420133e56a545bef6cba6f878d403d7}
+
+
+Assigns a value to the member in the message. 
+\begin{DoxyParams}{Parameters}
+\item[{\em msg}]the message to which to assign a value \item[{\em member}]the name of the member variable \item[{\em value}]the value to assign \item[{\em len}]the length of the value \end{DoxyParams}
+\index{rpc.h@{rpc.h}!EVTAG\_\-GET@{EVTAG\_\-GET}}
+\index{EVTAG\_\-GET@{EVTAG\_\-GET}!rpc.h@{rpc.h}}
+\subsubsection[{EVTAG\_\-GET}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTAG\_\-GET(msg, \/  member, \/  pvalue)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-get)((msg), (pvalue))}\label{rpc_8h_aef6e54053208c090c43d05c9b2259fb9}
+
+
+Returns the value for a member. 
+\begin{DoxyParams}{Parameters}
+\item[{\em msg}]the message from which to get the value \item[{\em member}]the name of the member variable \item[{\em pvalue}]a pointer to the variable to hold the value \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 otherwise. 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!EVTAG\_\-GET\_\-WITH\_\-LEN@{EVTAG\_\-GET\_\-WITH\_\-LEN}}
+\index{EVTAG\_\-GET\_\-WITH\_\-LEN@{EVTAG\_\-GET\_\-WITH\_\-LEN}!rpc.h@{rpc.h}}
+\subsubsection[{EVTAG\_\-GET\_\-WITH\_\-LEN}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTAG\_\-GET\_\-WITH\_\-LEN(msg, \/  member, \/  pvalue, \/  plen)~($\ast$(msg)-\/$>$base-\/$>$member\#\#\_\-get)((msg), (pvalue), (plen))}\label{rpc_8h_ae0b73ea41cb7f06976fd69a8f1be6219}
+
+
+Returns the value for a member. 
+\begin{DoxyParams}{Parameters}
+\item[{\em msg}]the message from which to get the value \item[{\em member}]the name of the member variable \item[{\em pvalue}]a pointer to the variable to hold the value \item[{\em plen}]a pointer to the length of the value \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 otherwise. 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!EVTAG\_\-HAS@{EVTAG\_\-HAS}}
+\index{EVTAG\_\-HAS@{EVTAG\_\-HAS}!rpc.h@{rpc.h}}
+\subsubsection[{EVTAG\_\-HAS}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVTAG\_\-HAS(msg, \/  member)~((msg)-\/$>$member\#\#\_\-set == 1)}\label{rpc_8h_a1a924e89c7a0c5eddc63cf9bf569fae6}
+
+
+Determines if the member has been set in the message. 
+\begin{DoxyParams}{Parameters}
+\item[{\em msg}]the message to inspect \item[{\em member}]the member variable to test for presences \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if it's present or 0 otherwise. 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!INPUT@{INPUT}}
+\index{INPUT@{INPUT}!rpc.h@{rpc.h}}
+\subsubsection[{INPUT}]{\setlength{\rightskip}{0pt plus 5cm}\#define INPUT~EVRPC\_\-INPUT}\label{rpc_8h_a1bb283bd7893b9855e2f23013891fc82}
+
+
+Deprecated alias for EVRPC\_\-INPUT. Not available on windows, where it conflicts with platform headers. \index{rpc.h@{rpc.h}!OUTPUT@{OUTPUT}}
+\index{OUTPUT@{OUTPUT}!rpc.h@{rpc.h}}
+\subsubsection[{OUTPUT}]{\setlength{\rightskip}{0pt plus 5cm}\#define OUTPUT~EVRPC\_\-OUTPUT}\label{rpc_8h_a61a3c9a18380aafb6e430e79bf596557}
+
+
+Deprecated alias for EVRPC\_\-OUTPUT. Not available on windows, where it conflicts with platform headers. 
+
+\subsection{Enumeration Type Documentation}
+\index{rpc.h@{rpc.h}!EVRPC\_\-HOOK\_\-RESULT@{EVRPC\_\-HOOK\_\-RESULT}}
+\index{EVRPC\_\-HOOK\_\-RESULT@{EVRPC\_\-HOOK\_\-RESULT}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-HOOK\_\-RESULT}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf EVRPC\_\-HOOK\_\-RESULT}}\label{rpc_8h_a9c37f133ebc96b2bd66c472079b1338b}
+
+
+Return value from hook processing functions. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EVRPC\_\-TERMINATE@{EVRPC\_\-TERMINATE}!rpc.h@{rpc.h}}\index{rpc.h@{rpc.h}!EVRPC\_\-TERMINATE@{EVRPC\_\-TERMINATE}}\item[{\em 
+EVRPC\_\-TERMINATE\label{rpc_8h_a9c37f133ebc96b2bd66c472079b1338ba61de2cad490f408aa9ecc3427cfb6233}
+}]indicates the rpc should be terminated \index{EVRPC\_\-CONTINUE@{EVRPC\_\-CONTINUE}!rpc.h@{rpc.h}}\index{rpc.h@{rpc.h}!EVRPC\_\-CONTINUE@{EVRPC\_\-CONTINUE}}\item[{\em 
+EVRPC\_\-CONTINUE\label{rpc_8h_a9c37f133ebc96b2bd66c472079b1338ba4f92aee79d3413c4940eeb578ee33643}
+}]continue processing the rpc \index{EVRPC\_\-PAUSE@{EVRPC\_\-PAUSE}!rpc.h@{rpc.h}}\index{rpc.h@{rpc.h}!EVRPC\_\-PAUSE@{EVRPC\_\-PAUSE}}\item[{\em 
+EVRPC\_\-PAUSE\label{rpc_8h_a9c37f133ebc96b2bd66c472079b1338baff86ced7cf446eec75868ba64d956b9c}
+}]pause processing request until resumed \end{description}
+\end{Desc}
+
+\index{rpc.h@{rpc.h}!EVRPC\_\-HOOK\_\-TYPE@{EVRPC\_\-HOOK\_\-TYPE}}
+\index{EVRPC\_\-HOOK\_\-TYPE@{EVRPC\_\-HOOK\_\-TYPE}!rpc.h@{rpc.h}}
+\subsubsection[{EVRPC\_\-HOOK\_\-TYPE}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf EVRPC\_\-HOOK\_\-TYPE}}\label{rpc_8h_a66eff7ea6bdd17e53fde6c4d9dc1835b}
+
+
+Hooks for changing the input and output of RPCs; this can be used to implement compression, authentication, encryption, . .. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EVRPC\_\-INPUT@{EVRPC\_\-INPUT}!rpc.h@{rpc.h}}\index{rpc.h@{rpc.h}!EVRPC\_\-INPUT@{EVRPC\_\-INPUT}}\item[{\em 
+EVRPC\_\-INPUT\label{rpc_8h_a66eff7ea6bdd17e53fde6c4d9dc1835ba2a62d2e1147edb5b460c1abb17be9734}
+}]apply the function to an input hook \index{EVRPC\_\-OUTPUT@{EVRPC\_\-OUTPUT}!rpc.h@{rpc.h}}\index{rpc.h@{rpc.h}!EVRPC\_\-OUTPUT@{EVRPC\_\-OUTPUT}}\item[{\em 
+EVRPC\_\-OUTPUT\label{rpc_8h_a66eff7ea6bdd17e53fde6c4d9dc1835bad63587ff3a66808e422f1ca48c9db85e}
+}]apply the function to an output hook \end{description}
+\end{Desc}
+
+
+
+\subsection{Function Documentation}
+\index{rpc.h@{rpc.h}!evrpc\_\-add\_\-hook@{evrpc\_\-add\_\-hook}}
+\index{evrpc\_\-add\_\-hook@{evrpc\_\-add\_\-hook}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-add\_\-hook}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ evrpc\_\-add\_\-hook (void $\ast$ {\em vbase}, \/  enum {\bf EVRPC\_\-HOOK\_\-TYPE} {\em hook\_\-type}, \/  int($\ast$)(void $\ast$, struct evhttp\_\-request $\ast$, struct {\bf evbuffer} $\ast$, void $\ast$) {\em cb}, \/  void $\ast$ {\em cb\_\-arg})}\label{rpc_8h_adb188728ddbaf5c85ac9e98d9d11a4a4}
+
+
+adds a processing hook to either an rpc base or rpc pool If a hook returns TERMINATE, the processing is aborted. On CONTINUE, the request is immediately processed after the hook returns. If the hook returns PAUSE, request processing stops until \doxyref{evrpc\_\-resume\_\-request()}{p.}{rpc_8h_a2724d98b6fc56d46cbfc9fe7ad9e6cf1} has been called.
+
+The add functions return handles that can be used for removing hooks.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em vbase}]a pointer to either struct evrpc\_\-base or struct evrpc\_\-pool \item[{\em hook\_\-type}]either INPUT or OUTPUT \item[{\em cb}]the callback to call when the hook is activated \item[{\em cb\_\-arg}]an additional argument for the callback \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a handle to the hook so it can be removed later 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evrpc\_\-remove\_\-hook()}{p.}{rpc_8h_a3969ea92840d165cab55a3228efcdbc6} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-free@{evrpc\_\-free}}
+\index{evrpc\_\-free@{evrpc\_\-free}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void evrpc\_\-free (struct evrpc\_\-base $\ast$ {\em base})}\label{rpc_8h_a64a8951f0d52f698a96808f276b32f39}
+
+
+Frees the evrpc base. For now, you are responsible for making sure that no rpcs are ongoing.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the evrpc\_\-base object to be freed \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evrpc\_\-init}{p.}{rpc_8h_aca904025a4a1cb8d22164da3afe32b5a} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-hook\_\-add\_\-meta@{evrpc\_\-hook\_\-add\_\-meta}}
+\index{evrpc\_\-hook\_\-add\_\-meta@{evrpc\_\-hook\_\-add\_\-meta}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-hook\_\-add\_\-meta}]{\setlength{\rightskip}{0pt plus 5cm}void evrpc\_\-hook\_\-add\_\-meta (void $\ast$ {\em ctx}, \/  const char $\ast$ {\em key}, \/  const void $\ast$ {\em data}, \/  size\_\-t {\em data\_\-size})}\label{rpc_8h_a1e6e536a5c57a2d87ffe778746906626}
+
+
+adds meta data to request \doxyref{evrpc\_\-hook\_\-add\_\-meta()}{p.}{rpc_8h_a1e6e536a5c57a2d87ffe778746906626} allows hooks to add meta data to a request. for a client request, the meta data can be inserted by an outgoing request hook and retrieved by the incoming request hook.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ctx}]the context provided to the hook call \item[{\em key}]a NUL-\/terminated c-\/string \item[{\em data}]the data to be associated with the key \item[{\em data\_\-size}]the size of the data \end{DoxyParams}
+\index{rpc.h@{rpc.h}!evrpc\_\-hook\_\-find\_\-meta@{evrpc\_\-hook\_\-find\_\-meta}}
+\index{evrpc\_\-hook\_\-find\_\-meta@{evrpc\_\-hook\_\-find\_\-meta}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-hook\_\-find\_\-meta}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-hook\_\-find\_\-meta (void $\ast$ {\em ctx}, \/  const char $\ast$ {\em key}, \/  void $\ast$$\ast$ {\em data}, \/  size\_\-t $\ast$ {\em data\_\-size})}\label{rpc_8h_aad4ec382ca6789ac5bdc672420d98fc5}
+
+
+retrieves meta data previously associated \doxyref{evrpc\_\-hook\_\-find\_\-meta()}{p.}{rpc_8h_aad4ec382ca6789ac5bdc672420d98fc5} can be used to retrieve meta data associated to a request by a previous hook. 
+\begin{DoxyParams}{Parameters}
+\item[{\em ctx}]the context provided to the hook call \item[{\em key}]a NUL-\/terminated c-\/string \item[{\em data}]pointer to a data pointer that will contain the retrieved data \item[{\em data\_\-size}]pointer to the size of the data \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success or -\/1 on failure 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!evrpc\_\-hook\_\-get\_\-connection@{evrpc\_\-hook\_\-get\_\-connection}}
+\index{evrpc\_\-hook\_\-get\_\-connection@{evrpc\_\-hook\_\-get\_\-connection}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-hook\_\-get\_\-connection}]{\setlength{\rightskip}{0pt plus 5cm}struct evhttp\_\-connection$\ast$ evrpc\_\-hook\_\-get\_\-connection (void $\ast$ {\em ctx})\hspace{0.3cm}{\ttfamily  [read]}}\label{rpc_8h_a3aef04ab91e1af62675cd7d76fd06e94}
+
+
+returns the connection object associated with the request 
+\begin{DoxyParams}{Parameters}
+\item[{\em ctx}]the context provided to the hook call \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the evhttp\_\-connection object 
+\end{DoxyReturn}
+\index{rpc.h@{rpc.h}!evrpc\_\-init@{evrpc\_\-init}}
+\index{evrpc\_\-init@{evrpc\_\-init}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}struct evrpc\_\-base$\ast$ evrpc\_\-init (struct evhttp $\ast$ {\em server})\hspace{0.3cm}{\ttfamily  [read]}}\label{rpc_8h_aca904025a4a1cb8d22164da3afe32b5a}
+
+
+Creates a new rpc base from which RPC requests can be received. 
+\begin{DoxyParams}{Parameters}
+\item[{\em server}]a pointer to an existing HTTP server \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a newly allocated evrpc\_\-base struct 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evrpc\_\-free()}{p.}{rpc_8h_a64a8951f0d52f698a96808f276b32f39} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-make\_\-request@{evrpc\_\-make\_\-request}}
+\index{evrpc\_\-make\_\-request@{evrpc\_\-make\_\-request}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-make\_\-request}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-make\_\-request (struct evrpc\_\-request\_\-wrapper $\ast$ {\em ctx})}\label{rpc_8h_a1bc336c8cb4b87e77fd35c697420b3c5}
+
+
+Makes an RPC request based on the provided context. This is a low-\/level function and should not be used directly unless a custom context object is provided. Use \doxyref{EVRPC\_\-MAKE\_\-REQUEST()}{p.}{rpc_8h_aff0efcd7cb8b966256b5127960bd2c81} instead.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ctx}]a context from \doxyref{EVRPC\_\-MAKE\_\-CTX()}{p.}{rpc_8h_ad7694fa8f1b5995a9d43bef1da170fad} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 otherwise. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-MAKE\_\-REQUEST()}{p.}{rpc_8h_aff0efcd7cb8b966256b5127960bd2c81}, \doxyref{EVRPC\_\-MAKE\_\-CTX()}{p.}{rpc_8h_ad7694fa8f1b5995a9d43bef1da170fad} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-pool\_\-add\_\-connection@{evrpc\_\-pool\_\-add\_\-connection}}
+\index{evrpc\_\-pool\_\-add\_\-connection@{evrpc\_\-pool\_\-add\_\-connection}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-pool\_\-add\_\-connection}]{\setlength{\rightskip}{0pt plus 5cm}void evrpc\_\-pool\_\-add\_\-connection (struct evrpc\_\-pool $\ast$ {\em pool}, \/  struct evhttp\_\-connection $\ast$ {\em evcon})}\label{rpc_8h_a063d8c73017ee732c8930e9c6fa00026}
+
+
+Adds a connection over which rpc can be dispatched to the pool. The connection object must have been newly created.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em pool}]the pool to which to add the connection \item[{\em evcon}]the connection to add to the pool. \end{DoxyParams}
+\index{rpc.h@{rpc.h}!evrpc\_\-pool\_\-free@{evrpc\_\-pool\_\-free}}
+\index{evrpc\_\-pool\_\-free@{evrpc\_\-pool\_\-free}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-pool\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void evrpc\_\-pool\_\-free (struct evrpc\_\-pool $\ast$ {\em pool})}\label{rpc_8h_a8d3e64475898ca58fd93b7f8919b3a01}
+
+
+frees an rpc connection pool 
+\begin{DoxyParams}{Parameters}
+\item[{\em pool}]a pointer to an evrpc\_\-pool allocated via \doxyref{evrpc\_\-pool\_\-new()}{p.}{rpc_8h_a8e87434603994a71d26676ddfb1e2033} \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evrpc\_\-pool\_\-new()}{p.}{rpc_8h_a8e87434603994a71d26676ddfb1e2033} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-pool\_\-new@{evrpc\_\-pool\_\-new}}
+\index{evrpc\_\-pool\_\-new@{evrpc\_\-pool\_\-new}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-pool\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct evrpc\_\-pool$\ast$ evrpc\_\-pool\_\-new (struct {\bf event\_\-base} $\ast$ {\em base})\hspace{0.3cm}{\ttfamily  [read]}}\label{rpc_8h_a8e87434603994a71d26676ddfb1e2033}
+
+
+creates an rpc connection pool a pool has a number of connections associated with it. rpc requests are always made via a pool.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]a pointer to an struct event\_\-based object; can be left NULL in singled-\/threaded applications \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a newly allocated struct evrpc\_\-pool object 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evrpc\_\-pool\_\-free()}{p.}{rpc_8h_a8d3e64475898ca58fd93b7f8919b3a01} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-pool\_\-remove\_\-connection@{evrpc\_\-pool\_\-remove\_\-connection}}
+\index{evrpc\_\-pool\_\-remove\_\-connection@{evrpc\_\-pool\_\-remove\_\-connection}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-pool\_\-remove\_\-connection}]{\setlength{\rightskip}{0pt plus 5cm}void evrpc\_\-pool\_\-remove\_\-connection (struct evrpc\_\-pool $\ast$ {\em pool}, \/  struct evhttp\_\-connection $\ast$ {\em evcon})}\label{rpc_8h_a707034fc4c7ba1021dd081863797e6e7}
+
+
+Removes a connection from the pool. The connection object must have been newly created.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em pool}]the pool from which to remove the connection \item[{\em evcon}]the connection to remove from the pool. \end{DoxyParams}
+\index{rpc.h@{rpc.h}!evrpc\_\-pool\_\-set\_\-timeout@{evrpc\_\-pool\_\-set\_\-timeout}}
+\index{evrpc\_\-pool\_\-set\_\-timeout@{evrpc\_\-pool\_\-set\_\-timeout}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-pool\_\-set\_\-timeout}]{\setlength{\rightskip}{0pt plus 5cm}void evrpc\_\-pool\_\-set\_\-timeout (struct evrpc\_\-pool $\ast$ {\em pool}, \/  int {\em timeout\_\-in\_\-secs})}\label{rpc_8h_a17dae9e4a25a500e521baf5a2c1c5c0a}
+
+
+Sets the timeout in secs after which a request has to complete. The RPC is completely aborted if it does not complete by then. Setting the timeout to 0 means that it never timeouts and can be used to implement callback type RPCs.
+
+Any connection already in the pool will be updated with the new timeout. Connections added to the pool after set\_\-timeout has be called receive the pool timeout only if no timeout has been set for the connection itself.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em pool}]a pointer to a struct evrpc\_\-pool object \item[{\em timeout\_\-in\_\-secs}]the number of seconds after which a request should timeout and a failure be returned to the callback. \end{DoxyParams}
+\index{rpc.h@{rpc.h}!evrpc\_\-register\_\-generic@{evrpc\_\-register\_\-generic}}
+\index{evrpc\_\-register\_\-generic@{evrpc\_\-register\_\-generic}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-register\_\-generic}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-register\_\-generic (struct evrpc\_\-base $\ast$ {\em base}, \/  const char $\ast$ {\em name}, \/  void($\ast$)(struct evrpc\_\-req\_\-generic $\ast$, void $\ast$) {\em callback}, \/  void $\ast$ {\em cbarg}, \/  void $\ast$($\ast$)(void $\ast$) {\em req\_\-new}, \/  void $\ast$ {\em req\_\-new\_\-arg}, \/  void($\ast$)(void $\ast$) {\em req\_\-free}, \/  int($\ast$)(void $\ast$, struct {\bf evbuffer} $\ast$) {\em req\_\-unmarshal}, \/  void $\ast$($\ast$)(void $\ast$) {\em rpl\_\-new}, \/  void $\ast$ {\em rpl\_\-new\_\-arg}, \/  void($\ast$)(void $\ast$) {\em rpl\_\-free}, \/  int($\ast$)(void $\ast$) {\em rpl\_\-complete}, \/  void($\ast$)(struct {\bf evbuffer} $\ast$, void $\ast$) {\em rpl\_\-marshal})}\label{rpc_8h_a5987c57760de0cfb2639e36406ae99d8}
+
+
+Function for registering a generic RPC with the RPC base. Do not call this function directly, use \doxyref{EVRPC\_\-REGISTER()}{p.}{rpc_8h_abb204281e2555a1e91ff3885747d0533} instead.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-REGISTER()}{p.}{rpc_8h_abb204281e2555a1e91ff3885747d0533} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-register\_\-rpc@{evrpc\_\-register\_\-rpc}}
+\index{evrpc\_\-register\_\-rpc@{evrpc\_\-register\_\-rpc}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-register\_\-rpc}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-register\_\-rpc (struct evrpc\_\-base $\ast$, \/  struct evrpc $\ast$, \/  void($\ast$)(struct evrpc\_\-req\_\-generic $\ast$, void $\ast$), \/  void $\ast$)}\label{rpc_8h_abaa7d70da1d9fdcb767279b55944be65}
+
+
+Low level function for registering an RPC with a server. Use \doxyref{EVRPC\_\-REGISTER()}{p.}{rpc_8h_abb204281e2555a1e91ff3885747d0533} instead.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-REGISTER()}{p.}{rpc_8h_abb204281e2555a1e91ff3885747d0533} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-remove\_\-hook@{evrpc\_\-remove\_\-hook}}
+\index{evrpc\_\-remove\_\-hook@{evrpc\_\-remove\_\-hook}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-remove\_\-hook}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-remove\_\-hook (void $\ast$ {\em vbase}, \/  enum {\bf EVRPC\_\-HOOK\_\-TYPE} {\em hook\_\-type}, \/  void $\ast$ {\em handle})}\label{rpc_8h_a3969ea92840d165cab55a3228efcdbc6}
+
+
+removes a previously added hook 
+\begin{DoxyParams}{Parameters}
+\item[{\em vbase}]a pointer to either struct evrpc\_\-base or struct evrpc\_\-pool \item[{\em hook\_\-type}]either INPUT or OUTPUT \item[{\em handle}]a handle returned by \doxyref{evrpc\_\-add\_\-hook()}{p.}{rpc_8h_adb188728ddbaf5c85ac9e98d9d11a4a4} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 on success or 0 on failure 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evrpc\_\-add\_\-hook()}{p.}{rpc_8h_adb188728ddbaf5c85ac9e98d9d11a4a4} 
+\end{DoxySeeAlso}
+\index{rpc.h@{rpc.h}!evrpc\_\-resume\_\-request@{evrpc\_\-resume\_\-request}}
+\index{evrpc\_\-resume\_\-request@{evrpc\_\-resume\_\-request}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-resume\_\-request}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-resume\_\-request (void $\ast$ {\em vbase}, \/  void $\ast$ {\em ctx}, \/  enum {\bf EVRPC\_\-HOOK\_\-RESULT} {\em res})}\label{rpc_8h_a2724d98b6fc56d46cbfc9fe7ad9e6cf1}
+
+
+resume a paused request 
+\begin{DoxyParams}{Parameters}
+\item[{\em vbase}]a pointer to either struct evrpc\_\-base or struct evrpc\_\-pool \item[{\em ctx}]the context pointer provided to the original hook call \end{DoxyParams}
+\index{rpc.h@{rpc.h}!evrpc\_\-send\_\-request\_\-generic@{evrpc\_\-send\_\-request\_\-generic}}
+\index{evrpc\_\-send\_\-request\_\-generic@{evrpc\_\-send\_\-request\_\-generic}!rpc.h@{rpc.h}}
+\subsubsection[{evrpc\_\-send\_\-request\_\-generic}]{\setlength{\rightskip}{0pt plus 5cm}int evrpc\_\-send\_\-request\_\-generic (struct evrpc\_\-pool $\ast$ {\em pool}, \/  void $\ast$ {\em request}, \/  void $\ast$ {\em reply}, \/  void($\ast$)(struct evrpc\_\-status $\ast$, void $\ast$, void $\ast$, void $\ast$) {\em cb}, \/  void $\ast$ {\em cb\_\-arg}, \/  const char $\ast$ {\em rpcname}, \/  void($\ast$)(struct {\bf evbuffer} $\ast$, void $\ast$) {\em req\_\-marshal}, \/  void($\ast$)(void $\ast$) {\em rpl\_\-clear}, \/  int($\ast$)(void $\ast$, struct {\bf evbuffer} $\ast$) {\em rpl\_\-unmarshal})}\label{rpc_8h_a3d0c80cbf69003059bcdef4bfdbb321f}
+
+
+Function for sending a generic RPC request. Do not call this function directly, use \doxyref{EVRPC\_\-MAKE\_\-REQUEST()}{p.}{rpc_8h_aff0efcd7cb8b966256b5127960bd2c81} instead.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{EVRPC\_\-MAKE\_\-REQUEST()}{p.}{rpc_8h_aff0efcd7cb8b966256b5127960bd2c81} 
+\end{DoxySeeAlso}

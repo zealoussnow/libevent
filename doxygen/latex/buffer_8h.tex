@@ -1,0 +1,766 @@
+\section{event2/buffer.h File Reference}
+\label{buffer_8h}\index{event2/buffer.h@{event2/buffer.h}}
+
+
+Functions for buffering data for network sending or receiving.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$stdarg.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf evbuffer}
+\begin{DoxyCompactList}\small\item\em An \doxyref{evbuffer}{p.}{structevbuffer} is an opaque data type for efficiently buffering data to be sent or received on the network. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer\_\-cb\_\-info}
+\begin{DoxyCompactList}\small\item\em Structure passed to an evbuffer\_\-cb\_\-func \doxyref{evbuffer}{p.}{structevbuffer} callback. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer\_\-iovec}
+\begin{DoxyCompactList}\small\item\em Describes a single extent of memory inside an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer\_\-ptr}
+\begin{DoxyCompactList}\small\item\em Pointer to a position within an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EVBUFFER\_\-CB\_\-ENABLED}~1
+\begin{DoxyCompactList}\small\item\em If this flag is not set, then a callback is temporarily disabled, and should not be invoked. \item\end{DoxyCompactList}\item 
+\#define {\bf EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD}~1
+\begin{DoxyCompactList}\small\item\em If this flag is set, then we will not use \doxyref{evbuffer\_\-peek()}{p.}{buffer_8h_adf4b59974a0cb989b7091f0b8677d511}, \doxyref{evbuffer\_\-remove()}{p.}{buffer_8h_a0455fc72c74c758ed8dc9a0902af451a}, \doxyref{evbuffer\_\-remove\_\-buffer()}{p.}{buffer_8h_a0bdef97f6a142425b271b329a90de869}, and so on to read bytes from this buffer: we'll only take bytes out of this buffer by writing them to the network (as with evbuffer\_\-write\_\-atmost), by removing them without observing them (as with evbuffer\_\-drain), or by copying them all out at once (as with evbuffer\_\-add\_\-buffer). \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ {\bf evbuffer\_\-cb\_\-func} )(struct {\bf evbuffer} $\ast$buffer, const struct {\bf evbuffer\_\-cb\_\-info} $\ast$info, void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em Type definition for a callback that is invoked whenever data is added or removed from an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+typedef void($\ast$ {\bf evbuffer\_\-ref\_\-cleanup\_\-cb} )(const void $\ast$data, size\_\-t datalen, void $\ast$extra)
+\begin{DoxyCompactList}\small\item\em A cleanup function for a piece of memory added to an \doxyref{evbuffer}{p.}{structevbuffer} by reference. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf evbuffer\_\-eol\_\-style} \{ {\bf EVBUFFER\_\-EOL\_\-ANY}, 
+{\bf EVBUFFER\_\-EOL\_\-CRLF}, 
+{\bf EVBUFFER\_\-EOL\_\-CRLF\_\-STRICT}, 
+{\bf EVBUFFER\_\-EOL\_\-LF}
+ \}
+\begin{DoxyCompactList}\small\item\em Used to tell evbuffer\_\-readln what kind of line-\/ending to look for. \item\end{DoxyCompactList}\item 
+enum {\bf evbuffer\_\-ptr\_\-how} \{ {\bf EVBUFFER\_\-PTR\_\-SET}, 
+{\bf EVBUFFER\_\-PTR\_\-ADD}
+ \}
+\begin{DoxyCompactList}\small\item\em Defines how to adjust an \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} by \doxyref{evbuffer\_\-ptr\_\-set()}{p.}{buffer_8h_a83ea16ab8facba6c68d2e6931d13fbf4}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf evbuffer\_\-add} (struct {\bf evbuffer} $\ast$buf, const void $\ast$data, size\_\-t datlen)
+\begin{DoxyCompactList}\small\item\em Append data to the end of an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-add\_\-buffer} (struct {\bf evbuffer} $\ast$outbuf, struct {\bf evbuffer} $\ast$inbuf)
+\begin{DoxyCompactList}\small\item\em Move all data from one \doxyref{evbuffer}{p.}{structevbuffer} into another \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+struct evbuffer\_\-cb\_\-entry $\ast$ {\bf evbuffer\_\-add\_\-cb} (struct {\bf evbuffer} $\ast$buffer, {\bf evbuffer\_\-cb\_\-func} cb, void $\ast$cbarg)
+\begin{DoxyCompactList}\small\item\em Add a new callback to an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-add\_\-file} (struct {\bf evbuffer} $\ast$outbuf, int fd, ev\_\-off\_\-t offset, ev\_\-off\_\-t length)
+\begin{DoxyCompactList}\small\item\em Copy data from a file into the \doxyref{evbuffer}{p.}{structevbuffer} for writing to a socket. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-add\_\-printf} (struct {\bf evbuffer} $\ast$buf, const char $\ast$fmt,...)
+\begin{DoxyCompactList}\small\item\em Append a formatted string to the end of an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-add\_\-reference} (struct {\bf evbuffer} $\ast$outbuf, const void $\ast$data, size\_\-t datlen, {\bf evbuffer\_\-ref\_\-cleanup\_\-cb} cleanupfn, void $\ast$cleanupfn\_\-arg)
+\begin{DoxyCompactList}\small\item\em Reference memory into an \doxyref{evbuffer}{p.}{structevbuffer} without copying. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-add\_\-vprintf} (struct {\bf evbuffer} $\ast$buf, const char $\ast$fmt, va\_\-list ap)
+\begin{DoxyCompactList}\small\item\em Append a va\_\-list formatted string to the end of an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-cb\_\-clear\_\-flags} (struct {\bf evbuffer} $\ast$buffer, struct evbuffer\_\-cb\_\-entry $\ast$cb, ev\_\-uint32\_\-t flags)
+\begin{DoxyCompactList}\small\item\em Change the flags that are set for a callback on a buffer by removing some. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-cb\_\-set\_\-flags} (struct {\bf evbuffer} $\ast$buffer, struct evbuffer\_\-cb\_\-entry $\ast$cb, ev\_\-uint32\_\-t flags)
+\begin{DoxyCompactList}\small\item\em Change the flags that are set for a callback on a buffer by adding more. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-clear\_\-flags} (struct {\bf evbuffer} $\ast$buf, ev\_\-uint64\_\-t flags)
+\begin{DoxyCompactList}\small\item\em Change the flags that are set for an \doxyref{evbuffer}{p.}{structevbuffer} by removing some. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-commit\_\-space} (struct {\bf evbuffer} $\ast$buf, struct {\bf evbuffer\_\-iovec} $\ast$vec, int n\_\-vecs)
+\begin{DoxyCompactList}\small\item\em Commits previously reserved space. \item\end{DoxyCompactList}\item 
+ev\_\-ssize\_\-t {\bf evbuffer\_\-copyout} (struct {\bf evbuffer} $\ast$buf, void $\ast$data\_\-out, size\_\-t datlen)
+\begin{DoxyCompactList}\small\item\em Read data from an \doxyref{evbuffer}{p.}{structevbuffer}, and leave the buffer unchanged. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-defer\_\-callbacks} (struct {\bf evbuffer} $\ast$buffer, struct {\bf event\_\-base} $\ast$base)
+\begin{DoxyCompactList}\small\item\em Force all the callbacks on an \doxyref{evbuffer}{p.}{structevbuffer} to be run, not immediately after the \doxyref{evbuffer}{p.}{structevbuffer} is altered, but instead from inside the \doxyref{event}{p.}{structevent} loop. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-drain} (struct {\bf evbuffer} $\ast$buf, size\_\-t len)
+\begin{DoxyCompactList}\small\item\em Remove a specified number of bytes data from the beginning of an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-enable\_\-locking} (struct {\bf evbuffer} $\ast$buf, void $\ast$lock)
+\begin{DoxyCompactList}\small\item\em Enable locking on an \doxyref{evbuffer}{p.}{structevbuffer} so that it can safely be used by multiple threads at the same time. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-expand} (struct {\bf evbuffer} $\ast$buf, size\_\-t datlen)
+\begin{DoxyCompactList}\small\item\em Expands the available space in an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+void {\bf evbuffer\_\-free} (struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Deallocate storage for an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-freeze} (struct {\bf evbuffer} $\ast$buf, int at\_\-front)
+\begin{DoxyCompactList}\small\item\em Prevent calls that modify an \doxyref{evbuffer}{p.}{structevbuffer} from succeeding. \item\end{DoxyCompactList}\item 
+size\_\-t {\bf evbuffer\_\-get\_\-contiguous\_\-space} (const struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Returns the number of contiguous available bytes in the first buffer chain. \item\end{DoxyCompactList}\item 
+size\_\-t {\bf evbuffer\_\-get\_\-length} (const struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Returns the total number of bytes stored in the \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+void {\bf evbuffer\_\-lock} (struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Acquire the lock on an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer} $\ast$ {\bf evbuffer\_\-new} (void)
+\begin{DoxyCompactList}\small\item\em Allocate storage for a new \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-peek} (struct {\bf evbuffer} $\ast$buffer, ev\_\-ssize\_\-t len, struct {\bf evbuffer\_\-ptr} $\ast$start\_\-at, struct {\bf evbuffer\_\-iovec} $\ast$vec\_\-out, int n\_\-vec)
+\begin{DoxyCompactList}\small\item\em Function to peek at data inside an \doxyref{evbuffer}{p.}{structevbuffer} without removing it or copying it out. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-prepend} (struct {\bf evbuffer} $\ast$buf, const void $\ast$data, size\_\-t size)
+\begin{DoxyCompactList}\small\item\em Prepends data to the beginning of the \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-prepend\_\-buffer} (struct {\bf evbuffer} $\ast$dst, struct {\bf evbuffer} $\ast$src)
+\begin{DoxyCompactList}\small\item\em Prepends all data from the src \doxyref{evbuffer}{p.}{structevbuffer} to the beginning of the dst \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-ptr\_\-set} (struct {\bf evbuffer} $\ast$buffer, struct {\bf evbuffer\_\-ptr} $\ast$ptr, size\_\-t position, enum {\bf evbuffer\_\-ptr\_\-how} how)
+\begin{DoxyCompactList}\small\item\em Sets the search pointer in the buffer to position. \item\end{DoxyCompactList}\item 
+unsigned char $\ast$ {\bf evbuffer\_\-pullup} (struct {\bf evbuffer} $\ast$buf, ev\_\-ssize\_\-t size)
+\begin{DoxyCompactList}\small\item\em Makes the data at the begging of an \doxyref{evbuffer}{p.}{structevbuffer} contiguous. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-read} (struct {\bf evbuffer} $\ast$buffer, evutil\_\-socket\_\-t fd, int howmuch)
+\begin{DoxyCompactList}\small\item\em Read from a file descriptor and store the result in an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+char $\ast$ {\bf evbuffer\_\-readln} (struct {\bf evbuffer} $\ast$buffer, size\_\-t $\ast$n\_\-read\_\-out, enum {\bf evbuffer\_\-eol\_\-style} eol\_\-style)
+\begin{DoxyCompactList}\small\item\em Read a single line from an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-remove} (struct {\bf evbuffer} $\ast$buf, void $\ast$data, size\_\-t datlen)
+\begin{DoxyCompactList}\small\item\em Read data from an \doxyref{evbuffer}{p.}{structevbuffer} and drain the bytes read. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-remove\_\-buffer} (struct {\bf evbuffer} $\ast$src, struct {\bf evbuffer} $\ast$dst, size\_\-t datlen)
+\begin{DoxyCompactList}\small\item\em Read data from an \doxyref{evbuffer}{p.}{structevbuffer} into another \doxyref{evbuffer}{p.}{structevbuffer}, draining the bytes from the source buffer. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-remove\_\-cb} (struct {\bf evbuffer} $\ast$buffer, {\bf evbuffer\_\-cb\_\-func} cb, void $\ast$cbarg)
+\begin{DoxyCompactList}\small\item\em Remove a callback from an \doxyref{evbuffer}{p.}{structevbuffer}, given the function and argument used to add it. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-remove\_\-cb\_\-entry} (struct {\bf evbuffer} $\ast$buffer, struct evbuffer\_\-cb\_\-entry $\ast$ent)
+\begin{DoxyCompactList}\small\item\em Remove a callback from an \doxyref{evbuffer}{p.}{structevbuffer}, given a handle returned from evbuffer\_\-add\_\-cb. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-reserve\_\-space} (struct {\bf evbuffer} $\ast$buf, ev\_\-ssize\_\-t size, struct {\bf evbuffer\_\-iovec} $\ast$vec, int n\_\-vec)
+\begin{DoxyCompactList}\small\item\em Reserves space in the last chain or chains of an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer\_\-ptr} {\bf evbuffer\_\-search} (struct {\bf evbuffer} $\ast$buffer, const char $\ast$what, size\_\-t len, const struct {\bf evbuffer\_\-ptr} $\ast$start)
+\begin{DoxyCompactList}\small\item\em Search for a string within an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer\_\-ptr} {\bf evbuffer\_\-search\_\-eol} (struct {\bf evbuffer} $\ast$buffer, struct {\bf evbuffer\_\-ptr} $\ast$start, size\_\-t $\ast$eol\_\-len\_\-out, enum {\bf evbuffer\_\-eol\_\-style} eol\_\-style)
+\begin{DoxyCompactList}\small\item\em Search for an end-\/of-\/line string within an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer\_\-ptr} {\bf evbuffer\_\-search\_\-range} (struct {\bf evbuffer} $\ast$buffer, const char $\ast$what, size\_\-t len, const struct {\bf evbuffer\_\-ptr} $\ast$start, const struct {\bf evbuffer\_\-ptr} $\ast$end)
+\begin{DoxyCompactList}\small\item\em Search for a string within part of an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-set\_\-flags} (struct {\bf evbuffer} $\ast$buf, ev\_\-uint64\_\-t flags)
+\begin{DoxyCompactList}\small\item\em Change the flags that are set for an \doxyref{evbuffer}{p.}{structevbuffer} by adding more. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-unfreeze} (struct {\bf evbuffer} $\ast$buf, int at\_\-front)
+\begin{DoxyCompactList}\small\item\em Re-\/enable calls that modify an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+void {\bf evbuffer\_\-unlock} (struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Release the lock on an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-write} (struct {\bf evbuffer} $\ast$buffer, evutil\_\-socket\_\-t fd)
+\begin{DoxyCompactList}\small\item\em Write the contents of an \doxyref{evbuffer}{p.}{structevbuffer} to a file descriptor. \item\end{DoxyCompactList}\item 
+int {\bf evbuffer\_\-write\_\-atmost} (struct {\bf evbuffer} $\ast$buffer, evutil\_\-socket\_\-t fd, ev\_\-ssize\_\-t howmuch)
+\begin{DoxyCompactList}\small\item\em Write some of the contents of an \doxyref{evbuffer}{p.}{structevbuffer} to a file descriptor. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for buffering data for network sending or receiving. An \doxyref{evbuffer}{p.}{structevbuffer} can be used for preparing data before sending it to the network or conversely for reading data from the network. Evbuffers try to avoid memory copies as much as possible. As a result, evbuffers can be used to pass data around without actually incurring the overhead of copying the data.
+
+A new \doxyref{evbuffer}{p.}{structevbuffer} can be allocated with \doxyref{evbuffer\_\-new()}{p.}{buffer_8h_a8ebe44bfccd1d245cae17b1b7586092a}, and can be freed with \doxyref{evbuffer\_\-free()}{p.}{buffer_8h_a0a87b43a5ae8c5589e77cde486b8a155}. Most users will be using evbuffers via the \doxyref{bufferevent}{p.}{structbufferevent} interface. To access a bufferevent's evbuffers, use \doxyref{bufferevent\_\-get\_\-input()}{p.}{bufferevent_8h_a7bc716ede3a5fc1e9107ae522e545e0c} and \doxyref{bufferevent\_\-get\_\-output()}{p.}{bufferevent_8h_af3dea057c5a276461dd94a1601682be1}.
+
+There are several guidelines for using evbuffers.
+
+
+\begin{DoxyItemize}
+\item if you already know how much data you are going to add as a result of calling \doxyref{evbuffer\_\-add()}{p.}{buffer_8h_a69c3b8893a49bdd919642c6920c1fcb4} multiple times, it makes sense to use \doxyref{evbuffer\_\-expand()}{p.}{buffer_8h_a305caf7b9bfb8713e6ef383d61791f95} first to make sure that enough memory is allocated before hand.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item \doxyref{evbuffer\_\-add\_\-buffer()}{p.}{buffer_8h_a9d2edd536246d70c50678a3865305414} adds the contents of one buffer to the other without incurring any unnecessary memory copies.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item \doxyref{evbuffer\_\-add()}{p.}{buffer_8h_a69c3b8893a49bdd919642c6920c1fcb4} and \doxyref{evbuffer\_\-add\_\-buffer()}{p.}{buffer_8h_a9d2edd536246d70c50678a3865305414} do not mix very well: if you use them, you will wind up with fragmented memory in your buffer.
+\end{DoxyItemize}
+
+
+\begin{DoxyItemize}
+\item For high-\/performance code, you may want to avoid copying data into and out of buffers. You can skip the copy step by using \doxyref{evbuffer\_\-reserve\_\-space()}{p.}{buffer_8h_ada49b2dc41bb09bb011765c1fc826a5d}/evbuffer\_\-commit\_\-space() when writing into a buffer, and \doxyref{evbuffer\_\-peek()}{p.}{buffer_8h_adf4b59974a0cb989b7091f0b8677d511} when reading.
+\end{DoxyItemize}
+
+In Libevent 2.0 and later, evbuffers are represented using a linked list of memory chunks, with pointers to the first and last chunk in the chain.
+
+As the contents of an \doxyref{evbuffer}{p.}{structevbuffer} can be stored in multiple different memory blocks, it cannot be accessed directly. Instead, \doxyref{evbuffer\_\-pullup()}{p.}{buffer_8h_a07df786553218ae3a7b0ebd2c9471a96} can be used to force a specified number of bytes to be contiguous. This will cause memory reallocation and memory copies if the data is split across multiple blocks. It is more efficient, however, to use \doxyref{evbuffer\_\-peek()}{p.}{buffer_8h_adf4b59974a0cb989b7091f0b8677d511} if you don't require that the memory to be contiguous. 
+
+\subsection{Define Documentation}
+\index{buffer.h@{buffer.h}!EVBUFFER\_\-CB\_\-ENABLED@{EVBUFFER\_\-CB\_\-ENABLED}}
+\index{EVBUFFER\_\-CB\_\-ENABLED@{EVBUFFER\_\-CB\_\-ENABLED}!buffer.h@{buffer.h}}
+\subsubsection[{EVBUFFER\_\-CB\_\-ENABLED}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVBUFFER\_\-CB\_\-ENABLED~1}\label{buffer_8h_aeb635643a72f8e57d50d7dee37308148}
+
+
+If this flag is not set, then a callback is temporarily disabled, and should not be invoked. \begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-cb\_\-set\_\-flags()}{p.}{buffer_8h_a4ba44d01484f19fbfe7c18d2a175dc3b}, \doxyref{evbuffer\_\-cb\_\-clear\_\-flags()}{p.}{buffer_8h_acda56baecd4b512f4e9f54a21e39177f} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD@{EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD}}
+\index{EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD@{EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD}!buffer.h@{buffer.h}}
+\subsubsection[{EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD~1}\label{buffer_8h_a0d9db8b232ebf8d63c660ec429981e91}
+
+
+If this flag is set, then we will not use \doxyref{evbuffer\_\-peek()}{p.}{buffer_8h_adf4b59974a0cb989b7091f0b8677d511}, \doxyref{evbuffer\_\-remove()}{p.}{buffer_8h_a0455fc72c74c758ed8dc9a0902af451a}, \doxyref{evbuffer\_\-remove\_\-buffer()}{p.}{buffer_8h_a0bdef97f6a142425b271b329a90de869}, and so on to read bytes from this buffer: we'll only take bytes out of this buffer by writing them to the network (as with evbuffer\_\-write\_\-atmost), by removing them without observing them (as with evbuffer\_\-drain), or by copying them all out at once (as with evbuffer\_\-add\_\-buffer). Using this option allows the implementation to use sendfile-\/based operations for \doxyref{evbuffer\_\-add\_\-file()}{p.}{buffer_8h_a5db7e9063755accc56fdad87d662743e}; see that function for more information.
+
+This flag is on by default for bufferevents that can take advantage of it; you should never actually need to set it on a bufferevent's output buffer. 
+
+\subsection{Typedef Documentation}
+\index{buffer.h@{buffer.h}!evbuffer\_\-cb\_\-func@{evbuffer\_\-cb\_\-func}}
+\index{evbuffer\_\-cb\_\-func@{evbuffer\_\-cb\_\-func}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-cb\_\-func}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf evbuffer\_\-cb\_\-func})(struct {\bf evbuffer} $\ast$buffer, const struct {\bf evbuffer\_\-cb\_\-info} $\ast$info, void $\ast$arg)}\label{buffer_8h_af40adaa98b02da7fca55da29270266d9}
+
+
+Type definition for a callback that is invoked whenever data is added or removed from an \doxyref{evbuffer}{p.}{structevbuffer}. An \doxyref{evbuffer}{p.}{structevbuffer} may have one or more callbacks set at a time. The order in which they are executed is undefined.
+
+A callback function may add more callbacks, or remove itself from the list of callbacks, or add or remove data from the buffer. It may not remove another callback from the list.
+
+If a callback adds or removes data from the buffer or from another buffer, this can cause a recursive invocation of your callback or other callbacks. If you ask for an infinite loop, you might just get one: watch out!
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the buffer whose size has changed \item[{\em info}]a structure describing how the buffer changed. \item[{\em arg}]a pointer to user data \end{DoxyParams}
+\index{buffer.h@{buffer.h}!evbuffer\_\-ref\_\-cleanup\_\-cb@{evbuffer\_\-ref\_\-cleanup\_\-cb}}
+\index{evbuffer\_\-ref\_\-cleanup\_\-cb@{evbuffer\_\-ref\_\-cleanup\_\-cb}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-ref\_\-cleanup\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf evbuffer\_\-ref\_\-cleanup\_\-cb})(const void $\ast$data, size\_\-t datalen, void $\ast$extra)}\label{buffer_8h_acc4dead0032a38143cb2c902417f9177}
+
+
+A cleanup function for a piece of memory added to an \doxyref{evbuffer}{p.}{structevbuffer} by reference. \begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-add\_\-reference()}{p.}{buffer_8h_a8a61b06a97974a86853becb9110b2ffd} 
+\end{DoxySeeAlso}
+
+
+\subsection{Enumeration Type Documentation}
+\index{buffer.h@{buffer.h}!evbuffer\_\-eol\_\-style@{evbuffer\_\-eol\_\-style}}
+\index{evbuffer\_\-eol\_\-style@{evbuffer\_\-eol\_\-style}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-eol\_\-style}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf evbuffer\_\-eol\_\-style}}\label{buffer_8h_ad8daf54669a1d2094ce4251dbb502178}
+
+
+Used to tell evbuffer\_\-readln what kind of line-\/ending to look for. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EVBUFFER\_\-EOL\_\-ANY@{EVBUFFER\_\-EOL\_\-ANY}!buffer.h@{buffer.h}}\index{buffer.h@{buffer.h}!EVBUFFER\_\-EOL\_\-ANY@{EVBUFFER\_\-EOL\_\-ANY}}\item[{\em 
+EVBUFFER\_\-EOL\_\-ANY\label{buffer_8h_ad8daf54669a1d2094ce4251dbb502178ab7c6da1408b1b2ec3a6657e5a71a50c3}
+}]Any sequence of CR and LF characters is acceptable as an EOL. Note that this style can produce ambiguous results: the sequence \char`\"{}CRLF\char`\"{} will be treated as a single EOL if it is all in the buffer at once, but if you first read a CR from the network and later read an LF from the network, it will be treated as two EOLs. \index{EVBUFFER\_\-EOL\_\-CRLF@{EVBUFFER\_\-EOL\_\-CRLF}!buffer.h@{buffer.h}}\index{buffer.h@{buffer.h}!EVBUFFER\_\-EOL\_\-CRLF@{EVBUFFER\_\-EOL\_\-CRLF}}\item[{\em 
+EVBUFFER\_\-EOL\_\-CRLF\label{buffer_8h_ad8daf54669a1d2094ce4251dbb502178a4aec5353e85fbb57ce3b1ee68f36f641}
+}]An EOL is an LF, optionally preceded by a CR. This style is most useful for implementing text-\/based internet protocols. \index{EVBUFFER\_\-EOL\_\-CRLF\_\-STRICT@{EVBUFFER\_\-EOL\_\-CRLF\_\-STRICT}!buffer.h@{buffer.h}}\index{buffer.h@{buffer.h}!EVBUFFER\_\-EOL\_\-CRLF\_\-STRICT@{EVBUFFER\_\-EOL\_\-CRLF\_\-STRICT}}\item[{\em 
+EVBUFFER\_\-EOL\_\-CRLF\_\-STRICT\label{buffer_8h_ad8daf54669a1d2094ce4251dbb502178a814775b4a9773d34421e7e88ca8c58de}
+}]An EOL is a CR followed by an LF. \index{EVBUFFER\_\-EOL\_\-LF@{EVBUFFER\_\-EOL\_\-LF}!buffer.h@{buffer.h}}\index{buffer.h@{buffer.h}!EVBUFFER\_\-EOL\_\-LF@{EVBUFFER\_\-EOL\_\-LF}}\item[{\em 
+EVBUFFER\_\-EOL\_\-LF\label{buffer_8h_ad8daf54669a1d2094ce4251dbb502178ac572ea90e5a96a7ceb878f2a8ef48993}
+}]An EOL is a LF. \end{description}
+\end{Desc}
+
+\index{buffer.h@{buffer.h}!evbuffer\_\-ptr\_\-how@{evbuffer\_\-ptr\_\-how}}
+\index{evbuffer\_\-ptr\_\-how@{evbuffer\_\-ptr\_\-how}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-ptr\_\-how}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf evbuffer\_\-ptr\_\-how}}\label{buffer_8h_a13a9ee759900ce2964d16acd5f309014}
+
+
+Defines how to adjust an \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} by \doxyref{evbuffer\_\-ptr\_\-set()}{p.}{buffer_8h_a83ea16ab8facba6c68d2e6931d13fbf4}. \begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-ptr\_\-set()}{p.}{buffer_8h_a83ea16ab8facba6c68d2e6931d13fbf4} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EVBUFFER\_\-PTR\_\-SET@{EVBUFFER\_\-PTR\_\-SET}!buffer.h@{buffer.h}}\index{buffer.h@{buffer.h}!EVBUFFER\_\-PTR\_\-SET@{EVBUFFER\_\-PTR\_\-SET}}\item[{\em 
+EVBUFFER\_\-PTR\_\-SET\label{buffer_8h_a13a9ee759900ce2964d16acd5f309014a78a0ff3721ff5f1647f743dcfb2f13ee}
+}]Sets the pointer to the position; can be called on with an uninitialized \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr}. \index{EVBUFFER\_\-PTR\_\-ADD@{EVBUFFER\_\-PTR\_\-ADD}!buffer.h@{buffer.h}}\index{buffer.h@{buffer.h}!EVBUFFER\_\-PTR\_\-ADD@{EVBUFFER\_\-PTR\_\-ADD}}\item[{\em 
+EVBUFFER\_\-PTR\_\-ADD\label{buffer_8h_a13a9ee759900ce2964d16acd5f309014a0bce00d78b5fbc55c478ff362269f428}
+}]Advances the pointer by adding to the current position. \end{description}
+\end{Desc}
+
+
+
+\subsection{Function Documentation}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add@{evbuffer\_\-add}}
+\index{evbuffer\_\-add@{evbuffer\_\-add}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-add (struct {\bf evbuffer} $\ast$ {\em buf}, \/  const void $\ast$ {\em data}, \/  size\_\-t {\em datlen})}\label{buffer_8h_a69c3b8893a49bdd919642c6920c1fcb4}
+
+
+Append data to the end of an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to be appended to \item[{\em data}]pointer to the beginning of the data buffer \item[{\em datlen}]the number of bytes to be copied from the data buffer \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add\_\-buffer@{evbuffer\_\-add\_\-buffer}}
+\index{evbuffer\_\-add\_\-buffer@{evbuffer\_\-add\_\-buffer}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-add\_\-buffer (struct {\bf evbuffer} $\ast$ {\em outbuf}, \/  struct {\bf evbuffer} $\ast$ {\em inbuf})}\label{buffer_8h_a9d2edd536246d70c50678a3865305414}
+
+
+Move all data from one \doxyref{evbuffer}{p.}{structevbuffer} into another \doxyref{evbuffer}{p.}{structevbuffer}. This is a destructive add. The data from one buffer moves into the other buffer. However, no unnecessary memory copies occur.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em outbuf}]the output buffer \item[{\em inbuf}]the input buffer \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-remove\_\-buffer()}{p.}{buffer_8h_a0bdef97f6a142425b271b329a90de869} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add\_\-cb@{evbuffer\_\-add\_\-cb}}
+\index{evbuffer\_\-add\_\-cb@{evbuffer\_\-add\_\-cb}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}struct evbuffer\_\-cb\_\-entry$\ast$ evbuffer\_\-add\_\-cb (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  {\bf evbuffer\_\-cb\_\-func} {\em cb}, \/  void $\ast$ {\em cbarg})\hspace{0.3cm}{\ttfamily  [read]}}\label{buffer_8h_aa2a1509845c3d71f0adac4198aab0bf7}
+
+
+Add a new callback to an \doxyref{evbuffer}{p.}{structevbuffer}. Subsequent calls to \doxyref{evbuffer\_\-add\_\-cb()}{p.}{buffer_8h_aa2a1509845c3d71f0adac4198aab0bf7} add new callbacks. To remove this callback, call evbuffer\_\-remove\_\-cb or evbuffer\_\-remove\_\-cb\_\-entry.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be monitored \item[{\em cb}]the callback function to invoke when the \doxyref{evbuffer}{p.}{structevbuffer} is modified, or NULL to remove all callbacks. \item[{\em cbarg}]an argument to be provided to the callback function \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a handle to the callback on success, or NULL on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add\_\-file@{evbuffer\_\-add\_\-file}}
+\index{evbuffer\_\-add\_\-file@{evbuffer\_\-add\_\-file}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add\_\-file}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-add\_\-file (struct {\bf evbuffer} $\ast$ {\em outbuf}, \/  int {\em fd}, \/  ev\_\-off\_\-t {\em offset}, \/  ev\_\-off\_\-t {\em length})}\label{buffer_8h_a5db7e9063755accc56fdad87d662743e}
+
+
+Copy data from a file into the \doxyref{evbuffer}{p.}{structevbuffer} for writing to a socket. This function avoids unnecessary data copies between userland and kernel. If sendfile is available and the EVBUFFER\_\-FLAG\_\-DRAINS\_\-TO\_\-FD flag is set, it uses those functions. Otherwise, it tries to use mmap (or CreateFileMapping on Windows).
+
+The function owns the resulting file descriptor and will close it when finished transferring data.
+
+The results of using \doxyref{evbuffer\_\-remove()}{p.}{buffer_8h_a0455fc72c74c758ed8dc9a0902af451a} or \doxyref{evbuffer\_\-pullup()}{p.}{buffer_8h_a07df786553218ae3a7b0ebd2c9471a96} on evbuffers whose data was added using this function are undefined.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em outbuf}]the output buffer \item[{\em fd}]the file descriptor \item[{\em offset}]the offset from which to read data \item[{\em length}]how much data to read \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add\_\-printf@{evbuffer\_\-add\_\-printf}}
+\index{evbuffer\_\-add\_\-printf@{evbuffer\_\-add\_\-printf}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add\_\-printf}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-add\_\-printf (struct {\bf evbuffer} $\ast$ {\em buf}, \/  const char $\ast$ {\em fmt}, \/   {\em ...})}\label{buffer_8h_adeb9457f344ddaf459726dbe348ac3db}
+
+
+Append a formatted string to the end of an \doxyref{evbuffer}{p.}{structevbuffer}. The string is formated as printf.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} that will be appended to \item[{\em fmt}]a format string \item[{\em ...}]arguments that will be passed to printf(3) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes added if successful, or -\/1 if an error occurred.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+evutil\_\-printf(), \doxyref{evbuffer\_\-add\_\-vprintf()}{p.}{buffer_8h_acc385568d5129d4af10486b641b98f81} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add\_\-reference@{evbuffer\_\-add\_\-reference}}
+\index{evbuffer\_\-add\_\-reference@{evbuffer\_\-add\_\-reference}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add\_\-reference}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-add\_\-reference (struct {\bf evbuffer} $\ast$ {\em outbuf}, \/  const void $\ast$ {\em data}, \/  size\_\-t {\em datlen}, \/  {\bf evbuffer\_\-ref\_\-cleanup\_\-cb} {\em cleanupfn}, \/  void $\ast$ {\em cleanupfn\_\-arg})}\label{buffer_8h_a8a61b06a97974a86853becb9110b2ffd}
+
+
+Reference memory into an \doxyref{evbuffer}{p.}{structevbuffer} without copying. The memory needs to remain valid until all the added data has been read. This function keeps just a reference to the memory without actually incurring the overhead of a copy.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em outbuf}]the output buffer \item[{\em data}]the memory to reference \item[{\em datlen}]how memory to reference \item[{\em cleanupfn}]callback to be invoked when the memory is no longer referenced by this \doxyref{evbuffer}{p.}{structevbuffer}. \item[{\em cleanupfn\_\-arg}]optional argument to the cleanup callback \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-add\_\-vprintf@{evbuffer\_\-add\_\-vprintf}}
+\index{evbuffer\_\-add\_\-vprintf@{evbuffer\_\-add\_\-vprintf}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-add\_\-vprintf}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-add\_\-vprintf (struct {\bf evbuffer} $\ast$ {\em buf}, \/  const char $\ast$ {\em fmt}, \/  va\_\-list {\em ap})}\label{buffer_8h_acc385568d5129d4af10486b641b98f81}
+
+
+Append a va\_\-list formatted string to the end of an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} that will be appended to \item[{\em fmt}]a format string \item[{\em ap}]a varargs va\_\-list argument array that will be passed to vprintf(3) \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes added if successful, or -\/1 if an error occurred. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-cb\_\-clear\_\-flags@{evbuffer\_\-cb\_\-clear\_\-flags}}
+\index{evbuffer\_\-cb\_\-clear\_\-flags@{evbuffer\_\-cb\_\-clear\_\-flags}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-cb\_\-clear\_\-flags}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-cb\_\-clear\_\-flags (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  struct evbuffer\_\-cb\_\-entry $\ast$ {\em cb}, \/  ev\_\-uint32\_\-t {\em flags})}\label{buffer_8h_acda56baecd4b512f4e9f54a21e39177f}
+
+
+Change the flags that are set for a callback on a buffer by removing some. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} that the callback is watching. \item[{\em cb}]the callback whose status we want to change. \item[{\em flags}]EVBUFFER\_\-CB\_\-ENABLED to disable the callback. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-cb\_\-set\_\-flags@{evbuffer\_\-cb\_\-set\_\-flags}}
+\index{evbuffer\_\-cb\_\-set\_\-flags@{evbuffer\_\-cb\_\-set\_\-flags}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-cb\_\-set\_\-flags}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-cb\_\-set\_\-flags (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  struct evbuffer\_\-cb\_\-entry $\ast$ {\em cb}, \/  ev\_\-uint32\_\-t {\em flags})}\label{buffer_8h_a4ba44d01484f19fbfe7c18d2a175dc3b}
+
+
+Change the flags that are set for a callback on a buffer by adding more. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} that the callback is watching. \item[{\em cb}]the callback whose status we want to change. \item[{\em flags}]EVBUFFER\_\-CB\_\-ENABLED to re-\/enable the callback. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-clear\_\-flags@{evbuffer\_\-clear\_\-flags}}
+\index{evbuffer\_\-clear\_\-flags@{evbuffer\_\-clear\_\-flags}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-clear\_\-flags}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-clear\_\-flags (struct {\bf evbuffer} $\ast$ {\em buf}, \/  ev\_\-uint64\_\-t {\em flags})}\label{buffer_8h_a732701957705ae6abe7c28effeb4aa39}
+
+
+Change the flags that are set for an \doxyref{evbuffer}{p.}{structevbuffer} by removing some. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} that the callback is watching. \item[{\em cb}]the callback whose status we want to change. \item[{\em flags}]One or more EVBUFFER\_\-FLAG\_\-$\ast$ options \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-commit\_\-space@{evbuffer\_\-commit\_\-space}}
+\index{evbuffer\_\-commit\_\-space@{evbuffer\_\-commit\_\-space}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-commit\_\-space}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-commit\_\-space (struct {\bf evbuffer} $\ast$ {\em buf}, \/  struct {\bf evbuffer\_\-iovec} $\ast$ {\em vec}, \/  int {\em n\_\-vecs})}\label{buffer_8h_a7a13a10fd1eb75cccf0ca29a05c5ba8a}
+
+
+Commits previously reserved space. Commits some of the space previously reserved with \doxyref{evbuffer\_\-reserve\_\-space()}{p.}{buffer_8h_ada49b2dc41bb09bb011765c1fc826a5d}. It then becomes available for reading.
+
+This function may return an error if the pointer in the extents do not match those returned from evbuffer\_\-reserve\_\-space, or if data has been added to the buffer since the space was reserved.
+
+If you want to commit less data than you got reserved space for, modify the iov\_\-len pointer of the appropriate extent to a smaller value. Note that you may have received more space than you requested if it was available!
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} in which to reserve space. \item[{\em vec}]one or two extents returned by evbuffer\_\-reserve\_\-space. \item[{\em n\_\-vecs}]the number of extents. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on error 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-reserve\_\-space()}{p.}{buffer_8h_ada49b2dc41bb09bb011765c1fc826a5d} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!evbuffer\_\-copyout@{evbuffer\_\-copyout}}
+\index{evbuffer\_\-copyout@{evbuffer\_\-copyout}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-copyout}]{\setlength{\rightskip}{0pt plus 5cm}ev\_\-ssize\_\-t evbuffer\_\-copyout (struct {\bf evbuffer} $\ast$ {\em buf}, \/  void $\ast$ {\em data\_\-out}, \/  size\_\-t {\em datlen})}\label{buffer_8h_a8fa753475570f6529691ef8484cacc1b}
+
+
+Read data from an \doxyref{evbuffer}{p.}{structevbuffer}, and leave the buffer unchanged. If more bytes are requested than are available in the \doxyref{evbuffer}{p.}{structevbuffer}, we only extract as many bytes as were available.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to be read from \item[{\em data\_\-out}]the destination buffer to store the result \item[{\em datlen}]the maximum size of the destination buffer \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes read, or -\/1 if we can't drain the buffer. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-defer\_\-callbacks@{evbuffer\_\-defer\_\-callbacks}}
+\index{evbuffer\_\-defer\_\-callbacks@{evbuffer\_\-defer\_\-callbacks}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-defer\_\-callbacks}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-defer\_\-callbacks (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  struct {\bf event\_\-base} $\ast$ {\em base})}\label{buffer_8h_a1c99c484430a81e641a783a273435074}
+
+
+Force all the callbacks on an \doxyref{evbuffer}{p.}{structevbuffer} to be run, not immediately after the \doxyref{evbuffer}{p.}{structevbuffer} is altered, but instead from inside the \doxyref{event}{p.}{structevent} loop. This can be used to serialize all the callbacks to a single thread of execution. \index{buffer.h@{buffer.h}!evbuffer\_\-drain@{evbuffer\_\-drain}}
+\index{evbuffer\_\-drain@{evbuffer\_\-drain}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-drain}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-drain (struct {\bf evbuffer} $\ast$ {\em buf}, \/  size\_\-t {\em len})}\label{buffer_8h_a5c24f3bfbc941d693bf59b5d77d2c37f}
+
+
+Remove a specified number of bytes data from the beginning of an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to be drained \item[{\em len}]the number of bytes to drain from the beginning of the buffer \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-enable\_\-locking@{evbuffer\_\-enable\_\-locking}}
+\index{evbuffer\_\-enable\_\-locking@{evbuffer\_\-enable\_\-locking}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-enable\_\-locking}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-enable\_\-locking (struct {\bf evbuffer} $\ast$ {\em buf}, \/  void $\ast$ {\em lock})}\label{buffer_8h_a1bf21d715f288541eb670c5f159f2264}
+
+
+Enable locking on an \doxyref{evbuffer}{p.}{structevbuffer} so that it can safely be used by multiple threads at the same time. NOTE: when locking is enabled, the lock will be held when callbacks are invoked. This could result in deadlock if you aren't careful. Plan accordingly!
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]An \doxyref{evbuffer}{p.}{structevbuffer} to make lockable. \item[{\em lock}]A lock object, or NULL if we should allocate our own. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-expand@{evbuffer\_\-expand}}
+\index{evbuffer\_\-expand@{evbuffer\_\-expand}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-expand}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-expand (struct {\bf evbuffer} $\ast$ {\em buf}, \/  size\_\-t {\em datlen})}\label{buffer_8h_a305caf7b9bfb8713e6ef383d61791f95}
+
+
+Expands the available space in an \doxyref{evbuffer}{p.}{structevbuffer}. Expands the available space in the \doxyref{evbuffer}{p.}{structevbuffer} to at least datlen, so that appending datlen additional bytes will not require any new allocations.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to be expanded \item[{\em datlen}]the new minimum length requirement \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-free@{evbuffer\_\-free}}
+\index{evbuffer\_\-free@{evbuffer\_\-free}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void evbuffer\_\-free (struct {\bf evbuffer} $\ast$ {\em buf})}\label{buffer_8h_a0a87b43a5ae8c5589e77cde486b8a155}
+
+
+Deallocate storage for an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]pointer to the \doxyref{evbuffer}{p.}{structevbuffer} to be freed \end{DoxyParams}
+\index{buffer.h@{buffer.h}!evbuffer\_\-freeze@{evbuffer\_\-freeze}}
+\index{evbuffer\_\-freeze@{evbuffer\_\-freeze}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-freeze}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-freeze (struct {\bf evbuffer} $\ast$ {\em buf}, \/  int {\em at\_\-front})}\label{buffer_8h_a8611ca97c720d4dd605e272cc4136684}
+
+
+Prevent calls that modify an \doxyref{evbuffer}{p.}{structevbuffer} from succeeding. A buffer may frozen at the front, at the back, or at both the front and the back.
+
+If the front of a buffer is frozen, operations that drain data from the front of the buffer, or that prepend data to the buffer, will fail until it is unfrozen. If the back a buffer is frozen, operations that append data from the buffer will fail until it is unfrozen.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]The buffer to freeze \item[{\em at\_\-front}]If true, we freeze the front of the buffer. If false, we freeze the back. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-get\_\-contiguous\_\-space@{evbuffer\_\-get\_\-contiguous\_\-space}}
+\index{evbuffer\_\-get\_\-contiguous\_\-space@{evbuffer\_\-get\_\-contiguous\_\-space}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-get\_\-contiguous\_\-space}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t evbuffer\_\-get\_\-contiguous\_\-space (const struct {\bf evbuffer} $\ast$ {\em buf})}\label{buffer_8h_acd3d8507991609637a501e835e450331}
+
+
+Returns the number of contiguous available bytes in the first buffer chain. This is useful when processing data that might be split into multiple chains, or that might all be in the first chain. Calls to \doxyref{evbuffer\_\-pullup()}{p.}{buffer_8h_a07df786553218ae3a7b0ebd2c9471a96} that cause reallocation and copying of data can thus be avoided.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]pointer to the \doxyref{evbuffer}{p.}{structevbuffer} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if no data is available, otherwise the number of available bytes in the first buffer chain. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-get\_\-length@{evbuffer\_\-get\_\-length}}
+\index{evbuffer\_\-get\_\-length@{evbuffer\_\-get\_\-length}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-get\_\-length}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t evbuffer\_\-get\_\-length (const struct {\bf evbuffer} $\ast$ {\em buf})}\label{buffer_8h_af1b44374d37735f3a90ae402eaeddf44}
+
+
+Returns the total number of bytes stored in the \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]pointer to the \doxyref{evbuffer}{p.}{structevbuffer} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes stored in the \doxyref{evbuffer}{p.}{structevbuffer} 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-lock@{evbuffer\_\-lock}}
+\index{evbuffer\_\-lock@{evbuffer\_\-lock}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-lock}]{\setlength{\rightskip}{0pt plus 5cm}void evbuffer\_\-lock (struct {\bf evbuffer} $\ast$ {\em buf})}\label{buffer_8h_af9542ca1ac381708c9b1450d91d168ec}
+
+
+Acquire the lock on an \doxyref{evbuffer}{p.}{structevbuffer}. Has no effect if locking was not enabled with evbuffer\_\-enable\_\-locking. \index{buffer.h@{buffer.h}!evbuffer\_\-new@{evbuffer\_\-new}}
+\index{evbuffer\_\-new@{evbuffer\_\-new}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf evbuffer}$\ast$ evbuffer\_\-new (void)\hspace{0.3cm}{\ttfamily  [read]}}\label{buffer_8h_a8ebe44bfccd1d245cae17b1b7586092a}
+
+
+Allocate storage for a new \doxyref{evbuffer}{p.}{structevbuffer}. \begin{DoxyReturn}{Returns}
+a pointer to a newly allocated \doxyref{evbuffer}{p.}{structevbuffer} struct, or NULL if an error occurred 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-peek@{evbuffer\_\-peek}}
+\index{evbuffer\_\-peek@{evbuffer\_\-peek}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-peek}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-peek (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  ev\_\-ssize\_\-t {\em len}, \/  struct {\bf evbuffer\_\-ptr} $\ast$ {\em start\_\-at}, \/  struct {\bf evbuffer\_\-iovec} $\ast$ {\em vec\_\-out}, \/  int {\em n\_\-vec})}\label{buffer_8h_adf4b59974a0cb989b7091f0b8677d511}
+
+
+Function to peek at data inside an \doxyref{evbuffer}{p.}{structevbuffer} without removing it or copying it out. Pointers to the data are returned by filling the 'vec\_\-out' array with pointers to one or more extents of data inside the buffer.
+
+The total data in the extents that you get back may be more than you requested (if there is more data last extent than you asked for), or less (if you do not provide enough evbuffer\_\-iovecs, or if the buffer does not have as much data as you asked to see).
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to peek into, \item[{\em len}]the number of bytes to try to peek. If len is negative, we will try to fill as much of vec\_\-out as we can. If len is negative and vec\_\-out is not provided, we return the number of evbuffer\_\-iovecs that would be needed to get all the data in the buffer. \item[{\em start\_\-at}]an \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} indicating the point at which we should start looking for data. NULL means, \char`\"{}At the start of the
+       buffer.\char`\"{} \item[{\em vec\_\-out}]an array of \doxyref{evbuffer\_\-iovec}{p.}{structevbuffer__iovec} \item[{\em n\_\-vec}]the length of vec\_\-out. If 0, we only count how many extents would be necessary to point to the requested amount of data. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of extents needed. This may be less than n\_\-vec if we didn't need all the evbuffer\_\-iovecs we were given, or more than n\_\-vec if we would need more to return all the data that was requested. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-prepend@{evbuffer\_\-prepend}}
+\index{evbuffer\_\-prepend@{evbuffer\_\-prepend}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-prepend}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-prepend (struct {\bf evbuffer} $\ast$ {\em buf}, \/  const void $\ast$ {\em data}, \/  size\_\-t {\em size})}\label{buffer_8h_a0daf99dbc837953427b60c462e5eba97}
+
+
+Prepends data to the beginning of the \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to which to prepend data \item[{\em data}]a pointer to the memory to prepend \item[{\em size}]the number of bytes to prepend \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 otherwise 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-prepend\_\-buffer@{evbuffer\_\-prepend\_\-buffer}}
+\index{evbuffer\_\-prepend\_\-buffer@{evbuffer\_\-prepend\_\-buffer}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-prepend\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-prepend\_\-buffer (struct {\bf evbuffer} $\ast$ {\em dst}, \/  struct {\bf evbuffer} $\ast$ {\em src})}\label{buffer_8h_a80ea4326ada348edc0e4fb53ad1df80c}
+
+
+Prepends all data from the src \doxyref{evbuffer}{p.}{structevbuffer} to the beginning of the dst \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em dst}]the \doxyref{evbuffer}{p.}{structevbuffer} to which to prepend data \item[{\em src}]the \doxyref{evbuffer}{p.}{structevbuffer} to prepend; it will be emptied as a result \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 otherwise 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-ptr\_\-set@{evbuffer\_\-ptr\_\-set}}
+\index{evbuffer\_\-ptr\_\-set@{evbuffer\_\-ptr\_\-set}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-ptr\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-ptr\_\-set (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  struct {\bf evbuffer\_\-ptr} $\ast$ {\em ptr}, \/  size\_\-t {\em position}, \/  enum {\bf evbuffer\_\-ptr\_\-how} {\em how})}\label{buffer_8h_a83ea16ab8facba6c68d2e6931d13fbf4}
+
+
+Sets the search pointer in the buffer to position. If \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} is not initialized. This function can only be called with EVBUFFER\_\-PTR\_\-SET.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be search \item[{\em ptr}]a pointer to a struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} \item[{\em position}]the position at which to start the next search \item[{\em how}]determines how the pointer should be manipulated. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success or -\/1 otherwise 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-pullup@{evbuffer\_\-pullup}}
+\index{evbuffer\_\-pullup@{evbuffer\_\-pullup}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-pullup}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ evbuffer\_\-pullup (struct {\bf evbuffer} $\ast$ {\em buf}, \/  ev\_\-ssize\_\-t {\em size})}\label{buffer_8h_a07df786553218ae3a7b0ebd2c9471a96}
+
+
+Makes the data at the begging of an \doxyref{evbuffer}{p.}{structevbuffer} contiguous. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to make contiguous \item[{\em size}]the number of bytes to make contiguous, or -\/1 to make the entire buffer contiguous. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the contiguous memory array 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-read@{evbuffer\_\-read}}
+\index{evbuffer\_\-read@{evbuffer\_\-read}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-read (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  evutil\_\-socket\_\-t {\em fd}, \/  int {\em howmuch})}\label{buffer_8h_a464aff577b05417171192fc68539b77e}
+
+
+Read from a file descriptor and store the result in an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to store the result \item[{\em fd}]the file descriptor to read from \item[{\em howmuch}]the number of bytes to be read \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes read, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-write()}{p.}{buffer_8h_a1207167bb14d5333326225f41477e910} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!evbuffer\_\-readln@{evbuffer\_\-readln}}
+\index{evbuffer\_\-readln@{evbuffer\_\-readln}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-readln}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ evbuffer\_\-readln (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  size\_\-t $\ast$ {\em n\_\-read\_\-out}, \/  enum {\bf evbuffer\_\-eol\_\-style} {\em eol\_\-style})}\label{buffer_8h_ae2460b5060948d3233342c4c81888650}
+
+
+Read a single line from an \doxyref{evbuffer}{p.}{structevbuffer}. Reads a line terminated by an EOL as determined by the evbuffer\_\-eol\_\-style argument. Returns a newly allocated nul-\/terminated string; the caller must free the returned value. The EOL is not included in the returned string.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to read from \item[{\em n\_\-read\_\-out}]if non-\/NULL, points to a size\_\-t that is set to the number of characters in the returned string. This is useful for strings that can contain NUL characters. \item[{\em eol\_\-style}]the style of line-\/ending to use. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to a single line, or NULL if an error occurred 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-remove@{evbuffer\_\-remove}}
+\index{evbuffer\_\-remove@{evbuffer\_\-remove}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-remove}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-remove (struct {\bf evbuffer} $\ast$ {\em buf}, \/  void $\ast$ {\em data}, \/  size\_\-t {\em datlen})}\label{buffer_8h_a0455fc72c74c758ed8dc9a0902af451a}
+
+
+Read data from an \doxyref{evbuffer}{p.}{structevbuffer} and drain the bytes read. If more bytes are requested than are available in the \doxyref{evbuffer}{p.}{structevbuffer}, we only extract as many bytes as were available.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to be read from \item[{\em data}]the destination buffer to store the result \item[{\em datlen}]the maximum size of the destination buffer \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes read, or -\/1 if we can't drain the buffer. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-remove\_\-buffer@{evbuffer\_\-remove\_\-buffer}}
+\index{evbuffer\_\-remove\_\-buffer@{evbuffer\_\-remove\_\-buffer}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-remove\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-remove\_\-buffer (struct {\bf evbuffer} $\ast$ {\em src}, \/  struct {\bf evbuffer} $\ast$ {\em dst}, \/  size\_\-t {\em datlen})}\label{buffer_8h_a0bdef97f6a142425b271b329a90de869}
+
+
+Read data from an \doxyref{evbuffer}{p.}{structevbuffer} into another \doxyref{evbuffer}{p.}{structevbuffer}, draining the bytes from the source buffer. This function avoids copy operations to the extent possible.
+
+If more bytes are requested than are available in src, the src buffer is drained completely.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em src}]the \doxyref{evbuffer}{p.}{structevbuffer} to be read from \item[{\em dst}]the destination \doxyref{evbuffer}{p.}{structevbuffer} to store the result into \item[{\em datlen}]the maximum numbers of bytes to transfer \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes read 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-remove\_\-cb@{evbuffer\_\-remove\_\-cb}}
+\index{evbuffer\_\-remove\_\-cb@{evbuffer\_\-remove\_\-cb}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-remove\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-remove\_\-cb (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  {\bf evbuffer\_\-cb\_\-func} {\em cb}, \/  void $\ast$ {\em cbarg})}\label{buffer_8h_a4d7c75045267863306d37043d3f0809a}
+
+
+Remove a callback from an \doxyref{evbuffer}{p.}{structevbuffer}, given the function and argument used to add it. \begin{DoxyReturn}{Returns}
+0 if a callback was removed, or -\/1 if no matching callback was found. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-remove\_\-cb\_\-entry@{evbuffer\_\-remove\_\-cb\_\-entry}}
+\index{evbuffer\_\-remove\_\-cb\_\-entry@{evbuffer\_\-remove\_\-cb\_\-entry}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-remove\_\-cb\_\-entry}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-remove\_\-cb\_\-entry (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  struct evbuffer\_\-cb\_\-entry $\ast$ {\em ent})}\label{buffer_8h_afd1e51be92170b17178949a639dfa8ab}
+
+
+Remove a callback from an \doxyref{evbuffer}{p.}{structevbuffer}, given a handle returned from evbuffer\_\-add\_\-cb. Calling this function invalidates the handle.
+
+\begin{DoxyReturn}{Returns}
+0 if a callback was removed, or -\/1 if no matching callback was found. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-reserve\_\-space@{evbuffer\_\-reserve\_\-space}}
+\index{evbuffer\_\-reserve\_\-space@{evbuffer\_\-reserve\_\-space}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-reserve\_\-space}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-reserve\_\-space (struct {\bf evbuffer} $\ast$ {\em buf}, \/  ev\_\-ssize\_\-t {\em size}, \/  struct {\bf evbuffer\_\-iovec} $\ast$ {\em vec}, \/  int {\em n\_\-vec})}\label{buffer_8h_ada49b2dc41bb09bb011765c1fc826a5d}
+
+
+Reserves space in the last chain or chains of an \doxyref{evbuffer}{p.}{structevbuffer}. Makes space available in the last chain or chains of an \doxyref{evbuffer}{p.}{structevbuffer} that can be arbitrarily written to by a user. The space does not become available for reading until it has been committed with \doxyref{evbuffer\_\-commit\_\-space()}{p.}{buffer_8h_a7a13a10fd1eb75cccf0ca29a05c5ba8a}.
+
+The space is made available as one or more extents, represented by an initial pointer and a length. You can force the memory to be available as only one extent. Allowing more extents, however, makes the function more efficient.
+
+Multiple subsequent calls to this function will make the same space available until \doxyref{evbuffer\_\-commit\_\-space()}{p.}{buffer_8h_a7a13a10fd1eb75cccf0ca29a05c5ba8a} has been called.
+
+It is an error to do anything that moves around the buffer's internal memory structures before committing the space.
+
+NOTE: The code currently does not ever use more than two extents. This may change in future versions.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} in which to reserve space. \item[{\em size}]how much space to make available, at minimum. The total length of the extents may be greater than the requested length. \item[{\em vec}]an array of one or more \doxyref{evbuffer\_\-iovec}{p.}{structevbuffer__iovec} structures to hold pointers to the reserved extents of memory. \item[{\em n\_\-vec}]The length of the vec array. Must be at least 1; 2 is more efficient. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of provided extents, or -\/1 on error. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-commit\_\-space()}{p.}{buffer_8h_a7a13a10fd1eb75cccf0ca29a05c5ba8a} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!evbuffer\_\-search@{evbuffer\_\-search}}
+\index{evbuffer\_\-search@{evbuffer\_\-search}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-search}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf evbuffer\_\-ptr} evbuffer\_\-search (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  const char $\ast$ {\em what}, \/  size\_\-t {\em len}, \/  const struct {\bf evbuffer\_\-ptr} $\ast$ {\em start})\hspace{0.3cm}{\ttfamily  [read]}}\label{buffer_8h_a61e15e2a355409587464c476d2481105}
+
+
+Search for a string within an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be searched \item[{\em what}]the string to be searched for \item[{\em len}]the length of the search string \item[{\em start}]NULL or a pointer to a valid struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr}. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} whose 'pos' field has the offset of the first occurrence of the string in the buffer after 'start'. The 'pos' field of the result is -\/1 if the string was not found. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-search\_\-eol@{evbuffer\_\-search\_\-eol}}
+\index{evbuffer\_\-search\_\-eol@{evbuffer\_\-search\_\-eol}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-search\_\-eol}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf evbuffer\_\-ptr} evbuffer\_\-search\_\-eol (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  struct {\bf evbuffer\_\-ptr} $\ast$ {\em start}, \/  size\_\-t $\ast$ {\em eol\_\-len\_\-out}, \/  enum {\bf evbuffer\_\-eol\_\-style} {\em eol\_\-style})\hspace{0.3cm}{\ttfamily  [read]}}\label{buffer_8h_aa54aca588fa272157513191a9628d457}
+
+
+Search for an end-\/of-\/line string within an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be searched \item[{\em start}]NULL or a pointer to a valid struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} to start searching at. \item[{\em eol\_\-len\_\-out}]If non-\/NULL, the pointed-\/to value will be set to the length of the end-\/of-\/line string. \item[{\em eol\_\-style}]The kind of EOL to look for; see \doxyref{evbuffer\_\-readln()}{p.}{buffer_8h_ae2460b5060948d3233342c4c81888650} for more information \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} whose 'pos' field has the offset of the first occurrence EOL in the buffer after 'start'. The 'pos' field of the result is -\/1 if the string was not found. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-search\_\-range@{evbuffer\_\-search\_\-range}}
+\index{evbuffer\_\-search\_\-range@{evbuffer\_\-search\_\-range}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-search\_\-range}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf evbuffer\_\-ptr} evbuffer\_\-search\_\-range (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  const char $\ast$ {\em what}, \/  size\_\-t {\em len}, \/  const struct {\bf evbuffer\_\-ptr} $\ast$ {\em start}, \/  const struct {\bf evbuffer\_\-ptr} $\ast$ {\em end})\hspace{0.3cm}{\ttfamily  [read]}}\label{buffer_8h_a532ded8162d838b306e18839e9ab04af}
+
+
+Search for a string within part of an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be searched \item[{\em what}]the string to be searched for \item[{\em len}]the length of the search string \item[{\em start}]NULL or a pointer to a valid struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} that indicates where we should start searching. \item[{\em end}]NULL or a pointer to a valid struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} that indicates where we should stop searching. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a struct \doxyref{evbuffer\_\-ptr}{p.}{structevbuffer__ptr} whose 'pos' field has the offset of the first occurrence of the string in the buffer after 'start'. The 'pos' field of the result is -\/1 if the string was not found. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-set\_\-flags@{evbuffer\_\-set\_\-flags}}
+\index{evbuffer\_\-set\_\-flags@{evbuffer\_\-set\_\-flags}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-set\_\-flags}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-set\_\-flags (struct {\bf evbuffer} $\ast$ {\em buf}, \/  ev\_\-uint64\_\-t {\em flags})}\label{buffer_8h_ae7ca62b72232b4029288e4c3a06f1c6c}
+
+
+Change the flags that are set for an \doxyref{evbuffer}{p.}{structevbuffer} by adding more. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} that the callback is watching. \item[{\em cb}]the callback whose status we want to change. \item[{\em flags}]One or more EVBUFFER\_\-FLAG\_\-$\ast$ options \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-unfreeze@{evbuffer\_\-unfreeze}}
+\index{evbuffer\_\-unfreeze@{evbuffer\_\-unfreeze}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-unfreeze}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-unfreeze (struct {\bf evbuffer} $\ast$ {\em buf}, \/  int {\em at\_\-front})}\label{buffer_8h_a0aceee5e8d8443df6d1b5daeb4daacfd}
+
+
+Re-\/enable calls that modify an \doxyref{evbuffer}{p.}{structevbuffer}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em buf}]The buffer to un-\/freeze \item[{\em at\_\-front}]If true, we unfreeze the front of the buffer. If false, we unfreeze the back. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{buffer.h@{buffer.h}!evbuffer\_\-unlock@{evbuffer\_\-unlock}}
+\index{evbuffer\_\-unlock@{evbuffer\_\-unlock}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-unlock}]{\setlength{\rightskip}{0pt plus 5cm}void evbuffer\_\-unlock (struct {\bf evbuffer} $\ast$ {\em buf})}\label{buffer_8h_a538b62549df58369e10fd5703cafe92b}
+
+
+Release the lock on an \doxyref{evbuffer}{p.}{structevbuffer}. Has no effect if locking was not enabled with evbuffer\_\-enable\_\-locking. \index{buffer.h@{buffer.h}!evbuffer\_\-write@{evbuffer\_\-write}}
+\index{evbuffer\_\-write@{evbuffer\_\-write}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-write (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  evutil\_\-socket\_\-t {\em fd})}\label{buffer_8h_a1207167bb14d5333326225f41477e910}
+
+
+Write the contents of an \doxyref{evbuffer}{p.}{structevbuffer} to a file descriptor. The \doxyref{evbuffer}{p.}{structevbuffer} will be drained after the bytes have been successfully written.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be written and drained \item[{\em fd}]the file descriptor to be written to \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes written, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-read()}{p.}{buffer_8h_a464aff577b05417171192fc68539b77e} 
+\end{DoxySeeAlso}
+\index{buffer.h@{buffer.h}!evbuffer\_\-write\_\-atmost@{evbuffer\_\-write\_\-atmost}}
+\index{evbuffer\_\-write\_\-atmost@{evbuffer\_\-write\_\-atmost}!buffer.h@{buffer.h}}
+\subsubsection[{evbuffer\_\-write\_\-atmost}]{\setlength{\rightskip}{0pt plus 5cm}int evbuffer\_\-write\_\-atmost (struct {\bf evbuffer} $\ast$ {\em buffer}, \/  evutil\_\-socket\_\-t {\em fd}, \/  ev\_\-ssize\_\-t {\em howmuch})}\label{buffer_8h_aa0bea512e82177762be7cf0a28a9b03b}
+
+
+Write some of the contents of an \doxyref{evbuffer}{p.}{structevbuffer} to a file descriptor. The \doxyref{evbuffer}{p.}{structevbuffer} will be drained after the bytes have been successfully written.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em buffer}]the \doxyref{evbuffer}{p.}{structevbuffer} to be written and drained \item[{\em fd}]the file descriptor to be written to \item[{\em howmuch}]the largest allowable number of bytes to write, or -\/1 to write as many bytes as we can. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of bytes written, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evbuffer\_\-read()}{p.}{buffer_8h_a464aff577b05417171192fc68539b77e} 
+\end{DoxySeeAlso}

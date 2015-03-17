@@ -1,0 +1,73 @@
+\section{event2/bufferevent\_\-ssl.h File Reference}
+\label{bufferevent__ssl_8h}\index{event2/bufferevent\_\-ssl.h@{event2/bufferevent\_\-ssl.h}}
+
+
+OpenSSL support for bufferevents.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$event2/bufferevent.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf bufferevent\_\-ssl\_\-state} \{ {\bfseries BUFFEREVENT\_\-SSL\_\-OPEN} =  0, 
+{\bfseries BUFFEREVENT\_\-SSL\_\-CONNECTING} =  1, 
+{\bfseries BUFFEREVENT\_\-SSL\_\-ACCEPTING} =  2
+ \}
+\begin{DoxyCompactList}\small\item\em The state of an SSL object to be used when creating a new SSL \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long {\bf bufferevent\_\-get\_\-openssl\_\-error} (struct {\bf bufferevent} $\ast$bev)
+\begin{DoxyCompactList}\small\item\em Return the most recent OpenSSL error reported on an SSL \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+struct {\bf bufferevent} $\ast$ {\bf bufferevent\_\-openssl\_\-filter\_\-new} (struct {\bf event\_\-base} $\ast$base, struct {\bf bufferevent} $\ast$underlying, struct ssl\_\-st $\ast$ssl, enum {\bf bufferevent\_\-ssl\_\-state} state, int options)
+\begin{DoxyCompactList}\small\item\em Create a new SSL \doxyref{bufferevent}{p.}{structbufferevent} to send its data over another \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+struct ssl\_\-st $\ast$ {\bf bufferevent\_\-openssl\_\-get\_\-ssl} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Return the underlying openssl SSL $\ast$ object for an SSL \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+struct {\bf bufferevent} $\ast$ {\bf bufferevent\_\-openssl\_\-socket\_\-new} (struct {\bf event\_\-base} $\ast$base, evutil\_\-socket\_\-t fd, struct ssl\_\-st $\ast$ssl, enum {\bf bufferevent\_\-ssl\_\-state} state, int options)
+\begin{DoxyCompactList}\small\item\em Create a new SSL \doxyref{bufferevent}{p.}{structbufferevent} to send its data over an SSL $\ast$ on a socket. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-ssl\_\-renegotiate} (struct {\bf bufferevent} $\ast$bev)
+\begin{DoxyCompactList}\small\item\em Tells a \doxyref{bufferevent}{p.}{structbufferevent} to begin SSL renegotiation. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+OpenSSL support for bufferevents. 
+
+\subsection{Function Documentation}
+\index{bufferevent\_\-ssl.h@{bufferevent\_\-ssl.h}!bufferevent\_\-get\_\-openssl\_\-error@{bufferevent\_\-get\_\-openssl\_\-error}}
+\index{bufferevent\_\-get\_\-openssl\_\-error@{bufferevent\_\-get\_\-openssl\_\-error}!bufferevent_ssl.h@{bufferevent\_\-ssl.h}}
+\subsubsection[{bufferevent\_\-get\_\-openssl\_\-error}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long bufferevent\_\-get\_\-openssl\_\-error (struct {\bf bufferevent} $\ast$ {\em bev})}\label{bufferevent__ssl_8h_a84d6e69ab782b5455d92dd6090f81fdf}
+
+
+Return the most recent OpenSSL error reported on an SSL \doxyref{bufferevent}{p.}{structbufferevent}. \index{bufferevent\_\-ssl.h@{bufferevent\_\-ssl.h}!bufferevent\_\-openssl\_\-filter\_\-new@{bufferevent\_\-openssl\_\-filter\_\-new}}
+\index{bufferevent\_\-openssl\_\-filter\_\-new@{bufferevent\_\-openssl\_\-filter\_\-new}!bufferevent_ssl.h@{bufferevent\_\-ssl.h}}
+\subsubsection[{bufferevent\_\-openssl\_\-filter\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf bufferevent}$\ast$ bufferevent\_\-openssl\_\-filter\_\-new (struct {\bf event\_\-base} $\ast$ {\em base}, \/  struct {\bf bufferevent} $\ast$ {\em underlying}, \/  struct ssl\_\-st $\ast$ {\em ssl}, \/  enum {\bf bufferevent\_\-ssl\_\-state} {\em state}, \/  int {\em options})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent__ssl_8h_ac3f28f95d0714dc30138cfa3d98b8edb}
+
+
+Create a new SSL \doxyref{bufferevent}{p.}{structbufferevent} to send its data over another \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]An \doxyref{event\_\-base}{p.}{structevent__base} to use to detect reading and writing. It must also be the base for the underlying \doxyref{bufferevent}{p.}{structbufferevent}. \item[{\em underlying}]A socket to use for this SSL \item[{\em ssl}]A SSL$\ast$ object from openssl. \item[{\em state}]The current state of the SSL connection \item[{\em options}]One or more bufferevent\_\-options \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxyref{bufferevent}{p.}{structbufferevent} on success, or NULL on failure 
+\end{DoxyReturn}
+\index{bufferevent\_\-ssl.h@{bufferevent\_\-ssl.h}!bufferevent\_\-openssl\_\-get\_\-ssl@{bufferevent\_\-openssl\_\-get\_\-ssl}}
+\index{bufferevent\_\-openssl\_\-get\_\-ssl@{bufferevent\_\-openssl\_\-get\_\-ssl}!bufferevent_ssl.h@{bufferevent\_\-ssl.h}}
+\subsubsection[{bufferevent\_\-openssl\_\-get\_\-ssl}]{\setlength{\rightskip}{0pt plus 5cm}struct ssl\_\-st$\ast$ bufferevent\_\-openssl\_\-get\_\-ssl (struct {\bf bufferevent} $\ast$ {\em bufev})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent__ssl_8h_af73a0ade8078f666b0eaf5acc75a2c95}
+
+
+Return the underlying openssl SSL $\ast$ object for an SSL \doxyref{bufferevent}{p.}{structbufferevent}. \index{bufferevent\_\-ssl.h@{bufferevent\_\-ssl.h}!bufferevent\_\-openssl\_\-socket\_\-new@{bufferevent\_\-openssl\_\-socket\_\-new}}
+\index{bufferevent\_\-openssl\_\-socket\_\-new@{bufferevent\_\-openssl\_\-socket\_\-new}!bufferevent_ssl.h@{bufferevent\_\-ssl.h}}
+\subsubsection[{bufferevent\_\-openssl\_\-socket\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf bufferevent}$\ast$ bufferevent\_\-openssl\_\-socket\_\-new (struct {\bf event\_\-base} $\ast$ {\em base}, \/  evutil\_\-socket\_\-t {\em fd}, \/  struct ssl\_\-st $\ast$ {\em ssl}, \/  enum {\bf bufferevent\_\-ssl\_\-state} {\em state}, \/  int {\em options})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent__ssl_8h_a25bcf9f9edae71f2395c5207bfd922f2}
+
+
+Create a new SSL \doxyref{bufferevent}{p.}{structbufferevent} to send its data over an SSL $\ast$ on a socket. 
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]An \doxyref{event\_\-base}{p.}{structevent__base} to use to detect reading and writing \item[{\em fd}]A socket to use for this SSL \item[{\em ssl}]A SSL$\ast$ object from openssl. \item[{\em state}]The current state of the SSL connection \item[{\em options}]One or more bufferevent\_\-options \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxyref{bufferevent}{p.}{structbufferevent} on success, or NULL on failure. 
+\end{DoxyReturn}
+\index{bufferevent\_\-ssl.h@{bufferevent\_\-ssl.h}!bufferevent\_\-ssl\_\-renegotiate@{bufferevent\_\-ssl\_\-renegotiate}}
+\index{bufferevent\_\-ssl\_\-renegotiate@{bufferevent\_\-ssl\_\-renegotiate}!bufferevent_ssl.h@{bufferevent\_\-ssl.h}}
+\subsubsection[{bufferevent\_\-ssl\_\-renegotiate}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-ssl\_\-renegotiate (struct {\bf bufferevent} $\ast$ {\em bev})}\label{bufferevent__ssl_8h_a2e0a58477aaf15fc619d352788d19830}
+
+
+Tells a \doxyref{bufferevent}{p.}{structbufferevent} to begin SSL renegotiation. 

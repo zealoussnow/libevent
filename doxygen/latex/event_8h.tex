@@ -1,0 +1,962 @@
+\section{event2/event.h File Reference}
+\label{event_8h}\index{event2/event.h@{event2/event.h}}
+
+
+Core functions for waiting for and receiving events, and using \doxyref{event}{p.}{structevent} bases.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf event}
+\begin{DoxyCompactList}\small\item\em Structure to represent a single \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-base}
+\begin{DoxyCompactList}\small\item\em Structure to hold information and state for a Libevent dispatch loop. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-config}
+\begin{DoxyCompactList}\small\item\em Configuration for an \doxyref{event\_\-base}{p.}{structevent__base}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries \_\-EVENT\_\-LOG\_\-DEBUG}~EVENT\_\-LOG\_\-DEBUG\label{event_8h_a964443418439acdd775129ae260b21bb}
+
+\item 
+\#define {\bfseries \_\-EVENT\_\-LOG\_\-ERR}~EVENT\_\-LOG\_\-ERR\label{event_8h_a829eede32e73952922a35e42b510bfe9}
+
+\item 
+\#define {\bfseries \_\-EVENT\_\-LOG\_\-MSG}~EVENT\_\-LOG\_\-MSG\label{event_8h_a6d898badc07a518c29ecb0129cc77188}
+
+\item 
+\#define {\bfseries \_\-EVENT\_\-LOG\_\-WARN}~EVENT\_\-LOG\_\-WARN\label{event_8h_aa8ba4ffdc827c139311654c41cfddd1d}
+
+\item 
+\#define {\bf event\_\-get\_\-signal}(ev)~((int)event\_\-get\_\-fd(ev))\label{event_8h_a69cc368a9137187726ef371a06f9cc9f}
+
+\begin{DoxyCompactList}\small\item\em Get the signal number assigned to a signal \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+\#define {\bf EVENT\_\-MAX\_\-PRIORITIES}~256
+\begin{DoxyCompactList}\small\item\em Largest number of priorities that Libevent can support. \item\end{DoxyCompactList}\item 
+\#define {\bf EVENT\_\-SET\_\-MEM\_\-FUNCTIONS\_\-IMPLEMENTED}\label{event_8h_ade387a9a39bbbdf40ff20b4d977ec6ae}
+
+\begin{DoxyCompactList}\small\item\em This definition is present if Libevent was built with support for \doxyref{event\_\-set\_\-mem\_\-functions()}{p.}{event_8h_a653e38c4bdd2f3b2d7476fcee95c1a62}. \item\end{DoxyCompactList}\item 
+\#define {\bf LIBEVENT\_\-VERSION}~\_\-EVENT\_\-VERSION
+\begin{DoxyCompactList}\small\item\em As event\_\-get\_\-version, but gives the version of Libevent's headers. \item\end{DoxyCompactList}\item 
+\#define {\bf LIBEVENT\_\-VERSION\_\-NUMBER}~\_\-EVENT\_\-NUMERIC\_\-VERSION
+\begin{DoxyCompactList}\small\item\em As event\_\-get\_\-version\_\-number, but gives the version number of Libevent's headers. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}{\bf event flags}\par
+{\em \label{_amgrpde9246336010eeb4473c42264734a30b}
+Flags to pass to \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}, \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0}, \doxyref{event\_\-pending()}{p.}{event_8h_a49773a4e3e46f60e488ac37fb46950d9}, and anything else with an argument of the form \char`\"{}short events\char`\"{} }\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EV\_\-ET}~0x20
+\begin{DoxyCompactList}\small\item\em Select edge-\/triggered behavior, if supported by the backend. \item\end{DoxyCompactList}\item 
+\#define {\bf EV\_\-PERSIST}~0x10
+\begin{DoxyCompactList}\small\item\em Persistent \doxyref{event}{p.}{structevent}: won't get removed automatically when activated. \item\end{DoxyCompactList}\item 
+\#define {\bf EV\_\-READ}~0x02\label{event_8h_a74bbaf2d529670cc0ab793497b41700f}
+
+\begin{DoxyCompactList}\small\item\em Wait for a socket or FD to become readable. \item\end{DoxyCompactList}\item 
+\#define {\bf EV\_\-SIGNAL}~0x08\label{event_8h_a59b7e95284ac1a197969d42ee9441ece}
+
+\begin{DoxyCompactList}\small\item\em Wait for a POSIX signal to be raised. \item\end{DoxyCompactList}\item 
+\#define {\bf EV\_\-TIMEOUT}~0x01
+\begin{DoxyCompactList}\small\item\em Indicates that a timeout has occurred. \item\end{DoxyCompactList}\item 
+\#define {\bf EV\_\-WRITE}~0x04\label{event_8h_a2a31813fa3b26bf2d150512cbbf893f7}
+
+\begin{DoxyCompactList}\small\item\em Wait for a socket or FD to become writeable. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Log severities}\par
+{\em \label{_amgrp51b7f7ab2a43043abfe09ca9d4e9a04b}
+ }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries EVENT\_\-LOG\_\-DEBUG}~0\label{event_8h_a6904203c125cd86cdd4f3cd90ef1c18f}
+
+\item 
+\#define {\bfseries EVENT\_\-LOG\_\-ERR}~3\label{event_8h_ab51b4412fec9223efc5e5fa862b57a11}
+
+\item 
+\#define {\bfseries EVENT\_\-LOG\_\-MSG}~1\label{event_8h_ae18003965fc4df307a68d4f5bde2ec45}
+
+\item 
+\#define {\bfseries EVENT\_\-LOG\_\-WARN}~2\label{event_8h_a795675e9eb8d63782e86260f101ae72d}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Loop flags}\par
+{\em \label{_amgrp56eaefab5ca78281f20c27e50b0a4d9f}
+These flags control the behavior of \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80}. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EVLOOP\_\-NONBLOCK}~0x02
+\begin{DoxyCompactList}\small\item\em Do not block: see which events are ready now, run the callbacks of the highest-\/priority ones, then exit. \item\end{DoxyCompactList}\item 
+\#define {\bf EVLOOP\_\-ONCE}~0x01
+\begin{DoxyCompactList}\small\item\em Block until we have an active \doxyref{event}{p.}{structevent}, then exit once all active events have had their callbacks run. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf evsignal\_\-$\ast$ macros}\par
+{\em \label{_amgrp94dd7a221cb4a4b856db63c63f8eeffd}
+Aliases for working with signal events }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries evsignal\_\-add}(ev, tv)~event\_\-add((ev), (tv))\label{event_8h_a043e61907ad2ae55d61f5c5e109729dd}
+
+\item 
+\#define {\bfseries evsignal\_\-assign}(ev, b, x, cb, arg)~event\_\-assign((ev), (b), (x), EV\_\-SIGNAL$|$EV\_\-PERSIST, cb, (arg))\label{event_8h_a08eae4d05e8e104b1d72bb73eaf95da4}
+
+\item 
+\#define {\bfseries evsignal\_\-del}(ev)~event\_\-del(ev)\label{event_8h_af2cca0259e62d40d8470e9b574568f74}
+
+\item 
+\#define {\bfseries evsignal\_\-initialized}(ev)~event\_\-initialized(ev)\label{event_8h_aa39848850017245c2e946c49c5a51a9d}
+
+\item 
+\#define {\bfseries evsignal\_\-new}(b, x, cb, arg)~event\_\-new((b), (x), EV\_\-SIGNAL$|$EV\_\-PERSIST, (cb), (arg))\label{event_8h_a990ce36ac02fb1033a0cc56df968b4c4}
+
+\item 
+\#define {\bfseries evsignal\_\-pending}(ev, tv)~event\_\-pending((ev), EV\_\-SIGNAL, (tv))\label{event_8h_aee9bcb501fce2f2b7d5bc19e5d53b611}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf evtimer\_\-$\ast$ macros}\par
+{\em \label{_amgrp75586550de2fe1f75e1c054e20d695a7}
+Aliases for working with one-\/shot timer events }\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries evtimer\_\-add}(ev, tv)~event\_\-add((ev), (tv))\label{event_8h_a6ea3ca87057c66fd9f5a9fda9b911f8b}
+
+\item 
+\#define {\bfseries evtimer\_\-assign}(ev, b, cb, arg)~event\_\-assign((ev), (b), -\/1, 0, (cb), (arg))\label{event_8h_a356b4550edd470440efa7a74da413939}
+
+\item 
+\#define {\bfseries evtimer\_\-del}(ev)~event\_\-del(ev)\label{event_8h_a22f7e7b422e9098d9362626d47b77525}
+
+\item 
+\#define {\bfseries evtimer\_\-initialized}(ev)~event\_\-initialized(ev)\label{event_8h_a765c62ada275b4114ca0494e9d1f0047}
+
+\item 
+\#define {\bfseries evtimer\_\-new}(b, cb, arg)~event\_\-new((b), -\/1, 0, (cb), (arg))\label{event_8h_a76b701417f1cd29208019283d1fd1691}
+
+\item 
+\#define {\bfseries evtimer\_\-pending}(ev, tv)~event\_\-pending((ev), EV\_\-TIMEOUT, (tv))\label{event_8h_a7037bae3f2fb09eb2752e8252b63a5a6}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ {\bf event\_\-callback\_\-fn} )(evutil\_\-socket\_\-t, short, void $\ast$)
+\begin{DoxyCompactList}\small\item\em A callback function for an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+typedef void($\ast$ {\bf event\_\-fatal\_\-cb} )(int err)
+\begin{DoxyCompactList}\small\item\em A function to be called if Libevent encounters a fatal internal error. \item\end{DoxyCompactList}\item 
+typedef void($\ast$ {\bf event\_\-log\_\-cb} )(int severity, const char $\ast$msg)
+\begin{DoxyCompactList}\small\item\em A callback function used to intercept Libevent's log messages. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf event\_\-base\_\-config\_\-flag} \{ \par
+{\bf EVENT\_\-BASE\_\-FLAG\_\-NOLOCK} =  0x01, 
+{\bf EVENT\_\-BASE\_\-FLAG\_\-IGNORE\_\-ENV} =  0x02, 
+{\bf EVENT\_\-BASE\_\-FLAG\_\-STARTUP\_\-IOCP} =  0x04, 
+{\bf EVENT\_\-BASE\_\-FLAG\_\-NO\_\-CACHE\_\-TIME} =  0x08, 
+\par
+{\bf EVENT\_\-BASE\_\-FLAG\_\-EPOLL\_\-USE\_\-CHANGELIST} =  0x10
+ \}
+\begin{DoxyCompactList}\small\item\em A flag passed to \doxyref{event\_\-config\_\-set\_\-flag()}{p.}{event_8h_ac4b2697c7927fcd2167a1749f6602f29}. \item\end{DoxyCompactList}\item 
+enum {\bf event\_\-method\_\-feature} \{ {\bf EV\_\-FEATURE\_\-ET} =  0x01, 
+{\bf EV\_\-FEATURE\_\-O1} =  0x02, 
+{\bf EV\_\-FEATURE\_\-FDS} =  0x04
+ \}
+\begin{DoxyCompactList}\small\item\em A flag used to describe which features an \doxyref{event\_\-base}{p.}{structevent__base} (must) provide. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf event\_\-active} (struct {\bf event} $\ast$ev, int res, short ncalls)
+\begin{DoxyCompactList}\small\item\em Make an \doxyref{event}{p.}{structevent} active. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-add} (struct {\bf event} $\ast$ev, const struct timeval $\ast$timeout)
+\begin{DoxyCompactList}\small\item\em Add an \doxyref{event}{p.}{structevent} to the set of pending events. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-assign} (struct {\bf event} $\ast$, struct {\bf event\_\-base} $\ast$, evutil\_\-socket\_\-t, short, {\bf event\_\-callback\_\-fn}, void $\ast$)
+\begin{DoxyCompactList}\small\item\em Prepare a new, already-\/allocated \doxyref{event}{p.}{structevent} structure to be added. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-dispatch} (struct {\bf event\_\-base} $\ast$)
+\begin{DoxyCompactList}\small\item\em Event dispatching loop. \item\end{DoxyCompactList}\item 
+void {\bfseries event\_\-base\_\-dump\_\-events} (struct {\bf event\_\-base} $\ast$, FILE $\ast$)\label{event_8h_acd5d691782408e8a55fbfdc08c26e5da}
+
+\item 
+void {\bf event\_\-base\_\-free} (struct {\bf event\_\-base} $\ast$)
+\begin{DoxyCompactList}\small\item\em Deallocate all memory associated with an \doxyref{event\_\-base}{p.}{structevent__base}, and free the base. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-get\_\-features} (const struct {\bf event\_\-base} $\ast$base)
+\begin{DoxyCompactList}\small\item\em Return a bitmask of the features implemented by an \doxyref{event}{p.}{structevent} base. \item\end{DoxyCompactList}\item 
+const char $\ast$ {\bf event\_\-base\_\-get\_\-method} (const struct {\bf event\_\-base} $\ast$)
+\begin{DoxyCompactList}\small\item\em Get the kernel \doxyref{event}{p.}{structevent} notification mechanism used by Libevent. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-gettimeofday\_\-cached} (struct {\bf event\_\-base} $\ast$base, struct timeval $\ast$tv)
+\begin{DoxyCompactList}\small\item\em Sets 'tv' to the current time (as returned by gettimeofday()), looking at the cached value in 'base' if possible, and calling gettimeofday() or clock\_\-gettime() as appropriate if there is no cached time. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-got\_\-break} (struct {\bf event\_\-base} $\ast$)
+\begin{DoxyCompactList}\small\item\em Checks if the \doxyref{event}{p.}{structevent} loop was told to abort immediately by \doxyref{event\_\-loopbreak()}{p.}{event__compat_8h_a3a5c57caea1d97160f6990b3deeb6961}. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-got\_\-exit} (struct {\bf event\_\-base} $\ast$)
+\begin{DoxyCompactList}\small\item\em Checks if the \doxyref{event}{p.}{structevent} loop was told to exit by \doxyref{event\_\-loopexit()}{p.}{event__compat_8h_a2e3d894ac7986bb4967ebfe67a2d9977}. \item\end{DoxyCompactList}\item 
+struct timeval $\ast$ {\bf event\_\-base\_\-init\_\-common\_\-timeout} (struct {\bf event\_\-base} $\ast$base, const struct timeval $\ast$duration)
+\begin{DoxyCompactList}\small\item\em Prepare an \doxyref{event\_\-base}{p.}{structevent__base} to use a large number of timeouts with the same duration. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-loop} (struct {\bf event\_\-base} $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Wait for events to become active, and run their callbacks. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-loopbreak} (struct {\bf event\_\-base} $\ast$)
+\begin{DoxyCompactList}\small\item\em Abort the active \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} immediately. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-loopexit} (struct {\bf event\_\-base} $\ast$, const struct timeval $\ast$)
+\begin{DoxyCompactList}\small\item\em Exit the \doxyref{event}{p.}{structevent} loop after the specified time. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-base} $\ast$ {\bf event\_\-base\_\-new} (void)
+\begin{DoxyCompactList}\small\item\em Create and return a new \doxyref{event\_\-base}{p.}{structevent__base} to use with the rest of Libevent. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-base} $\ast$ {\bf event\_\-base\_\-new\_\-with\_\-config} (const struct {\bf event\_\-config} $\ast$)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxyref{event}{p.}{structevent} API. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-once} (struct {\bf event\_\-base} $\ast$, evutil\_\-socket\_\-t, short, {\bf event\_\-callback\_\-fn}, void $\ast$, const struct timeval $\ast$)
+\begin{DoxyCompactList}\small\item\em Schedule a one-\/time \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-priority\_\-init} (struct {\bf event\_\-base} $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Set the number of different \doxyref{event}{p.}{structevent} priorities. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-base\_\-set} (struct {\bf event\_\-base} $\ast$, struct {\bf event} $\ast$)
+\begin{DoxyCompactList}\small\item\em Associate a different \doxyref{event}{p.}{structevent} base with an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-config\_\-avoid\_\-method} (struct {\bf event\_\-config} $\ast$cfg, const char $\ast$method)
+\begin{DoxyCompactList}\small\item\em Enters an \doxyref{event}{p.}{structevent} method that should be avoided into the configuration. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-config\_\-free} (struct {\bf event\_\-config} $\ast$cfg)
+\begin{DoxyCompactList}\small\item\em Deallocates all memory associated with an \doxyref{event}{p.}{structevent} configuration object. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-config} $\ast$ {\bf event\_\-config\_\-new} (void)
+\begin{DoxyCompactList}\small\item\em Allocates a new \doxyref{event}{p.}{structevent} configuration object. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-config\_\-require\_\-features} (struct {\bf event\_\-config} $\ast$cfg, int feature)
+\begin{DoxyCompactList}\small\item\em Enters a required \doxyref{event}{p.}{structevent} method feature that the application demands. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-config\_\-set\_\-flag} (struct {\bf event\_\-config} $\ast$cfg, int flag)
+\begin{DoxyCompactList}\small\item\em Sets one or more flags to configure what parts of the eventual \doxyref{event\_\-base}{p.}{structevent__base} will be initialized, and how they'll work. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-config\_\-set\_\-num\_\-cpus\_\-hint} (struct {\bf event\_\-config} $\ast$cfg, int cpus)
+\begin{DoxyCompactList}\small\item\em Records a hint for the number of CPUs in the system. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-debug\_\-unassign} (struct {\bf event} $\ast$)
+\begin{DoxyCompactList}\small\item\em When debugging mode is enabled, informs Libevent that an \doxyref{event}{p.}{structevent} should no longer be considered as assigned. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-del} (struct {\bf event} $\ast$)
+\begin{DoxyCompactList}\small\item\em Remove an \doxyref{event}{p.}{structevent} from the set of monitored events. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-enable\_\-debug\_\-mode} (void)
+\begin{DoxyCompactList}\small\item\em Enable some relatively expensive debugging checks in Libevent that would normally be turned off. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-free} (struct {\bf event} $\ast$)
+\begin{DoxyCompactList}\small\item\em Deallocate a struct \doxyref{event}{p.}{structevent} $\ast$ returned by \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-get\_\-assignment} (const struct {\bf event} $\ast${\bf event}, struct {\bf event\_\-base} $\ast$$\ast$base\_\-out, evutil\_\-socket\_\-t $\ast$fd\_\-out, short $\ast$events\_\-out, {\bf event\_\-callback\_\-fn} $\ast$callback\_\-out, void $\ast$$\ast$arg\_\-out)
+\begin{DoxyCompactList}\small\item\em Extract \_\-all\_\- of arguments given to construct a given \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-base} $\ast$ {\bf event\_\-get\_\-base} (const struct {\bf event} $\ast$ev)\label{event_8h_ae9763d285fa415e4547a0d5e55cf5b13}
+
+\begin{DoxyCompactList}\small\item\em Get the \doxyref{event\_\-base}{p.}{structevent__base} associated with an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+{\bf event\_\-callback\_\-fn} {\bf event\_\-get\_\-callback} (const struct {\bf event} $\ast$ev)\label{event_8h_a6cdb0a8dbf7efa9be7b65914ed5c6821}
+
+\begin{DoxyCompactList}\small\item\em Return the callback assigned to an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+void $\ast$ {\bf event\_\-get\_\-callback\_\-arg} (const struct {\bf event} $\ast$ev)\label{event_8h_ab07e87ff7d43ad7205a008f08fbaf0a3}
+
+\begin{DoxyCompactList}\small\item\em Return the callback argument assigned to an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+short {\bf event\_\-get\_\-events} (const struct {\bf event} $\ast$ev)\label{event_8h_a0123fdd5b9a1c204de5d7ef1a4578387}
+
+\begin{DoxyCompactList}\small\item\em Return the events (EV\_\-READ, EV\_\-WRITE, etc) assigned to an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+evutil\_\-socket\_\-t {\bf event\_\-get\_\-fd} (const struct {\bf event} $\ast$ev)\label{event_8h_aee0c9c3fc7c997e4d4b77bdcdf321ee6}
+
+\begin{DoxyCompactList}\small\item\em Get the socket or signal assigned to an \doxyref{event}{p.}{structevent}, or -\/1 if the \doxyref{event}{p.}{structevent} has no socket. \item\end{DoxyCompactList}\item 
+size\_\-t {\bf event\_\-get\_\-struct\_\-event\_\-size} (void)
+\begin{DoxyCompactList}\small\item\em Return the size of struct \doxyref{event}{p.}{structevent} that the Libevent library was compiled with. \item\end{DoxyCompactList}\item 
+const char $\ast$$\ast$ {\bf event\_\-get\_\-supported\_\-methods} (void)
+\begin{DoxyCompactList}\small\item\em Gets all \doxyref{event}{p.}{structevent} notification mechanisms supported by Libevent. \item\end{DoxyCompactList}\item 
+const char $\ast$ {\bf event\_\-get\_\-version} (void)
+\begin{DoxyCompactList}\small\item\em Get the Libevent version. \item\end{DoxyCompactList}\item 
+ev\_\-uint32\_\-t {\bf event\_\-get\_\-version\_\-number} (void)
+\begin{DoxyCompactList}\small\item\em Return a numeric representation of Libevent's version. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-initialized} (const struct {\bf event} $\ast$ev)
+\begin{DoxyCompactList}\small\item\em Test if an \doxyref{event}{p.}{structevent} structure might be initialized. \item\end{DoxyCompactList}\item 
+struct {\bf event} $\ast$ {\bf event\_\-new} (struct {\bf event\_\-base} $\ast$, evutil\_\-socket\_\-t, short, {\bf event\_\-callback\_\-fn}, void $\ast$)
+\begin{DoxyCompactList}\small\item\em Allocate and asssign a new \doxyref{event}{p.}{structevent} structure, ready to be added. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-pending} (const struct {\bf event} $\ast$ev, short events, struct timeval $\ast$tv)
+\begin{DoxyCompactList}\small\item\em Checks if a specific \doxyref{event}{p.}{structevent} is pending or scheduled. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-priority\_\-set} (struct {\bf event} $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Assign a priority to an \doxyref{event}{p.}{structevent}. \item\end{DoxyCompactList}\item 
+int {\bf event\_\-reinit} (struct {\bf event\_\-base} $\ast$base)
+\begin{DoxyCompactList}\small\item\em Reinitialize the \doxyref{event}{p.}{structevent} base after a fork. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-set\_\-fatal\_\-callback} ({\bf event\_\-fatal\_\-cb} cb)
+\begin{DoxyCompactList}\small\item\em Override Libevent's behavior in the \doxyref{event}{p.}{structevent} of a fatal internal error. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-set\_\-log\_\-callback} ({\bf event\_\-log\_\-cb} cb)
+\begin{DoxyCompactList}\small\item\em Redirect Libevent's log messages. \item\end{DoxyCompactList}\item 
+void {\bf event\_\-set\_\-mem\_\-functions} (void $\ast$($\ast$malloc\_\-fn)(size\_\-t sz), void $\ast$($\ast$realloc\_\-fn)(void $\ast$ptr, size\_\-t sz), void($\ast$free\_\-fn)(void $\ast$ptr))
+\begin{DoxyCompactList}\small\item\em Override the functions that Libevent uses for memory management. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Core functions for waiting for and receiving events, and using \doxyref{event}{p.}{structevent} bases. 
+
+\subsection{Define Documentation}
+\index{event.h@{event.h}!EV\_\-ET@{EV\_\-ET}}
+\index{EV\_\-ET@{EV\_\-ET}!event.h@{event.h}}
+\subsubsection[{EV\_\-ET}]{\setlength{\rightskip}{0pt plus 5cm}\#define EV\_\-ET~0x20}\label{event_8h_a01084abbcdd3a58b4068359548a3ea71}
+
+
+Select edge-\/triggered behavior, if supported by the backend. \index{event.h@{event.h}!EV\_\-PERSIST@{EV\_\-PERSIST}}
+\index{EV\_\-PERSIST@{EV\_\-PERSIST}!event.h@{event.h}}
+\subsubsection[{EV\_\-PERSIST}]{\setlength{\rightskip}{0pt plus 5cm}\#define EV\_\-PERSIST~0x10}\label{event_8h_a3c4947a60eb6d09327c61f89135f9f37}
+
+
+Persistent \doxyref{event}{p.}{structevent}: won't get removed automatically when activated. When a persistent \doxyref{event}{p.}{structevent} with a timeout becomes activated, its timeout is reset to 0. \index{event.h@{event.h}!EV\_\-TIMEOUT@{EV\_\-TIMEOUT}}
+\index{EV\_\-TIMEOUT@{EV\_\-TIMEOUT}!event.h@{event.h}}
+\subsubsection[{EV\_\-TIMEOUT}]{\setlength{\rightskip}{0pt plus 5cm}\#define EV\_\-TIMEOUT~0x01}\label{event_8h_a37ef4b6056484f5580f7d72fcf46fccf}
+
+
+Indicates that a timeout has occurred. It's not necessary to pass this flag to event\_\-for new()/event\_\-assign() to get a timeout. \index{event.h@{event.h}!EVENT\_\-MAX\_\-PRIORITIES@{EVENT\_\-MAX\_\-PRIORITIES}}
+\index{EVENT\_\-MAX\_\-PRIORITIES@{EVENT\_\-MAX\_\-PRIORITIES}!event.h@{event.h}}
+\subsubsection[{EVENT\_\-MAX\_\-PRIORITIES}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVENT\_\-MAX\_\-PRIORITIES~256}\label{event_8h_ad74f7bf73ff985bfaf61c462cbba022f}
+
+
+Largest number of priorities that Libevent can support. \index{event.h@{event.h}!EVLOOP\_\-NONBLOCK@{EVLOOP\_\-NONBLOCK}}
+\index{EVLOOP\_\-NONBLOCK@{EVLOOP\_\-NONBLOCK}!event.h@{event.h}}
+\subsubsection[{EVLOOP\_\-NONBLOCK}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVLOOP\_\-NONBLOCK~0x02}\label{event_8h_a10b9c102337d0ece8607c9c01bc4f7c8}
+
+
+Do not block: see which events are ready now, run the callbacks of the highest-\/priority ones, then exit. \index{event.h@{event.h}!EVLOOP\_\-ONCE@{EVLOOP\_\-ONCE}}
+\index{EVLOOP\_\-ONCE@{EVLOOP\_\-ONCE}!event.h@{event.h}}
+\subsubsection[{EVLOOP\_\-ONCE}]{\setlength{\rightskip}{0pt plus 5cm}\#define EVLOOP\_\-ONCE~0x01}\label{event_8h_afab575b1e867dde13a2c7f2f967e0e4e}
+
+
+Block until we have an active \doxyref{event}{p.}{structevent}, then exit once all active events have had their callbacks run. \index{event.h@{event.h}!LIBEVENT\_\-VERSION@{LIBEVENT\_\-VERSION}}
+\index{LIBEVENT\_\-VERSION@{LIBEVENT\_\-VERSION}!event.h@{event.h}}
+\subsubsection[{LIBEVENT\_\-VERSION}]{\setlength{\rightskip}{0pt plus 5cm}\#define LIBEVENT\_\-VERSION~\_\-EVENT\_\-VERSION}\label{event_8h_aad00c7d4ddbd6b590c15861a2e767182}
+
+
+As event\_\-get\_\-version, but gives the version of Libevent's headers. \index{event.h@{event.h}!LIBEVENT\_\-VERSION\_\-NUMBER@{LIBEVENT\_\-VERSION\_\-NUMBER}}
+\index{LIBEVENT\_\-VERSION\_\-NUMBER@{LIBEVENT\_\-VERSION\_\-NUMBER}!event.h@{event.h}}
+\subsubsection[{LIBEVENT\_\-VERSION\_\-NUMBER}]{\setlength{\rightskip}{0pt plus 5cm}\#define LIBEVENT\_\-VERSION\_\-NUMBER~\_\-EVENT\_\-NUMERIC\_\-VERSION}\label{event_8h_a8a9c8021651a2d8d7946083281279586}
+
+
+As event\_\-get\_\-version\_\-number, but gives the version number of Libevent's headers. 
+
+\subsection{Typedef Documentation}
+\index{event.h@{event.h}!event\_\-callback\_\-fn@{event\_\-callback\_\-fn}}
+\index{event\_\-callback\_\-fn@{event\_\-callback\_\-fn}!event.h@{event.h}}
+\subsubsection[{event\_\-callback\_\-fn}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf event\_\-callback\_\-fn})(evutil\_\-socket\_\-t, short, void $\ast$)}\label{event_8h_ac1bbbe034b87ff78b7a380c0b71064d4}
+
+
+A callback function for an \doxyref{event}{p.}{structevent}. It receives three arguments:
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em fd}]An fd or signal \item[{\em events}]One or more EV\_\-$\ast$ flags \item[{\em arg}]A user-\/supplied argument.\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-fatal\_\-cb@{event\_\-fatal\_\-cb}}
+\index{event\_\-fatal\_\-cb@{event\_\-fatal\_\-cb}!event.h@{event.h}}
+\subsubsection[{event\_\-fatal\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf event\_\-fatal\_\-cb})(int err)}\label{event_8h_a96cbd560e6fe7cb4ebfa6000e164d752}
+
+
+A function to be called if Libevent encounters a fatal internal error. \begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-set\_\-fatal\_\-callback}{p.}{event_8h_a73beabc6626db0da679eb8961ce3f477} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-log\_\-cb@{event\_\-log\_\-cb}}
+\index{event\_\-log\_\-cb@{event\_\-log\_\-cb}!event.h@{event.h}}
+\subsubsection[{event\_\-log\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf event\_\-log\_\-cb})(int severity, const char $\ast$msg)}\label{event_8h_adbff4d951c4b002b955966f0ab228a76}
+
+
+A callback function used to intercept Libevent's log messages. \begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-set\_\-log\_\-callback}{p.}{event_8h_a87e59ed1dd711ced2b2a1314d3e3c1c7} 
+\end{DoxySeeAlso}
+
+
+\subsection{Enumeration Type Documentation}
+\index{event.h@{event.h}!event\_\-base\_\-config\_\-flag@{event\_\-base\_\-config\_\-flag}}
+\index{event\_\-base\_\-config\_\-flag@{event\_\-base\_\-config\_\-flag}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-config\_\-flag}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf event\_\-base\_\-config\_\-flag}}\label{event_8h_acfef69af45abee54725f40f7f29986c5}
+
+
+A flag passed to \doxyref{event\_\-config\_\-set\_\-flag()}{p.}{event_8h_ac4b2697c7927fcd2167a1749f6602f29}. These flags change the behavior of an allocated \doxyref{event\_\-base}{p.}{structevent__base}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-config\_\-set\_\-flag()}{p.}{event_8h_ac4b2697c7927fcd2167a1749f6602f29}, \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04}, \doxyref{event\_\-method\_\-feature}{p.}{event_8h_ae7da61aef13e27a3047151b696b44c80} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EVENT\_\-BASE\_\-FLAG\_\-NOLOCK@{EVENT\_\-BASE\_\-FLAG\_\-NOLOCK}!event.h@{event.h}}\index{event.h@{event.h}!EVENT\_\-BASE\_\-FLAG\_\-NOLOCK@{EVENT\_\-BASE\_\-FLAG\_\-NOLOCK}}\item[{\em 
+EVENT\_\-BASE\_\-FLAG\_\-NOLOCK\label{event_8h_acfef69af45abee54725f40f7f29986c5ac1302f72251168137258335e945e2ae5}
+}]Do not allocate a lock for the \doxyref{event}{p.}{structevent} base, even if we have locking set up. \index{EVENT\_\-BASE\_\-FLAG\_\-IGNORE\_\-ENV@{EVENT\_\-BASE\_\-FLAG\_\-IGNORE\_\-ENV}!event.h@{event.h}}\index{event.h@{event.h}!EVENT\_\-BASE\_\-FLAG\_\-IGNORE\_\-ENV@{EVENT\_\-BASE\_\-FLAG\_\-IGNORE\_\-ENV}}\item[{\em 
+EVENT\_\-BASE\_\-FLAG\_\-IGNORE\_\-ENV\label{event_8h_acfef69af45abee54725f40f7f29986c5a230574947412d83f2dd19fe8c7d286e7}
+}]Do not check the EVENT\_\-$\ast$ environment variables when configuring an \doxyref{event\_\-base}{p.}{structevent__base}. \index{EVENT\_\-BASE\_\-FLAG\_\-STARTUP\_\-IOCP@{EVENT\_\-BASE\_\-FLAG\_\-STARTUP\_\-IOCP}!event.h@{event.h}}\index{event.h@{event.h}!EVENT\_\-BASE\_\-FLAG\_\-STARTUP\_\-IOCP@{EVENT\_\-BASE\_\-FLAG\_\-STARTUP\_\-IOCP}}\item[{\em 
+EVENT\_\-BASE\_\-FLAG\_\-STARTUP\_\-IOCP\label{event_8h_acfef69af45abee54725f40f7f29986c5a4ffb2510ab533d7156f412ee4f0c08ea}
+}]Windows only: enable the IOCP dispatcher at startup. If this flag is set then \doxyref{bufferevent\_\-socket\_\-new()}{p.}{bufferevent_8h_a501557193aa56c9f4923583d9d734395} and evconn\_\-listener\_\-new() will use IOCP-\/backed implementations instead of the usual select-\/based one on Windows. \index{EVENT\_\-BASE\_\-FLAG\_\-NO\_\-CACHE\_\-TIME@{EVENT\_\-BASE\_\-FLAG\_\-NO\_\-CACHE\_\-TIME}!event.h@{event.h}}\index{event.h@{event.h}!EVENT\_\-BASE\_\-FLAG\_\-NO\_\-CACHE\_\-TIME@{EVENT\_\-BASE\_\-FLAG\_\-NO\_\-CACHE\_\-TIME}}\item[{\em 
+EVENT\_\-BASE\_\-FLAG\_\-NO\_\-CACHE\_\-TIME\label{event_8h_acfef69af45abee54725f40f7f29986c5a057dff1977c48174f0a0f0c43ef92ec5}
+}]Instead of checking the current time every time the \doxyref{event}{p.}{structevent} loop is ready to run timeout callbacks, check after each timeout callback. \index{EVENT\_\-BASE\_\-FLAG\_\-EPOLL\_\-USE\_\-CHANGELIST@{EVENT\_\-BASE\_\-FLAG\_\-EPOLL\_\-USE\_\-CHANGELIST}!event.h@{event.h}}\index{event.h@{event.h}!EVENT\_\-BASE\_\-FLAG\_\-EPOLL\_\-USE\_\-CHANGELIST@{EVENT\_\-BASE\_\-FLAG\_\-EPOLL\_\-USE\_\-CHANGELIST}}\item[{\em 
+EVENT\_\-BASE\_\-FLAG\_\-EPOLL\_\-USE\_\-CHANGELIST\label{event_8h_acfef69af45abee54725f40f7f29986c5acceb45f3098787247044929f92f4296e}
+}]If we are using the epoll backend, this flag says that it is safe to use Libevent's internal change-\/list code to batch up adds and deletes in order to try to do as few syscalls as possible. Setting this flag can make your code run faster, but it may trigger a Linux bug: it is not safe to use this flag if you have any fds cloned by dup() or its variants. Doing so will produce strange and hard-\/to-\/diagnose bugs.
+
+This flag can also be activated by settnig the EVENT\_\-EPOLL\_\-USE\_\-CHANGELIST environment variable.
+
+This flag has no effect if you wind up using a backend other than epoll. \end{description}
+\end{Desc}
+
+\index{event.h@{event.h}!event\_\-method\_\-feature@{event\_\-method\_\-feature}}
+\index{event\_\-method\_\-feature@{event\_\-method\_\-feature}!event.h@{event.h}}
+\subsubsection[{event\_\-method\_\-feature}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf event\_\-method\_\-feature}}\label{event_8h_ae7da61aef13e27a3047151b696b44c80}
+
+
+A flag used to describe which features an \doxyref{event\_\-base}{p.}{structevent__base} (must) provide. Because of OS limitations, not every Libevent backend supports every possible feature. You can use this type with \doxyref{event\_\-config\_\-require\_\-features()}{p.}{event_8h_a2b08f2633e76290117e4a03621940948} to tell Libevent to only proceed if your \doxyref{event\_\-base}{p.}{structevent__base} implements a given feature, and you can receive this type from \doxyref{event\_\-base\_\-get\_\-features()}{p.}{event_8h_a11cb58563e8b5da36f00db2e250d026c} to see which features are available. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{EV\_\-FEATURE\_\-ET@{EV\_\-FEATURE\_\-ET}!event.h@{event.h}}\index{event.h@{event.h}!EV\_\-FEATURE\_\-ET@{EV\_\-FEATURE\_\-ET}}\item[{\em 
+EV\_\-FEATURE\_\-ET\label{event_8h_ae7da61aef13e27a3047151b696b44c80ab407cae60af925dba44bd66e56e5f897}
+}]Require an \doxyref{event}{p.}{structevent} method that allows edge-\/triggered events with EV\_\-ET. \index{EV\_\-FEATURE\_\-O1@{EV\_\-FEATURE\_\-O1}!event.h@{event.h}}\index{event.h@{event.h}!EV\_\-FEATURE\_\-O1@{EV\_\-FEATURE\_\-O1}}\item[{\em 
+EV\_\-FEATURE\_\-O1\label{event_8h_ae7da61aef13e27a3047151b696b44c80a7a6f2de86c09b92aa175f950190bf706}
+}]Require an \doxyref{event}{p.}{structevent} method where having one \doxyref{event}{p.}{structevent} triggered among many is [approximately] an O(1) operation. This excludes (for example) select and poll, which are approximately O(N) for N equal to the total number of possible events. \index{EV\_\-FEATURE\_\-FDS@{EV\_\-FEATURE\_\-FDS}!event.h@{event.h}}\index{event.h@{event.h}!EV\_\-FEATURE\_\-FDS@{EV\_\-FEATURE\_\-FDS}}\item[{\em 
+EV\_\-FEATURE\_\-FDS\label{event_8h_ae7da61aef13e27a3047151b696b44c80a2e964e8a8f3033d26d52831fb8eec199}
+}]Require an \doxyref{event}{p.}{structevent} method that allows file descriptors as well as sockets. \end{description}
+\end{Desc}
+
+
+
+\subsection{Function Documentation}
+\index{event.h@{event.h}!event\_\-active@{event\_\-active}}
+\index{event\_\-active@{event\_\-active}!event.h@{event.h}}
+\subsubsection[{event\_\-active}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-active (struct {\bf event} $\ast$ {\em ev}, \/  int {\em res}, \/  short {\em ncalls})}\label{event_8h_a3262ae1dc7fe51516b43412d61301e4f}
+
+
+Make an \doxyref{event}{p.}{structevent} active. You can use this function on a pending or a non-\/pending \doxyref{event}{p.}{structevent} to make it active, so that its callback will be run by \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f} or \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80}.
+
+One common use in multithreaded programs is to wake the thread running \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} from another thread.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} to make active. \item[{\em res}]a set of flags to pass to the event's callback. \item[{\em ncalls}]an obsolete argument: this is ignored. \end{DoxyParams}
+\index{event.h@{event.h}!event\_\-add@{event\_\-add}}
+\index{event\_\-add@{event\_\-add}!event.h@{event.h}}
+\subsubsection[{event\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-add (struct {\bf event} $\ast$ {\em ev}, \/  const struct timeval $\ast$ {\em timeout})}\label{event_8h_a44df7b40859b56f2c866adb02dabdd9e}
+
+
+Add an \doxyref{event}{p.}{structevent} to the set of pending events. The function \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} schedules the execution of the ev \doxyref{event}{p.}{structevent} when the \doxyref{event}{p.}{structevent} specified in \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0}/event\_\-new() occurs, or when the time specified in timeout has elapesed. If atimeout is NULL, no timeout occurs and the function will only be called if a matching \doxyref{event}{p.}{structevent} occurs. The \doxyref{event}{p.}{structevent} in the ev argument must be already initialized by \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} or \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd} and may not be used in calls to \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} until it is no longer pending.
+
+If the \doxyref{event}{p.}{structevent} in the ev argument already has a scheduled timeout, calling \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} replaces the old timeout with the new one, or clears the old timeout if the timeout argument is NULL.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} struct initialized via \doxyref{event\_\-set()}{p.}{event__compat_8h_ace184d66066e9bac013779d8f6921d11} \item[{\em timeout}]the maximum amount of time to wait for the \doxyref{event}{p.}{structevent}, or NULL to wait forever \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}, \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0}, \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-assign@{event\_\-assign}}
+\index{event\_\-assign@{event\_\-assign}!event.h@{event.h}}
+\subsubsection[{event\_\-assign}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-assign (struct {\bf event} $\ast$, \/  struct {\bf event\_\-base} $\ast$, \/  evutil\_\-socket\_\-t, \/  short, \/  {\bf event\_\-callback\_\-fn}, \/  void $\ast$)}\label{event_8h_afade5e4859dee5b85d502e5594a05cf0}
+
+
+Prepare a new, already-\/allocated \doxyref{event}{p.}{structevent} structure to be added. The function \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} prepares the \doxyref{event}{p.}{structevent} structure ev to be used in future calls to \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} and \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}. Unlike \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}, it doesn't allocate memory itself: it requires that you have already allocated a struct \doxyref{event}{p.}{structevent}, probably on the heap. Doing this will typically make your code depend on the size of the \doxyref{event}{p.}{structevent} structure, and thereby create incompatibility with future versions of Libevent.
+
+The easiest way to avoid this problem is just to use \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd} and \doxyref{event\_\-free()}{p.}{event_8h_ad7fd53b1263bf0fdccd959a6c5a659cc} instead.
+
+A slightly harder way to future-\/proof your code is to use \doxyref{event\_\-get\_\-struct\_\-event\_\-size()}{p.}{event_8h_a3881f7391324c05bd6f0c291e2682f03} to determine the required size of an \doxyref{event}{p.}{structevent} at runtime.
+
+Note that it is NOT safe to call this function on an \doxyref{event}{p.}{structevent} that is active or pending. Doing so WILL corrupt internal data structures in Libevent, and lead to strange, hard-\/to-\/diagnose bugs. You \_\-can\_\- use event\_\-assign to change an existing \doxyref{event}{p.}{structevent}, but only if it is not active or pending!
+
+The arguments for this function, and the behavior of the events that it makes, are as for \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} struct to be modified \item[{\em base}]the \doxyref{event}{p.}{structevent} base to which ev should be attached. \item[{\em fd}]the file descriptor to be monitored \item[{\em events}]desired events to monitor; can be EV\_\-READ and/or EV\_\-WRITE \item[{\em callback}]callback function to be invoked when the \doxyref{event}{p.}{structevent} occurs \item[{\em callback\_\-arg}]an argument to be passed to the callback function\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success, or -\/1 on invalid arguments.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}, \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}, \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}, \doxyref{event\_\-base\_\-once()}{p.}{event_8h_acddee16b430c037ae061f966dc18eb9d}, \doxyref{event\_\-get\_\-struct\_\-event\_\-size()}{p.}{event_8h_a3881f7391324c05bd6f0c291e2682f03} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-dispatch@{event\_\-base\_\-dispatch}}
+\index{event\_\-base\_\-dispatch@{event\_\-base\_\-dispatch}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-dispatch}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-dispatch (struct {\bf event\_\-base} $\ast$)}\label{event_8h_a01e457364ed5216a8c7bc219033b946f}
+
+
+Event dispatching loop. This loop will run the \doxyref{event}{p.}{structevent} base until either there are no more added events, or until something calls \doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e} or \doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9}.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} or \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if an error occurred, or 1 if no events were registered. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-free@{event\_\-base\_\-free}}
+\index{event\_\-base\_\-free@{event\_\-base\_\-free}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-base\_\-free (struct {\bf event\_\-base} $\ast$)}\label{event_8h_a6e9827de8c3014417b11b48f2fe688ae}
+
+
+Deallocate all memory associated with an \doxyref{event\_\-base}{p.}{structevent__base}, and free the base. Note that this function will not close any fds or free any memory passed to event\_\-new as the argument to callback.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]an \doxyref{event\_\-base}{p.}{structevent__base} to be freed \end{DoxyParams}
+\index{event.h@{event.h}!event\_\-base\_\-get\_\-features@{event\_\-base\_\-get\_\-features}}
+\index{event\_\-base\_\-get\_\-features@{event\_\-base\_\-get\_\-features}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-get\_\-features}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-get\_\-features (const struct {\bf event\_\-base} $\ast$ {\em base})}\label{event_8h_a11cb58563e8b5da36f00db2e250d026c}
+
+
+Return a bitmask of the features implemented by an \doxyref{event}{p.}{structevent} base. This will be a bitwise OR of one or more of the values of event\_\-method\_\-feature
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-method\_\-feature}{p.}{event_8h_ae7da61aef13e27a3047151b696b44c80} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-get\_\-method@{event\_\-base\_\-get\_\-method}}
+\index{event\_\-base\_\-get\_\-method@{event\_\-base\_\-get\_\-method}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-get\_\-method}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ event\_\-base\_\-get\_\-method (const struct {\bf event\_\-base} $\ast$)}\label{event_8h_a10914a893ed07dc8238d3274a9cbb3fc}
+
+
+Get the kernel \doxyref{event}{p.}{structevent} notification mechanism used by Libevent. 
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a string identifying the kernel \doxyref{event}{p.}{structevent} mechanism (kqueue, epoll, etc.) 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-base\_\-gettimeofday\_\-cached@{event\_\-base\_\-gettimeofday\_\-cached}}
+\index{event\_\-base\_\-gettimeofday\_\-cached@{event\_\-base\_\-gettimeofday\_\-cached}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-gettimeofday\_\-cached}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-gettimeofday\_\-cached (struct {\bf event\_\-base} $\ast$ {\em base}, \/  struct timeval $\ast$ {\em tv})}\label{event_8h_ad1d2129d47590c53d166f8c09afee865}
+
+
+Sets 'tv' to the current time (as returned by gettimeofday()), looking at the cached value in 'base' if possible, and calling gettimeofday() or clock\_\-gettime() as appropriate if there is no cached time. Generally, this value will only be cached while actually processing \doxyref{event}{p.}{structevent} callbacks, and may be very inaccuate if your callbacks take a long time to execute.
+
+Returns 0 on success, negative on failure. \index{event.h@{event.h}!event\_\-base\_\-got\_\-break@{event\_\-base\_\-got\_\-break}}
+\index{event\_\-base\_\-got\_\-break@{event\_\-base\_\-got\_\-break}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-got\_\-break}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-got\_\-break (struct {\bf event\_\-base} $\ast$)}\label{event_8h_a7a2be7762111b00935c1b1f5ea055351}
+
+
+Checks if the \doxyref{event}{p.}{structevent} loop was told to abort immediately by \doxyref{event\_\-loopbreak()}{p.}{event__compat_8h_a3a5c57caea1d97160f6990b3deeb6961}. This function will return true for an \doxyref{event\_\-base}{p.}{structevent__base} at every point after \doxyref{event\_\-loopbreak()}{p.}{event__compat_8h_a3a5c57caea1d97160f6990b3deeb6961} is called, until the \doxyref{event}{p.}{structevent} loop is next entered.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if \doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e} was called on this \doxyref{event}{p.}{structevent} base, or 0 otherwise 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e} 
+
+\doxyref{event\_\-base\_\-got\_\-exit()}{p.}{event_8h_a4786b2d2cc1dd6e5fdd50e0d7627d495} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-got\_\-exit@{event\_\-base\_\-got\_\-exit}}
+\index{event\_\-base\_\-got\_\-exit@{event\_\-base\_\-got\_\-exit}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-got\_\-exit}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-got\_\-exit (struct {\bf event\_\-base} $\ast$)}\label{event_8h_a4786b2d2cc1dd6e5fdd50e0d7627d495}
+
+
+Checks if the \doxyref{event}{p.}{structevent} loop was told to exit by \doxyref{event\_\-loopexit()}{p.}{event__compat_8h_a2e3d894ac7986bb4967ebfe67a2d9977}. This function will return true for an \doxyref{event\_\-base}{p.}{structevent__base} at every point after \doxyref{event\_\-loopexit()}{p.}{event__compat_8h_a2e3d894ac7986bb4967ebfe67a2d9977} is called, until the \doxyref{event}{p.}{structevent} loop is next entered.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if \doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9} was called on this \doxyref{event}{p.}{structevent} base, or 0 otherwise 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9} 
+
+\doxyref{event\_\-base\_\-got\_\-break()}{p.}{event_8h_a7a2be7762111b00935c1b1f5ea055351} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-init\_\-common\_\-timeout@{event\_\-base\_\-init\_\-common\_\-timeout}}
+\index{event\_\-base\_\-init\_\-common\_\-timeout@{event\_\-base\_\-init\_\-common\_\-timeout}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-init\_\-common\_\-timeout}]{\setlength{\rightskip}{0pt plus 5cm}struct timeval$\ast$ event\_\-base\_\-init\_\-common\_\-timeout (struct {\bf event\_\-base} $\ast$ {\em base}, \/  const struct timeval $\ast$ {\em duration})\hspace{0.3cm}{\ttfamily  [read]}}\label{event_8h_a55b459e572b58cc0b0c4cca8ce63921d}
+
+
+Prepare an \doxyref{event\_\-base}{p.}{structevent__base} to use a large number of timeouts with the same duration. Libevent's default scheduling algorithm is optimized for having a large number of timeouts with their durations more or less randomly distributed. But if you have a large number of timeouts that all have the same duration (for example, if you have a large number of connections that all have a 10-\/second timeout), then you can improve Libevent's performance by telling Libevent about it.
+
+To do this, call this function with the common duration. It will return a pointer to a different, opaque timeout value. (Don't depend on its actual contents!) When you use this timeout value in \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}, Libevent will schedule the \doxyref{event}{p.}{structevent} more efficiently.
+
+(This optimization probably will not be worthwhile until you have thousands or tens of thousands of events with the same timeout.) \index{event.h@{event.h}!event\_\-base\_\-loop@{event\_\-base\_\-loop}}
+\index{event\_\-base\_\-loop@{event\_\-base\_\-loop}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-loop}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-loop (struct {\bf event\_\-base} $\ast$, \/  int)}\label{event_8h_ad712706e6a763b6662f0eb03b3d8cd80}
+
+
+Wait for events to become active, and run their callbacks. This is a more flexible version of \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f}.
+
+By default, this loop will run the \doxyref{event}{p.}{structevent} base until either there are no more added events, or until something calls \doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e} or evenet\_\-base\_\-loopexit(). You can override this behavior with the 'flags' argument.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} or \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} \item[{\em flags}]any combination of EVLOOP\_\-ONCE $|$ EVLOOP\_\-NONBLOCK \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 if an error occurred, or 1 if no events were registered. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9}, \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f}, \doxyref{EVLOOP\_\-ONCE}{p.}{event_8h_afab575b1e867dde13a2c7f2f967e0e4e}, \doxyref{EVLOOP\_\-NONBLOCK}{p.}{event_8h_a10b9c102337d0ece8607c9c01bc4f7c8} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-loopbreak@{event\_\-base\_\-loopbreak}}
+\index{event\_\-base\_\-loopbreak@{event\_\-base\_\-loopbreak}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-loopbreak}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-loopbreak (struct {\bf event\_\-base} $\ast$)}\label{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e}
+
+
+Abort the active \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} immediately. \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} will abort the loop after the next \doxyref{event}{p.}{structevent} is completed; \doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e} is typically invoked from this event's callback. This behavior is analogous to the \char`\"{}break;\char`\"{} statement.
+
+Subsequent invocations of \doxyref{event\_\-loop()}{p.}{event__compat_8h_a765c1875642fc730addf04e9433f6448} will proceed normally.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loopexit()}{p.}{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-loopexit@{event\_\-base\_\-loopexit}}
+\index{event\_\-base\_\-loopexit@{event\_\-base\_\-loopexit}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-loopexit}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-loopexit (struct {\bf event\_\-base} $\ast$, \/  const struct timeval $\ast$)}\label{event_8h_ac2c66174ee5f10df65b9a9b62fca7dd9}
+
+
+Exit the \doxyref{event}{p.}{structevent} loop after the specified time. The next \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} iteration after the given timer expires will complete normally (handling all queued events) then exit without blocking for events again.
+
+Subsequent invocations of \doxyref{event\_\-base\_\-loop()}{p.}{event_8h_ad712706e6a763b6662f0eb03b3d8cd80} will proceed normally.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} \item[{\em tv}]the amount of time after which the loop should terminate, or NULL to exit after running all currently active events. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-loopbreak()}{p.}{event_8h_a07a7599e478e4031fa8cf52e26d8aa1e} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-new@{event\_\-base\_\-new}}
+\index{event\_\-base\_\-new@{event\_\-base\_\-new}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf event\_\-base}$\ast$ event\_\-base\_\-new (void)\hspace{0.3cm}{\ttfamily  [read]}}\label{event_8h_a4c16f1203aebc67f94791ae0240b7353}
+
+
+Create and return a new \doxyref{event\_\-base}{p.}{structevent__base} to use with the rest of Libevent. \begin{DoxyReturn}{Returns}
+a new \doxyref{event\_\-base}{p.}{structevent__base} on success, or NULL on failure.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-free()}{p.}{event_8h_a6e9827de8c3014417b11b48f2fe688ae}, \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-new\_\-with\_\-config@{event\_\-base\_\-new\_\-with\_\-config}}
+\index{event\_\-base\_\-new\_\-with\_\-config@{event\_\-base\_\-new\_\-with\_\-config}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-new\_\-with\_\-config}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf event\_\-base}$\ast$ event\_\-base\_\-new\_\-with\_\-config (const struct {\bf event\_\-config} $\ast$)\hspace{0.3cm}{\ttfamily  [read]}}\label{event_8h_a444afb106c45ba296d847417a3a1ef04}
+
+
+Initialize the \doxyref{event}{p.}{structevent} API. Use \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} to initialize a new \doxyref{event}{p.}{structevent} base, taking the specified configuration under consideration. The configuration object can currently be used to avoid certain \doxyref{event}{p.}{structevent} notification mechanisms.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em cfg}]the \doxyref{event}{p.}{structevent} configuration object \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an initialized \doxyref{event\_\-base}{p.}{structevent__base} that can be used to registering events, or NULL if no \doxyref{event}{p.}{structevent} base can be created with the requested \doxyref{event\_\-config}{p.}{structevent__config}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353}, \doxyref{event\_\-base\_\-free()}{p.}{event_8h_a6e9827de8c3014417b11b48f2fe688ae}, \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}, \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-once@{event\_\-base\_\-once}}
+\index{event\_\-base\_\-once@{event\_\-base\_\-once}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-once}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-once (struct {\bf event\_\-base} $\ast$, \/  evutil\_\-socket\_\-t, \/  short, \/  {\bf event\_\-callback\_\-fn}, \/  void $\ast$, \/  const struct timeval $\ast$)}\label{event_8h_acddee16b430c037ae061f966dc18eb9d}
+
+
+Schedule a one-\/time \doxyref{event}{p.}{structevent}. The function \doxyref{event\_\-base\_\-once()}{p.}{event_8h_acddee16b430c037ae061f966dc18eb9d} is similar to \doxyref{event\_\-set()}{p.}{event__compat_8h_ace184d66066e9bac013779d8f6921d11}. However, it schedules a callback to be called exactly once, and does not require the caller to prepare an \doxyref{event}{p.}{structevent} structure.
+
+Note that in Libevent 2.0 and earlier, if the \doxyref{event}{p.}{structevent} is never triggered, the internal memory used to hold it will never be freed. This may be fixed in a later version of Libevent.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]an \doxyref{event\_\-base}{p.}{structevent__base} \item[{\em fd}]a file descriptor to monitor, or -\/1 for no fd. \item[{\em events}]event(s) to monitor; can be any of EV\_\-READ $|$ EV\_\-WRITE, or EV\_\-TIMEOUT \item[{\em callback}]callback function to be invoked when the \doxyref{event}{p.}{structevent} occurs \item[{\em arg}]an argument to be passed to the callback function \item[{\em timeout}]the maximum amount of time to wait for the \doxyref{event}{p.}{structevent}. NULL makes an EV\_\-READ/EV\_\-WRITE \doxyref{event}{p.}{structevent} make forever; NULL makes an EV\_\-TIMEOUT \doxyref{event}{p.}{structevent} succees immediately. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-base\_\-priority\_\-init@{event\_\-base\_\-priority\_\-init}}
+\index{event\_\-base\_\-priority\_\-init@{event\_\-base\_\-priority\_\-init}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-priority\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-priority\_\-init (struct {\bf event\_\-base} $\ast$, \/  int)}\label{event_8h_a67067fe995561cd36a7f34ef19e030e8}
+
+
+Set the number of different \doxyref{event}{p.}{structevent} priorities. By default Libevent schedules all active events with the same priority. However, some time it is desirable to process some events with a higher priority than others. For that reason, Libevent supports strict priority queues. Active events with a lower priority are always processed before events with a higher priority.
+
+The number of different priorities can be set initially with the \doxyref{event\_\-base\_\-priority\_\-init()}{p.}{event_8h_a67067fe995561cd36a7f34ef19e030e8} function. This function should be called before the first call to \doxyref{event\_\-base\_\-dispatch()}{p.}{event_8h_a01e457364ed5216a8c7bc219033b946f}. The \doxyref{event\_\-priority\_\-set()}{p.}{event_8h_a9984a63f2edcc72bef96a188f569b367} function can be used to assign a priority to an \doxyref{event}{p.}{structevent}. By default, Libevent assigns the middle priority to all events unless their priority is explicitly set.
+
+Note that urgent-\/priority events can starve less-\/urgent events: after running all urgent-\/priority callbacks, Libevent checks for more urgent events again, before running less-\/urgent events. Less-\/urgent events will not have their callbacks run until there are no events more urgent than them that want to be active.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event\_\-base}{p.}{structevent__base} structure returned by \doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} \item[{\em npriorities}]the maximum number of priorities \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-priority\_\-set()}{p.}{event_8h_a9984a63f2edcc72bef96a188f569b367} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-base\_\-set@{event\_\-base\_\-set}}
+\index{event\_\-base\_\-set@{event\_\-base\_\-set}!event.h@{event.h}}
+\subsubsection[{event\_\-base\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-base\_\-set (struct {\bf event\_\-base} $\ast$, \/  struct {\bf event} $\ast$)}\label{event_8h_a2efd0ac7e54428d1941f212bc16ed9ce}
+
+
+Associate a different \doxyref{event}{p.}{structevent} base with an \doxyref{event}{p.}{structevent}. The \doxyref{event}{p.}{structevent} to be associated must not be currently active or pending.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em eb}]the \doxyref{event}{p.}{structevent} base \item[{\em ev}]the \doxyref{event}{p.}{structevent} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-config\_\-avoid\_\-method@{event\_\-config\_\-avoid\_\-method}}
+\index{event\_\-config\_\-avoid\_\-method@{event\_\-config\_\-avoid\_\-method}!event.h@{event.h}}
+\subsubsection[{event\_\-config\_\-avoid\_\-method}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-config\_\-avoid\_\-method (struct {\bf event\_\-config} $\ast$ {\em cfg}, \/  const char $\ast$ {\em method})}\label{event_8h_a961de3fb39a12ff67ff030bb3caacba2}
+
+
+Enters an \doxyref{event}{p.}{structevent} method that should be avoided into the configuration. This can be used to avoid \doxyref{event}{p.}{structevent} mechanisms that do not support certain file descriptor types, or for debugging to avoid certain \doxyref{event}{p.}{structevent} mechanisms. An application can make use of multiple \doxyref{event}{p.}{structevent} bases to accommodate incompatible file descriptor types.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em cfg}]the \doxyref{event}{p.}{structevent} configuration object \item[{\em method}]the name of the \doxyref{event}{p.}{structevent} method to avoid \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-config\_\-free@{event\_\-config\_\-free}}
+\index{event\_\-config\_\-free@{event\_\-config\_\-free}!event.h@{event.h}}
+\subsubsection[{event\_\-config\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-config\_\-free (struct {\bf event\_\-config} $\ast$ {\em cfg})}\label{event_8h_a605f44836f97bb031776a7f70d53d719}
+
+
+Deallocates all memory associated with an \doxyref{event}{p.}{structevent} configuration object. 
+\begin{DoxyParams}{Parameters}
+\item[{\em cfg}]the \doxyref{event}{p.}{structevent} configuration object to be freed. \end{DoxyParams}
+\index{event.h@{event.h}!event\_\-config\_\-new@{event\_\-config\_\-new}}
+\index{event\_\-config\_\-new@{event\_\-config\_\-new}!event.h@{event.h}}
+\subsubsection[{event\_\-config\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf event\_\-config}$\ast$ event\_\-config\_\-new (void)\hspace{0.3cm}{\ttfamily  [read]}}\label{event_8h_a92e238d51357e3dae6fcdd0b9e83b2d2}
+
+
+Allocates a new \doxyref{event}{p.}{structevent} configuration object. The \doxyref{event}{p.}{structevent} configuration object can be used to change the behavior of an \doxyref{event}{p.}{structevent} base.
+
+\begin{DoxyReturn}{Returns}
+an \doxyref{event\_\-config}{p.}{structevent__config} object that can be used to store configuration, or NULL if an error is encountered. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04}, \doxyref{event\_\-config\_\-free()}{p.}{event_8h_a605f44836f97bb031776a7f70d53d719}, \doxyref{event\_\-config}{p.}{structevent__config} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-config\_\-require\_\-features@{event\_\-config\_\-require\_\-features}}
+\index{event\_\-config\_\-require\_\-features@{event\_\-config\_\-require\_\-features}!event.h@{event.h}}
+\subsubsection[{event\_\-config\_\-require\_\-features}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-config\_\-require\_\-features (struct {\bf event\_\-config} $\ast$ {\em cfg}, \/  int {\em feature})}\label{event_8h_a2b08f2633e76290117e4a03621940948}
+
+
+Enters a required \doxyref{event}{p.}{structevent} method feature that the application demands. Note that not every feature or combination of features is supported on every platform. Code that requests features should be prepared to handle the case where \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} returns NULL, as in: 
+\begin{DoxyPre}
+     event\_config\_require\_features(cfg, EV\_FEATURE\_ET);
+     base = event\_base\_new\_with\_config(cfg);
+     if (base == NULL) \{
+We can't get edge-triggered behavior here.
+       event\_config\_require\_features(cfg, 0);
+       base = event\_base\_new\_with\_config(cfg);
+     \}
+   \end{DoxyPre}
+
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em cfg}]the \doxyref{event}{p.}{structevent} configuration object \item[{\em feature}]a bitfield of one or more event\_\-method\_\-feature values. Replaces values from previous calls to this function. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-method\_\-feature}{p.}{event_8h_ae7da61aef13e27a3047151b696b44c80}, \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-config\_\-set\_\-flag@{event\_\-config\_\-set\_\-flag}}
+\index{event\_\-config\_\-set\_\-flag@{event\_\-config\_\-set\_\-flag}!event.h@{event.h}}
+\subsubsection[{event\_\-config\_\-set\_\-flag}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-config\_\-set\_\-flag (struct {\bf event\_\-config} $\ast$ {\em cfg}, \/  int {\em flag})}\label{event_8h_ac4b2697c7927fcd2167a1749f6602f29}
+
+
+Sets one or more flags to configure what parts of the eventual \doxyref{event\_\-base}{p.}{structevent__base} will be initialized, and how they'll work. \begin{DoxySeeAlso}{See also}
+event\_\-base\_\-config\_\-flags, \doxyref{event\_\-base\_\-new\_\-with\_\-config()}{p.}{event_8h_a444afb106c45ba296d847417a3a1ef04} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-config\_\-set\_\-num\_\-cpus\_\-hint@{event\_\-config\_\-set\_\-num\_\-cpus\_\-hint}}
+\index{event\_\-config\_\-set\_\-num\_\-cpus\_\-hint@{event\_\-config\_\-set\_\-num\_\-cpus\_\-hint}!event.h@{event.h}}
+\subsubsection[{event\_\-config\_\-set\_\-num\_\-cpus\_\-hint}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-config\_\-set\_\-num\_\-cpus\_\-hint (struct {\bf event\_\-config} $\ast$ {\em cfg}, \/  int {\em cpus})}\label{event_8h_aa12ff91d766988a170cab43c53f66143}
+
+
+Records a hint for the number of CPUs in the system. This is used for tuning thread pools, etc, for optimal performance. In Libevent 2.0, it is only on Windows, and only when IOCP is in use.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em cfg}]the \doxyref{event}{p.}{structevent} configuration object \item[{\em cpus}]the number of cpus \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-debug\_\-unassign@{event\_\-debug\_\-unassign}}
+\index{event\_\-debug\_\-unassign@{event\_\-debug\_\-unassign}!event.h@{event.h}}
+\subsubsection[{event\_\-debug\_\-unassign}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-debug\_\-unassign (struct {\bf event} $\ast$)}\label{event_8h_afcc47ab5cc9128202cbe5012c4214a6b}
+
+
+When debugging mode is enabled, informs Libevent that an \doxyref{event}{p.}{structevent} should no longer be considered as assigned. When debugging mode is not enabled, does nothing.
+
+This function must only be called on a non-\/added \doxyref{event}{p.}{structevent}.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-enable\_\-debug\_\-mode()}{p.}{event_8h_a3472400b8b1802550df2242673a6da37} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-del@{event\_\-del}}
+\index{event\_\-del@{event\_\-del}!event.h@{event.h}}
+\subsubsection[{event\_\-del}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-del (struct {\bf event} $\ast$)}\label{event_8h_a30a8cb96af49d18388f64de73a2d4258}
+
+
+Remove an \doxyref{event}{p.}{structevent} from the set of monitored events. The function \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258} will cancel the \doxyref{event}{p.}{structevent} in the argument ev. If the \doxyref{event}{p.}{structevent} has already executed or has never been added the call will have no effect.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} struct to be removed from the working set \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-enable\_\-debug\_\-mode@{event\_\-enable\_\-debug\_\-mode}}
+\index{event\_\-enable\_\-debug\_\-mode@{event\_\-enable\_\-debug\_\-mode}!event.h@{event.h}}
+\subsubsection[{event\_\-enable\_\-debug\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-enable\_\-debug\_\-mode (void)}\label{event_8h_a3472400b8b1802550df2242673a6da37}
+
+
+Enable some relatively expensive debugging checks in Libevent that would normally be turned off. Generally, these checks cause code that would otherwise crash mysteriously to fail earlier with an assertion failure. Note that this method MUST be called before any events or event\_\-bases have been created.
+
+Debug mode can currently catch the following errors: An \doxyref{event}{p.}{structevent} is re-\/assigned while it is added Any function is called on a non-\/assigned \doxyref{event}{p.}{structevent}
+
+Note that debugging mode uses memory to track every \doxyref{event}{p.}{structevent} that has been initialized (via event\_\-assign, event\_\-set, or event\_\-new) but not yet released (via event\_\-free or event\_\-debug\_\-unassign). If you want to use debug mode, and you find yourself running out of memory, you will need to use event\_\-debug\_\-unassign to explicitly stop tracking events that are no longer considered set-\/up.
+
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-debug\_\-unassign()}{p.}{event_8h_afcc47ab5cc9128202cbe5012c4214a6b} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-free@{event\_\-free}}
+\index{event\_\-free@{event\_\-free}!event.h@{event.h}}
+\subsubsection[{event\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-free (struct {\bf event} $\ast$)}\label{event_8h_ad7fd53b1263bf0fdccd959a6c5a659cc}
+
+
+Deallocate a struct \doxyref{event}{p.}{structevent} $\ast$ returned by \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd}. If the \doxyref{event}{p.}{structevent} is pending or active, first make it non-\/pending and non-\/active. \index{event.h@{event.h}!event\_\-get\_\-assignment@{event\_\-get\_\-assignment}}
+\index{event\_\-get\_\-assignment@{event\_\-get\_\-assignment}!event.h@{event.h}}
+\subsubsection[{event\_\-get\_\-assignment}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-get\_\-assignment (const struct {\bf event} $\ast$ {\em event}, \/  struct {\bf event\_\-base} $\ast$$\ast$ {\em base\_\-out}, \/  evutil\_\-socket\_\-t $\ast$ {\em fd\_\-out}, \/  short $\ast$ {\em events\_\-out}, \/  {\bf event\_\-callback\_\-fn} $\ast$ {\em callback\_\-out}, \/  void $\ast$$\ast$ {\em arg\_\-out})}\label{event_8h_a2103c3cbf6e3e173419ebf019e29c788}
+
+
+Extract \_\-all\_\- of arguments given to construct a given \doxyref{event}{p.}{structevent}. The \doxyref{event\_\-base}{p.}{structevent__base} is copied into $\ast$base\_\-out, the fd is copied into $\ast$fd\_\-out, and so on.
+
+If any of the \char`\"{}\_\-out\char`\"{} arguments is NULL, it will be ignored. \index{event.h@{event.h}!event\_\-get\_\-struct\_\-event\_\-size@{event\_\-get\_\-struct\_\-event\_\-size}}
+\index{event\_\-get\_\-struct\_\-event\_\-size@{event\_\-get\_\-struct\_\-event\_\-size}!event.h@{event.h}}
+\subsubsection[{event\_\-get\_\-struct\_\-event\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t event\_\-get\_\-struct\_\-event\_\-size (void)}\label{event_8h_a3881f7391324c05bd6f0c291e2682f03}
+
+
+Return the size of struct \doxyref{event}{p.}{structevent} that the Libevent library was compiled with. This will be NO GREATER than sizeof(struct event) if you're running with the same version of Libevent that your application was built with, but otherwise might not.
+
+Note that it might be SMALLER than sizeof(struct event) if some future version of Libevent adds extra padding to the end of struct \doxyref{event}{p.}{structevent}. We might do this to help ensure ABI-\/compatibility between different versions of Libevent. \index{event.h@{event.h}!event\_\-get\_\-supported\_\-methods@{event\_\-get\_\-supported\_\-methods}}
+\index{event\_\-get\_\-supported\_\-methods@{event\_\-get\_\-supported\_\-methods}!event.h@{event.h}}
+\subsubsection[{event\_\-get\_\-supported\_\-methods}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$$\ast$ event\_\-get\_\-supported\_\-methods (void)}\label{event_8h_af93a8115c6c8ff28db573cba84d1e488}
+
+
+Gets all \doxyref{event}{p.}{structevent} notification mechanisms supported by Libevent. This functions returns the \doxyref{event}{p.}{structevent} mechanism in order preferred by Libevent. Note that this list will include all backends that Libevent has compiled-\/in support for, and will not necessarily check your OS to see whether it has the required resources.
+
+\begin{DoxyReturn}{Returns}
+an array with pointers to the names of support methods. The end of the array is indicated by a NULL pointer. If an error is encountered NULL is returned. 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-get\_\-version@{event\_\-get\_\-version}}
+\index{event\_\-get\_\-version@{event\_\-get\_\-version}!event.h@{event.h}}
+\subsubsection[{event\_\-get\_\-version}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ event\_\-get\_\-version (void)}\label{event_8h_a43d7feed94477cf0a7e3e062cc17b7e1}
+
+
+Get the Libevent version. Note that this will give you the version of the library that you're currently linked against, not the version of the headers that you've compiled against.
+
+\begin{DoxyReturn}{Returns}
+a string containing the version number of Libevent 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-get\_\-version\_\-number@{event\_\-get\_\-version\_\-number}}
+\index{event\_\-get\_\-version\_\-number@{event\_\-get\_\-version\_\-number}!event.h@{event.h}}
+\subsubsection[{event\_\-get\_\-version\_\-number}]{\setlength{\rightskip}{0pt plus 5cm}ev\_\-uint32\_\-t event\_\-get\_\-version\_\-number (void)}\label{event_8h_abd4d1f2b4ca8e11f3bbf022244f01fa9}
+
+
+Return a numeric representation of Libevent's version. Note that this will give you the version of the library that you're currently linked against, not the version of the headers you've used to compile.
+
+The format uses one byte each for the major, minor, and patchlevel parts of the version number. The low-\/order byte is unused. For example, version 2.0.1-\/alpha has a numeric representation of 0x02000100 \index{event.h@{event.h}!event\_\-initialized@{event\_\-initialized}}
+\index{event\_\-initialized@{event\_\-initialized}!event.h@{event.h}}
+\subsubsection[{event\_\-initialized}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-initialized (const struct {\bf event} $\ast$ {\em ev})}\label{event_8h_a5be4fbc16d90915a7d1b21ed3bae40c0}
+
+
+Test if an \doxyref{event}{p.}{structevent} structure might be initialized. The \doxyref{event\_\-initialized()}{p.}{event_8h_a5be4fbc16d90915a7d1b21ed3bae40c0} function can be used to check if an \doxyref{event}{p.}{structevent} has been initialized.
+
+Warning: This function is only useful for distinguishing a a zeroed-\/out piece of memory from an initialized \doxyref{event}{p.}{structevent}, it can easily be confused by uninitialized memory. Thus, it should ONLY be used to distinguish an initialized \doxyref{event}{p.}{structevent} from zero.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} structure to be tested \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the structure might be initialized, or 0 if it has not been initialized 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-new@{event\_\-new}}
+\index{event\_\-new@{event\_\-new}!event.h@{event.h}}
+\subsubsection[{event\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf event}$\ast$ event\_\-new (struct {\bf event\_\-base} $\ast$, \/  evutil\_\-socket\_\-t, \/  short, \/  {\bf event\_\-callback\_\-fn}, \/  void $\ast$)\hspace{0.3cm}{\ttfamily  [read]}}\label{event_8h_ab9a66f828d205eda84b321e32014cbbd}
+
+
+Allocate and asssign a new \doxyref{event}{p.}{structevent} structure, ready to be added. The function \doxyref{event\_\-new()}{p.}{event_8h_ab9a66f828d205eda84b321e32014cbbd} returns a new \doxyref{event}{p.}{structevent} that can be used in future calls to \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} and \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}. The fd and events arguments determine which conditions will trigger the \doxyref{event}{p.}{structevent}; the callback and callback\_\-arg arguments tell Libevent what to do when the \doxyref{event}{p.}{structevent} becomes active.
+
+If events contains one of EV\_\-READ, EV\_\-WRITE, or EV\_\-READ$|$EV\_\-WRITE, then fd is a file descriptor or socket that should get monitored for readiness to read, readiness to write, or readiness for either operation (respectively). If events contains EV\_\-SIGNAL, then fd is a signal number to wait for. If events contains none of those flags, then the \doxyref{event}{p.}{structevent} can be triggered only by a timeout or by manual activation with \doxyref{event\_\-active()}{p.}{event_8h_a3262ae1dc7fe51516b43412d61301e4f}: In this case, fd must be -\/1.
+
+The EV\_\-PERSIST flag can also be passed in the events argument: it makes \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} persistent until \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258} is called.
+
+The EV\_\-ET flag is compatible with EV\_\-READ and EV\_\-WRITE, and supported only by certain backends. It tells Libevent to use edge-\/triggered events.
+
+The EV\_\-TIMEOUT flag has no effect here.
+
+It is okay to have multiple events all listening on the same fds; but they must either all be edge-\/triggered, or all not be edge triggerd.
+
+When the \doxyref{event}{p.}{structevent} becomes active, the \doxyref{event}{p.}{structevent} loop will run the provided callbuck function, with three arguments. The first will be the provided fd value. The second will be a bitfield of the events that triggered: EV\_\-READ, EV\_\-WRITE, or EV\_\-SIGNAL. Here the EV\_\-TIMEOUT flag indicates that a timeout occurred, and EV\_\-ET indicates that an edge-\/triggered \doxyref{event}{p.}{structevent} occurred. The third \doxyref{event}{p.}{structevent} will be the callback\_\-arg pointer that you provide.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the \doxyref{event}{p.}{structevent} base to which the \doxyref{event}{p.}{structevent} should be attached. \item[{\em fd}]the file descriptor or signal to be monitored, or -\/1. \item[{\em events}]desired events to monitor: bitfield of EV\_\-READ, EV\_\-WRITE, EV\_\-SIGNAL, EV\_\-PERSIST, EV\_\-ET. \item[{\em callback}]callback function to be invoked when the \doxyref{event}{p.}{structevent} occurs \item[{\em callback\_\-arg}]an argument to be passed to the callback function\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a newly allocated struct \doxyref{event}{p.}{structevent} that must later be freed with \doxyref{event\_\-free()}{p.}{event_8h_ad7fd53b1263bf0fdccd959a6c5a659cc}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-free()}{p.}{event_8h_ad7fd53b1263bf0fdccd959a6c5a659cc}, \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e}, \doxyref{event\_\-del()}{p.}{event_8h_a30a8cb96af49d18388f64de73a2d4258}, \doxyref{event\_\-assign()}{p.}{event_8h_afade5e4859dee5b85d502e5594a05cf0} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-pending@{event\_\-pending}}
+\index{event\_\-pending@{event\_\-pending}!event.h@{event.h}}
+\subsubsection[{event\_\-pending}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-pending (const struct {\bf event} $\ast$ {\em ev}, \/  short {\em events}, \/  struct timeval $\ast$ {\em tv})}\label{event_8h_a49773a4e3e46f60e488ac37fb46950d9}
+
+
+Checks if a specific \doxyref{event}{p.}{structevent} is pending or scheduled. 
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} struct previously passed to \doxyref{event\_\-add()}{p.}{event_8h_a44df7b40859b56f2c866adb02dabdd9e} \item[{\em events}]the requested \doxyref{event}{p.}{structevent} type; any of EV\_\-TIMEOUT$|$EV\_\-READ$|$ EV\_\-WRITE$|$EV\_\-SIGNAL \item[{\em tv}]if this field is not NULL, and the \doxyref{event}{p.}{structevent} has a timeout, this field is set to hold the time at which the timeout will expire.\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the \doxyref{event}{p.}{structevent} is pending on any of the events in 'what', (that is to say, it has been added), or 0 if the \doxyref{event}{p.}{structevent} is not added. 
+\end{DoxyReturn}
+\index{event.h@{event.h}!event\_\-priority\_\-set@{event\_\-priority\_\-set}}
+\index{event\_\-priority\_\-set@{event\_\-priority\_\-set}!event.h@{event.h}}
+\subsubsection[{event\_\-priority\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-priority\_\-set (struct {\bf event} $\ast$, \/  int)}\label{event_8h_a9984a63f2edcc72bef96a188f569b367}
+
+
+Assign a priority to an \doxyref{event}{p.}{structevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em ev}]an \doxyref{event}{p.}{structevent} struct \item[{\em priority}]the new priority to be assigned \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-priority\_\-init()}{p.}{event__compat_8h_ac98d83bce2fe3e97ac655329fb30fccb} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-reinit@{event\_\-reinit}}
+\index{event\_\-reinit@{event\_\-reinit}!event.h@{event.h}}
+\subsubsection[{event\_\-reinit}]{\setlength{\rightskip}{0pt plus 5cm}int event\_\-reinit (struct {\bf event\_\-base} $\ast$ {\em base})}\label{event_8h_a7409499a79a59842955928af446fe03d}
+
+
+Reinitialize the \doxyref{event}{p.}{structevent} base after a fork. Some \doxyref{event}{p.}{structevent} mechanisms do not survive across fork. The \doxyref{event}{p.}{structevent} base needs to be reinitialized with the \doxyref{event\_\-reinit()}{p.}{event_8h_a7409499a79a59842955928af446fe03d} function.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the \doxyref{event}{p.}{structevent} base that needs to be re-\/initialized \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if some events could not be re-\/added. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{event\_\-base\_\-new()}{p.}{event_8h_a4c16f1203aebc67f94791ae0240b7353} 
+\end{DoxySeeAlso}
+\index{event.h@{event.h}!event\_\-set\_\-fatal\_\-callback@{event\_\-set\_\-fatal\_\-callback}}
+\index{event\_\-set\_\-fatal\_\-callback@{event\_\-set\_\-fatal\_\-callback}!event.h@{event.h}}
+\subsubsection[{event\_\-set\_\-fatal\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-set\_\-fatal\_\-callback ({\bf event\_\-fatal\_\-cb} {\em cb})}\label{event_8h_a73beabc6626db0da679eb8961ce3f477}
+
+
+Override Libevent's behavior in the \doxyref{event}{p.}{structevent} of a fatal internal error. By default, Libevent will call exit(1) if a programming error makes it impossible to continue correct operation. This function allows you to supply another callback instead. Note that if the function is ever invoked, something is wrong with your program, or with Libevent: any subsequent calls to Libevent may result in undefined behavior.
+
+Libevent will (almost) always log an \_\-EVENT\_\-LOG\_\-ERR message before calling this function; look at the last log message to see why Libevent has died. \index{event.h@{event.h}!event\_\-set\_\-log\_\-callback@{event\_\-set\_\-log\_\-callback}}
+\index{event\_\-set\_\-log\_\-callback@{event\_\-set\_\-log\_\-callback}!event.h@{event.h}}
+\subsubsection[{event\_\-set\_\-log\_\-callback}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-set\_\-log\_\-callback ({\bf event\_\-log\_\-cb} {\em cb})}\label{event_8h_a87e59ed1dd711ced2b2a1314d3e3c1c7}
+
+
+Redirect Libevent's log messages. 
+\begin{DoxyParams}{Parameters}
+\item[{\em cb}]a function taking two arguments: an integer severity between \_\-EVENT\_\-LOG\_\-DEBUG and \_\-EVENT\_\-LOG\_\-ERR, and a string. If cb is NULL, then the default log is used.\end{DoxyParams}
+NOTE: The function you provide $\ast$must not$\ast$ call any other libevent functionality. Doing so can produce undefined behavior. \index{event.h@{event.h}!event\_\-set\_\-mem\_\-functions@{event\_\-set\_\-mem\_\-functions}}
+\index{event\_\-set\_\-mem\_\-functions@{event\_\-set\_\-mem\_\-functions}!event.h@{event.h}}
+\subsubsection[{event\_\-set\_\-mem\_\-functions}]{\setlength{\rightskip}{0pt plus 5cm}void event\_\-set\_\-mem\_\-functions (void $\ast$($\ast$)(size\_\-t sz) {\em malloc\_\-fn}, \/  void $\ast$($\ast$)(void $\ast$ptr, size\_\-t sz) {\em realloc\_\-fn}, \/  void($\ast$)(void $\ast$ptr) {\em free\_\-fn})}\label{event_8h_a653e38c4bdd2f3b2d7476fcee95c1a62}
+
+
+Override the functions that Libevent uses for memory management. Usually, Libevent uses the standard libc functions malloc, realloc, and free to allocate memory. Passing replacements for those functions to \doxyref{event\_\-set\_\-mem\_\-functions()}{p.}{event_8h_a653e38c4bdd2f3b2d7476fcee95c1a62} overrides this behavior.
+
+Note that all memory returned from Libevent will be allocated by the replacement functions rather than by malloc() and realloc(). Thus, if you have replaced those functions, it will not be appropriate to free() memory that you get from Libevent. Instead, you must use the free\_\-fn replacement that you provided.
+
+Note also that if you are going to call this function, you should do so before any call to any Libevent function that does allocation. Otherwise, those funtions will allocate their memory using malloc(), but then later free it using your provided free\_\-fn.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em malloc\_\-fn}]A replacement for malloc. \item[{\em realloc\_\-fn}]A replacement for realloc \item[{\em free\_\-fn}]A replacement for free. \end{DoxyParams}

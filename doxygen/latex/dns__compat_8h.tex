@@ -1,0 +1,304 @@
+\section{event2/dns\_\-compat.h File Reference}
+\label{dns__compat_8h}\index{event2/dns\_\-compat.h@{event2/dns\_\-compat.h}}
+
+
+Potentially non-\/threadsafe versions of the functions in \doxyref{dns.h}{p.}{dns_8h}: provided only for backwards compatibility.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct evdns\_\-server\_\-port $\ast$ {\bf evdns\_\-add\_\-server\_\-port} (evutil\_\-socket\_\-t socket, int flags, {\bf evdns\_\-request\_\-callback\_\-fn\_\-type} callback, void $\ast$user\_\-data)
+\begin{DoxyCompactList}\small\item\em As evdns\_\-server\_\-new\_\-with\_\-base. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-clear\_\-nameservers\_\-and\_\-suspend} (void)
+\begin{DoxyCompactList}\small\item\em Remove all configured nameservers, and suspend all pending resolves. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-count\_\-nameservers} (void)
+\begin{DoxyCompactList}\small\item\em Get the number of configured nameservers. \item\end{DoxyCompactList}\item 
+struct evdns\_\-base $\ast$ {\bf evdns\_\-get\_\-global\_\-base} (void)
+\begin{DoxyCompactList}\small\item\em Return the global evdns\_\-base created by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} and used by the other deprecated functions. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the asynchronous DNS library. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-nameserver\_\-add} (unsigned long int address)
+\begin{DoxyCompactList}\small\item\em Add a nameserver. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-nameserver\_\-ip\_\-add} (const char $\ast$ip\_\-as\_\-string)
+\begin{DoxyCompactList}\small\item\em Add a nameserver. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-resolv\_\-conf\_\-parse} (int flags, const char $\ast$const filename)
+\begin{DoxyCompactList}\small\item\em Parse a resolv.conf file. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-resolve\_\-ipv4} (const char $\ast$name, int flags, {\bf evdns\_\-callback\_\-type} callback, void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Lookup an A record for a given name. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-resolve\_\-ipv6} (const char $\ast$name, int flags, {\bf evdns\_\-callback\_\-type} callback, void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Lookup an AAAA record for a given name. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-resolve\_\-reverse} (const struct in\_\-addr $\ast$in, int flags, {\bf evdns\_\-callback\_\-type} callback, void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Lookup a PTR record for a given IP address. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-resolve\_\-reverse\_\-ipv6} (const struct in6\_\-addr $\ast$in, int flags, {\bf evdns\_\-callback\_\-type} callback, void $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Lookup a PTR record for a given IPv6 address. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-resume} (void)
+\begin{DoxyCompactList}\small\item\em Resume normal operation and continue any suspended resolve requests. \item\end{DoxyCompactList}\item 
+void {\bf evdns\_\-search\_\-add} (const char $\ast$domain)
+\begin{DoxyCompactList}\small\item\em Add a domain to the list of search domains. \item\end{DoxyCompactList}\item 
+void {\bf evdns\_\-search\_\-clear} (void)
+\begin{DoxyCompactList}\small\item\em Clear the list of search domains. \item\end{DoxyCompactList}\item 
+void {\bf evdns\_\-search\_\-ndots\_\-set} (const int ndots)
+\begin{DoxyCompactList}\small\item\em Set the 'ndots' parameter for searches. \item\end{DoxyCompactList}\item 
+int {\bf evdns\_\-set\_\-option} (const char $\ast$option, const char $\ast$val, int flags)
+\begin{DoxyCompactList}\small\item\em Set the value of a configuration option. \item\end{DoxyCompactList}\item 
+void {\bf evdns\_\-shutdown} (int fail\_\-requests)
+\begin{DoxyCompactList}\small\item\em Shut down the asynchronous DNS resolver and terminate all active requests. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Potentially non-\/threadsafe versions of the functions in \doxyref{dns.h}{p.}{dns_8h}: provided only for backwards compatibility. 
+
+\subsection{Function Documentation}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-add\_\-server\_\-port@{evdns\_\-add\_\-server\_\-port}}
+\index{evdns\_\-add\_\-server\_\-port@{evdns\_\-add\_\-server\_\-port}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-add\_\-server\_\-port}]{\setlength{\rightskip}{0pt plus 5cm}struct evdns\_\-server\_\-port$\ast$ evdns\_\-add\_\-server\_\-port (evutil\_\-socket\_\-t {\em socket}, \/  int {\em flags}, \/  {\bf evdns\_\-request\_\-callback\_\-fn\_\-type} {\em callback}, \/  void $\ast$ {\em user\_\-data})\hspace{0.3cm}{\ttfamily  [read]}}\label{dns__compat_8h_aaa1aa021d9a842e02366e36df2ebbb71}
+
+
+As evdns\_\-server\_\-new\_\-with\_\-base. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which even\_\-base it uses. The recommended function is \doxyref{evdns\_\-add\_\-server\_\-port\_\-with\_\-base()}{p.}{dns_8h_ae85fd5477f58f798c15a5d31fe4405ec}.\end{Desc}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-clear\_\-nameservers\_\-and\_\-suspend@{evdns\_\-clear\_\-nameservers\_\-and\_\-suspend}}
+\index{evdns\_\-clear\_\-nameservers\_\-and\_\-suspend@{evdns\_\-clear\_\-nameservers\_\-and\_\-suspend}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-clear\_\-nameservers\_\-and\_\-suspend}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-clear\_\-nameservers\_\-and\_\-suspend (void)}\label{dns__compat_8h_a6131a72d3aa3d311666d7b0d1b51451c}
+
+
+Remove all configured nameservers, and suspend all pending resolves. Resolves will not necessarily be re-\/attempted until \doxyref{evdns\_\-resume()}{p.}{dns__compat_8h_a27bf24a40c3d278373490421ed5ccf77} is called.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-clear\_\-nameservers\_\-and\_\-suspend()}{p.}{dns_8h_a6905231913b16b4be9b49739597be64e}.\end{Desc}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-resume()}{p.}{dns__compat_8h_a27bf24a40c3d278373490421ed5ccf77} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-count\_\-nameservers@{evdns\_\-count\_\-nameservers}}
+\index{evdns\_\-count\_\-nameservers@{evdns\_\-count\_\-nameservers}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-count\_\-nameservers}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-count\_\-nameservers (void)}\label{dns__compat_8h_aefea2452917461e8eae9887069f76a23}
+
+
+Get the number of configured nameservers. This returns the number of configured nameservers (not necessarily the number of running nameservers). This is useful for double-\/checking whether our calls to the various nameserver configuration functions have been successful.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-count\_\-nameservers()}{p.}{dns_8h_abf5ce2fb1c199f87d256d8dc929586d4}.\end{Desc}
+\begin{DoxyReturn}{Returns}
+the number of configured nameservers 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-nameserver\_\-add()}{p.}{dns__compat_8h_a0ba5d16d88f50668ef2a9ec8d08dc113} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-get\_\-global\_\-base@{evdns\_\-get\_\-global\_\-base}}
+\index{evdns\_\-get\_\-global\_\-base@{evdns\_\-get\_\-global\_\-base}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-get\_\-global\_\-base}]{\setlength{\rightskip}{0pt plus 5cm}struct evdns\_\-base$\ast$ evdns\_\-get\_\-global\_\-base (void)\hspace{0.3cm}{\ttfamily  [read]}}\label{dns__compat_8h_aa742958b366b3acf147487732b275436}
+
+
+Return the global evdns\_\-base created by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} and used by the other deprecated functions. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because use of the global evdns\_\-base is error-\/prone. \end{Desc}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-init@{evdns\_\-init}}
+\index{evdns\_\-init@{evdns\_\-init}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-init (void)}\label{dns__compat_8h_afce412359a059f87cba10658dbd16b53}
+
+
+Initialize the asynchronous DNS library. This function initializes support for non-\/blocking name resolution by calling \doxyref{evdns\_\-resolv\_\-conf\_\-parse()}{p.}{dns__compat_8h_a1a04688076484579b5dd1ce07b584d42} on UNIX and evdns\_\-config\_\-windows\_\-nameservers() on Windows.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it always uses the current \doxyref{event}{p.}{structevent} base, and is easily confused by multiple calls to \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113}, and so is not safe for multithreaded use. Additionally, it allocates a global structure that only one thread can use. The replacement is \doxyref{evdns\_\-base\_\-new()}{p.}{dns_8h_a01e7ab67e97b46dc4962bbc29d0d0604}.\end{Desc}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-shutdown()}{p.}{dns__compat_8h_a4dc777ee490a8039c2b990487ae18af8} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-nameserver\_\-add@{evdns\_\-nameserver\_\-add}}
+\index{evdns\_\-nameserver\_\-add@{evdns\_\-nameserver\_\-add}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-nameserver\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-nameserver\_\-add (unsigned long int {\em address})}\label{dns__compat_8h_a0ba5d16d88f50668ef2a9ec8d08dc113}
+
+
+Add a nameserver. The address should be an IPv4 address in network byte order. The type of address is chosen so that it matches in\_\-addr.s\_\-addr.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-nameserver\_\-add()}{p.}{dns_8h_a187db99dc5996a2b7aa672321d50d5d8}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em address}]an IP address in network byte order \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-nameserver\_\-ip\_\-add()}{p.}{dns__compat_8h_ab0b1ee113de5daac378625021aae0276} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-nameserver\_\-ip\_\-add@{evdns\_\-nameserver\_\-ip\_\-add}}
+\index{evdns\_\-nameserver\_\-ip\_\-add@{evdns\_\-nameserver\_\-ip\_\-add}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-nameserver\_\-ip\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-nameserver\_\-ip\_\-add (const char $\ast$ {\em ip\_\-as\_\-string})}\label{dns__compat_8h_ab0b1ee113de5daac378625021aae0276}
+
+
+Add a nameserver. This wraps the \doxyref{evdns\_\-nameserver\_\-add()}{p.}{dns__compat_8h_a0ba5d16d88f50668ef2a9ec8d08dc113} function by parsing a string as an IP address and adds it as a nameserver.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-nameserver\_\-ip\_\-add()}{p.}{dns_8h_a5d90b3ed3156d5c1884a651e87e66e17}.\end{Desc}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-nameserver\_\-add()}{p.}{dns__compat_8h_a0ba5d16d88f50668ef2a9ec8d08dc113} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-resolv\_\-conf\_\-parse@{evdns\_\-resolv\_\-conf\_\-parse}}
+\index{evdns\_\-resolv\_\-conf\_\-parse@{evdns\_\-resolv\_\-conf\_\-parse}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-resolv\_\-conf\_\-parse}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-resolv\_\-conf\_\-parse (int {\em flags}, \/  const char $\ast$const  {\em filename})}\label{dns__compat_8h_a1a04688076484579b5dd1ce07b584d42}
+
+
+Parse a resolv.conf file. The 'flags' parameter determines what information is parsed from the resolv.conf file. See the man page for resolv.conf for the format of this file.
+
+The following directives are not parsed from the file: sortlist, rotate, no-\/check-\/names, inet6, debug.
+
+If this function encounters an error, the possible return values are: 1 = failed to open file, 2 = failed to stat file, 3 = file too large, 4 = out of memory, 5 = short read from file, 6 = no nameservers listed in the file
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-resolv\_\-conf\_\-parse()}{p.}{dns_8h_ad4b52689e65d384c37693b080d9eef21}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em flags}]any of DNS\_\-OPTION\_\-NAMESERVERS$|$DNS\_\-OPTION\_\-SEARCH$|$DNS\_\-OPTION\_\-MISC$|$ DNS\_\-OPTIONS\_\-ALL \item[{\em filename}]the path to the resolv.conf file \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or various positive error codes if an error occurred (see above) 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+resolv.conf(3), evdns\_\-config\_\-windows\_\-nameservers() 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-resolve\_\-ipv4@{evdns\_\-resolve\_\-ipv4}}
+\index{evdns\_\-resolve\_\-ipv4@{evdns\_\-resolve\_\-ipv4}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-resolve\_\-ipv4}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-resolve\_\-ipv4 (const char $\ast$ {\em name}, \/  int {\em flags}, \/  {\bf evdns\_\-callback\_\-type} {\em callback}, \/  void $\ast$ {\em ptr})}\label{dns__compat_8h_a68e22e497f71fc97e7b85512319867ee}
+
+
+Lookup an A record for a given name. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-resolve\_\-ipv4()}{p.}{dns_8h_ac646ab50f11433ca375ce0be66be7efa}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]a DNS hostname \item[{\em flags}]either 0, or DNS\_\-QUERY\_\-NO\_\-SEARCH to disable searching for this query. \item[{\em callback}]a callback function to invoke when the request is completed \item[{\em ptr}]an argument to pass to the callback function \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-resolve\_\-ipv6()}{p.}{dns__compat_8h_ab3f98800b12f4a7e839088c95adc2c3a}, \doxyref{evdns\_\-resolve\_\-reverse()}{p.}{dns__compat_8h_a8b2c2c8984d5596ab12dc6fdc0fb2018}, \doxyref{evdns\_\-resolve\_\-reverse\_\-ipv6()}{p.}{dns__compat_8h_a7f34271326be1fa9d85050e79e979f00} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-resolve\_\-ipv6@{evdns\_\-resolve\_\-ipv6}}
+\index{evdns\_\-resolve\_\-ipv6@{evdns\_\-resolve\_\-ipv6}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-resolve\_\-ipv6}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-resolve\_\-ipv6 (const char $\ast$ {\em name}, \/  int {\em flags}, \/  {\bf evdns\_\-callback\_\-type} {\em callback}, \/  void $\ast$ {\em ptr})}\label{dns__compat_8h_ab3f98800b12f4a7e839088c95adc2c3a}
+
+
+Lookup an AAAA record for a given name. 
+\begin{DoxyParams}{Parameters}
+\item[{\em name}]a DNS hostname \item[{\em flags}]either 0, or DNS\_\-QUERY\_\-NO\_\-SEARCH to disable searching for this query. \item[{\em callback}]a callback function to invoke when the request is completed \item[{\em ptr}]an argument to pass to the callback function \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-resolve\_\-ipv4()}{p.}{dns__compat_8h_a68e22e497f71fc97e7b85512319867ee}, \doxyref{evdns\_\-resolve\_\-reverse()}{p.}{dns__compat_8h_a8b2c2c8984d5596ab12dc6fdc0fb2018}, \doxyref{evdns\_\-resolve\_\-reverse\_\-ipv6()}{p.}{dns__compat_8h_a7f34271326be1fa9d85050e79e979f00} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-resolve\_\-reverse@{evdns\_\-resolve\_\-reverse}}
+\index{evdns\_\-resolve\_\-reverse@{evdns\_\-resolve\_\-reverse}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-resolve\_\-reverse}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-resolve\_\-reverse (const struct in\_\-addr $\ast$ {\em in}, \/  int {\em flags}, \/  {\bf evdns\_\-callback\_\-type} {\em callback}, \/  void $\ast$ {\em ptr})}\label{dns__compat_8h_a8b2c2c8984d5596ab12dc6fdc0fb2018}
+
+
+Lookup a PTR record for a given IP address. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-resolve\_\-reverse()}{p.}{dns_8h_a5044832b0101814228934cc3fd2a83c8}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em in}]an IPv4 address \item[{\em flags}]either 0, or DNS\_\-QUERY\_\-NO\_\-SEARCH to disable searching for this query. \item[{\em callback}]a callback function to invoke when the request is completed \item[{\em ptr}]an argument to pass to the callback function \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-resolve\_\-reverse\_\-ipv6()}{p.}{dns__compat_8h_a7f34271326be1fa9d85050e79e979f00} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-resolve\_\-reverse\_\-ipv6@{evdns\_\-resolve\_\-reverse\_\-ipv6}}
+\index{evdns\_\-resolve\_\-reverse\_\-ipv6@{evdns\_\-resolve\_\-reverse\_\-ipv6}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-resolve\_\-reverse\_\-ipv6}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-resolve\_\-reverse\_\-ipv6 (const struct in6\_\-addr $\ast$ {\em in}, \/  int {\em flags}, \/  {\bf evdns\_\-callback\_\-type} {\em callback}, \/  void $\ast$ {\em ptr})}\label{dns__compat_8h_a7f34271326be1fa9d85050e79e979f00}
+
+
+Lookup a PTR record for a given IPv6 address. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-resolve\_\-reverse\_\-ipv6()}{p.}{dns_8h_ac2ae80af5bff5627f59a6ce8ff5eeea8}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em in}]an IPv6 address \item[{\em flags}]either 0, or DNS\_\-QUERY\_\-NO\_\-SEARCH to disable searching for this query. \item[{\em callback}]a callback function to invoke when the request is completed \item[{\em ptr}]an argument to pass to the callback function \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-resolve\_\-reverse\_\-ipv6()}{p.}{dns__compat_8h_a7f34271326be1fa9d85050e79e979f00} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-resume@{evdns\_\-resume}}
+\index{evdns\_\-resume@{evdns\_\-resume}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-resume}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-resume (void)}\label{dns__compat_8h_a27bf24a40c3d278373490421ed5ccf77}
+
+
+Resume normal operation and continue any suspended resolve requests. Re-\/attempt resolves left in limbo after an earlier call to \doxyref{evdns\_\-clear\_\-nameservers\_\-and\_\-suspend()}{p.}{dns__compat_8h_a6131a72d3aa3d311666d7b0d1b51451c}.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-resume()}{p.}{dns_8h_a2a70398d61d38e13f559cf135abb8406}.\end{Desc}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-clear\_\-nameservers\_\-and\_\-suspend()}{p.}{dns__compat_8h_a6131a72d3aa3d311666d7b0d1b51451c} 
+\end{DoxySeeAlso}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-search\_\-add@{evdns\_\-search\_\-add}}
+\index{evdns\_\-search\_\-add@{evdns\_\-search\_\-add}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-search\_\-add}]{\setlength{\rightskip}{0pt plus 5cm}void evdns\_\-search\_\-add (const char $\ast$ {\em domain})}\label{dns__compat_8h_ae7a63c39b7eb75bf97555ab265a84858}
+
+
+Add a domain to the list of search domains. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-search\_\-add()}{p.}{dns_8h_addf2cfb1c1a237d68409fc1464b26b00}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em domain}]the domain to be added to the search list \end{DoxyParams}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-search\_\-clear@{evdns\_\-search\_\-clear}}
+\index{evdns\_\-search\_\-clear@{evdns\_\-search\_\-clear}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-search\_\-clear}]{\setlength{\rightskip}{0pt plus 5cm}void evdns\_\-search\_\-clear (void)}\label{dns__compat_8h_a61b92557ca2f3de783041b087c04690a}
+
+
+Clear the list of search domains. \begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-search\_\-clear()}{p.}{dns_8h_a0ba91c6fda38169eeed7040c9721ed2b}. \end{Desc}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-search\_\-ndots\_\-set@{evdns\_\-search\_\-ndots\_\-set}}
+\index{evdns\_\-search\_\-ndots\_\-set@{evdns\_\-search\_\-ndots\_\-set}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-search\_\-ndots\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}void evdns\_\-search\_\-ndots\_\-set (const int {\em ndots})}\label{dns__compat_8h_a06910efcf0ead0173affeb50851e149d}
+
+
+Set the 'ndots' parameter for searches. Sets the number of dots which, when found in a name, causes the first query to be without any search domain.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-search\_\-ndots\_\-set()}{p.}{dns_8h_aaac85133f8d6288055093c99120bdd82}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em ndots}]the new ndots parameter \end{DoxyParams}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-set\_\-option@{evdns\_\-set\_\-option}}
+\index{evdns\_\-set\_\-option@{evdns\_\-set\_\-option}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-set\_\-option}]{\setlength{\rightskip}{0pt plus 5cm}int evdns\_\-set\_\-option (const char $\ast$ {\em option}, \/  const char $\ast$ {\em val}, \/  int {\em flags})}\label{dns__compat_8h_aad9d40ceab56f58f546076439a3ee2eb}
+
+
+Set the value of a configuration option. The currently available configuration options are:
+
+ndots, timeout, max-\/timeouts, max-\/inflight, and attempts
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is \doxyref{evdns\_\-base\_\-set\_\-option()}{p.}{dns_8h_a3308067aed25c60a2ddeee83e5dd84d9}.\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em option}]the name of the configuration option to be modified \item[{\em val}]the value to be set \item[{\em flags}]Ignored. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\index{dns\_\-compat.h@{dns\_\-compat.h}!evdns\_\-shutdown@{evdns\_\-shutdown}}
+\index{evdns\_\-shutdown@{evdns\_\-shutdown}!dns_compat.h@{dns\_\-compat.h}}
+\subsubsection[{evdns\_\-shutdown}]{\setlength{\rightskip}{0pt plus 5cm}void evdns\_\-shutdown (int {\em fail\_\-requests})}\label{dns__compat_8h_a4dc777ee490a8039c2b990487ae18af8}
+
+
+Shut down the asynchronous DNS resolver and terminate all active requests. If the 'fail\_\-requests' option is enabled, all active requests will return an empty result with the error flag set to DNS\_\-ERR\_\-SHUTDOWN. Otherwise, the requests will be silently discarded.
+
+\begin{Desc}
+\item[{\bf Deprecated}]This function is deprecated because it does not allow the caller to specify which evdns\_\-base it applies to. The recommended function is evdns\_\-base\_\-shutdown().\end{Desc}
+
+\begin{DoxyParams}{Parameters}
+\item[{\em fail\_\-requests}]if zero, active requests will be aborted; if non-\/zero, active requests will return DNS\_\-ERR\_\-SHUTDOWN. \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\doxyref{evdns\_\-init()}{p.}{dns__compat_8h_afce412359a059f87cba10658dbd16b53} 
+\end{DoxySeeAlso}

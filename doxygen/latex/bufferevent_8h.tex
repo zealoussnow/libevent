@@ -1,0 +1,750 @@
+\section{event2/bufferevent.h File Reference}
+\label{bufferevent_8h}\index{event2/bufferevent.h@{event2/bufferevent.h}}
+
+
+Functions for buffering data for network sending or receiving.  
+{\ttfamily \#include $<$event2/event-\/config.h$>$}\par
+{\ttfamily \#include $<$event2/util.h$>$}\par
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf bufferevent}
+\begin{DoxyCompactList}\small\item\em An opaque type for handling buffered IO. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf EV\_\-RATE\_\-LIMIT\_\-MAX}~EV\_\-SSIZE\_\-MAX
+\begin{DoxyCompactList}\small\item\em Maximum configurable rate-\/ or burst-\/limit. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}{\bf Bufferevent event codes}\par
+{\em \label{_amgrpe1216b1b61e9ac8f6be43415d746e46e}
+These flags are passed as arguments to a bufferevent's \doxyref{event}{p.}{structevent} callback. }\begin{DoxyCompactItemize}
+\item 
+\#define {\bf BEV\_\-EVENT\_\-CONNECTED}~0x80
+\begin{DoxyCompactList}\small\item\em connect operation finished. \item\end{DoxyCompactList}\item 
+\#define {\bf BEV\_\-EVENT\_\-EOF}~0x10\label{bufferevent_8h_a4d7d8c93cf62e6f3d37c0cbac75aebcc}
+
+\begin{DoxyCompactList}\small\item\em eof file reached \item\end{DoxyCompactList}\item 
+\#define {\bf BEV\_\-EVENT\_\-ERROR}~0x20\label{bufferevent_8h_a5f112d7a064258bdabf8d5182a3bf5e4}
+
+\begin{DoxyCompactList}\small\item\em unrecoverable error encountered \item\end{DoxyCompactList}\item 
+\#define {\bf BEV\_\-EVENT\_\-READING}~0x01\label{bufferevent_8h_a504816ca8678e4f3d0bee2700fda524d}
+
+\begin{DoxyCompactList}\small\item\em error encountered while reading \item\end{DoxyCompactList}\item 
+\#define {\bf BEV\_\-EVENT\_\-TIMEOUT}~0x40\label{bufferevent_8h_aa537428e3ac2c8d2dbb4ec041f09347f}
+
+\begin{DoxyCompactList}\small\item\em user-\/specified timeout reached \item\end{DoxyCompactList}\item 
+\#define {\bf BEV\_\-EVENT\_\-WRITING}~0x02\label{bufferevent_8h_a557afaa0ce75e6bbb71fdcd68c35d077}
+
+\begin{DoxyCompactList}\small\item\em error encountered while writing \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ {\bf bufferevent\_\-data\_\-cb} )(struct {\bf bufferevent} $\ast$bev, void $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em A read or write callback for a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+typedef void($\ast$ {\bf bufferevent\_\-event\_\-cb} )(struct {\bf bufferevent} $\ast$bev, short what, void $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em An event/error callback for a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf bufferevent\_\-flush\_\-mode} \{ {\bf BEV\_\-NORMAL} =  0, 
+{\bf BEV\_\-FLUSH} =  1, 
+{\bf BEV\_\-FINISHED} =  2
+ \}
+\begin{DoxyCompactList}\small\item\em Flags that can be passed into filters to let them know how to deal with the incoming data. \item\end{DoxyCompactList}\item 
+enum {\bf bufferevent\_\-options} \{ {\bf BEV\_\-OPT\_\-CLOSE\_\-ON\_\-FREE} =  (1$<$$<$0), 
+{\bf BEV\_\-OPT\_\-THREADSAFE} =  (1$<$$<$1), 
+{\bf BEV\_\-OPT\_\-DEFER\_\-CALLBACKS} =  (1$<$$<$2), 
+{\bf BEV\_\-OPT\_\-UNLOCK\_\-CALLBACKS} =  (1$<$$<$3)
+ \}
+\begin{DoxyCompactList}\small\item\em Options that can be specified when creating a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group} (struct {\bf bufferevent} $\ast$bev, struct bufferevent\_\-rate\_\-limit\_\-group $\ast$g)
+\begin{DoxyCompactList}\small\item\em Add 'bev' to the list of bufferevents whose aggregate reading and writing is restricted by 'g'. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-base\_\-set} (struct {\bf event\_\-base} $\ast$base, struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Assign a \doxyref{bufferevent}{p.}{structbufferevent} to a specific \doxyref{event\_\-base}{p.}{structevent__base}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-disable} (struct {\bf bufferevent} $\ast$bufev, short {\bf event})
+\begin{DoxyCompactList}\small\item\em Disable a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-enable} (struct {\bf bufferevent} $\ast$bufev, short {\bf event})
+\begin{DoxyCompactList}\small\item\em Enable a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-flush} (struct {\bf bufferevent} $\ast$bufev, short iotype, enum {\bf bufferevent\_\-flush\_\-mode} mode)
+\begin{DoxyCompactList}\small\item\em Triggers the \doxyref{bufferevent}{p.}{structbufferevent} to produce more data if possible. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-free} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Deallocate the storage associated with a \doxyref{bufferevent}{p.}{structbufferevent} structure. \item\end{DoxyCompactList}\item 
+struct {\bf event\_\-base} $\ast$ {\bf bufferevent\_\-get\_\-base} (struct {\bf bufferevent} $\ast$bev)\label{bufferevent_8h_a5cabb56040b43ba1a92efd21c4a89890}
+
+\begin{DoxyCompactList}\small\item\em Return the \doxyref{event\_\-base}{p.}{structevent__base} used by a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+short {\bf bufferevent\_\-get\_\-enabled} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Return the events that are enabled on a given \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+struct {\bf evbuffer} $\ast$ {\bf bufferevent\_\-get\_\-input} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Returns the input buffer. \item\end{DoxyCompactList}\item 
+ev\_\-ssize\_\-t {\bfseries bufferevent\_\-get\_\-max\_\-to\_\-read} (struct {\bf bufferevent} $\ast$bev)\label{bufferevent_8h_ab2a8edb561655b13b013363726188f0c}
+
+\item 
+ev\_\-ssize\_\-t {\bfseries bufferevent\_\-get\_\-max\_\-to\_\-write} (struct {\bf bufferevent} $\ast$bev)\label{bufferevent_8h_a97487188a8ace977c3a74e330d2f224d}
+
+\item 
+struct {\bf evbuffer} $\ast$ {\bf bufferevent\_\-get\_\-output} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Returns the output buffer. \item\end{DoxyCompactList}\item 
+struct {\bf bufferevent} $\ast$ {\bf bufferevent\_\-get\_\-underlying} (struct {\bf bufferevent} $\ast$bufev)\label{bufferevent_8h_a8d40fb7aea3c48e25d616bbe4b0fda65}
+
+\begin{DoxyCompactList}\small\item\em Returns the underlying \doxyref{bufferevent}{p.}{structbufferevent} associated with a \doxyref{bufferevent}{p.}{structbufferevent} (if the \doxyref{bufferevent}{p.}{structbufferevent} is a wrapper), or NULL if there is no underlying \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+evutil\_\-socket\_\-t {\bf bufferevent\_\-getfd} (struct {\bf bufferevent} $\ast$bufev)\label{bufferevent_8h_aa959659c8ba1c56c3444b5c147762a91}
+
+\begin{DoxyCompactList}\small\item\em Returns the file descriptor associated with a \doxyref{bufferevent}{p.}{structbufferevent}, or -\/1 if no file descriptor is associated with the \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-lock} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Acquire the lock on a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+struct {\bf bufferevent} $\ast$ {\bf bufferevent\_\-pair\_\-get\_\-partner} (struct {\bf bufferevent} $\ast$bev)
+\begin{DoxyCompactList}\small\item\em Given one \doxyref{bufferevent}{p.}{structbufferevent} returned by \doxyref{bufferevent\_\-pair\_\-new()}{p.}{bufferevent_8h_af8932010b0a590ddf9848026e8a99059}, returns the other one if it still exists. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-pair\_\-new} (struct {\bf event\_\-base} $\ast$base, int options, struct {\bf bufferevent} $\ast$pair[2])
+\begin{DoxyCompactList}\small\item\em Allocate a pair of linked bufferevents. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-priority\_\-set} (struct {\bf bufferevent} $\ast$bufev, int pri)
+\begin{DoxyCompactList}\small\item\em Assign a priority to a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-rate\_\-limit\_\-group\_\-free} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$)
+\begin{DoxyCompactList}\small\item\em Free a rate-\/limiting group. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$grp, ev\_\-uint64\_\-t $\ast$total\_\-read\_\-out, ev\_\-uint64\_\-t $\ast$total\_\-written\_\-out)
+\begin{DoxyCompactList}\small\item\em Inspect the total bytes read/written on a group. \item\end{DoxyCompactList}\item 
+struct bufferevent\_\-rate\_\-limit\_\-group $\ast$ {\bf bufferevent\_\-rate\_\-limit\_\-group\_\-new} (struct {\bf event\_\-base} $\ast$base, const struct ev\_\-token\_\-bucket\_\-cfg $\ast$cfg)
+\begin{DoxyCompactList}\small\item\em Create a new rate-\/limit group for bufferevents. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$grp)
+\begin{DoxyCompactList}\small\item\em Reset the total bytes read/written on a group. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$, const struct ev\_\-token\_\-bucket\_\-cfg $\ast$)
+\begin{DoxyCompactList}\small\item\em Change the rate-\/limiting settings for a given rate-\/limiting group. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$, size\_\-t)
+\begin{DoxyCompactList}\small\item\em Change the smallest quantum we're willing to allocate to any single \doxyref{bufferevent}{p.}{structbufferevent} in a group for reading or writing at a time. \item\end{DoxyCompactList}\item 
+size\_\-t {\bf bufferevent\_\-read} (struct {\bf bufferevent} $\ast$bufev, void $\ast$data, size\_\-t size)
+\begin{DoxyCompactList}\small\item\em Read data from a \doxyref{bufferevent}{p.}{structbufferevent} buffer. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-read\_\-buffer} (struct {\bf bufferevent} $\ast$bufev, struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Read data from a \doxyref{bufferevent}{p.}{structbufferevent} buffer into an \doxyref{evbuffer}{p.}{structevbuffer}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group} (struct {\bf bufferevent} $\ast$bev)
+\begin{DoxyCompactList}\small\item\em Remove 'bev' from its current rate-\/limit group (if any). \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-set\_\-rate\_\-limit} (struct {\bf bufferevent} $\ast$bev, struct ev\_\-token\_\-bucket\_\-cfg $\ast$cfg)
+\begin{DoxyCompactList}\small\item\em Set the rate-\/limit of a the \doxyref{bufferevent}{p.}{structbufferevent} 'bev' to the one specified in 'cfg'. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-set\_\-timeouts} (struct {\bf bufferevent} $\ast$bufev, const struct timeval $\ast$timeout\_\-read, const struct timeval $\ast$timeout\_\-write)
+\begin{DoxyCompactList}\small\item\em Set the read and write timeout for a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-setcb} (struct {\bf bufferevent} $\ast$bufev, {\bf bufferevent\_\-data\_\-cb} readcb, {\bf bufferevent\_\-data\_\-cb} writecb, {\bf bufferevent\_\-event\_\-cb} eventcb, void $\ast$cbarg)
+\begin{DoxyCompactList}\small\item\em Changes the callbacks for a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-setfd} (struct {\bf bufferevent} $\ast$bufev, evutil\_\-socket\_\-t fd)
+\begin{DoxyCompactList}\small\item\em Changes the file descriptor on which the \doxyref{bufferevent}{p.}{structbufferevent} operates. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-setwatermark} (struct {\bf bufferevent} $\ast$bufev, short events, size\_\-t lowmark, size\_\-t highmark)
+\begin{DoxyCompactList}\small\item\em Sets the watermarks for read and write events. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-socket\_\-connect} (struct {\bf bufferevent} $\ast$, struct sockaddr $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Launch a connect() attempt with a socket-\/based \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-socket\_\-connect\_\-hostname} (struct {\bf bufferevent} $\ast$, struct evdns\_\-base $\ast$, int, const char $\ast$, int)
+\begin{DoxyCompactList}\small\item\em Resolve the hostname 'hostname' and connect to it as with \doxyref{bufferevent\_\-socket\_\-connect()}{p.}{bufferevent_8h_ac2ecbb906883ea848f7bca767d479a2a}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-socket\_\-get\_\-dns\_\-error} (struct {\bf bufferevent} $\ast$bev)
+\begin{DoxyCompactList}\small\item\em Return the error code for the last failed DNS lookup attempt made by \doxyref{bufferevent\_\-socket\_\-connect\_\-hostname()}{p.}{bufferevent_8h_a797686b522045aefb217c6b87ea7ae4a}. \item\end{DoxyCompactList}\item 
+struct {\bf bufferevent} $\ast$ {\bf bufferevent\_\-socket\_\-new} (struct {\bf event\_\-base} $\ast$base, evutil\_\-socket\_\-t fd, int options)
+\begin{DoxyCompactList}\small\item\em Create a new socket \doxyref{bufferevent}{p.}{structbufferevent} over an existing socket. \item\end{DoxyCompactList}\item 
+void {\bf bufferevent\_\-unlock} (struct {\bf bufferevent} $\ast$bufev)
+\begin{DoxyCompactList}\small\item\em Release the lock on a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-write} (struct {\bf bufferevent} $\ast$bufev, const void $\ast$data, size\_\-t size)
+\begin{DoxyCompactList}\small\item\em Write data to a \doxyref{bufferevent}{p.}{structbufferevent} buffer. \item\end{DoxyCompactList}\item 
+int {\bf bufferevent\_\-write\_\-buffer} (struct {\bf bufferevent} $\ast$bufev, struct {\bf evbuffer} $\ast$buf)
+\begin{DoxyCompactList}\small\item\em Write data from an \doxyref{evbuffer}{p.}{structevbuffer} to a \doxyref{bufferevent}{p.}{structbufferevent} buffer. \item\end{DoxyCompactList}\item 
+void {\bf ev\_\-token\_\-bucket\_\-cfg\_\-free} (struct ev\_\-token\_\-bucket\_\-cfg $\ast$cfg)
+\begin{DoxyCompactList}\small\item\em Free all storage held in 'cfg'. \item\end{DoxyCompactList}\item 
+struct ev\_\-token\_\-bucket\_\-cfg $\ast$ {\bf ev\_\-token\_\-bucket\_\-cfg\_\-new} (size\_\-t read\_\-rate, size\_\-t read\_\-burst, size\_\-t write\_\-rate, size\_\-t write\_\-burst, const struct timeval $\ast$tick\_\-len)
+\begin{DoxyCompactList}\small\item\em Initialize and return a new object to configure the rate-\/limiting behavior of bufferevents. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}{\bf Rate limit manipulation}\par
+{\em \label{_amgrpe8b14baa4d79a5e7721adc58a70c2873}
+Subtract a number of bytes from a bufferevent's read or write bucket.
+
+The decrement value can be negative, if you want to manually refill the bucket. If the change puts the bucket above or below zero, the \doxyref{bufferevent}{p.}{structbufferevent} will resume or suspend reading writing as appropriate. These functions make no change in the buckets for the bufferevent's group, if any.
+
+Returns 0 on success, -\/1 on internal error. }\begin{DoxyCompactItemize}
+\item 
+int {\bfseries bufferevent\_\-decrement\_\-read\_\-limit} (struct {\bf bufferevent} $\ast$bev, ev\_\-ssize\_\-t decr)\label{bufferevent_8h_ae22e5c618f1f93afcd6c2adb1b9ca165}
+
+\item 
+int {\bfseries bufferevent\_\-decrement\_\-write\_\-limit} (struct {\bf bufferevent} $\ast$bev, ev\_\-ssize\_\-t decr)\label{bufferevent_8h_afedbe4264b84e4e8c65bdeba1bd42b6a}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Rate limit inspection}\par
+{\em \label{_amgrp6ba2cc97cb0cf2def4252c54244c5aa5}
+Return the current read or write bucket size for a \doxyref{bufferevent}{p.}{structbufferevent}.
+
+If it is not configured with a per-\/bufferevent ratelimit, return EV\_\-SSIZE\_\-MAX. This function does not inspect the group limit, if any. Note that it can return a negative value if the \doxyref{bufferevent}{p.}{structbufferevent} has been made to read or write more than its limit. }\begin{DoxyCompactItemize}
+\item 
+ev\_\-ssize\_\-t {\bfseries bufferevent\_\-get\_\-read\_\-limit} (struct {\bf bufferevent} $\ast$bev)\label{bufferevent_8h_a73312a98fb1823be7936833a83b46a9d}
+
+\item 
+ev\_\-ssize\_\-t {\bfseries bufferevent\_\-get\_\-write\_\-limit} (struct {\bf bufferevent} $\ast$bev)\label{bufferevent_8h_a90ee89498a9bd8777267fbca7947827d}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Group rate limit manipulation}\par
+{\em \label{_amgrp57e621f34587553a500fc3eabeb15db4}
+Subtract a number of bytes from a \doxyref{bufferevent}{p.}{structbufferevent} rate-\/limiting group's read or write bucket.
+
+The decrement value can be negative, if you want to manually refill the bucket. If the change puts the bucket above or below zero, the bufferevents in the group will resume or suspend reading writing as appropriate.
+
+Returns 0 on success, -\/1 on internal error. }\begin{DoxyCompactItemize}
+\item 
+int {\bfseries bufferevent\_\-rate\_\-limit\_\-group\_\-decrement\_\-read} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$, ev\_\-ssize\_\-t)\label{bufferevent_8h_aa5f603c05b36373b532db68aca645ed8}
+
+\item 
+int {\bfseries bufferevent\_\-rate\_\-limit\_\-group\_\-decrement\_\-write} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$, ev\_\-ssize\_\-t)\label{bufferevent_8h_aec8e489e3c2705105d85064340018847}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}{\bf Group Rate limit inspection}\par
+{\em \label{_amgrp587004889761fd1b2150560e50ac43d2}
+Return the read or write bucket size for a \doxyref{bufferevent}{p.}{structbufferevent} rate limit group.
+
+Note that it can return a negative value if bufferevents in the group have been made to read or write more than their limits. }\begin{DoxyCompactItemize}
+\item 
+ev\_\-ssize\_\-t {\bfseries bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-read\_\-limit} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$)\label{bufferevent_8h_aa72d92d5179e24cd73a910fd353c927a}
+
+\item 
+ev\_\-ssize\_\-t {\bfseries bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-write\_\-limit} (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$)\label{bufferevent_8h_ad1f35e47760c34deaf1baede3fd0425a}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Filtering support}
+\label{_amgrpc7006df938bda2ca942f78aa63ae8cc0}
+ \begin{DoxyCompactItemize}
+\item 
+enum {\bf bufferevent\_\-filter\_\-result} \{ {\bf BEV\_\-OK} =  0, 
+{\bf BEV\_\-NEED\_\-MORE} =  1, 
+{\bf BEV\_\-ERROR} =  2
+ \}
+\begin{DoxyCompactList}\small\item\em Values that filters can return. \item\end{DoxyCompactList}\item 
+enum {\bf bufferevent\_\-filter\_\-result}($\ast$ {\bf bufferevent\_\-filter\_\-cb} )(struct {\bf evbuffer} $\ast$src, struct {\bf evbuffer} $\ast$dst, ev\_\-ssize\_\-t dst\_\-limit, enum {\bf bufferevent\_\-flush\_\-mode} mode, void $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em A callback function to implement a filter for a \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\item 
+struct {\bf bufferevent} $\ast$ {\bf bufferevent\_\-filter\_\-new} (struct {\bf bufferevent} $\ast$underlying, {\bf bufferevent\_\-filter\_\-cb} input\_\-filter, {\bf bufferevent\_\-filter\_\-cb} output\_\-filter, int options, void($\ast$free\_\-context)(void $\ast$), void $\ast$ctx)
+\begin{DoxyCompactList}\small\item\em Allocate a new filtering \doxyref{bufferevent}{p.}{structbufferevent} on top of an existing \doxyref{bufferevent}{p.}{structbufferevent}. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for buffering data for network sending or receiving. Bufferevents are higher level than evbuffers: each has an underlying \doxyref{evbuffer}{p.}{structevbuffer} for reading and one for writing, and callbacks that are invoked under certain circumstances.
+
+A \doxyref{bufferevent}{p.}{structbufferevent} provides input and output buffers that get filled and drained automatically. The user of a \doxyref{bufferevent}{p.}{structbufferevent} no longer deals directly with the I/O, but instead is reading from input and writing to output buffers.
+
+Once initialized, the \doxyref{bufferevent}{p.}{structbufferevent} structure can be used repeatedly with \doxyref{bufferevent\_\-enable()}{p.}{bufferevent_8h_a1b9a3412e8c8e122c745b33d46b9643e} and \doxyref{bufferevent\_\-disable()}{p.}{bufferevent_8h_aa15582fe250247aa98d4897527215727}.
+
+When reading is enabled, the \doxyref{bufferevent}{p.}{structbufferevent} will try to read from the file descriptor onto its input buffer, and and call the read callback. When writing is enabled, the \doxyref{bufferevent}{p.}{structbufferevent} will try to write data onto its file descriptor when writing is enabled, and call the write callback when the output buffer is sufficiently drained.
+
+Bufferevents come in several flavors, including:
+
+
+\begin{DoxyDescription}
+\item[Socket-\/based bufferevents ]A \doxyref{bufferevent}{p.}{structbufferevent} that reads and writes data onto a network socket. Created with \doxyref{bufferevent\_\-socket\_\-new()}{p.}{bufferevent_8h_a501557193aa56c9f4923583d9d734395}.
+
+
+\item[Paired bufferevents ]A pair of bufferevents that send and receive data to one another without touching the network. Created with \doxyref{bufferevent\_\-pair\_\-new()}{p.}{bufferevent_8h_af8932010b0a590ddf9848026e8a99059}.
+
+
+\item[Filtering bufferevents ]A \doxyref{bufferevent}{p.}{structbufferevent} that transforms data, and sends or receives it over another underlying \doxyref{bufferevent}{p.}{structbufferevent}. Created with \doxyref{bufferevent\_\-filter\_\-new()}{p.}{bufferevent_8h_ab6dea1351561f1866b0526fc1207bb69}.
+
+
+\item[SSL-\/backed bufferevents ]A \doxyref{bufferevent}{p.}{structbufferevent} that uses the openssl library to send and receive data over an encrypted connection. Created with \doxyref{bufferevent\_\-openssl\_\-socket\_\-new()}{p.}{bufferevent__ssl_8h_a25bcf9f9edae71f2395c5207bfd922f2} or \doxyref{bufferevent\_\-openssl\_\-filter\_\-new()}{p.}{bufferevent__ssl_8h_ac3f28f95d0714dc30138cfa3d98b8edb}. 
+\end{DoxyDescription}
+
+\subsection{Define Documentation}
+\index{bufferevent.h@{bufferevent.h}!BEV\_\-EVENT\_\-CONNECTED@{BEV\_\-EVENT\_\-CONNECTED}}
+\index{BEV\_\-EVENT\_\-CONNECTED@{BEV\_\-EVENT\_\-CONNECTED}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{BEV\_\-EVENT\_\-CONNECTED}]{\setlength{\rightskip}{0pt plus 5cm}\#define BEV\_\-EVENT\_\-CONNECTED~0x80}\label{bufferevent_8h_affb7a7e5e21e1541ba6f43f950d92993}
+
+
+connect operation finished. \index{bufferevent.h@{bufferevent.h}!EV\_\-RATE\_\-LIMIT\_\-MAX@{EV\_\-RATE\_\-LIMIT\_\-MAX}}
+\index{EV\_\-RATE\_\-LIMIT\_\-MAX@{EV\_\-RATE\_\-LIMIT\_\-MAX}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{EV\_\-RATE\_\-LIMIT\_\-MAX}]{\setlength{\rightskip}{0pt plus 5cm}\#define EV\_\-RATE\_\-LIMIT\_\-MAX~EV\_\-SSIZE\_\-MAX}\label{bufferevent_8h_a78fc86349f408552be0fdf249db673ec}
+
+
+Maximum configurable rate-\/ or burst-\/limit. 
+
+\subsection{Typedef Documentation}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-data\_\-cb@{bufferevent\_\-data\_\-cb}}
+\index{bufferevent\_\-data\_\-cb@{bufferevent\_\-data\_\-cb}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-data\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf bufferevent\_\-data\_\-cb})(struct {\bf bufferevent} $\ast$bev, void $\ast$ctx)}\label{bufferevent_8h_a75e8fa059136e13c04c237e9c03cdbe8}
+
+
+A read or write callback for a \doxyref{bufferevent}{p.}{structbufferevent}. The read callback is triggered when new data arrives in the input buffer and the amount of readable data exceed the low watermark which is 0 by default.
+
+The write callback is triggered if the write buffer has been exhausted or fell below its low watermark.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bev}]the \doxyref{bufferevent}{p.}{structbufferevent} that triggered the callback \item[{\em ctx}]the user-\/specified context for this \doxyref{bufferevent}{p.}{structbufferevent} \end{DoxyParams}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-event\_\-cb@{bufferevent\_\-event\_\-cb}}
+\index{bufferevent\_\-event\_\-cb@{bufferevent\_\-event\_\-cb}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-event\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}typedef void($\ast$ {\bf bufferevent\_\-event\_\-cb})(struct {\bf bufferevent} $\ast$bev, short what, void $\ast$ctx)}\label{bufferevent_8h_a79b5f4b983f8e67005416738c6494ac6}
+
+
+An event/error callback for a \doxyref{bufferevent}{p.}{structbufferevent}. The \doxyref{event}{p.}{structevent} callback is triggered if either an EOF condition or another unrecoverable error was encountered.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bev}]the \doxyref{bufferevent}{p.}{structbufferevent} for which the error condition was reached \item[{\em what}]a conjunction of flags: BEV\_\-EVENT\_\-READING or BEV\_\-EVENT\_\-WRITING to indicate if the error was encountered on the read or write path, and one of the following flags: BEV\_\-EVENT\_\-EOF, BEV\_\-EVENT\_\-ERROR, BEV\_\-EVENT\_\-TIMEOUT, BEV\_\-EVENT\_\-CONNECTED.\item[{\em ctx}]the user-\/specified context for this \doxyref{bufferevent}{p.}{structbufferevent} \end{DoxyParams}
+
+
+\subsection{Enumeration Type Documentation}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-filter\_\-result@{bufferevent\_\-filter\_\-result}}
+\index{bufferevent\_\-filter\_\-result@{bufferevent\_\-filter\_\-result}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-filter\_\-result}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf bufferevent\_\-filter\_\-result}}\label{bufferevent_8h_a19e499f7bfa831b802fd3575d141b4e1}
+
+
+Values that filters can return. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{BEV\_\-OK@{BEV\_\-OK}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-OK@{BEV\_\-OK}}\item[{\em 
+BEV\_\-OK\label{bufferevent_8h_a19e499f7bfa831b802fd3575d141b4e1a794bf8211eaafdbeb382991dc5874e4d}
+}]everything is okay \index{BEV\_\-NEED\_\-MORE@{BEV\_\-NEED\_\-MORE}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-NEED\_\-MORE@{BEV\_\-NEED\_\-MORE}}\item[{\em 
+BEV\_\-NEED\_\-MORE\label{bufferevent_8h_a19e499f7bfa831b802fd3575d141b4e1a78c4f864aee50d333d74e3b46e12b8a4}
+}]the filter needs to read more data before output \index{BEV\_\-ERROR@{BEV\_\-ERROR}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-ERROR@{BEV\_\-ERROR}}\item[{\em 
+BEV\_\-ERROR\label{bufferevent_8h_a19e499f7bfa831b802fd3575d141b4e1a4e51550811d3dad92400c27d69277032}
+}]the filter encountered a critical error, no further data can be processed. \end{description}
+\end{Desc}
+
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-flush\_\-mode@{bufferevent\_\-flush\_\-mode}}
+\index{bufferevent\_\-flush\_\-mode@{bufferevent\_\-flush\_\-mode}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-flush\_\-mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf bufferevent\_\-flush\_\-mode}}\label{bufferevent_8h_ac35edc760057a2e48b4e8ba9ecf2ad25}
+
+
+Flags that can be passed into filters to let them know how to deal with the incoming data. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{BEV\_\-NORMAL@{BEV\_\-NORMAL}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-NORMAL@{BEV\_\-NORMAL}}\item[{\em 
+BEV\_\-NORMAL\label{bufferevent_8h_ac35edc760057a2e48b4e8ba9ecf2ad25a81903ce04ca68ac1680dd0b7a28a7fce}
+}]usually set when processing data \index{BEV\_\-FLUSH@{BEV\_\-FLUSH}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-FLUSH@{BEV\_\-FLUSH}}\item[{\em 
+BEV\_\-FLUSH\label{bufferevent_8h_ac35edc760057a2e48b4e8ba9ecf2ad25a77e7f15a95815dcaaef27fdabb0e6164}
+}]want to checkpoint all data sent. \index{BEV\_\-FINISHED@{BEV\_\-FINISHED}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-FINISHED@{BEV\_\-FINISHED}}\item[{\em 
+BEV\_\-FINISHED\label{bufferevent_8h_ac35edc760057a2e48b4e8ba9ecf2ad25acb248a91854bbebd773061df7f4bbc94}
+}]encountered EOF on read or done sending data \end{description}
+\end{Desc}
+
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-options@{bufferevent\_\-options}}
+\index{bufferevent\_\-options@{bufferevent\_\-options}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-options}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf bufferevent\_\-options}}\label{bufferevent_8h_aa4919449c62c6483e2d135509190dc65}
+
+
+Options that can be specified when creating a \doxyref{bufferevent}{p.}{structbufferevent}. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{BEV\_\-OPT\_\-CLOSE\_\-ON\_\-FREE@{BEV\_\-OPT\_\-CLOSE\_\-ON\_\-FREE}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-OPT\_\-CLOSE\_\-ON\_\-FREE@{BEV\_\-OPT\_\-CLOSE\_\-ON\_\-FREE}}\item[{\em 
+BEV\_\-OPT\_\-CLOSE\_\-ON\_\-FREE\label{bufferevent_8h_aa4919449c62c6483e2d135509190dc65a5dc89d74ef445da33295d00c8f6adc90}
+}]If set, we close the underlying file descriptor/bufferevent/whatever when this \doxyref{bufferevent}{p.}{structbufferevent} is freed. \index{BEV\_\-OPT\_\-THREADSAFE@{BEV\_\-OPT\_\-THREADSAFE}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-OPT\_\-THREADSAFE@{BEV\_\-OPT\_\-THREADSAFE}}\item[{\em 
+BEV\_\-OPT\_\-THREADSAFE\label{bufferevent_8h_aa4919449c62c6483e2d135509190dc65adfb637881b739eff1441ad848a5e3a2d}
+}]If set, and threading is enabled, operations on this \doxyref{bufferevent}{p.}{structbufferevent} are protected by a lock. \index{BEV\_\-OPT\_\-DEFER\_\-CALLBACKS@{BEV\_\-OPT\_\-DEFER\_\-CALLBACKS}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-OPT\_\-DEFER\_\-CALLBACKS@{BEV\_\-OPT\_\-DEFER\_\-CALLBACKS}}\item[{\em 
+BEV\_\-OPT\_\-DEFER\_\-CALLBACKS\label{bufferevent_8h_aa4919449c62c6483e2d135509190dc65a2fbeb24d0156aa2492c23aaace73f1d3}
+}]If set, callbacks are run deferred in the \doxyref{event}{p.}{structevent} loop. \index{BEV\_\-OPT\_\-UNLOCK\_\-CALLBACKS@{BEV\_\-OPT\_\-UNLOCK\_\-CALLBACKS}!bufferevent.h@{bufferevent.h}}\index{bufferevent.h@{bufferevent.h}!BEV\_\-OPT\_\-UNLOCK\_\-CALLBACKS@{BEV\_\-OPT\_\-UNLOCK\_\-CALLBACKS}}\item[{\em 
+BEV\_\-OPT\_\-UNLOCK\_\-CALLBACKS\label{bufferevent_8h_aa4919449c62c6483e2d135509190dc65acb8ca6f6422fb8f9a748521cf8c4caf5}
+}]If set, callbacks are executed without locks being held on the \doxyref{bufferevent}{p.}{structbufferevent}. This option currently requires that BEV\_\-OPT\_\-DEFER\_\-CALLBACKS also be set; a future version of Libevent might remove the requirement. \end{description}
+\end{Desc}
+
+
+
+\subsection{Function Documentation}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group@{bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group}}
+\index{bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group@{bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-add\_\-to\_\-rate\_\-limit\_\-group (struct {\bf bufferevent} $\ast$ {\em bev}, \/  struct bufferevent\_\-rate\_\-limit\_\-group $\ast$ {\em g})}\label{bufferevent_8h_aadb00f5d5c054bb705db78db327ef261}
+
+
+Add 'bev' to the list of bufferevents whose aggregate reading and writing is restricted by 'g'. If 'g' is NULL, remove 'bev' from its current group.
+
+A \doxyref{bufferevent}{p.}{structbufferevent} may belong to no more than one rate-\/limit group at a time. If 'bev' is already a member of a group, it will be removed from its old group before being added to 'g'.
+
+Return 0 on success and -\/1 on failure. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-base\_\-set@{bufferevent\_\-base\_\-set}}
+\index{bufferevent\_\-base\_\-set@{bufferevent\_\-base\_\-set}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-base\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-base\_\-set (struct {\bf event\_\-base} $\ast$ {\em base}, \/  struct {\bf bufferevent} $\ast$ {\em bufev})}\label{bufferevent_8h_a0697dabdb9b4057ae71b40a2f0e45fed}
+
+
+Assign a \doxyref{bufferevent}{p.}{structbufferevent} to a specific \doxyref{event\_\-base}{p.}{structevent__base}. NOTE that only socket bufferevents support this function.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]an \doxyref{event\_\-base}{p.}{structevent__base} returned by \doxyref{event\_\-init()}{p.}{event__compat_8h_a1bf74386dd3725e1538fed2d70c1c113} \item[{\em bufev}]a \doxyref{bufferevent}{p.}{structbufferevent} struct returned by bufferevent\_\-new() or \doxyref{bufferevent\_\-socket\_\-new()}{p.}{bufferevent_8h_a501557193aa56c9f4923583d9d734395} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+bufferevent\_\-new() 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-disable@{bufferevent\_\-disable}}
+\index{bufferevent\_\-disable@{bufferevent\_\-disable}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-disable}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-disable (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  short {\em event})}\label{bufferevent_8h_aa15582fe250247aa98d4897527215727}
+
+
+Disable a \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be disabled \item[{\em \doxyref{event}{p.}{structevent}}]any combination of EV\_\-READ $|$ EV\_\-WRITE. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{bufferevent\_\-enable()}{p.}{bufferevent_8h_a1b9a3412e8c8e122c745b33d46b9643e} 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-enable@{bufferevent\_\-enable}}
+\index{bufferevent\_\-enable@{bufferevent\_\-enable}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-enable}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-enable (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  short {\em event})}\label{bufferevent_8h_a1b9a3412e8c8e122c745b33d46b9643e}
+
+
+Enable a \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be enabled \item[{\em \doxyref{event}{p.}{structevent}}]any combination of EV\_\-READ $|$ EV\_\-WRITE. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{bufferevent\_\-disable()}{p.}{bufferevent_8h_aa15582fe250247aa98d4897527215727} 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-filter\_\-new@{bufferevent\_\-filter\_\-new}}
+\index{bufferevent\_\-filter\_\-new@{bufferevent\_\-filter\_\-new}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-filter\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf bufferevent}$\ast$ bufferevent\_\-filter\_\-new (struct {\bf bufferevent} $\ast$ {\em underlying}, \/  {\bf bufferevent\_\-filter\_\-cb} {\em input\_\-filter}, \/  {\bf bufferevent\_\-filter\_\-cb} {\em output\_\-filter}, \/  int {\em options}, \/  void($\ast$)(void $\ast$) {\em free\_\-context}, \/  void $\ast$ {\em ctx})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_ab6dea1351561f1866b0526fc1207bb69}
+
+
+Allocate a new filtering \doxyref{bufferevent}{p.}{structbufferevent} on top of an existing \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em underlying}]the underlying \doxyref{bufferevent}{p.}{structbufferevent}. \item[{\em input\_\-filter}]The filter to apply to data we read from the underlying \doxyref{bufferevent}{p.}{structbufferevent} \item[{\em output\_\-filter}]The filer to apply to data we write to the underlying \doxyref{bufferevent}{p.}{structbufferevent} \item[{\em options}]A bitfield of \doxyref{bufferevent}{p.}{structbufferevent} options. \item[{\em free\_\-context}]A function to use to free the filter context when this \doxyref{bufferevent}{p.}{structbufferevent} is freed. \item[{\em ctx}]A context pointer to pass to the filter functions. \end{DoxyParams}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-flush@{bufferevent\_\-flush}}
+\index{bufferevent\_\-flush@{bufferevent\_\-flush}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-flush}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-flush (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  short {\em iotype}, \/  enum {\bf bufferevent\_\-flush\_\-mode} {\em mode})}\label{bufferevent_8h_a03376a35668ff9b6dc905cce0d89876d}
+
+
+Triggers the \doxyref{bufferevent}{p.}{structbufferevent} to produce more data if possible. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} object \item[{\em iotype}]either EV\_\-READ or EV\_\-WRITE or both. \item[{\em mode}]either BEV\_\-NORMAL or BEV\_\-FLUSH or BEV\_\-FINISHED \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 on failure, 0 if no data was produces, 1 if data was produced 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-free@{bufferevent\_\-free}}
+\index{bufferevent\_\-free@{bufferevent\_\-free}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-free (struct {\bf bufferevent} $\ast$ {\em bufev})}\label{bufferevent_8h_a474a4cef8fd80bea09a636b5f3055bec}
+
+
+Deallocate the storage associated with a \doxyref{bufferevent}{p.}{structbufferevent} structure. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} structure to be freed. \end{DoxyParams}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-get\_\-enabled@{bufferevent\_\-get\_\-enabled}}
+\index{bufferevent\_\-get\_\-enabled@{bufferevent\_\-get\_\-enabled}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-get\_\-enabled}]{\setlength{\rightskip}{0pt plus 5cm}short bufferevent\_\-get\_\-enabled (struct {\bf bufferevent} $\ast$ {\em bufev})}\label{bufferevent_8h_afbb4adabeb188cc9000bdee4ba23bdb2}
+
+
+Return the events that are enabled on a given \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to inspect \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A combination of EV\_\-READ $|$ EV\_\-WRITE 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-get\_\-input@{bufferevent\_\-get\_\-input}}
+\index{bufferevent\_\-get\_\-input@{bufferevent\_\-get\_\-input}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-get\_\-input}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf evbuffer}$\ast$ bufferevent\_\-get\_\-input (struct {\bf bufferevent} $\ast$ {\em bufev})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_a7bc716ede3a5fc1e9107ae522e545e0c}
+
+
+Returns the input buffer. The user MUST NOT set the callback on this buffer.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} from which to get the \doxyref{evbuffer}{p.}{structevbuffer} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \doxyref{evbuffer}{p.}{structevbuffer} object for the input buffer 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-get\_\-output@{bufferevent\_\-get\_\-output}}
+\index{bufferevent\_\-get\_\-output@{bufferevent\_\-get\_\-output}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-get\_\-output}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf evbuffer}$\ast$ bufferevent\_\-get\_\-output (struct {\bf bufferevent} $\ast$ {\em bufev})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_af3dea057c5a276461dd94a1601682be1}
+
+
+Returns the output buffer. The user MUST NOT set the callback on this buffer.
+
+When filters are being used, the filters need to be manually triggered if the output buffer was manipulated.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} from which to get the \doxyref{evbuffer}{p.}{structevbuffer} \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \doxyref{evbuffer}{p.}{structevbuffer} object for the output buffer 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-lock@{bufferevent\_\-lock}}
+\index{bufferevent\_\-lock@{bufferevent\_\-lock}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-lock}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-lock (struct {\bf bufferevent} $\ast$ {\em bufev})}\label{bufferevent_8h_a56a61802037478591048b4967fa15599}
+
+
+Acquire the lock on a \doxyref{bufferevent}{p.}{structbufferevent}. Has no effect if locking was not enabled with BEV\_\-OPT\_\-THREADSAFE. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-pair\_\-get\_\-partner@{bufferevent\_\-pair\_\-get\_\-partner}}
+\index{bufferevent\_\-pair\_\-get\_\-partner@{bufferevent\_\-pair\_\-get\_\-partner}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-pair\_\-get\_\-partner}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf bufferevent}$\ast$ bufferevent\_\-pair\_\-get\_\-partner (struct {\bf bufferevent} $\ast$ {\em bev})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_a3ebd2a56a2ef87106bf76630eb0926b6}
+
+
+Given one \doxyref{bufferevent}{p.}{structbufferevent} returned by \doxyref{bufferevent\_\-pair\_\-new()}{p.}{bufferevent_8h_af8932010b0a590ddf9848026e8a99059}, returns the other one if it still exists. Otherwise returns NULL. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-pair\_\-new@{bufferevent\_\-pair\_\-new}}
+\index{bufferevent\_\-pair\_\-new@{bufferevent\_\-pair\_\-new}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-pair\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-pair\_\-new (struct {\bf event\_\-base} $\ast$ {\em base}, \/  int {\em options}, \/  struct {\bf bufferevent} $\ast$ {\em pair}[2])}\label{bufferevent_8h_af8932010b0a590ddf9848026e8a99059}
+
+
+Allocate a pair of linked bufferevents. The bufferevents behave as would two bufferevent\_\-sock instances connected to opposite ends of a socketpair(), except that no internal socketpair is allocated.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]The \doxyref{event}{p.}{structevent} base to associate with the socketpair. \item[{\em options}]A set of options for this \doxyref{bufferevent}{p.}{structbufferevent} \item[{\em pair}]A pointer to an array to hold the two new \doxyref{bufferevent}{p.}{structbufferevent} objects. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-priority\_\-set@{bufferevent\_\-priority\_\-set}}
+\index{bufferevent\_\-priority\_\-set@{bufferevent\_\-priority\_\-set}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-priority\_\-set}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-priority\_\-set (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  int {\em pri})}\label{bufferevent_8h_a73e1daaa7c4d52c95b16c9944fa62e90}
+
+
+Assign a priority to a \doxyref{bufferevent}{p.}{structbufferevent}. Only supported for socket bufferevents.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]a \doxyref{bufferevent}{p.}{structbufferevent} struct \item[{\em pri}]the priority to be assigned \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-rate\_\-limit\_\-group\_\-free@{bufferevent\_\-rate\_\-limit\_\-group\_\-free}}
+\index{bufferevent\_\-rate\_\-limit\_\-group\_\-free@{bufferevent\_\-rate\_\-limit\_\-group\_\-free}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-rate\_\-limit\_\-group\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-rate\_\-limit\_\-group\_\-free (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$)}\label{bufferevent_8h_adf4304c0c47fedb8122700ce1f0def8b}
+
+
+Free a rate-\/limiting group. The group must have no members when this function is called. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals@{bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals}}
+\index{bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals@{bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-rate\_\-limit\_\-group\_\-get\_\-totals (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$ {\em grp}, \/  ev\_\-uint64\_\-t $\ast$ {\em total\_\-read\_\-out}, \/  ev\_\-uint64\_\-t $\ast$ {\em total\_\-written\_\-out})}\label{bufferevent_8h_a4fec52eebbe5f925dfc2eaa60100124d}
+
+
+Inspect the total bytes read/written on a group. Set the variable pointed to by total\_\-read\_\-out to the total number of bytes ever read on grp, and the variable pointed to by total\_\-written\_\-out to the total number of bytes ever written on grp. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-rate\_\-limit\_\-group\_\-new@{bufferevent\_\-rate\_\-limit\_\-group\_\-new}}
+\index{bufferevent\_\-rate\_\-limit\_\-group\_\-new@{bufferevent\_\-rate\_\-limit\_\-group\_\-new}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-rate\_\-limit\_\-group\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct bufferevent\_\-rate\_\-limit\_\-group$\ast$ bufferevent\_\-rate\_\-limit\_\-group\_\-new (struct {\bf event\_\-base} $\ast$ {\em base}, \/  const struct ev\_\-token\_\-bucket\_\-cfg $\ast$ {\em cfg})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_acf75d7e04a54e7fe4543f7efd596e7f7}
+
+
+Create a new rate-\/limit group for bufferevents. A rate-\/limit group constrains the maximum number of bytes sent and received, in toto, by all of its bufferevents.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]An \doxyref{event\_\-base}{p.}{structevent__base} to run any necessary timeouts for the group. Note that all bufferevents in the group do not necessarily need to share this \doxyref{event\_\-base}{p.}{structevent__base}. \item[{\em cfg}]The rate-\/limit for this group.\end{DoxyParams}
+Note that all rate-\/limits hare are currently best-\/effort: future versions of Libevent may implement them more tightly.
+
+Note also that only some \doxyref{bufferevent}{p.}{structbufferevent} types currently respect rate-\/limiting. They are: socket-\/based bufferevents (normal and IOCP-\/based), and SSL-\/based bufferevents. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals@{bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals}}
+\index{bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals@{bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$ {\em grp})}\label{bufferevent_8h_a38c81c84dc02318bd34f41d84f468a98}
+
+
+Reset the total bytes read/written on a group. Reset the number of bytes read or written on grp as given by \doxyref{bufferevent\_\-rate\_\-limit\_\-group\_\-reset\_\-totals()}{p.}{bufferevent_8h_a38c81c84dc02318bd34f41d84f468a98}. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg@{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg}}
+\index{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg@{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-cfg (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$, \/  const struct ev\_\-token\_\-bucket\_\-cfg $\ast$)}\label{bufferevent_8h_a9b766efb61af2cb92d24f6e4caa38a53}
+
+
+Change the rate-\/limiting settings for a given rate-\/limiting group. Return 0 on success, -\/1 on failure. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share@{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share}}
+\index{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share@{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-rate\_\-limit\_\-group\_\-set\_\-min\_\-share (struct bufferevent\_\-rate\_\-limit\_\-group $\ast$, \/  size\_\-t)}\label{bufferevent_8h_aa2499cfb56976dcf3c6b846801043214}
+
+
+Change the smallest quantum we're willing to allocate to any single \doxyref{bufferevent}{p.}{structbufferevent} in a group for reading or writing at a time. The rationale is that, because of TCP/IP protocol overheads and kernel behavior, if a rate-\/limiting group is so tight on bandwidth that you're only willing to send 1 byte per tick per \doxyref{bufferevent}{p.}{structbufferevent}, you might instead want to batch up the reads and writes so that you send N bytes per 1/N of the bufferevents (chosen at random) each tick, so you still wind up send 1 byte per tick per \doxyref{bufferevent}{p.}{structbufferevent} on average, but you don't send so many tiny packets.
+
+The default min-\/share is currently 64 bytes.
+
+Returns 0 on success, -\/1 on faulre. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-read@{bufferevent\_\-read}}
+\index{bufferevent\_\-read@{bufferevent\_\-read}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-read}]{\setlength{\rightskip}{0pt plus 5cm}size\_\-t bufferevent\_\-read (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  void $\ast$ {\em data}, \/  size\_\-t {\em size})}\label{bufferevent_8h_a6bd435529e20a39b24fead9ddcd966ba}
+
+
+Read data from a \doxyref{bufferevent}{p.}{structbufferevent} buffer. The \doxyref{bufferevent\_\-read()}{p.}{bufferevent_8h_a6bd435529e20a39b24fead9ddcd966ba} function is used to read data from the input buffer.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be read from \item[{\em data}]pointer to a buffer that will store the data \item[{\em size}]the size of the data buffer, in bytes \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the amount of data read, in bytes. 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-read\_\-buffer@{bufferevent\_\-read\_\-buffer}}
+\index{bufferevent\_\-read\_\-buffer@{bufferevent\_\-read\_\-buffer}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-read\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-read\_\-buffer (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  struct {\bf evbuffer} $\ast$ {\em buf})}\label{bufferevent_8h_ab2246fd48085c1acc9e98747a83af041}
+
+
+Read data from a \doxyref{bufferevent}{p.}{structbufferevent} buffer into an \doxyref{evbuffer}{p.}{structevbuffer}. This avoids memory copies.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be read from \item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to which to add data \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred. 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group@{bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group}}
+\index{bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group@{bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-remove\_\-from\_\-rate\_\-limit\_\-group (struct {\bf bufferevent} $\ast$ {\em bev})}\label{bufferevent_8h_abdbf64b4203fe6b65b263661ef18c6f2}
+
+
+Remove 'bev' from its current rate-\/limit group (if any). \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-set\_\-rate\_\-limit@{bufferevent\_\-set\_\-rate\_\-limit}}
+\index{bufferevent\_\-set\_\-rate\_\-limit@{bufferevent\_\-set\_\-rate\_\-limit}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-set\_\-rate\_\-limit}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-set\_\-rate\_\-limit (struct {\bf bufferevent} $\ast$ {\em bev}, \/  struct ev\_\-token\_\-bucket\_\-cfg $\ast$ {\em cfg})}\label{bufferevent_8h_aeb7bc9d8af4dd74b3de8dcd2941e6e02}
+
+
+Set the rate-\/limit of a the \doxyref{bufferevent}{p.}{structbufferevent} 'bev' to the one specified in 'cfg'. If 'cfg' is NULL, disable any per-\/bufferevent rate-\/limiting on 'bev'.
+
+Note that only some \doxyref{bufferevent}{p.}{structbufferevent} types currently respect rate-\/limiting. They are: socket-\/based bufferevents (normal and IOCP-\/based), and SSL-\/based bufferevents.
+
+Return 0 on sucess, -\/1 on failure. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-set\_\-timeouts@{bufferevent\_\-set\_\-timeouts}}
+\index{bufferevent\_\-set\_\-timeouts@{bufferevent\_\-set\_\-timeouts}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-set\_\-timeouts}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-set\_\-timeouts (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  const struct timeval $\ast$ {\em timeout\_\-read}, \/  const struct timeval $\ast$ {\em timeout\_\-write})}\label{bufferevent_8h_a3686d744e67e9a530ebf8ab888ade2cf}
+
+
+Set the read and write timeout for a \doxyref{bufferevent}{p.}{structbufferevent}. A bufferevent's timeout will fire the first time that the indicated amount of time has elapsed since a successful read or write operation, during which the \doxyref{bufferevent}{p.}{structbufferevent} was trying to read or write.
+
+(In other words, if reading or writing is disabled, or if the bufferevent's read or write operation has been suspended because there's no data to write, or not enough banwidth, or so on, the timeout isn't active. The timeout only becomes active when we we're willing to actually read or write.)
+
+Calling bufferevent\_\-enable or setting a timeout for a \doxyref{bufferevent}{p.}{structbufferevent} whose timeout is already pending resets its timeout.
+
+If the timeout elapses, the corresponding operation (EV\_\-READ or EV\_\-WRITE) becomes disabled until you re-\/enable it again. The bufferevent's \doxyref{event}{p.}{structevent} callback is called with the BEV\_\-EVENT\_\-TIMEOUT$|$BEV\_\-EVENT\_\-READING or BEV\_\-EVENT\_\-TIMEOUT$|$BEV\_\-EVENT\_\-WRITING.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be modified \item[{\em timeout\_\-read}]the read timeout, or NULL \item[{\em timeout\_\-write}]the write timeout, or NULL \end{DoxyParams}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-setcb@{bufferevent\_\-setcb}}
+\index{bufferevent\_\-setcb@{bufferevent\_\-setcb}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-setcb}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-setcb (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  {\bf bufferevent\_\-data\_\-cb} {\em readcb}, \/  {\bf bufferevent\_\-data\_\-cb} {\em writecb}, \/  {\bf bufferevent\_\-event\_\-cb} {\em eventcb}, \/  void $\ast$ {\em cbarg})}\label{bufferevent_8h_a63792519cb94a38beccb5e1390cd6198}
+
+
+Changes the callbacks for a \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} object for which to change callbacks \item[{\em readcb}]callback to invoke when there is data to be read, or NULL if no callback is desired \item[{\em writecb}]callback to invoke when the file descriptor is ready for writing, or NULL if no callback is desired \item[{\em eventcb}]callback to invoke when there is an \doxyref{event}{p.}{structevent} on the file descriptor \item[{\em cbarg}]an argument that will be supplied to each of the callbacks (readcb, writecb, and errorcb) \end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+bufferevent\_\-new() 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-setfd@{bufferevent\_\-setfd}}
+\index{bufferevent\_\-setfd@{bufferevent\_\-setfd}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-setfd}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-setfd (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  evutil\_\-socket\_\-t {\em fd})}\label{bufferevent_8h_a0a367e404942c11265bfcd0b693aa120}
+
+
+Changes the file descriptor on which the \doxyref{bufferevent}{p.}{structbufferevent} operates. Not supported for all \doxyref{bufferevent}{p.}{structbufferevent} types.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} object for which to change the file descriptor \item[{\em fd}]the file descriptor to operate on \end{DoxyParams}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-setwatermark@{bufferevent\_\-setwatermark}}
+\index{bufferevent\_\-setwatermark@{bufferevent\_\-setwatermark}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-setwatermark}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-setwatermark (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  short {\em events}, \/  size\_\-t {\em lowmark}, \/  size\_\-t {\em highmark})}\label{bufferevent_8h_a74e3835e99f8eb73bb1cd7afa7427049}
+
+
+Sets the watermarks for read and write events. On input, a \doxyref{bufferevent}{p.}{structbufferevent} does not invoke the user read callback unless there is at least low watermark data in the buffer. If the read buffer is beyond the high watermark, the \doxyref{bufferevent}{p.}{structbufferevent} stops reading from the network.
+
+On output, the user write callback is invoked whenever the buffered data falls below the low watermark. Filters that write to this bufev will try not to write more bytes to this buffer than the high watermark would allow, except when flushing.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be modified \item[{\em events}]EV\_\-READ, EV\_\-WRITE or both \item[{\em lowmark}]the lower watermark to set \item[{\em highmark}]the high watermark to set \end{DoxyParams}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-socket\_\-connect@{bufferevent\_\-socket\_\-connect}}
+\index{bufferevent\_\-socket\_\-connect@{bufferevent\_\-socket\_\-connect}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-socket\_\-connect}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-socket\_\-connect (struct {\bf bufferevent} $\ast$, \/  struct sockaddr $\ast$, \/  int)}\label{bufferevent_8h_ac2ecbb906883ea848f7bca767d479a2a}
+
+
+Launch a connect() attempt with a socket-\/based \doxyref{bufferevent}{p.}{structbufferevent}. When the connect succeeds, the eventcb will be invoked with BEV\_\-EVENT\_\-CONNECTED set.
+
+If the \doxyref{bufferevent}{p.}{structbufferevent} does not already have a socket set, we allocate a new socket here and make it nonblocking before we begin.
+
+If no address is provided, we assume that the socket is already connecting, and configure the \doxyref{bufferevent}{p.}{structbufferevent} so that a BEV\_\-EVENT\_\-CONNECTED \doxyref{event}{p.}{structevent} will be yielded when it is done connecting.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]an existing \doxyref{bufferevent}{p.}{structbufferevent} allocated with \doxyref{bufferevent\_\-socket\_\-new()}{p.}{bufferevent_8h_a501557193aa56c9f4923583d9d734395}. \item[{\em addr}]the address we should connect to \item[{\em socklen}]The length of the address \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success, -\/1 on failure. 
+\end{DoxyReturn}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-socket\_\-connect\_\-hostname@{bufferevent\_\-socket\_\-connect\_\-hostname}}
+\index{bufferevent\_\-socket\_\-connect\_\-hostname@{bufferevent\_\-socket\_\-connect\_\-hostname}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-socket\_\-connect\_\-hostname}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-socket\_\-connect\_\-hostname (struct {\bf bufferevent} $\ast$, \/  struct evdns\_\-base $\ast$, \/  int, \/  const char $\ast$, \/  int)}\label{bufferevent_8h_a797686b522045aefb217c6b87ea7ae4a}
+
+
+Resolve the hostname 'hostname' and connect to it as with \doxyref{bufferevent\_\-socket\_\-connect()}{p.}{bufferevent_8h_ac2ecbb906883ea848f7bca767d479a2a}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]An existing \doxyref{bufferevent}{p.}{structbufferevent} allocated with \doxyref{bufferevent\_\-socket\_\-new()}{p.}{bufferevent_8h_a501557193aa56c9f4923583d9d734395} \item[{\em evdns\_\-base}]Optionally, an evdns\_\-base to use for resolving hostnames asynchronously. May be set to NULL for a blocking resolve. \item[{\em family}]A preferred address family to resolve addresses to, or AF\_\-UNSPEC for no preference. Only AF\_\-INET, AF\_\-INET6, and AF\_\-UNSPEC are supported. \item[{\em hostname}]The hostname to resolve; see below for notes on recognized formats \item[{\em port}]The port to connect to on the resolved address. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, -\/1 on failure.
+\end{DoxyReturn}
+Recognized hostname formats are:
+
+www.example.com (hostname) 1.2.3.4 (ipv4address) ::1 (ipv6address) [::1] ([ipv6address])
+
+Performance note: If you do not provide an evdns\_\-base, this function may block while it waits for a DNS response. This is probably not what you want. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-socket\_\-get\_\-dns\_\-error@{bufferevent\_\-socket\_\-get\_\-dns\_\-error}}
+\index{bufferevent\_\-socket\_\-get\_\-dns\_\-error@{bufferevent\_\-socket\_\-get\_\-dns\_\-error}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-socket\_\-get\_\-dns\_\-error}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-socket\_\-get\_\-dns\_\-error (struct {\bf bufferevent} $\ast$ {\em bev})}\label{bufferevent_8h_a9a66b02bce652cdbcc7d26636ce26d67}
+
+
+Return the error code for the last failed DNS lookup attempt made by \doxyref{bufferevent\_\-socket\_\-connect\_\-hostname()}{p.}{bufferevent_8h_a797686b522045aefb217c6b87ea7ae4a}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em bev}]The \doxyref{bufferevent}{p.}{structbufferevent} object. \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+DNS error code. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+evutil\_\-gai\_\-strerror() 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-socket\_\-new@{bufferevent\_\-socket\_\-new}}
+\index{bufferevent\_\-socket\_\-new@{bufferevent\_\-socket\_\-new}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-socket\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf bufferevent}$\ast$ bufferevent\_\-socket\_\-new (struct {\bf event\_\-base} $\ast$ {\em base}, \/  evutil\_\-socket\_\-t {\em fd}, \/  int {\em options})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_a501557193aa56c9f4923583d9d734395}
+
+
+Create a new socket \doxyref{bufferevent}{p.}{structbufferevent} over an existing socket. 
+\begin{DoxyParams}{Parameters}
+\item[{\em base}]the \doxyref{event}{p.}{structevent} base to associate with the new \doxyref{bufferevent}{p.}{structbufferevent}. \item[{\em fd}]the file descriptor from which data is read and written to. This file descriptor is not allowed to be a pipe(2). It is safe to set the fd to -\/1, so long as you later set it with bufferevent\_\-setfd or \doxyref{bufferevent\_\-socket\_\-connect()}{p.}{bufferevent_8h_ac2ecbb906883ea848f7bca767d479a2a}. \item[{\em options}]Zero or more BEV\_\-OPT\_\-$\ast$ flags \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to a newly allocated \doxyref{bufferevent}{p.}{structbufferevent} struct, or NULL if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{bufferevent\_\-free()}{p.}{bufferevent_8h_a474a4cef8fd80bea09a636b5f3055bec} 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-unlock@{bufferevent\_\-unlock}}
+\index{bufferevent\_\-unlock@{bufferevent\_\-unlock}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-unlock}]{\setlength{\rightskip}{0pt plus 5cm}void bufferevent\_\-unlock (struct {\bf bufferevent} $\ast$ {\em bufev})}\label{bufferevent_8h_a53fd135567d95cab72b8bad473c97510}
+
+
+Release the lock on a \doxyref{bufferevent}{p.}{structbufferevent}. Has no effect if locking was not enabled with BEV\_\-OPT\_\-THREADSAFE. \index{bufferevent.h@{bufferevent.h}!bufferevent\_\-write@{bufferevent\_\-write}}
+\index{bufferevent\_\-write@{bufferevent\_\-write}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-write}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-write (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  const void $\ast$ {\em data}, \/  size\_\-t {\em size})}\label{bufferevent_8h_abc606695cd6bb2e3f25c4330d0c9e3ab}
+
+
+Write data to a \doxyref{bufferevent}{p.}{structbufferevent} buffer. The \doxyref{bufferevent\_\-write()}{p.}{bufferevent_8h_abc606695cd6bb2e3f25c4330d0c9e3ab} function can be used to write data to the file descriptor. The data is appended to the output buffer and written to the descriptor automatically as it becomes available for writing.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be written to \item[{\em data}]a pointer to the data to be written \item[{\em size}]the length of the data, in bytes \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{bufferevent\_\-write\_\-buffer()}{p.}{bufferevent_8h_a3b140a32a4d16c402433130dc8c3bde4} 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-write\_\-buffer@{bufferevent\_\-write\_\-buffer}}
+\index{bufferevent\_\-write\_\-buffer@{bufferevent\_\-write\_\-buffer}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-write\_\-buffer}]{\setlength{\rightskip}{0pt plus 5cm}int bufferevent\_\-write\_\-buffer (struct {\bf bufferevent} $\ast$ {\em bufev}, \/  struct {\bf evbuffer} $\ast$ {\em buf})}\label{bufferevent_8h_a3b140a32a4d16c402433130dc8c3bde4}
+
+
+Write data from an \doxyref{evbuffer}{p.}{structevbuffer} to a \doxyref{bufferevent}{p.}{structbufferevent} buffer. The \doxyref{evbuffer}{p.}{structevbuffer} is being drained as a result.
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em bufev}]the \doxyref{bufferevent}{p.}{structbufferevent} to be written to \item[{\em buf}]the \doxyref{evbuffer}{p.}{structevbuffer} to be written \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if successful, or -\/1 if an error occurred 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See also}
+\doxyref{bufferevent\_\-write()}{p.}{bufferevent_8h_abc606695cd6bb2e3f25c4330d0c9e3ab} 
+\end{DoxySeeAlso}
+\index{bufferevent.h@{bufferevent.h}!ev\_\-token\_\-bucket\_\-cfg\_\-free@{ev\_\-token\_\-bucket\_\-cfg\_\-free}}
+\index{ev\_\-token\_\-bucket\_\-cfg\_\-free@{ev\_\-token\_\-bucket\_\-cfg\_\-free}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{ev\_\-token\_\-bucket\_\-cfg\_\-free}]{\setlength{\rightskip}{0pt plus 5cm}void ev\_\-token\_\-bucket\_\-cfg\_\-free (struct ev\_\-token\_\-bucket\_\-cfg $\ast$ {\em cfg})}\label{bufferevent_8h_ad918ea1e7f7967e5db895c7dde5b78ae}
+
+
+Free all storage held in 'cfg'. Note: 'cfg' is not currently reference-\/counted; it is not safe to free it until no \doxyref{bufferevent}{p.}{structbufferevent} is using it. \index{bufferevent.h@{bufferevent.h}!ev\_\-token\_\-bucket\_\-cfg\_\-new@{ev\_\-token\_\-bucket\_\-cfg\_\-new}}
+\index{ev\_\-token\_\-bucket\_\-cfg\_\-new@{ev\_\-token\_\-bucket\_\-cfg\_\-new}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{ev\_\-token\_\-bucket\_\-cfg\_\-new}]{\setlength{\rightskip}{0pt plus 5cm}struct ev\_\-token\_\-bucket\_\-cfg$\ast$ ev\_\-token\_\-bucket\_\-cfg\_\-new (size\_\-t {\em read\_\-rate}, \/  size\_\-t {\em read\_\-burst}, \/  size\_\-t {\em write\_\-rate}, \/  size\_\-t {\em write\_\-burst}, \/  const struct timeval $\ast$ {\em tick\_\-len})\hspace{0.3cm}{\ttfamily  [read]}}\label{bufferevent_8h_a60dd9d6469537b9099d2f6299c114ae6}
+
+
+Initialize and return a new object to configure the rate-\/limiting behavior of bufferevents. 
+\begin{DoxyParams}{Parameters}
+\item[{\em read\_\-rate}]The maximum number of bytes to read per tick on average. \item[{\em read\_\-burst}]The maximum number of bytes to read in any single tick. \item[{\em write\_\-rate}]The maximum number of bytes to write per tick on average. \item[{\em write\_\-burst}]The maximum number of bytes to write in any single tick. \item[{\em tick\_\-len}]The length of a single tick. Defaults to one second. Any fractions of a millisecond are ignored.\end{DoxyParams}
+Note that all rate-\/limits hare are currently best-\/effort: future versions of Libevent may implement them more tightly. 
+
+\subsection{Variable Documentation}
+\index{bufferevent.h@{bufferevent.h}!bufferevent\_\-filter\_\-cb@{bufferevent\_\-filter\_\-cb}}
+\index{bufferevent\_\-filter\_\-cb@{bufferevent\_\-filter\_\-cb}!bufferevent.h@{bufferevent.h}}
+\subsubsection[{bufferevent\_\-filter\_\-cb}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf bufferevent\_\-filter\_\-result}($\ast$ {\bf bufferevent\_\-filter\_\-cb})(struct {\bf evbuffer} $\ast$src, struct {\bf evbuffer} $\ast$dst, ev\_\-ssize\_\-t dst\_\-limit, enum {\bf bufferevent\_\-flush\_\-mode} mode, void $\ast$ctx)}\label{bufferevent_8h_a4fade9aae0c515ff1848f395ae35e4c7}
+
+
+A callback function to implement a filter for a \doxyref{bufferevent}{p.}{structbufferevent}. 
+\begin{DoxyParams}{Parameters}
+\item[{\em src}]An \doxyref{evbuffer}{p.}{structevbuffer} to drain data from. \item[{\em dst}]An \doxyref{evbuffer}{p.}{structevbuffer} to add data to. \item[{\em limit}]A suggested upper bound of bytes to write to dst. The filter may ignore this value, but doing so means that it will overflow the high-\/water mark associated with dst. -\/1 means \char`\"{}no limit\char`\"{}. \item[{\em mode}]Whether we should write data as may be convenient (BEV\_\-NORMAL), or flush as much data as we can (BEV\_\-FLUSH), or flush as much as we can, possibly including an end-\/of-\/stream marker (BEV\_\-FINISH). \item[{\em ctx}]A user-\/supplied pointer.\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+BEV\_\-OK if we wrote some data; BEV\_\-NEED\_\-MORE if we can't produce any more output until we get some input; and BEV\_\-ERROR on an error. 
+\end{DoxyReturn}
