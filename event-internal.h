@@ -203,7 +203,7 @@ struct event_base {
 	int event_running_priority;
 
 	/** Set if we're running the event_base_loop function, to prevent
-	 * reentrant invocation(重复调用). */
+	 * reentrant invocation. */
 	int running_loop;
 
 	/* Active event management. */

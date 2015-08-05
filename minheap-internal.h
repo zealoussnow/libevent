@@ -139,14 +139,14 @@ int min_heap_reserve(min_heap_t* s, unsigned n)
 
 void min_heap_shift_up_(min_heap_t* s, unsigned hole_index, struct event* e)
 {
-	unsigned parent = (hole_index - 1) / 2;
-	while (hole_index && min_heap_elem_greater(s->p[parent], e))
-	{
-		(s->p[hole_index] = s->p[parent])->ev_timeout_pos.min_heap_idx = hole_index;
-		hole_index = parent;
-		parent = (hole_index - 1) / 2;
-	}
-	(s->p[hole_index] = e)->ev_timeout_pos.min_heap_idx = hole_index;
+    unsigned parent = (hole_index - 1) / 2;
+    while (hole_index && min_heap_elem_greater(s->p[parent], e))
+    {
+	(s->p[hole_index] = s->p[parent])->ev_timeout_pos.min_heap_idx = hole_index;
+	hole_index = parent;
+	parent = (hole_index - 1) / 2;
+    }
+    (s->p[hole_index] = e)->ev_timeout_pos.min_heap_idx = hole_index;
 }
 
 void min_heap_shift_down_(min_heap_t* s, unsigned hole_index, struct event* e)
