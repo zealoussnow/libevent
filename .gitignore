@@ -6,3 +6,15 @@
 *~
 *.la
 *.lo
+
+*.Plo
+*.Po
+Makefile
+config.h
+*.log
+*.status
+configure
+event-config.h
+*.pc
+libtool
+stamp-h1
