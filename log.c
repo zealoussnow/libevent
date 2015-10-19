@@ -187,6 +187,10 @@ _warn_helper(int severity, const char *errstr, const char *fmt, va_list ap)
 	event_log(severity, buf);
 }
 
+/*
+ * include/event2/event.h
+ * typedef void (*event_log_cb)(int, const char *);
+ */
 static event_log_cb log_fn = NULL;
 
 void

@@ -135,13 +135,14 @@ poll_dispatch(struct event_base *base, struct timeval *tv)
 		 * polling. If we're not multithreaded, then we'll skip the
 		 * copy step here to save memory and time. */
 		if (pop->realloc_copy) {
+			/* The useage of realloc */
 			struct pollfd *tmp = mm_realloc(pop->event_set_copy,
 			    pop->event_count * sizeof(struct pollfd));
 			if (tmp == NULL) {
 				event_warn("realloc");
 				return -1;
 			}
-			pop->event_set_copy = tmp;
+			pop->event_set_copy = tmp; /* Is it a useful step? */
 			pop->realloc_copy = 0;
 		}
 		memcpy(pop->event_set_copy, pop->event_set,

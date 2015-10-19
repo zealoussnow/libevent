@@ -353,6 +353,9 @@ detect_monotonic(void)
  * on 'base'.  If there is a cached time, return it.  Otherwise, use
  * clock_gettime or gettimeofday as appropriate to find out the right time.
  * Return 0 on success, -1 on failure.
+ *
+ * 根据base来设置tp为为当前的时间。我们必须持有base上面的锁。如果有缓存的时间，
+ * 直接返回，否则使用clock_gettime或者gettimeofday得到正确的时间。
  */
 static int
 gettime(struct event_base *base, struct timeval *tp)
@@ -1572,6 +1575,7 @@ event_base_loop(struct event_base *base, int flags)
 	int res, done, retval = 0;
 
 	/* 
+	 * 夺取锁，在evsel.dispatch中释放，然后调用自定义的回调函数
 	 * Grab the lock.  We will release it inside evsel.dispatch, and again
 	 * as we invoke user callbacks. 
 	 */
@@ -1640,7 +1644,7 @@ event_base_loop(struct event_base *base, int flags)
 
 		/* 
 		 * update last old time 
-		 * 更新last wait time，并清空time cache
+		 * 更新last old time，并清空time cache
 		 */
 		gettime(base, &base->event_tv);
 
