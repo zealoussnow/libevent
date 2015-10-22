@@ -181,12 +181,16 @@ epoll_apply_one_change(struct event_base *base,
 	if (1) {
 		/* The logic here is a little tricky.  If we had no events set
 		   on the fd before, we need to set op="ADD" and set
-		   events=the events we want to add.  If we had any events set
-		   on the fd before, and we want any events to remain on the
+		   events=the events we want to add.(如果在设置fd之前没有事件，我们应该设置op=ADD,
+		   events=我们想添加的事件)
+		   If we had any events set on the fd before, (如果在设置fd之前有任何事件发生)
+		   and we want any events to remain on the (而且我们期望在fd上保留任何事件)
 		   fd, we need to say op="MOD" and set events=the events we
-		   want to remain.  But if we want to delete the last event,
+		   want to remain.  (那么我们应该设置op="MOD"，events=我们想保留的事件)
+		   But if we want to delete the last event,
 		   we say op="DEL" and set events=the remaining events.  What
 		   fun!
+		   如果我们想删除最后的时间，应该设置op="DEL"，events=保留的事件。多么有趣啊！
 		*/
 
 		/* TODO: Turn this into a switch or a table lookup. */

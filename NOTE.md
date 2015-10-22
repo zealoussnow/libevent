@@ -1,4 +1,61 @@
+### 源代码组织结构
 
+libevent库主要分为：头文件、辅助功能函数、日志、libevent框架、对系统
+IO多路复用机制的封装、信号管理、定时事件管理、缓冲区管理、基本数据结构
+和基于libevent的两个实用库等几部分。
+
+#### 1. 头文件
+
+主要就是event.h：事件宏定义、接口函数声明，主要结构体event的声明
+
+#### 2. 内部头文件
+
+xxx-internal.h：内部数据结构和函数，对外不可见，以达到信息隐藏的目的
+
+#### 3. libevent框架
+
+event.c：event整体框架的代码实现
+
+#### 4. 对系统IO多路复用机制的封装
+
+epoll.c：对epoll的封装
+
+select.c：对select的封装
+
+devpoll.c：对/dev/poll的封装
+
+kqueue.c：对kqueue的封装
+
+
+#### 5. 定时事件管理
+
+min-heap.h：其实就是一个以时间作为key的小根堆结构
+
+#### 6. 信号管理
+
+signal.c：对信号事件的处理
+
+#### 7. 辅助功能函数
+
+evutil.h和evutil.c：一些辅助功能函数，包括创建socket pair和一些时间
+操作函数：加、减和比较等
+
+#### 8. 日志
+
+log.h和log.c：log日志函数
+
+#### 9. 缓冲区管理
+
+evbuffer.c和buffer.c：libevent对缓冲区的封装
+
+#### 10. 基本数据结构
+
+compact/sys下的两个源文件：queue.h是libevent基本数据结构的实现，包括
+链表，双向链表，队列等。
+
+#### 11. 使用网络库
+
+http和evdns：是基于libevent实现的http服务器和异步dns查询库
 
 ### Reactor --- 反应器
 
@@ -185,4 +242,28 @@ event是整个libevent库的核心，是Reactor框架中的事件处理程序组
         /* allows us to adopt for different types of events */
         void (*ev_callback)(evutil_socket_t, short, void *arg);
         void *ev_arg;
+    };
+
+
+### Signal
+
+    struct evsig_info {
+        /* Event watching ev_signal_pair[1] */
+        struct event ev_signal;
+        /* Socketpair used to send notifications from the signal handler */
+        evutil_socket_t ev_signal_pair[2];
+        /* True iff we've added the ev_signal event yet. */
+        int ev_signal_added;
+        /* Count of the number of signals we're currently watching. */
+        int ev_n_signals_added;
+
+        /* Array of previous signal handler objects before Libevent started
+         * messing with them.  Used to restore old signal handlers. */
+    #ifdef _EVENT_HAVE_SIGACTION
+        struct sigaction **sh_old;
+    #else
+        ev_sighandler_t **sh_old;
+    #endif
+        /* Size of sh_old. */
+        int sh_old_max;
     };

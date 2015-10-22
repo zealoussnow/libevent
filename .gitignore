@@ -18,3 +18,5 @@ event-config.h
 *.pc
 libtool
 stamp-h1
+*.out
+tags

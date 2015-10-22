@@ -215,7 +215,8 @@ evsig_init(struct event_base *base)
 	return 0;
 }
 
-/* Helper: set the signal handler for evsignal to handler in base, so that
+/* 辅助函数：设置信号处理函数
+ * Helper: set the signal handler for evsignal to handler in base, so that
  * we can restore the original handler when we clear the current one. */
 int
 _evsig_set_handler(struct event_base *base,
@@ -398,7 +399,7 @@ evsig_handler(int sig)
 
 	/* Wake up our notification mechanism */
 	msg = sig;
-	send(evsig_base_fd, (char*)&msg, 1, 0);
+	send(evsig_base_fd, (char*)&msg, 1, 0); /* 向socketpair的读端发送数据，引发读事件 */
 	errno = save_errno;
 #ifdef WIN32
 	EVUTIL_SET_SOCKET_ERROR(socket_errno);
