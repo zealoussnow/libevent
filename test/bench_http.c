@@ -42,6 +42,8 @@
 #include <string.h>
 #include <errno.h>
 
+#include <evutil.h>
+
 #include "event2/event.h"
 #include "event2/buffer.h"
 #include "event2/util.h"
@@ -178,7 +180,10 @@ main(int argc, char **argv)
 	    (int)content_len, port,
 	    use_iocp? "IOCP" : event_base_get_method(base));
 
-	evhttp_bind_socket(http, "0.0.0.0", port);
+	if (evhttp_bind_socket(http, "0.0.0.0", port) == -1) {
+		perror("bind error");
+		return -1;
+	}
 
 #ifdef _WIN32
 	if (use_iocp) {
