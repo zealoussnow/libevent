@@ -199,13 +199,18 @@ extern "C" {
 
 /**
  * Structure to hold information and state for a Libevent dispatch loop.
+ * 保存Libevent分发循环的信息和状态。
  *
  * The event_base lies at the center of Libevent; every application will
  * have one.  It keeps track of all pending and active events, and
  * notifies your application of the active ones.
+ * event_base是Libevent的核心，每个应用都会有一个。它跟踪所有pending和active的
+ * 事件，并通知你active的事件。
  *
  * This is an opaque structure; you can allocate one using
  * event_base_new() or event_base_new_with_config().
+ * 这是一个不公开的结构，你可以通过使用event_base_new()或者
+ * event_base_new_with_config()来分配该结构。
  *
  * @see event_base_new(), event_base_free(), event_base_loop(),
  *    event_base_new_with_config()
@@ -258,10 +263,19 @@ struct event_base
  * becomes active, its timeout is reset: this means you can use persistent
  * events to implement periodic timeouts.
  *
+ * 一个非持久的事件在它被触发后立即变为非pending的；因此，调用event_add()时，它
+ * 最多只能运行一次。一个持久的事件即使在它变为active时依然保留pending状态。你
+ * 可以通过event_del()来手动把它变为非pending状态。当一个持久的事件由于超时而变
+ * 为active状态时，它的超时会被重置，这意味着你能用持久事件来实现周期性的超时。
+ *
  * This should be treated as an opaque structure; you should never read or
  * write any of its fields directly.  For backward compatibility with old
  * code, it is defined in the event2/event_struct.h header; including this
  * header may make your code incompatible with other versions of Libevent.
+ *
+ * 这是个不透明的结构，你绝不应该直接读写它的字段。为了向后兼容旧代码，它被定义
+ * 在了event2/event_struct头文件中，包含这个头文件可能是你的代码与其它版本的
+ * Libevent不兼容。
  *
  * @see event_new(), event_free(), event_assign(), event_get_assignment(),
  *    event_add(), event_del(), event_active(), event_pending(),
@@ -283,6 +297,9 @@ struct event
  * complex many-argument constructor, we provide an abstract data type
  * wrhere you set up configation information before passing it to
  * event_base_new_with_config().
+ * 有多个选项可以用来修改一个event_base的行为和实现。为了避免在一个复杂的多个参
+ * 数的构造函数中传递它们所有的选项，我们提供一个抽象的数据类型，你可以设置配置
+ * 信息在传递它们到event_base_new_with_config()之前。
  *
  * @see event_config_new(), event_config_free(), event_base_new_with_config(),
  *   event_config_avoid_method(), event_config_require_features(),
@@ -338,9 +355,11 @@ struct event_base *event_base_new(void);
 
 /**
   Reinitialize the event base after a fork
+  在fork之后重新初始化event base
 
   Some event mechanisms do not survive across fork.   The event base needs
   to be reinitialized with the event_reinit() function.
+  使用fork时，一些事件机制不会被保留。even base需要通过该函数重新初始化。
 
   @param base the event base that needs to be re-initialized
   @return 0 if successful, or -1 if some events could not be re-added.
@@ -354,6 +373,8 @@ int event_reinit(struct event_base *base);
   This loop will run the event base until either there are no more pending or
   active, or until something calls event_base_loopbreak() or
   event_base_loopexit().
+  这个循环会运行event base直到没有更多pending或者active的事件，或者直到调用了
+  event_base_loopbreak或event_base_loopexit。
 
   @param base the event_base structure returned by event_base_new() or
      event_base_new_with_config()
@@ -365,6 +386,7 @@ int event_base_dispatch(struct event_base *);
 
 /**
  Get the kernel event notification mechanism used by Libevent.
+ 获取被libevent使用的内核事件通知机制
 
  @param eb the event_base structure returned by event_base_new()
  @return a string identifying the kernel event mechanism (kqueue, epoll, etc.)

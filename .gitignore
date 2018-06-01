@@ -32,6 +32,8 @@
 Makefile
 Makefile.in
 
+!my-example/Makefile
+
 # Libtool stuff
 .libs
 *.lo
